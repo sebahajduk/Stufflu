@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9B929C96E120024B7EB /* ZenventoryApp.swift */; };
+		606EF9BC29C96E120024B7EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9BB29C96E120024B7EB /* ContentView.swift */; };
+		606EF9BE29C96E130024B7EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 606EF9BD29C96E130024B7EB /* Assets.xcassets */; };
+		606EF9C129C96E130024B7EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 606EF9C029C96E130024B7EB /* Preview Assets.xcassets */; };
+		606EF9CB29C96E130024B7EB /* ZenventoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9CA29C96E130024B7EB /* ZenventoryTests.swift */; };
+		606EF9D529C96E130024B7EB /* ZenventoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9D429C96E130024B7EB /* ZenventoryUITests.swift */; };
+		606EF9D729C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9D629C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		606EF9C729C96E130024B7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 606EF9AE29C96E120024B7EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 606EF9B529C96E120024B7EB;
+			remoteInfo = Zenventory;
+		};
+		606EF9D129C96E130024B7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 606EF9AE29C96E120024B7EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 606EF9B529C96E120024B7EB;
+			remoteInfo = Zenventory;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		606EF9B629C96E120024B7EB /* Zenventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zenventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		606EF9B929C96E120024B7EB /* ZenventoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryApp.swift; sourceTree = "<group>"; };
+		606EF9BB29C96E120024B7EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		606EF9BD29C96E130024B7EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		606EF9C029C96E130024B7EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		606EF9C629C96E130024B7EB /* ZenventoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenventoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		606EF9CA29C96E130024B7EB /* ZenventoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryTests.swift; sourceTree = "<group>"; };
+		606EF9D029C96E130024B7EB /* ZenventoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenventoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		606EF9D429C96E130024B7EB /* ZenventoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryUITests.swift; sourceTree = "<group>"; };
+		606EF9D629C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		606EF9B329C96E120024B7EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		606EF9C329C96E130024B7EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		606EF9CD29C96E130024B7EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		606EF9AD29C96E120024B7EB = {
+			isa = PBXGroup;
+			children = (
+				606EF9B829C96E120024B7EB /* Zenventory */,
+				606EF9C929C96E130024B7EB /* ZenventoryTests */,
+				606EF9D329C96E130024B7EB /* ZenventoryUITests */,
+				606EF9B729C96E120024B7EB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		606EF9B729C96E120024B7EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				606EF9B629C96E120024B7EB /* Zenventory.app */,
+				606EF9C629C96E130024B7EB /* ZenventoryTests.xctest */,
+				606EF9D029C96E130024B7EB /* ZenventoryUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		606EF9B829C96E120024B7EB /* Zenventory */ = {
+			isa = PBXGroup;
+			children = (
+				606EF9B929C96E120024B7EB /* ZenventoryApp.swift */,
+				606EF9BB29C96E120024B7EB /* ContentView.swift */,
+				606EF9BD29C96E130024B7EB /* Assets.xcassets */,
+				606EF9BF29C96E130024B7EB /* Preview Content */,
+			);
+			path = Zenventory;
+			sourceTree = "<group>";
+		};
+		606EF9BF29C96E130024B7EB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				606EF9C029C96E130024B7EB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		606EF9C929C96E130024B7EB /* ZenventoryTests */ = {
+			isa = PBXGroup;
+			children = (
+				606EF9CA29C96E130024B7EB /* ZenventoryTests.swift */,
+			);
+			path = ZenventoryTests;
+			sourceTree = "<group>";
+		};
+		606EF9D329C96E130024B7EB /* ZenventoryUITests */ = {
+			isa = PBXGroup;
+			children = (
+				606EF9D429C96E130024B7EB /* ZenventoryUITests.swift */,
+				606EF9D629C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift */,
+			);
+			path = ZenventoryUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		606EF9B529C96E120024B7EB /* Zenventory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 606EF9DA29C96E130024B7EB /* Build configuration list for PBXNativeTarget "Zenventory" */;
+			buildPhases = (
+				606EF9B229C96E120024B7EB /* Sources */,
+				606EF9B329C96E120024B7EB /* Frameworks */,
+				606EF9B429C96E120024B7EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Zenventory;
+			productName = Zenventory;
+			productReference = 606EF9B629C96E120024B7EB /* Zenventory.app */;
+			productType = "com.apple.product-type.application";
+		};
+		606EF9C529C96E130024B7EB /* ZenventoryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 606EF9DD29C96E130024B7EB /* Build configuration list for PBXNativeTarget "ZenventoryTests" */;
+			buildPhases = (
+				606EF9C229C96E130024B7EB /* Sources */,
+				606EF9C329C96E130024B7EB /* Frameworks */,
+				606EF9C429C96E130024B7EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				606EF9C829C96E130024B7EB /* PBXTargetDependency */,
+			);
+			name = ZenventoryTests;
+			productName = ZenventoryTests;
+			productReference = 606EF9C629C96E130024B7EB /* ZenventoryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		606EF9CF29C96E130024B7EB /* ZenventoryUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 606EF9E029C96E130024B7EB /* Build configuration list for PBXNativeTarget "ZenventoryUITests" */;
+			buildPhases = (
+				606EF9CC29C96E130024B7EB /* Sources */,
+				606EF9CD29C96E130024B7EB /* Frameworks */,
+				606EF9CE29C96E130024B7EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				606EF9D229C96E130024B7EB /* PBXTargetDependency */,
+			);
+			name = ZenventoryUITests;
+			productName = ZenventoryUITests;
+			productReference = 606EF9D029C96E130024B7EB /* ZenventoryUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		606EF9AE29C96E120024B7EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					606EF9B529C96E120024B7EB = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					606EF9C529C96E130024B7EB = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 606EF9B529C96E120024B7EB;
+					};
+					606EF9CF29C96E130024B7EB = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 606EF9B529C96E120024B7EB;
+					};
+				};
+			};
+			buildConfigurationList = 606EF9B129C96E120024B7EB /* Build configuration list for PBXProject "Zenventory" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 606EF9AD29C96E120024B7EB;
+			productRefGroup = 606EF9B729C96E120024B7EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				606EF9B529C96E120024B7EB /* Zenventory */,
+				606EF9C529C96E130024B7EB /* ZenventoryTests */,
+				606EF9CF29C96E130024B7EB /* ZenventoryUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		606EF9B429C96E120024B7EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				606EF9C129C96E130024B7EB /* Preview Assets.xcassets in Resources */,
+				606EF9BE29C96E130024B7EB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		606EF9C429C96E130024B7EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		606EF9CE29C96E130024B7EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		606EF9B229C96E120024B7EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				606EF9BC29C96E120024B7EB /* ContentView.swift in Sources */,
+				606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		606EF9C229C96E130024B7EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				606EF9CB29C96E130024B7EB /* ZenventoryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		606EF9CC29C96E130024B7EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				606EF9D729C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift in Sources */,
+				606EF9D529C96E130024B7EB /* ZenventoryUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		606EF9C829C96E130024B7EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 606EF9B529C96E120024B7EB /* Zenventory */;
+			targetProxy = 606EF9C729C96E130024B7EB /* PBXContainerItemProxy */;
+		};
+		606EF9D229C96E130024B7EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 606EF9B529C96E120024B7EB /* Zenventory */;
+			targetProxy = 606EF9D129C96E130024B7EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		606EF9D829C96E130024B7EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		606EF9D929C96E130024B7EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		606EF9DB29C96E130024B7EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Zenventory/Preview Content\"";
+				DEVELOPMENT_TEAM = 9AWGRVU6P9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sebastianhajduk.Zenventory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		606EF9DC29C96E130024B7EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Zenventory/Preview Content\"";
+				DEVELOPMENT_TEAM = 9AWGRVU6P9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sebastianhajduk.Zenventory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		606EF9DE29C96E130024B7EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9AWGRVU6P9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sebastianhajduk.ZenventoryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Zenventory.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Zenventory";
+			};
+			name = Debug;
+		};
+		606EF9DF29C96E130024B7EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9AWGRVU6P9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sebastianhajduk.ZenventoryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Zenventory.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Zenventory";
+			};
+			name = Release;
+		};
+		606EF9E129C96E130024B7EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9AWGRVU6P9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sebastianhajduk.ZenventoryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Zenventory;
+			};
+			name = Debug;
+		};
+		606EF9E229C96E130024B7EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9AWGRVU6P9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sebastianhajduk.ZenventoryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Zenventory;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		606EF9B129C96E120024B7EB /* Build configuration list for PBXProject "Zenventory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				606EF9D829C96E130024B7EB /* Debug */,
+				606EF9D929C96E130024B7EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		606EF9DA29C96E130024B7EB /* Build configuration list for PBXNativeTarget "Zenventory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				606EF9DB29C96E130024B7EB /* Debug */,
+				606EF9DC29C96E130024B7EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		606EF9DD29C96E130024B7EB /* Build configuration list for PBXNativeTarget "ZenventoryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				606EF9DE29C96E130024B7EB /* Debug */,
+				606EF9DF29C96E130024B7EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		606EF9E029C96E130024B7EB /* Build configuration list for PBXNativeTarget "ZenventoryUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				606EF9E129C96E130024B7EB /* Debug */,
+				606EF9E229C96E130024B7EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 606EF9AE29C96E120024B7EB /* Project object */;
+}
