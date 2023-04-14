@@ -11,7 +11,9 @@ import SwiftUI
 struct ZenventoryApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabBarView()
+                .toolbarBackground(.hidden, for: .navigationBar)
+                .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

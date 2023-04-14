@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SwiftUIView: View {
+struct ProductCell: View {
     var body: some View {
         HStack {
             Image(systemName: "camera.macro.circle.fill")
@@ -24,23 +24,28 @@ struct SwiftUIView: View {
 
                 Text("Last used: 02.04.2023")
                     .font(.caption2)
+                    .foregroundColor(.gray)
 
                 Text("Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum")
                     .font(.system(size: 10))
                     .padding(.top, 5)
                     .padding(.trailing, 50)
+                    .foregroundColor(ZColor.foreground)
             }
-
         }
         .padding()
         .frame(maxHeight: 100)
-        .background(.gray.opacity(0.2))
+        .background(ZColor.background)
         .cornerRadius(30)
+        .overlay {
+            RoundedRectangle(cornerRadius: 30)
+                .stroke(.gray.opacity(0.2), lineWidth: 1)
+        }
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct ProductCell_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIView()
+        TabBarView()
     }
 }

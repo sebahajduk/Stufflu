@@ -7,19 +7,32 @@
 
 import SwiftUI
 
-struct TabBarView: View {
-    var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("Home", image: "house.fill")
-                }
+enum TabSelected {
+    case home, profile
+}
 
-            ProfileView()
-                .tabItem {
-                    Label("Profile", image: "person.crop.circle.fill")
+struct TabBarView: View {
+
+    @State private var selectedTab: TabSelected = .home
+    
+    var body: some View {
+        VStack {
+            switch selectedTab {
+            case .home:
+                NavigationView {
+                    HomeView()
                 }
+            case .profile:
+                NavigationView {
+                    ProfileView()
+                }
+            }
+
+            ZTabView(selectedTab: $selectedTab)
+                .frame(height: 50)
         }
+        .background(ZColor.background)
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 
