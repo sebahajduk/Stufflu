@@ -13,7 +13,8 @@ struct StandardButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .padding()
-                .background(colorScheme == .dark ? ZColor.foreground.opacity(0.1) : ZColor.foreground)
+                .bold()
+                .background(ZColor.foreground)
                 .foregroundColor(ZColor.background)
                 .clipShape(Capsule())
                 .opacity(configuration.isPressed ? 0.9 : 1)

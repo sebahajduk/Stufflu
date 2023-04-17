@@ -15,6 +15,7 @@ struct ProductCell: View {
                 .frame(width: 60, height: 60)
                 .clipShape(Circle())
                 .padding()
+                .foregroundColor(ZColor.foreground)
 
             VStack(alignment: .leading) {
                 Text("Product name")

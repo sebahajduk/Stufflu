@@ -41,8 +41,8 @@ struct HomeView: View {
                                 Text("Sold")
                                 Text("$102,22")
                                     .bold()
-
                             }
+
                             Divider()
                                 .frame(maxHeight: 30)
 

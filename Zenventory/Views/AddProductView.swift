@@ -19,23 +19,48 @@ struct AddProductView: View {
                 ZColor.background
                 VStack(spacing: 20) {
                     PhotosPicker(selection: $vm.selectedItem, matching: .images, photoLibrary: .shared()) {
-                        Image(uiImage: vm.productImage!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 70, height: 70)
-                            .foregroundColor(.gray)
-                            .background(.clear)
-                            .padding(.bottom, 50)
-                    }
-                    .onChange(of: vm.selectedItem) { _ in
-                        print(vm.selectedItem)
+                        if vm.productImage == nil {
+                            Image(systemName: "camera.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 70, height: 70)
+                                .foregroundColor(ZColor.foreground)
+                                .background(.clear)
+                                .padding(.bottom, 50)
+                        } else {
+                            Image(uiImage: vm.productImage!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 70, height: 70)
+                                .padding(.bottom, 50)
+                        }
                     }
 
                     VStack(spacing: 20) {
-                        TextField("Name", text: $vm.productName)
-                        TextField("Guarantee (months)", text: $vm.productGuarantee)
-                        TextField("Care name (cleaning, insurance etc.)", text: $vm.productCareName)
-                        TextField("Care interval", text: $vm.productCareInterval)
+                        TextFieldWithStatus(isValid: $vm.nameIsValid,
+                                            textFieldValue: $vm.productName,
+                                            textFieldLabel: "Name*",
+                                            keyboardType: .default)
+
+                        TextFieldWithStatus(isValid: $vm.guaranteeIsValid,
+                                            textFieldValue: $vm.productGuarantee,
+                                            textFieldLabel: "Guarantee (months)",
+                                            keyboardType: .default)
+
+                        TextFieldWithStatus(isValid: $vm.careNameIsValid,
+                                            textFieldValue: $vm.productCareName,
+                                            textFieldLabel: "Care name (cleaning, insurance etc.)",
+                                            keyboardType: .default)
+
+                        TextFieldWithStatus(isValid: $vm.careIntervalIsValid,
+                                            textFieldValue: $vm.productCareInterval,
+                                            textFieldLabel: "Care interval (months)",
+                                            keyboardType: .numberPad)
+
+                        TextFieldWithStatus(isValid: $vm.priceIsValid,
+                                            textFieldValue: $vm.productPrice,
+                                            textFieldLabel: "Price",
+                                            keyboardType: .decimalPad)
                     }
                     .padding()
                     .background(.ultraThinMaterial)
