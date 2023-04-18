@@ -45,7 +45,7 @@ struct AddProductView: View {
                         TextFieldWithStatus(isValid: $vm.guaranteeIsValid,
                                             textFieldValue: $vm.productGuarantee,
                                             textFieldLabel: "Guarantee (months)",
-                                            keyboardType: .default)
+                                            keyboardType: .numberPad)
 
                         TextFieldWithStatus(isValid: $vm.careNameIsValid,
                                             textFieldValue: $vm.productCareName,

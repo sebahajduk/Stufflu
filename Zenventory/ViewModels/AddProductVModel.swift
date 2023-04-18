@@ -69,28 +69,28 @@ class AddProductVModel: ObservableObject {
 
     private func observeGuarantee() {
         $productGuarantee
-            .map { $0.isInteger }
+            .map { $0.isInteger || $0.count == 0 }
             .assign(to: \.guaranteeIsValid, on: self)
             .store(in: &cancellables)
     }
 
     private func observeCareName() {
         $productCareName
-            .map { $0.count >= 3}
+            .map { $0.count >= 3 || $0.count == 0 }
             .assign(to: \.careNameIsValid, on: self)
             .store(in: &cancellables)
     }
 
     private func observeCareInterval() {
         $productCareInterval
-            .map { $0.isInteger }
+            .map { $0.isInteger || $0.count == 0 }
             .assign(to: \.careIntervalIsValid, on: self)
             .store(in: &cancellables)
     }
 
     private func observePrice() {
         $productPrice
-            .map { $0.isDouble }
+            .map { $0.isDouble || $0.count == 0 }
             .assign(to: \.priceIsValid, on: self)
             .store(in: &cancellables)
     }

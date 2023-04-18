@@ -14,7 +14,6 @@
 		606EF9BC29C96E120024B7EB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9BB29C96E120024B7EB /* HomeView.swift */; };
 		606EF9BE29C96E130024B7EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 606EF9BD29C96E130024B7EB /* Assets.xcassets */; };
 		606EF9C129C96E130024B7EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 606EF9C029C96E130024B7EB /* Preview Assets.xcassets */; };
-		606EF9CB29C96E130024B7EB /* ZenventoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9CA29C96E130024B7EB /* ZenventoryTests.swift */; };
 		606EF9D529C96E130024B7EB /* ZenventoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9D429C96E130024B7EB /* ZenventoryUITests.swift */; };
 		606EF9D729C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9D629C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift */; };
 		606EF9E529C970EA0024B7EB /* ZColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9E429C970EA0024B7EB /* ZColor.swift */; };
@@ -25,6 +24,8 @@
 		607346E729E9BC3000110F01 /* Publisher+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607346E629E9BC3000110F01 /* Publisher+Ext.swift */; };
 		607346EE29EDC8A500110F01 /* TextFieldWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607346ED29EDC8A500110F01 /* TextFieldWithStatus.swift */; };
 		607346F029EDCC9700110F01 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607346EF29EDCC9700110F01 /* String+Ext.swift */; };
+		607346F229EEE73300110F01 /* AddProductVModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607346F129EEE73300110F01 /* AddProductVModel_Tests.swift */; };
+		607346F529EEEE3000110F01 /* String+Ext_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607346F429EEEE3000110F01 /* String+Ext_Tests.swift */; };
 		6090E93129DB46A0007131C5 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6090E93029DB46A0007131C5 /* ProductCell.swift */; };
 		60A5BF0129CCC9B3008EA2A4 /* MyProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A5BF0029CCC9B3008EA2A4 /* MyProductsView.swift */; };
 		60A5BF0529CCCCA6008EA2A4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A5BF0429CCCCA6008EA2A4 /* Product.swift */; };
@@ -58,7 +59,6 @@
 		606EF9BD29C96E130024B7EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		606EF9C029C96E130024B7EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		606EF9C629C96E130024B7EB /* ZenventoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenventoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		606EF9CA29C96E130024B7EB /* ZenventoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryTests.swift; sourceTree = "<group>"; };
 		606EF9D029C96E130024B7EB /* ZenventoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenventoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		606EF9D429C96E130024B7EB /* ZenventoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryUITests.swift; sourceTree = "<group>"; };
 		606EF9D629C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -70,6 +70,8 @@
 		607346E629E9BC3000110F01 /* Publisher+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Ext.swift"; sourceTree = "<group>"; };
 		607346ED29EDC8A500110F01 /* TextFieldWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithStatus.swift; sourceTree = "<group>"; };
 		607346EF29EDCC9700110F01 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		607346F129EEE73300110F01 /* AddProductVModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVModel_Tests.swift; sourceTree = "<group>"; };
+		607346F429EEEE3000110F01 /* String+Ext_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext_Tests.swift"; sourceTree = "<group>"; };
 		6090E93029DB46A0007131C5 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		60A5BF0029CCC9B3008EA2A4 /* MyProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductsView.swift; sourceTree = "<group>"; };
 		60A5BF0429CCCCA6008EA2A4 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -157,7 +159,8 @@
 		606EF9C929C96E130024B7EB /* ZenventoryTests */ = {
 			isa = PBXGroup;
 			children = (
-				606EF9CA29C96E130024B7EB /* ZenventoryTests.swift */,
+				607346F329EEEE1400110F01 /* Extensions_Tests */,
+				607346F129EEE73300110F01 /* AddProductVModel_Tests.swift */,
 			);
 			path = ZenventoryTests;
 			sourceTree = "<group>";
@@ -203,6 +206,14 @@
 				607346ED29EDC8A500110F01 /* TextFieldWithStatus.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		607346F329EEEE1400110F01 /* Extensions_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				607346F429EEEE3000110F01 /* String+Ext_Tests.swift */,
+			);
+			path = Extensions_Tests;
 			sourceTree = "<group>";
 		};
 		60A248F029CAC6CE00809C51 /* Utilities */ = {
@@ -376,7 +387,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				606EF9CB29C96E130024B7EB /* ZenventoryTests.swift in Sources */,
+				607346F529EEEE3000110F01 /* String+Ext_Tests.swift in Sources */,
+				607346F229EEE73300110F01 /* AddProductVModel_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
