@@ -11,6 +11,13 @@ import PhotosUI
 
 class AddProductVModel: ObservableObject {
 
+    var dataService: CoreDataService
+
+    init(dataService: CoreDataService) {
+        self.dataService = dataService
+        runObservers()
+    }
+
     private var cancellables = Set<AnyCancellable>()
 
     @Published var selectedItem: PhotosPickerItem?
@@ -32,8 +39,19 @@ class AddProductVModel: ObservableObject {
     @Published var careIntervalIsValid = true
     @Published var priceIsValid = true
 
-    init() {
-        runObservers()
+    func addButtonTapped() {
+        guard textfieldsAreValid() else { return }
+
+        dataService.addProduct(name: productName,
+                               guarantee: Int(productGuarantee) ?? nil,
+                               careName: productCareName,
+                               careInterval: Int(productCareInterval) ?? nil,
+                               price: Double(productPrice) ?? nil,
+                               importance: Int(importanceSlider))
+    }
+
+    private func textfieldsAreValid() -> Bool {
+        nameIsValid && guaranteeIsValid && careNameIsValid && careIntervalIsValid && priceIsValid
     }
 
     private func runObservers() {
@@ -94,4 +112,14 @@ class AddProductVModel: ObservableObject {
             .assign(to: \.priceIsValid, on: self)
             .store(in: &cancellables)
     }
+
+   
+
+
 }
+
+
+
+
+
+

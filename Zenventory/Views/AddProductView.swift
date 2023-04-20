@@ -11,7 +11,11 @@ import PhotosUI
 
 struct AddProductView: View {
 
-    @StateObject private var vm = AddProductVModel()
+    @StateObject private var vm: AddProductVModel
+
+    init(coreDataService: CoreDataService) {
+        _vm = StateObject(wrappedValue: AddProductVModel(dataService: coreDataService))
+    }
 
     var body: some View {
         NavigationStack {
@@ -71,10 +75,10 @@ struct AddProductView: View {
                         .padding(.horizontal)
 
                     NavigationLink("Receipt & invoice") {
-                        AddProductView()
+                        
                     }
 
-                    Button("Add product") { }
+                    Button("Add product") { vm.addButtonTapped() }
                         .buttonStyle(StandardButton())
                 }
                 .padding()
@@ -88,6 +92,6 @@ struct AddProductView: View {
 
 struct AddProductView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView()
+        TabBarView(coreDataService: CoreDataService())
     }
 }

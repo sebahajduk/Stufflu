@@ -19,6 +19,8 @@ struct ZTabView: View {
     @Binding var selectedTab: TabSelected
     @State private var isPresented: Bool = false
 
+    @State var dataService: CoreDataService
+
     var body: some View {
         HStack {
             Spacer()
@@ -53,7 +55,7 @@ struct ZTabView: View {
                 }
                 .offset(y: -32)
             }.sheet(isPresented: $isPresented) {
-                AddProductView()
+                AddProductView(coreDataService: dataService)
             }
 
 

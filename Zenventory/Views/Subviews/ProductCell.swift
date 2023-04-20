@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ProductCell: View {
+
+    @State var productEntity: ProductEntity
+
     var body: some View {
         HStack {
             Image(systemName: "camera.macro.circle.fill")
@@ -18,24 +21,26 @@ struct ProductCell: View {
                 .foregroundColor(ZColor.foreground)
 
             VStack(alignment: .leading) {
-                Text("Product name")
+                Text(productEntity.name ?? "")
                     .bold()
                     .font(.subheadline)
                     .foregroundColor(ZColor.foreground)
 
-                Text("Last used: 02.04.2023")
+                Text("Last used: ")
                     .font(.caption2)
                     .foregroundColor(.gray)
 
-                Text("Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum")
+                Text(productEntity.productDescr ?? "")
                     .font(.system(size: 10))
                     .padding(.top, 5)
                     .padding(.trailing, 50)
                     .foregroundColor(ZColor.foreground)
             }
+
+            Spacer()
         }
         .padding()
-        .frame(maxHeight: 100)
+        .frame(maxWidth: .infinity, maxHeight: 100)
         .background(ZColor.background)
         .cornerRadius(30)
         .overlay {
@@ -47,6 +52,6 @@ struct ProductCell: View {
 
 struct ProductCell_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView()
+        TabBarView(coreDataService: CoreDataService())
     }
 }

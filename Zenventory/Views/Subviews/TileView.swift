@@ -26,6 +26,6 @@ struct TileView: View {
 
 struct TileView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView()
+        TabBarView(coreDataService: CoreDataService())
     }
 }

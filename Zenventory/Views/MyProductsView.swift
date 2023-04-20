@@ -43,7 +43,7 @@ struct MyProductsView: View {
 
                 ScrollView {
                     ForEach(0..<10) { _ in
-                        ProductCell()
+//                        ProductCell()
                     }
                 }
                 .padding(.horizontal, 20)
@@ -56,7 +56,8 @@ struct MyProductsView: View {
 }
 
 struct MyProductsView_Previews: PreviewProvider {
+
     static var previews: some View {
-        TabBarView()
+        TabBarView(coreDataService: CoreDataService())
     }
 }

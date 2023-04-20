@@ -10,12 +10,13 @@
 		602EC15C29DC752F00E8B470 /* WishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC15B29DC752F00E8B470 /* WishlistView.swift */; };
 		602EC15E29DC844F00E8B470 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC15D29DC844F00E8B470 /* AddProductView.swift */; };
 		602EC16129DC84DF00E8B470 /* AddProductVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC16029DC84DF00E8B470 /* AddProductVModel.swift */; };
+		605B5B7629F03E0F00973AD1 /* ProductsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7429F03E0F00973AD1 /* ProductsContainer.xcdatamodeld */; };
+		605B5B7829F0455C00973AD1 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7729F0455C00973AD1 /* CoreDataService.swift */; };
+		605B5B7A29F049EB00973AD1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7929F049EB00973AD1 /* HomeViewModel.swift */; };
 		606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9B929C96E120024B7EB /* ZenventoryApp.swift */; };
 		606EF9BC29C96E120024B7EB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9BB29C96E120024B7EB /* HomeView.swift */; };
 		606EF9BE29C96E130024B7EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 606EF9BD29C96E130024B7EB /* Assets.xcassets */; };
 		606EF9C129C96E130024B7EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 606EF9C029C96E130024B7EB /* Preview Assets.xcassets */; };
-		606EF9D529C96E130024B7EB /* ZenventoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9D429C96E130024B7EB /* ZenventoryUITests.swift */; };
-		606EF9D729C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9D629C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift */; };
 		606EF9E529C970EA0024B7EB /* ZColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9E429C970EA0024B7EB /* ZColor.swift */; };
 		606EF9E829C9724E0024B7EB /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9E729C9724E0024B7EB /* TabBarView.swift */; };
 		606EF9EA29C9725B0024B7EB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9E929C9725B0024B7EB /* ProfileView.swift */; };
@@ -53,6 +54,9 @@
 		602EC15B29DC752F00E8B470 /* WishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistView.swift; sourceTree = "<group>"; };
 		602EC15D29DC844F00E8B470 /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
 		602EC16029DC84DF00E8B470 /* AddProductVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVModel.swift; sourceTree = "<group>"; };
+		605B5B7529F03E0F00973AD1 /* ProductsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductsContainer.xcdatamodel; sourceTree = "<group>"; };
+		605B5B7729F0455C00973AD1 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		605B5B7929F049EB00973AD1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		606EF9B629C96E120024B7EB /* Zenventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zenventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		606EF9B929C96E120024B7EB /* ZenventoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryApp.swift; sourceTree = "<group>"; };
 		606EF9BB29C96E120024B7EB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -60,8 +64,6 @@
 		606EF9C029C96E130024B7EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		606EF9C629C96E130024B7EB /* ZenventoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenventoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		606EF9D029C96E130024B7EB /* ZenventoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenventoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		606EF9D429C96E130024B7EB /* ZenventoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryUITests.swift; sourceTree = "<group>"; };
-		606EF9D629C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		606EF9E429C970EA0024B7EB /* ZColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZColor.swift; sourceTree = "<group>"; };
 		606EF9E729C9724E0024B7EB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		606EF9E929C9725B0024B7EB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				602EC16029DC84DF00E8B470 /* AddProductVModel.swift */,
+				605B5B7929F049EB00973AD1 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -117,7 +120,6 @@
 			children = (
 				606EF9B829C96E120024B7EB /* Zenventory */,
 				606EF9C929C96E130024B7EB /* ZenventoryTests */,
-				606EF9D329C96E130024B7EB /* ZenventoryUITests */,
 				606EF9B729C96E120024B7EB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -165,20 +167,13 @@
 			path = ZenventoryTests;
 			sourceTree = "<group>";
 		};
-		606EF9D329C96E130024B7EB /* ZenventoryUITests */ = {
-			isa = PBXGroup;
-			children = (
-				606EF9D429C96E130024B7EB /* ZenventoryUITests.swift */,
-				606EF9D629C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift */,
-			);
-			path = ZenventoryUITests;
-			sourceTree = "<group>";
-		};
 		606EF9E329C970D00024B7EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				606EF9E429C970EA0024B7EB /* ZColor.swift */,
 				60A5BF0429CCCCA6008EA2A4 /* Product.swift */,
+				605B5B7429F03E0F00973AD1 /* ProductsContainer.xcdatamodeld */,
+				605B5B7729F0455C00973AD1 /* CoreDataService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -366,6 +361,7 @@
 				602EC15E29DC844F00E8B470 /* AddProductView.swift in Sources */,
 				602EC16129DC84DF00E8B470 /* AddProductVModel.swift in Sources */,
 				6090E93129DB46A0007131C5 /* ProductCell.swift in Sources */,
+				605B5B7A29F049EB00973AD1 /* HomeViewModel.swift in Sources */,
 				607346F029EDCC9700110F01 /* String+Ext.swift in Sources */,
 				602EC15C29DC752F00E8B470 /* WishlistView.swift in Sources */,
 				606EF9E529C970EA0024B7EB /* ZColor.swift in Sources */,
@@ -376,10 +372,12 @@
 				607346E729E9BC3000110F01 /* Publisher+Ext.swift in Sources */,
 				606EF9EA29C9725B0024B7EB /* ProfileView.swift in Sources */,
 				606EF9E829C9724E0024B7EB /* TabBarView.swift in Sources */,
+				605B5B7829F0455C00973AD1 /* CoreDataService.swift in Sources */,
 				60A5BF0129CCC9B3008EA2A4 /* MyProductsView.swift in Sources */,
 				607346EE29EDC8A500110F01 /* TextFieldWithStatus.swift in Sources */,
 				60B090CF29E5A646009BD972 /* StandardButton.swift in Sources */,
 				606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */,
+				605B5B7629F03E0F00973AD1 /* ProductsContainer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,8 +394,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				606EF9D729C96E130024B7EB /* ZenventoryUITestsLaunchTests.swift in Sources */,
-				606EF9D529C96E130024B7EB /* ZenventoryUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +701,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		605B5B7429F03E0F00973AD1 /* ProductsContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				605B5B7529F03E0F00973AD1 /* ProductsContainer.xcdatamodel */,
+			);
+			currentVersion = 605B5B7529F03E0F00973AD1 /* ProductsContainer.xcdatamodel */;
+			path = ProductsContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 606EF9AE29C96E120024B7EB /* Project object */;
 }

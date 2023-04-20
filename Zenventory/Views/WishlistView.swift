@@ -15,7 +15,7 @@ struct WishlistView: View {
 
             ScrollView {
                 ForEach(0..<10) { _ in
-                    ProductCell()
+//                    ProductCell()
                 }
             }
             .padding(.horizontal, 20)

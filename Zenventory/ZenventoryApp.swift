@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ZenventoryApp: App {
+
+    @StateObject var coreDataService = CoreDataService()
+
     var body: some Scene {
         WindowGroup {
-            TabBarView()
+            TabBarView(coreDataService: coreDataService)
                 .toolbarBackground(.hidden, for: .navigationBar)
                 .toolbar(.hidden, for: .navigationBar)
         }

@@ -9,6 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
 
+    @StateObject private var vm: HomeViewModel
+
+    init(coreDataService: CoreDataService) {
+        _vm = StateObject(wrappedValue: HomeViewModel(dataService: coreDataService))
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -63,8 +69,8 @@ struct HomeView: View {
                             .bold()
                             .foregroundColor(ZColor.foreground)
                         
-                        ForEach(0..<5) { _ in
-                            ProductCell()
+                        ForEach(vm.products) { entity in
+                            ProductCell(productEntity: entity)
                         }
                         Spacer()
                     }
@@ -80,6 +86,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView()
+        TabBarView(coreDataService: CoreDataService())
     }
 }

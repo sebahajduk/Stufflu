@@ -13,6 +13,8 @@ enum TabSelected {
 
 struct TabBarView: View {
 
+    var coreDataService: CoreDataService
+
     @State private var selectedTab: TabSelected = .home
     
     var body: some View {
@@ -20,7 +22,7 @@ struct TabBarView: View {
             switch selectedTab {
             case .home:
                 NavigationView {
-                    HomeView()
+                    HomeView(coreDataService: coreDataService)
                 }
             case .profile:
                 NavigationView {
@@ -28,7 +30,7 @@ struct TabBarView: View {
                 }
             }
 
-            ZTabView(selectedTab: $selectedTab)
+            ZTabView(selectedTab: $selectedTab, dataService: coreDataService)
                 .frame(height: 50)
         }
         .background(ZColor.background)
@@ -37,7 +39,8 @@ struct TabBarView: View {
 }
 
 struct TabView_Previews: PreviewProvider {
+
     static var previews: some View {
-        TabBarView()
+        TabBarView(coreDataService: CoreDataService())
     }
 }
