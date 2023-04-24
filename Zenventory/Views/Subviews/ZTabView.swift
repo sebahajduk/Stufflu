@@ -36,7 +36,7 @@ struct ZTabView: View {
                     Text("Home")
                         .font(.caption2)
                 }
-                .foregroundColor(selectedTab == .home ? ZColor.foreground : ZColor.foreground.opacity(0.5))
+                .foregroundColor(selectedTab == .home ? ZColor.action : ZColor.foreground.opacity(0.5))
             }
             Spacer()
 
@@ -45,8 +45,9 @@ struct ZTabView: View {
             } label: {
                 ZStack {
                     Circle()
-                        .foregroundColor(ZColor.foreground)
+                        .foregroundColor(ZColor.action)
                         .frame(width: 60, height: 60)
+                        .shadow(color: ZColor.action, radius: 10)
                     Image(systemName: "plus")
                         .resizable()
                         .bold()
@@ -72,7 +73,7 @@ struct ZTabView: View {
                     Text("Profile")
                         .font(.caption2)
                 }
-                .foregroundColor(selectedTab == .profile ? ZColor.foreground : ZColor.foreground.opacity(0.5))
+                .foregroundColor(selectedTab == .profile ? ZColor.action : ZColor.foreground.opacity(0.5))
             }
 
             Spacer()

@@ -13,6 +13,7 @@
 		605B5B7629F03E0F00973AD1 /* ProductsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7429F03E0F00973AD1 /* ProductsContainer.xcdatamodeld */; };
 		605B5B7829F0455C00973AD1 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7729F0455C00973AD1 /* CoreDataService.swift */; };
 		605B5B7A29F049EB00973AD1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7929F049EB00973AD1 /* HomeViewModel.swift */; };
+		605B5B7C29F1A1E500973AD1 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7B29F1A1E500973AD1 /* ProductCellViewModel.swift */; };
 		606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9B929C96E120024B7EB /* ZenventoryApp.swift */; };
 		606EF9BC29C96E120024B7EB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9BB29C96E120024B7EB /* HomeView.swift */; };
 		606EF9BE29C96E130024B7EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 606EF9BD29C96E130024B7EB /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 		605B5B7529F03E0F00973AD1 /* ProductsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductsContainer.xcdatamodel; sourceTree = "<group>"; };
 		605B5B7729F0455C00973AD1 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		605B5B7929F049EB00973AD1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		605B5B7B29F1A1E500973AD1 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
 		606EF9B629C96E120024B7EB /* Zenventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zenventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		606EF9B929C96E120024B7EB /* ZenventoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryApp.swift; sourceTree = "<group>"; };
 		606EF9BB29C96E120024B7EB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				602EC16029DC84DF00E8B470 /* AddProductVModel.swift */,
+				605B5B7B29F1A1E500973AD1 /* ProductCellViewModel.swift */,
 				605B5B7929F049EB00973AD1 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
@@ -374,6 +377,7 @@
 				606EF9E829C9724E0024B7EB /* TabBarView.swift in Sources */,
 				605B5B7829F0455C00973AD1 /* CoreDataService.swift in Sources */,
 				60A5BF0129CCC9B3008EA2A4 /* MyProductsView.swift in Sources */,
+				605B5B7C29F1A1E500973AD1 /* ProductCellViewModel.swift in Sources */,
 				607346EE29EDC8A500110F01 /* TextFieldWithStatus.swift in Sources */,
 				60B090CF29E5A646009BD972 /* StandardButton.swift in Sources */,
 				606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */,

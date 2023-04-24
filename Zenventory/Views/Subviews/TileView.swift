@@ -14,12 +14,16 @@ struct TileView: View {
 
     var body: some View {
         Text(title)
-            .foregroundColor(ZColor.foreground)
+            .foregroundColor(ZColor.action)
             .font(.footnote.bold())
             .frame(maxWidth: .infinity, maxHeight: 100)
             .padding(30)
             .background(ZColor.background)
-            .cornerRadius(20)
+            .cornerRadius(30)
+            .overlay {
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(ZColor.action.opacity(0.2), lineWidth: 1)
+            }
             .shadow(color: ZColor.foreground.opacity(0.1), radius: 10)
     }
 }

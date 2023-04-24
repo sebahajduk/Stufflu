@@ -14,7 +14,7 @@ struct StandardButton: ButtonStyle {
             configuration.label
                 .padding()
                 .bold()
-                .background(ZColor.foreground)
+                .background(ZColor.action)
                 .foregroundColor(ZColor.background)
                 .clipShape(Capsule())
                 .opacity(configuration.isPressed ? 0.9 : 1)

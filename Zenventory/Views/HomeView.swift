@@ -17,7 +17,7 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
                         HStack {
                             NavigationLink(destination: MyProductsView()) {
@@ -68,16 +68,25 @@ struct HomeView: View {
                             .font(.headline)
                             .bold()
                             .foregroundColor(ZColor.foreground)
-                        
-                        ForEach(vm.products) { entity in
-                            ProductCell(productEntity: entity)
+
+                        List {
+                            ForEach(vm.products, id: \.self) { entity in
+                                ProductCell(productEntity: entity)
+                                    .listRowSeparator(.hidden)
+                            }
+                            .onDelete(perform: vm.deleteItem(at:))
+                            
                         }
+                        .frame(maxWidth: .infinity, minHeight: 1000)
+                        .listStyle(.plain)
+                        .background(ZColor.background)
+
                         Spacer()
                     }
                     .padding()
                 }
                 .background(ZColor.background)
-            }
+        }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .ignoresSafeArea()

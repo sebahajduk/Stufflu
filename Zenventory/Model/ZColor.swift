@@ -10,4 +10,5 @@ import SwiftUI
 enum ZColor {
     static let background = Color(UIColor(named: "background")!)
     static let foreground = Color(UIColor(named: "foreground")!)
+    static let action = Color(UIColor(named: "action")!)
 }

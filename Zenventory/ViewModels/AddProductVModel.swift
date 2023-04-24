@@ -9,6 +9,11 @@ import SwiftUI
 import Combine
 import PhotosUI
 
+enum Importance: String, CaseIterable, Identifiable {
+    case low, medium, high
+    var id: Self { self }
+}
+
 class AddProductVModel: ObservableObject {
 
     var dataService: CoreDataService
@@ -20,7 +25,10 @@ class AddProductVModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    @Published var selectedItem: PhotosPickerItem?
+    @Published var selectedProductPhoto: PhotosPickerItem?
+    @Published var selectedInvoicePhoto: PhotosPickerItem?
+
+    @Published var selectedImportance: Importance = .medium
 
     // MARK: --- Product details ---
     @Published var productName: String = ""
@@ -64,7 +72,7 @@ class AddProductVModel: ObservableObject {
     }
 
     private func observeSelectedItem() {
-        $selectedItem
+        $selectedProductPhoto
             .compactMap { $0 }
             .tryAwaitMap {
                 /// Needs to be converted into Data because type Image.self does not show photos other than .png
@@ -112,12 +120,7 @@ class AddProductVModel: ObservableObject {
             .assign(to: \.priceIsValid, on: self)
             .store(in: &cancellables)
     }
-
-   
-
-
 }
-
 
 
 

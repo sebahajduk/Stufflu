@@ -33,4 +33,8 @@ class HomeViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
+
+    func deleteItem(at offsets: IndexSet) {
+        products.remove(atOffsets: offsets)
+    }
 }

@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ProductCell: View {
 
-    @State var productEntity: ProductEntity
+    @StateObject private var vm: ProductCellViewModel
+
+    init(productEntity: ProductEntity) {
+        _vm = StateObject(wrappedValue: ProductCellViewModel(product: productEntity))
+    }
 
     var body: some View {
         HStack {
@@ -20,17 +24,17 @@ struct ProductCell: View {
                 .padding()
                 .foregroundColor(ZColor.foreground)
 
-            VStack(alignment: .leading) {
-                Text(productEntity.name ?? "")
+            VStack(alignment: .leading, spacing: 2) {
+                Text(vm.product.name ?? "")
                     .bold()
                     .font(.subheadline)
                     .foregroundColor(ZColor.foreground)
 
-                Text("Last used: ")
+                Text("Last used: \(vm.lastUsed)")
                     .font(.caption2)
                     .foregroundColor(.gray)
 
-                Text(productEntity.productDescr ?? "")
+                Text(vm.product.productDescr ?? "lorem ipsum lorem ipsum lorem ipsum")
                     .font(.system(size: 10))
                     .padding(.top, 5)
                     .padding(.trailing, 50)
@@ -40,8 +44,9 @@ struct ProductCell: View {
             Spacer()
         }
         .padding()
-        .frame(maxWidth: .infinity, maxHeight: 100)
+        .frame(maxWidth: .infinity, maxHeight: 90)
         .background(ZColor.background)
+        .listRowBackground(ZColor.background)
         .cornerRadius(30)
         .overlay {
             RoundedRectangle(cornerRadius: 30)

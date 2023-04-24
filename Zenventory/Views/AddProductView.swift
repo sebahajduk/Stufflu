@@ -22,13 +22,13 @@ struct AddProductView: View {
             ZStack {
                 ZColor.background
                 VStack(spacing: 20) {
-                    PhotosPicker(selection: $vm.selectedItem, matching: .images, photoLibrary: .shared()) {
+                    PhotosPicker(selection: $vm.selectedProductPhoto, matching: .images, photoLibrary: .shared()) {
                         if vm.productImage == nil {
                             Image(systemName: "camera.circle.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 70, height: 70)
-                                .foregroundColor(ZColor.foreground)
+                                .foregroundColor(ZColor.action)
                                 .background(.clear)
                                 .padding(.bottom, 50)
                         } else {
@@ -70,13 +70,49 @@ struct AddProductView: View {
                     .background(.ultraThinMaterial)
                     .cornerRadius(20)
 
-                    Text("Importance: " + String(Int(vm.importanceSlider)))
-                    Slider(value: $vm.importanceSlider, in: 0...10, step: 1)
-                        .padding(.horizontal)
+                    Text("Importance")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading)
+                        .padding(.bottom, -10)
+                        .bold()
+                        .font(.subheadline)
+                        .foregroundColor(ZColor.foreground)
 
-                    NavigationLink("Receipt & invoice") {
-                        
+                    Picker("Importance", selection: $vm.selectedImportance) {
+                        ForEach(Importance.allCases) { importance in
+                            Text(importance.rawValue.capitalized)
+                        }
                     }
+                    .pickerStyle(.segmented)
+                    .foregroundColor(ZColor.foreground)
+
+                    HStack(alignment: .center) {
+                        Text("Receipt & invoice")
+                            .bold()
+                            .font(.subheadline)
+                            .foregroundColor(ZColor.foreground)
+
+                        Spacer()
+
+                        PhotosPicker(selection: $vm.selectedProductPhoto, matching: .images, photoLibrary: .shared()) {
+                            if vm.productImage == nil {
+                                Image(systemName: "doc.viewfinder.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 44, height: 44)
+                                    .background(.clear)
+                                    .foregroundColor(ZColor.action)
+                            } else {
+                                Image(uiImage: vm.productImage!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 70, height: 70)
+                                    .padding(.bottom, 50)
+                            }
+                        }
+                    }
+
+                    .padding()
 
                     Button("Add product") { vm.addButtonTapped() }
                         .buttonStyle(StandardButton())

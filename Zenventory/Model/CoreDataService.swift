@@ -61,8 +61,13 @@ class CoreDataService: ObservableObject {
         }
 
         newProduct.importance = Int64(importance)
+        newProduct.lastUsed = Date()
 
         saveData()
+    }
+
+    func removeProduct() {
+        
     }
 
     private func saveData() {
