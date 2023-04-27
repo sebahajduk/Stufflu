@@ -11,6 +11,8 @@ import PhotosUI
 
 struct AddProductView: View {
 
+    @Environment(\.dismiss) private var dismiss
+
     @StateObject private var vm: AddProductVModel
 
     init(coreDataService: CoreDataService) {
@@ -114,7 +116,10 @@ struct AddProductView: View {
 
                     .padding()
 
-                    Button("Add product") { vm.addButtonTapped() }
+                    Button("Add product") {
+                        vm.addButtonTapped()
+                        self.dismiss()
+                    }
                         .buttonStyle(StandardButton())
                 }
                 .padding()

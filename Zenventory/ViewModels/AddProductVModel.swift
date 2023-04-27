@@ -17,6 +17,7 @@ enum Importance: String, CaseIterable, Identifiable {
 class AddProductVModel: ObservableObject {
 
     var dataService: CoreDataService
+    private let manager = ZFileManager.instance
 
     init(dataService: CoreDataService) {
         self.dataService = dataService
@@ -33,6 +34,7 @@ class AddProductVModel: ObservableObject {
     // MARK: --- Product details ---
     @Published var productName: String = ""
     @Published var productImage: UIImage?
+    @Published var invoiceImage: UIImage?
     @Published var productGuarantee: String = ""
     @Published var productImportance: Int = 0
     @Published var productCareName: String = ""
@@ -55,7 +57,17 @@ class AddProductVModel: ObservableObject {
                                careName: productCareName,
                                careInterval: Int(productCareInterval) ?? nil,
                                price: Double(productPrice) ?? nil,
-                               importance: Int(importanceSlider))
+                               importance: selectedImportance.rawValue)
+
+
+        if let productImage = productImage {
+            manager.saveImage(productImage: productImage, name: productName)
+        }
+
+        if let invoiceImage = invoiceImage {
+            manager.saveImage(productImage: invoiceImage, name: "\(productName)Invoice")
+        }
+
     }
 
     private func textfieldsAreValid() -> Bool {

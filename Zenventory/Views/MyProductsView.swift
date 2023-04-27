@@ -8,18 +8,44 @@
 import SwiftUI
 
 struct MyProductsView: View {
-    let tempArr: [Product] = []
+
+    @StateObject var vm: MyProductViewModel
+
+    @FocusState private var focusField: Bool?
+
+    init(coreDataService: CoreDataService) {
+        _vm = StateObject(wrappedValue: MyProductViewModel(dataService: coreDataService))
+    }
 
     var body: some View {
         ZStack {
             ZColor.background
                 .ignoresSafeArea()
             VStack {
-                ZStack(alignment: .center) {
+                ZStack(alignment: .top) {
                     VStack {
                         Text("Total value")
                         Text("$12 332.00")
                             .bold()
+
+                        TextField("Search ...", text: $vm.searchText)
+                            .padding(7)
+                            .padding(.horizontal, 25)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(8)
+                            .padding(.horizontal, 10)
+                            .overlay(alignment: .leading) {
+                                Image(systemName: "magnifyingglass")
+                                    .padding()
+                            }
+//                            .focused($focusField, equals: true)
+//                            .toolbar {
+//                                ToolbarItem(placement: .keyboard) {
+//                                    Button("Done") {
+//                                        focusField = nil
+//                                    }
+//                                }
+//                            }
                     }
 
                     HStack {
@@ -31,7 +57,7 @@ struct MyProductsView: View {
                         }
 
                         Menu {
-
+                            
                         } label: {
                             Image(systemName: "line.3.horizontal.decrease")
                                 .frame(width: 30, height: 30)
@@ -41,11 +67,14 @@ struct MyProductsView: View {
                 }
                 .padding(.horizontal, 20)
 
-                ScrollView {
-                    ForEach(0..<10) { _ in
-//                        ProductCell()
+                List {
+                    ForEach(vm.myProducts) { product in
+                        ProductCell(productEntity: product)
                     }
+                    .listRowSeparator(.hidden)
                 }
+                .listRowBackground(ZColor.background)
+                .listStyle(.plain)
                 .padding(.horizontal, 20)
             }
             .foregroundColor(ZColor.foreground)

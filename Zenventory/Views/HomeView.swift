@@ -20,7 +20,7 @@ struct HomeView: View {
             ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
                         HStack {
-                            NavigationLink(destination: MyProductsView()) {
+                            NavigationLink(destination: MyProductsView(coreDataService: vm.dataService)) {
                                 TileView(title: "MY PRODUCTS", image: "products")
                             }
                             NavigationLink(destination: WishlistView()) {
@@ -77,7 +77,7 @@ struct HomeView: View {
                             .onDelete(perform: vm.deleteItem(at:))
                             
                         }
-                        .frame(maxWidth: .infinity, minHeight: 1000)
+                        .frame(maxWidth: .infinity, minHeight: 400)
                         .listStyle(.plain)
                         .background(ZColor.background)
 

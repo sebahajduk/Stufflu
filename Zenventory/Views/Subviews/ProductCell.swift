@@ -17,12 +17,22 @@ struct ProductCell: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "camera.macro.circle.fill")
-                .resizable()
-                .frame(width: 60, height: 60)
-                .clipShape(Circle())
-                .padding()
-                .foregroundColor(ZColor.foreground)
+            if let image = vm.productImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
+                    .padding()
+                    .foregroundColor(ZColor.foreground)
+            } else {
+                Image(systemName: "camera.macro.circle.fill")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
+                    .padding()
+                    .foregroundColor(ZColor.foreground)
+            }
+
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(vm.product.name ?? "")

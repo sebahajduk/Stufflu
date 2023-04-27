@@ -33,6 +33,7 @@ struct TabBarView: View {
             ZTabView(selectedTab: $selectedTab, dataService: coreDataService)
                 .frame(height: 50)
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
         .background(ZColor.background)
         .toolbar(.hidden, for: .navigationBar)
     }

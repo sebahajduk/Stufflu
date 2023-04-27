@@ -42,39 +42,41 @@ class CoreDataService: ObservableObject {
                     careName: String?,
                     careInterval: Int?,
                     price: Double?,
-                    importance: Int) {
+                    importance: String) {
 
         let newProduct = ProductEntity(context: container.viewContext)
 
         newProduct.name = name
+        newProduct.careName = careName
+        newProduct.importance = importance
+        newProduct.lastUsed = Date()
 
         if guarantee != nil {
             newProduct.guarantee = Int16(guarantee!)
         }
-        newProduct.careName = careName
 
         if careInterval != nil {
             newProduct.careInterval = Int64(careInterval!)
         }
+
         if price != nil {
             newProduct.price = price!
         }
-
-        newProduct.importance = Int64(importance)
-        newProduct.lastUsed = Date()
-
         saveData()
     }
 
-    func removeProduct() {
-        
+    func removeProduct(at offsets: IndexSet) {
+        guard let index = offsets.first else { return }
+
+        let entity = savedEntities[index]
+        container.viewContext.delete(entity)
+        saveData()
     }
 
     private func saveData() {
         do {
             try container.viewContext.save()
             fetchProducts()
-            print(savedEntities)
         } catch {
             print("Error\(error.localizedDescription)")
         }
