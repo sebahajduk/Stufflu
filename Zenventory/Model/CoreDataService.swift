@@ -46,6 +46,7 @@ class CoreDataService: ObservableObject {
 
         let newProduct = ProductEntity(context: container.viewContext)
 
+        newProduct.id = UUID()
         newProduct.name = name
         newProduct.careName = careName
         newProduct.importance = importance

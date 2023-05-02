@@ -38,19 +38,16 @@ struct MyProductsView: View {
                                 Image(systemName: "magnifyingglass")
                                     .padding()
                             }
-//                            .focused($focusField, equals: true)
-//                            .toolbar {
-//                                ToolbarItem(placement: .keyboard) {
-//                                    Button("Done") {
-//                                        focusField = nil
-//                                    }
-//                                }
-//                            }
+                            .submitLabel(.done)
                     }
 
                     HStack {
                         Menu {
-
+                            ForEach(SortingType.allCases) { type in
+                                Button(type.rawValue) {
+                                    vm.sortingType = type
+                                }
+                            }
                         } label: {
                             Image(systemName: "arrow.up.arrow.down")
                                 .frame(width: 30, height: 30)
