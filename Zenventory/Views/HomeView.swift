@@ -11,7 +11,7 @@ struct HomeView: View {
 
     @StateObject private var vm: HomeViewModel
 
-    init(coreDataService: CoreDataService) {
+    init(coreDataService: any CoreDataManager) {
         _vm = StateObject(wrappedValue: HomeViewModel(dataService: coreDataService))
     }
 

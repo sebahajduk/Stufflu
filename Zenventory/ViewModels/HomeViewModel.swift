@@ -9,13 +9,13 @@ import Foundation
 import Combine
 
 class HomeViewModel: ObservableObject {
-    var dataService: CoreDataService
+    var dataService: any CoreDataManager
 
     @Published var products: [ProductEntity] = []
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(dataService: CoreDataService) {
+    init(dataService: any CoreDataManager) {
         self.dataService = dataService
         showSavedProducts()
         observeEntity()
@@ -26,7 +26,7 @@ class HomeViewModel: ObservableObject {
     }
 
     private func observeEntity() {
-        dataService.$savedEntities
+        dataService.savedEntitiesPublisher
             .sink { [weak self] newValue in
                 guard let self else { return }
                 self.products = newValue

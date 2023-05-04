@@ -1,30 +1,38 @@
 //
-//  CoreDataService.swift
-//  Zenventory
+//  MockCoreData.swift
+//  ZenventoryTests
 //
-//  Created by Sebastian Hajduk on 19/04/2023.
+//  Created by Sebastian Hajduk on 02/05/2023.
 //
 
 import Foundation
-import Combine
 import CoreData
+import Combine
+@testable import Zenventory
 
-class CoreDataService: ObservableObject, CoreDataManager {
-    let container: NSPersistentContainer
-    @Published var savedEntities: [ProductEntity] = []
-    var savedEntitiesPublisher: Published<[ProductEntity]>.Publisher { $savedEntities }
-    var savedEntitiesPublished: Published<[ProductEntity]> { _savedEntities }
+class MockCoreData: NSObject, CoreDataManager {
+    var container: NSPersistentContainer = {
+        let description = NSPersistentStoreDescription()
+        description.url = URL(filePath: "/dev/null")
 
-    private var cancellables = Set<AnyCancellable>()
+        let container = NSPersistentContainer(name: "ProductsContainer")
 
-    init() {
-        container = NSPersistentContainer(name: "ProductsContainer")
-        container.loadPersistentStores { (description, error) in
-            if let error = error {
-                print("Error loading core data: \(error.localizedDescription)")
+        container.persistentStoreDescriptions = [description]
+
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                fatalError(error.localizedDescription)
             }
         }
-        fetchProducts()
+
+        return container
+    }()
+
+    @Published var savedEntities: [ProductEntity] = []
+    var savedEntitiesPublisher: Published<[Zenventory.ProductEntity]>.Publisher { $savedEntities }
+
+    func removeProduct(at offsets: IndexSet) {
+
     }
 
     func fetchProducts() {
@@ -55,22 +63,12 @@ class CoreDataService: ObservableObject, CoreDataManager {
         if guarantee != nil {
             newProduct.guarantee = Int16(guarantee!)
         }
-
         if careInterval != nil {
             newProduct.careInterval = Int64(careInterval!)
         }
-
         if price != nil {
             newProduct.price = price!
         }
-        saveData()
-    }
-
-    func removeProduct(at offsets: IndexSet) {
-        guard let index = offsets.first else { return }
-
-        let entity = savedEntities[index]
-        container.viewContext.delete(entity)
         saveData()
     }
 
@@ -82,4 +80,5 @@ class CoreDataService: ObservableObject, CoreDataManager {
             print("Error\(error.localizedDescription)")
         }
     }
+
 }

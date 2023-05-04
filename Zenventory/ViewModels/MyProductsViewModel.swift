@@ -11,8 +11,8 @@ import Combine
 
 enum SortingType: String, CaseIterable, Identifiable {
     var id: Self { self }
-    case lowPrice = "Price lowest",
-         hightPrice = "Price highest",
+    case lowestPrice = "Price lowest",
+         highestPrice = "Price highest",
          nameAZ = "Name A-Z",
          nameZA = "Name Z-A",
          lastUsed = "Last used",
@@ -21,14 +21,23 @@ enum SortingType: String, CaseIterable, Identifiable {
 
 class MyProductViewModel: ObservableObject {
 
-    var dataService: CoreDataService
+    var dataService: any CoreDataManager
     private var cancellables = Set<AnyCancellable>()
 
     @Published var myProducts: [ProductEntity] = []
     @Published var searchText: String = ""
+
+    //MARK: Sorting
     @Published var sortingType: SortingType = .addedDate
 
-    init(dataService: CoreDataService) {
+    //MARK: --- Filtering params ---
+    @Published var isFilterActive: Bool = false
+    @Published var minPrice = ""
+    @Published var maxPrice = ""
+    @Published var useImportance = false
+    @Published var importance: Importance = .medium
+
+    init(dataService: any CoreDataManager) {
         self.dataService = dataService
         loadMyItems()
         observeSearching()
@@ -63,7 +72,6 @@ class MyProductViewModel: ObservableObject {
                 guard let self else { return }
                 withAnimation(.linear) {
                     self.myProducts = self.sortProducts(by: newType)
-
                 }
             }
             .store(in: &cancellables)
@@ -73,9 +81,9 @@ class MyProductViewModel: ObservableObject {
         var sortedArray: [ProductEntity] = []
 
         switch type {
-        case .lowPrice:
+        case .lowestPrice:
             sortedArray = self.myProducts.sorted { $0.price < $1.price }
-        case .hightPrice:
+        case .highestPrice:
             sortedArray = self.myProducts.sorted { $0.price > $1.price }
         case .nameAZ:
             sortedArray = self.myProducts.sorted { $0.name! < $1.name! }
@@ -90,4 +98,32 @@ class MyProductViewModel: ObservableObject {
         return sortedArray
     }
 
+    func clearFilters() {
+        isFilterActive = false
+        minPrice = ""
+        maxPrice = ""
+        useImportance = false
+        importance = .medium
+    }
+
+    func observeFiltering(_ completion: () -> ()) {
+        let filtered = self.dataService.savedEntities
+            .filter { (entity) -> Bool in
+                guard minPrice.count > 0 else { return true }
+                return entity.price > Double(minPrice)!
+            }
+            .filter { (entity) -> Bool in
+                guard maxPrice.count > 0 else { return true }
+                return entity.price < Double(maxPrice)!
+            }
+            .filter { (entity) -> Bool in
+                guard useImportance else { return true }
+                return entity.importance!.lowercased() == importance.rawValue.lowercased()
+            }
+
+        withAnimation {
+            myProducts = filtered
+        }
+        completion()
+    }
 }

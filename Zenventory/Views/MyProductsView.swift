@@ -13,7 +13,9 @@ struct MyProductsView: View {
 
     @FocusState private var focusField: Bool?
 
-    init(coreDataService: CoreDataService) {
+    @State private var isFiltering = false
+
+    init(coreDataService: any CoreDataManager) {
         _vm = StateObject(wrappedValue: MyProductViewModel(dataService: coreDataService))
     }
 
@@ -28,7 +30,7 @@ struct MyProductsView: View {
                         Text("$12 332.00")
                             .bold()
 
-                        TextField("Search ...", text: $vm.searchText)
+                        TextField("Search...", text: $vm.searchText)
                             .padding(7)
                             .padding(.horizontal, 25)
                             .background(Color(.systemGray6))
@@ -51,13 +53,20 @@ struct MyProductsView: View {
                         } label: {
                             Image(systemName: "arrow.up.arrow.down")
                                 .frame(width: 30, height: 30)
+                                .foregroundColor(ZColor.action)
+                                .bold()
                         }
 
-                        Menu {
-                            
+                        Button {
+                            isFiltering = true
                         } label: {
                             Image(systemName: "line.3.horizontal.decrease")
                                 .frame(width: 30, height: 30)
+                                .foregroundColor(ZColor.action)
+                                .bold()
+                        }.sheet(isPresented: $isFiltering) {
+                            MyProductsFilterView(vm: vm)
+                                .presentationDetents([.filter])
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)

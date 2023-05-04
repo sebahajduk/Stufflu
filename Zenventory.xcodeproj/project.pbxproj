@@ -31,6 +31,11 @@
 		607346F229EEE73300110F01 /* AddProductVModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607346F129EEE73300110F01 /* AddProductVModel_Tests.swift */; };
 		607346F529EEEE3000110F01 /* String+Ext_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607346F429EEEE3000110F01 /* String+Ext_Tests.swift */; };
 		6090E93129DB46A0007131C5 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6090E93029DB46A0007131C5 /* ProductCell.swift */; };
+		60A030132A00FF5F00818118 /* MyProductsViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A030122A00FF5F00818118 /* MyProductsViewModel_Tests.swift */; };
+		60A030152A00FFB500818118 /* MockCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A030142A00FFB500818118 /* MockCoreData.swift */; };
+		60A030172A0105F000818118 /* MyProductsFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A030162A0105F000818118 /* MyProductsFilterView.swift */; };
+		60A0301D2A012F6900818118 /* PresentationDetent+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0301C2A012F6900818118 /* PresentationDetent+Ext.swift */; };
+		60A0301F2A03630500818118 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0301E2A03630500818118 /* CoreDataManager.swift */; };
 		60A5BF0129CCC9B3008EA2A4 /* MyProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A5BF0029CCC9B3008EA2A4 /* MyProductsView.swift */; };
 		60B090CF29E5A646009BD972 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B090CE29E5A646009BD972 /* StandardButton.swift */; };
 /* End PBXBuildFile section */
@@ -72,6 +77,11 @@
 		607346F129EEE73300110F01 /* AddProductVModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVModel_Tests.swift; sourceTree = "<group>"; };
 		607346F429EEEE3000110F01 /* String+Ext_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext_Tests.swift"; sourceTree = "<group>"; };
 		6090E93029DB46A0007131C5 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		60A030122A00FF5F00818118 /* MyProductsViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductsViewModel_Tests.swift; sourceTree = "<group>"; };
+		60A030142A00FFB500818118 /* MockCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreData.swift; sourceTree = "<group>"; };
+		60A030162A0105F000818118 /* MyProductsFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductsFilterView.swift; sourceTree = "<group>"; };
+		60A0301C2A012F6900818118 /* PresentationDetent+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresentationDetent+Ext.swift"; sourceTree = "<group>"; };
+		60A0301E2A03630500818118 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		60A5BF0029CCC9B3008EA2A4 /* MyProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductsView.swift; sourceTree = "<group>"; };
 		60A5BF0629CCD3C9008EA2A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		60B090CE29E5A646009BD972 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
@@ -153,6 +163,8 @@
 			children = (
 				607346F329EEEE1400110F01 /* Extensions_Tests */,
 				607346F129EEE73300110F01 /* AddProductVModel_Tests.swift */,
+				60A030122A00FF5F00818118 /* MyProductsViewModel_Tests.swift */,
+				60A030142A00FFB500818118 /* MockCoreData.swift */,
 			);
 			path = ZenventoryTests;
 			sourceTree = "<group>";
@@ -160,9 +172,11 @@
 		606EF9E329C970D00024B7EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				604E77A329F6E56800562F9F /* ZFileManager.swift */,
 				606EF9E429C970EA0024B7EB /* ZColor.swift */,
 				605B5B7429F03E0F00973AD1 /* ProductsContainer.xcdatamodeld */,
 				605B5B7729F0455C00973AD1 /* CoreDataService.swift */,
+				60A0301E2A03630500818118 /* CoreDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,7 +191,7 @@
 				60A5BF0029CCC9B3008EA2A4 /* MyProductsView.swift */,
 				602EC15B29DC752F00E8B470 /* WishlistView.swift */,
 				602EC15D29DC844F00E8B470 /* AddProductView.swift */,
-				604E77A329F6E56800562F9F /* ZFileManager.swift */,
+				60A030162A0105F000818118 /* MyProductsFilterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +228,7 @@
 			children = (
 				607346E629E9BC3000110F01 /* Publisher+Ext.swift */,
 				607346EF29EDCC9700110F01 /* String+Ext.swift */,
+				60A0301C2A012F6900818118 /* PresentationDetent+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,6 +341,7 @@
 				607346F029EDCC9700110F01 /* String+Ext.swift in Sources */,
 				602EC15C29DC752F00E8B470 /* WishlistView.swift in Sources */,
 				606EF9E529C970EA0024B7EB /* ZColor.swift in Sources */,
+				60A030172A0105F000818118 /* MyProductsFilterView.swift in Sources */,
 				606EF9EF29C980A60024B7EB /* TileView.swift in Sources */,
 				606EF9EC29C9793A0024B7EB /* ZTabView.swift in Sources */,
 				604E77A629F97C7D00562F9F /* MyProductsViewModel.swift in Sources */,
@@ -334,8 +350,10 @@
 				606EF9EA29C9725B0024B7EB /* ProfileView.swift in Sources */,
 				606EF9E829C9724E0024B7EB /* TabBarView.swift in Sources */,
 				605B5B7829F0455C00973AD1 /* CoreDataService.swift in Sources */,
+				60A0301F2A03630500818118 /* CoreDataManager.swift in Sources */,
 				60A5BF0129CCC9B3008EA2A4 /* MyProductsView.swift in Sources */,
 				605B5B7C29F1A1E500973AD1 /* ProductCellViewModel.swift in Sources */,
+				60A0301D2A012F6900818118 /* PresentationDetent+Ext.swift in Sources */,
 				607346EE29EDC8A500110F01 /* TextFieldWithStatus.swift in Sources */,
 				60B090CF29E5A646009BD972 /* StandardButton.swift in Sources */,
 				606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */,
@@ -349,6 +367,8 @@
 			files = (
 				607346F529EEEE3000110F01 /* String+Ext_Tests.swift in Sources */,
 				607346F229EEE73300110F01 /* AddProductVModel_Tests.swift in Sources */,
+				60A030152A00FFB500818118 /* MockCoreData.swift in Sources */,
+				60A030132A00FF5F00818118 /* MyProductsViewModel_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
