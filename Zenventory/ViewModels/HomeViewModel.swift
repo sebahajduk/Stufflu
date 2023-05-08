@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 class HomeViewModel: ObservableObject {
     var dataService: any CoreDataManager
@@ -36,5 +37,6 @@ class HomeViewModel: ObservableObject {
 
     func deleteItem(at offsets: IndexSet) {
         products.remove(atOffsets: offsets)
+        dataService.removeProduct(at: offsets)
     }
 }

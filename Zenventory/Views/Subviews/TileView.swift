@@ -16,8 +16,8 @@ struct TileView: View {
         Text(title)
             .foregroundColor(ZColor.action)
             .font(.footnote.bold())
-            .frame(maxWidth: .infinity, maxHeight: 100)
-            .padding(30)
+            .frame(maxWidth: .infinity, maxHeight: 70)
+            .padding()
             .background(ZColor.background)
             .cornerRadius(30)
             .overlay {

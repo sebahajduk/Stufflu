@@ -72,10 +72,12 @@ struct MyProductsView: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .padding(.horizontal, 20)
-
+                
                 List {
                     ForEach(vm.myProducts) { product in
-                        ProductCell(productEntity: product)
+                        NavigationLink(destination: ProductDetailsView(product: product).ignoresSafeArea()) {
+                            ProductCell(productEntity: product)
+                        }
                     }
                     .listRowSeparator(.hidden)
                 }

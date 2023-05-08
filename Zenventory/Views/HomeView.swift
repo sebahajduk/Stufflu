@@ -16,80 +16,72 @@ struct HomeView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            ScrollView(showsIndicators: false) {
-                    VStack(spacing: 20) {
-                        HStack {
-                            NavigationLink(destination: MyProductsView(coreDataService: vm.dataService)) {
-                                TileView(title: "MY PRODUCTS", image: "products")
-                            }
-                            NavigationLink(destination: WishlistView()) {
-                                TileView(title: "WISHLIST", image: "wishlist")
-                            }
-                        }
-                        .contentShape(RoundedRectangle(cornerRadius: 30))
-
-                        HStack {
-                            TileView(title: "BOUGHT", image: "products")
-                            TileView(title: "SOLD", image: "sold")
-                        }
-                        .contentShape(RoundedRectangle(cornerRadius: 30))
-
-                        Divider()
-                            .padding(.horizontal)
-
-                        Text("30 days history")
-                            .font(.headline)
-                            .foregroundColor(ZColor.foreground)
-
-                        HStack(spacing: 50) {
-                            VStack {
-                                Text("Sold")
-                                Text("$102,22")
-                                    .bold()
-                            }
-
-                            Divider()
-                                .frame(maxHeight: 30)
-
-                            VStack {
-                                Text("Bought")
-                                Text("$14,12")
-                                    .bold()
-                            }
-                        }
-                        .foregroundColor(ZColor.foreground)
-
-                        Divider()
-                            .padding(.horizontal)
-
-                        Text("Unused for at least 30 days")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .font(.headline)
-                            .bold()
-                            .foregroundColor(ZColor.foreground)
-
-                        List {
-                            ForEach(vm.products, id: \.self) { entity in
-                                ProductCell(productEntity: entity)
-                                    .listRowSeparator(.hidden)
-                            }
-                            .onDelete(perform: vm.deleteItem(at:))
-                            
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 400)
-                        .listStyle(.plain)
-                        .background(ZColor.background)
-
-                        Spacer()
-                    }
-                    .padding()
+        VStack(spacing: 20) {
+            HStack {
+                NavigationLink(destination: MyProductsView(coreDataService: vm.dataService)) {
+                    TileView(title: "MY PRODUCTS", image: "products")
                 }
-                .background(ZColor.background)
+                NavigationLink(destination: WishlistView()) {
+                    TileView(title: "WISHLIST", image: "wishlist")
+                }
+            }
+            .contentShape(RoundedRectangle(cornerRadius: 30))
+
+            HStack {
+                TileView(title: "BOUGHT", image: "products")
+                TileView(title: "SOLD", image: "sold")
+            }
+            .contentShape(RoundedRectangle(cornerRadius: 30))
+
+            Divider()
+                .padding(.horizontal)
+
+            Text("30 days history")
+                .font(.headline)
+                .foregroundColor(ZColor.foreground)
+
+            HStack(spacing: 50) {
+                VStack {
+                    Text("Sold")
+                    Text("$102,22")
+                        .bold()
+                }
+
+                Divider()
+                    .frame(maxHeight: 30)
+
+                VStack {
+                    Text("Bought")
+                    Text("$14,12")
+                        .bold()
+                }
+            }
+            .foregroundColor(ZColor.foreground)
+
+            Divider()
+                .padding(.horizontal)
+
+            Text("Unused for at least 30 days")
+                .frame(maxWidth: .infinity, alignment: .center)
+                .font(.headline)
+                .bold()
+                .foregroundColor(ZColor.foreground)
+
+            List {
+                ForEach(vm.products, id: \.self) { entity in
+                    NavigationLink(destination: ProductDetailsView(product: entity)) {
+                        ProductCell(productEntity: entity)
+                    }
+                    .listRowSeparator(.hidden)
+                }
+                .onDelete(perform: vm.deleteItem)
+            }
+            .listStyle(.plain)
+            .background(ZColor.background)
         }
-            .navigationTitle("")
-            .navigationBarTitleDisplayMode(.inline)
-            .ignoresSafeArea()
+        .padding(.horizontal)
+        .background(ZColor.background)
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 

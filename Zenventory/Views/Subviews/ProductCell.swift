@@ -52,6 +52,7 @@ struct ProductCell: View {
             }
 
             Spacer()
+
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: 90)
@@ -68,5 +69,5 @@ struct ProductCell: View {
 struct ProductCell_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView(coreDataService: CoreDataService())
-    }
+     }
 }

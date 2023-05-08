@@ -58,7 +58,7 @@ struct MyProductsFilterView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Filter") {
-                        vm.observeFiltering() {
+                        vm.filter() {
                             self.dismiss()
                         }
                     }

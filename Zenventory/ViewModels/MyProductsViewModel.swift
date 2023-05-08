@@ -106,15 +106,15 @@ class MyProductViewModel: ObservableObject {
         importance = .medium
     }
 
-    func observeFiltering(_ completion: () -> ()) {
+    func filter(_ completion: () -> ()) {
         let filtered = self.dataService.savedEntities
             .filter { (entity) -> Bool in
                 guard minPrice.count > 0 else { return true }
-                return entity.price > Double(minPrice)!
+                return entity.price >= Double(minPrice)!
             }
             .filter { (entity) -> Bool in
                 guard maxPrice.count > 0 else { return true }
-                return entity.price < Double(maxPrice)!
+                return entity.price <= Double(maxPrice)!
             }
             .filter { (entity) -> Bool in
                 guard useImportance else { return true }

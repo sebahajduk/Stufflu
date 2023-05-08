@@ -116,4 +116,43 @@ final class MyProductsViewModel_Tests: XCTestCase {
         XCTAssertEqual("C", vm.myProducts[3].name)
     }
 
+    //MARK: ---FILTERING TESTS---
+
+    func test_MyProductsViewModel_filter_shouldFilterByPrice() {
+        // Given
+        let data = MockCoreData()
+        data.addProduct(name: "D", guarantee: 1, careName: "", careInterval: 1, price: 2, importance: "medium")
+        data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
+        data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
+        data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
+        let vm = MyProductViewModel(dataService: data)
+        vm.minPrice = "2"
+        vm.maxPrice = "3"
+        // When
+        vm.filter() { }
+
+        // Then
+        XCTAssertEqual(2, vm.myProducts.count)
+        XCTAssertTrue(vm.myProducts.contains(where: { $0.price == 2 }))
+        XCTAssertTrue(vm.myProducts.contains(where: { $0.price == 3 }))
+    }
+
+    func test_MyProductsViewModel_filter_shouldFilterByImportance() {
+        // Given
+        let data = MockCoreData()
+        data.addProduct(name: "D", guarantee: 1, careName: "", careInterval: 1, price: 2, importance: "high")
+        data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
+        data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "low")
+        data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
+        let vm = MyProductViewModel(dataService: data)
+        vm.useImportance = true
+        vm.importance = .high
+
+        // When
+        vm.filter() { }
+
+        // Then
+        XCTAssertEqual(1, vm.myProducts.count)
+        XCTAssertTrue(vm.myProducts.contains(where: { $0.importance == "high" }))
+    }
 }
