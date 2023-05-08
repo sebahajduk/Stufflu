@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct TextFieldWithStatus: View {
+internal struct TextFieldWithStatus: View {
 
-    @Binding var isValid: Bool
-    @Binding var textFieldValue: String
-    @State var textFieldLabel: String = ""
-    @State var keyboardType: UIKeyboardType
+    @Binding internal var isValid: Bool
+    @Binding internal var textFieldValue: String
+    @State internal var textFieldLabel: String = ""
+    @State internal var keyboardType: UIKeyboardType
 
     var body: some View {
         HStack {

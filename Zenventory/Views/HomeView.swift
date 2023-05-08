@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct HomeView: View {
+internal struct HomeView: View {
 
     @StateObject private var vm: HomeViewModel
 
-    init(coreDataService: any CoreDataManager) {
+    internal init(
+        coreDataService: any CoreDataManager
+    ) {
         _vm = StateObject(wrappedValue: HomeViewModel(dataService: coreDataService))
     }
 
@@ -69,7 +71,9 @@ struct HomeView: View {
 
             List {
                 ForEach(vm.products, id: \.self) { entity in
-                    NavigationLink(destination: ProductDetailsView(product: entity)) {
+                    NavigationLink(
+                        destination: ProductDetailsView(product: entity)
+                    ) {
                         ProductCell(productEntity: entity)
                     }
                     .listRowSeparator(.hidden)
@@ -85,7 +89,7 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
+private struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView(coreDataService: CoreDataService())
     }

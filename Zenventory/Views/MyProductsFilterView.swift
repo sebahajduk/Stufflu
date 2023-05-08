@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct MyProductsFilterView: View {
+internal struct MyProductsFilterView: View {
 
-    @ObservedObject var vm: MyProductViewModel
-    @Environment(\.dismiss) var dismiss
+    @ObservedObject internal var vm: MyProductViewModel
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
@@ -19,31 +19,28 @@ struct MyProductsFilterView: View {
 
                 HStack {
                     TextField("Min", text: $vm.minPrice)
-                        .frame(height: 30)
-                        .frame(maxWidth: 60)
-                        .padding(.horizontal, 25)
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(8)
-                        .padding(.horizontal, 10)
+                        .modifier(PriceTextField())
+
                     Divider()
                         .frame(height: 20)
+
                     TextField("Max", text: $vm.maxPrice)
-                        .frame(height: 30)
-                        .frame(maxWidth: 60)
-                        .padding(.horizontal, 25)
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(8)
-                        .padding(.horizontal, 10)
+                        .modifier(PriceTextField())
                 }
 
-                Toggle("Use importance", isOn: $vm.useImportance)
-                    .bold()
-                    .padding(.horizontal, 100)
-                    .padding(.top)
-                    .tint(ZColor.action)
+                Toggle(
+                    "Use importance",
+                    isOn: $vm.useImportance
+                )
+                .bold()
+                .padding(.horizontal, 100)
+                .padding(.top)
+                .tint(ZColor.action)
 
-
-                Picker("Importance", selection: $vm.importance) {
+                Picker(
+                    "Importance",
+                    selection: $vm.importance
+                ) {
                     ForEach(Importance.allCases) { importance in
                         Button(importance.rawValue.capitalized) {
                             vm.importance = importance
@@ -72,10 +69,6 @@ struct MyProductsFilterView: View {
                     .foregroundColor(ZColor.action)
                 }
             }
-
         }
     }
-
-    
 }
-

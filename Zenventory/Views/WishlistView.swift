@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WishlistView: View {
+internal struct WishlistView: View {
     var body: some View {
         ZStack {
             ZColor.background
@@ -25,7 +25,7 @@ struct WishlistView: View {
     }
 }
 
-struct WishlistView_Previews: PreviewProvider {
+private struct WishlistView_Previews: PreviewProvider {
     static var previews: some View {
         WishlistView()
     }

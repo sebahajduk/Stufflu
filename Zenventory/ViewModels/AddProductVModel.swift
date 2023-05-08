@@ -17,7 +17,6 @@ enum Importance: String, CaseIterable, Identifiable {
 class AddProductVModel: ObservableObject {
 
     var dataService: CoreDataService
-    private let manager = ZFileManager.instance
 
     init(dataService: CoreDataService) {
         self.dataService = dataService
@@ -52,20 +51,22 @@ class AddProductVModel: ObservableObject {
     func addButtonTapped() {
         guard textfieldsAreValid() else { return }
 
-        dataService.addProduct(name: productName,
-                               guarantee: Int(productGuarantee) ?? nil,
-                               careName: productCareName,
-                               careInterval: Int(productCareInterval) ?? nil,
-                               price: Double(productPrice) ?? nil,
-                               importance: selectedImportance.rawValue)
+        dataService.addProduct(
+            name: productName,
+            guarantee: Int(productGuarantee) ?? nil,
+            careName: productCareName,
+            careInterval: Int(productCareInterval) ?? nil,
+            price: Double(productPrice) ?? nil,
+            importance: selectedImportance.rawValue
+        )
 
 
         if let productImage = productImage {
-            manager.saveImage(productImage: productImage, name: productName)
+            ZFileManager.saveImage(productImage: productImage, name: productName)
         }
 
         if let invoiceImage = invoiceImage {
-            manager.saveImage(productImage: invoiceImage, name: "\(productName)Invoice")
+            ZFileManager.saveImage(productImage: invoiceImage, name: "\(productName)Invoice")
         }
 
     }
@@ -86,14 +87,16 @@ class AddProductVModel: ObservableObject {
     private func observeSelectedItem() {
         $selectedProductPhoto
             .compactMap { $0 }
-            .tryAwaitMap {
+            .tryAwaitMap { index in
                 /// Needs to be converted into Data because type Image.self does not show photos other than .png
                 /// for example .heic or .jpeg
-                try await $0.loadTransferable(type: Data.self)!
+                return try await index.loadTransferable(type: Data.self) ?? Data()
             }
             .receive(on: RunLoop.main)
             .sink { value in
-                self.productImage = UIImage(data: value)!
+                if let image = UIImage(data: value) {
+                    self.productImage = image
+                }
             }
             .store(in: &cancellables)
     }

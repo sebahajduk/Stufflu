@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct ProductCell: View {
+internal struct ProductCell: View {
 
     @StateObject private var vm: ProductCellViewModel
 
-    init(productEntity: ProductEntity) {
+    internal init(productEntity: ProductEntity) {
         _vm = StateObject(wrappedValue: ProductCellViewModel(product: productEntity))
     }
 
@@ -19,20 +19,11 @@ struct ProductCell: View {
         HStack {
             if let image = vm.productImage {
                 Image(uiImage: image)
-                    .resizable()
-                    .frame(width: 60, height: 60)
-                    .clipShape(Circle())
-                    .padding()
-                    .foregroundColor(ZColor.foreground)
+                    .circleImage(size: 60, action: false)
             } else {
                 Image(systemName: "camera.macro.circle.fill")
-                    .resizable()
-                    .frame(width: 60, height: 60)
-                    .clipShape(Circle())
-                    .padding()
-                    .foregroundColor(ZColor.foreground)
+                    .circleImage(size: 60, action: false)
             }
-
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(vm.product.name ?? "")
@@ -52,7 +43,6 @@ struct ProductCell: View {
             }
 
             Spacer()
-
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: 90)
@@ -66,7 +56,7 @@ struct ProductCell: View {
     }
 }
 
-struct ProductCell_Previews: PreviewProvider {
+private struct ProductCell_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView(coreDataService: CoreDataService())
      }

@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+internal struct ProfileView: View {
     var body: some View {
-        Color(.black)
+        ZColor.background
             .ignoresSafeArea()
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
+private struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
     }

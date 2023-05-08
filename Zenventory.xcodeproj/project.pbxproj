@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		601A0C122A095ECA00072DBA /* Image+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601A0C112A095ECA00072DBA /* Image+Ext.swift */; };
+		601A0C142A09652800072DBA /* PriceTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601A0C132A09652800072DBA /* PriceTextField.swift */; };
 		602EC15C29DC752F00E8B470 /* WishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC15B29DC752F00E8B470 /* WishlistView.swift */; };
 		602EC15E29DC844F00E8B470 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC15D29DC844F00E8B470 /* AddProductView.swift */; };
 		602EC16129DC84DF00E8B470 /* AddProductVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC16029DC84DF00E8B470 /* AddProductVModel.swift */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		601A0C112A095ECA00072DBA /* Image+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Ext.swift"; sourceTree = "<group>"; };
+		601A0C132A09652800072DBA /* PriceTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTextField.swift; sourceTree = "<group>"; };
 		602EC15B29DC752F00E8B470 /* WishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistView.swift; sourceTree = "<group>"; };
 		602EC15D29DC844F00E8B470 /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
 		602EC16029DC84DF00E8B470 /* AddProductVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVModel.swift; sourceTree = "<group>"; };
@@ -109,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		601A0C0E2A095DD100072DBA /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				601A0C132A09652800072DBA /* PriceTextField.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		602EC15F29DC84BC00E8B470 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +201,7 @@
 		606EF9E629C9711F0024B7EB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				601A0C0E2A095DD100072DBA /* Modifiers */,
 				606EF9ED29C980810024B7EB /* Subviews */,
 				606EF9E729C9724E0024B7EB /* TabBarView.swift */,
 				606EF9BB29C96E120024B7EB /* HomeView.swift */,
@@ -235,6 +248,7 @@
 				607346E629E9BC3000110F01 /* Publisher+Ext.swift */,
 				607346EF29EDCC9700110F01 /* String+Ext.swift */,
 				60A0301C2A012F6900818118 /* PresentationDetent+Ext.swift */,
+				601A0C112A095ECA00072DBA /* Image+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -355,6 +369,8 @@
 				607346E729E9BC3000110F01 /* Publisher+Ext.swift in Sources */,
 				606EF9EA29C9725B0024B7EB /* ProfileView.swift in Sources */,
 				606EF9E829C9724E0024B7EB /* TabBarView.swift in Sources */,
+				601A0C142A09652800072DBA /* PriceTextField.swift in Sources */,
+				601A0C122A095ECA00072DBA /* Image+Ext.swift in Sources */,
 				605B5B7829F0455C00973AD1 /* CoreDataService.swift in Sources */,
 				60A0301F2A03630500818118 /* CoreDataManager.swift in Sources */,
 				60A5BF0129CCC9B3008EA2A4 /* MyProductsView.swift in Sources */,

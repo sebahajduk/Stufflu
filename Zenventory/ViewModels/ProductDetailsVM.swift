@@ -9,14 +9,13 @@ import SwiftUI
 
 class ProductDetailsVM: ObservableObject {
 
-    @Published var product: ProductEntity
-    @Published var image: UIImage?
+    @Published internal var product: ProductEntity
+    @Published internal var image: UIImage?
 
-    init(product: ProductEntity) {
+    internal init(
+        product: ProductEntity
+    ) {
         self.product = product
-        self.image = ZFileManager.instance.getImage(name: product.name!)
+        self.image = ZFileManager.getImage(name: product.name!)
     }
-
-    
-
 }

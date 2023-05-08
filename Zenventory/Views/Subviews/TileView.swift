@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct TileView: View {
+internal struct TileView: View {
 
-    var title: String
-    var image: String
+    internal var title: String
+    internal var image: String
 
     var body: some View {
         Text(title)
@@ -28,7 +28,7 @@ struct TileView: View {
     }
 }
 
-struct TileView_Previews: PreviewProvider {
+private struct TileView_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView(coreDataService: CoreDataService())
     }

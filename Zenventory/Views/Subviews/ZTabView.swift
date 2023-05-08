@@ -7,19 +7,20 @@
 
 import SwiftUI
 
-struct TabButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
+fileprivate struct TabButtonStyle: ButtonStyle {
+    internal func makeBody(configuration: Configuration) -> some View {
+        configuration
+            .label
             .opacity(configuration.isPressed ? 0.9 : 1)
             .scaleEffect(configuration.isPressed ? 0.98 : 1)
     }
 }
 
-struct ZTabView: View {
-    @Binding var selectedTab: TabSelected
-    @State private var isPresented: Bool = false
+internal struct ZTabView: View {
+    @Binding internal var selectedTab: TabSelected
 
-    @State var dataService: CoreDataService
+    @State internal var dataService: CoreDataService
+    @State private var isPresented: Bool = false
 
     var body: some View {
         HStack {
@@ -38,6 +39,7 @@ struct ZTabView: View {
                 }
                 .foregroundColor(selectedTab == .home ? ZColor.action : ZColor.foreground.opacity(0.5))
             }
+
             Spacer()
 
             Button {
@@ -59,8 +61,8 @@ struct ZTabView: View {
                 AddProductView(coreDataService: dataService)
             }
 
-
             Spacer()
+
             Button {
                 selectedTab = .profile
             } label: {

@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct ProductDetailsView: View {
+internal struct ProductDetailsView: View {
 
     @StateObject var vm: ProductDetailsVM
 
-    init(product: ProductEntity) {
+    internal init(
+        product: ProductEntity
+    ) {
         _vm = StateObject(wrappedValue: ProductDetailsVM(product: product))
     }
 
@@ -19,23 +21,15 @@ struct ProductDetailsView: View {
         ZStack {
             ZColor.background
                 .ignoresSafeArea()
+
             VStack(alignment: .center) {
                 if vm.image != nil {
                     Image(uiImage: vm.image!)
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .padding()
+                        .circleImage(size: 100, action: true)
                 } else {
                     Image(systemName: "camera.macro.circle.fill")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .padding()
-                        .foregroundColor(ZColor.foreground)
+                        .circleImage(size: 100, action: true)
                 }
-
-                Text(vm.product.name!)
             }
         }
         .navigationTitle(vm.product.name!)
@@ -43,7 +37,7 @@ struct ProductDetailsView: View {
     }
 }
 
-struct ProductDetailsView_Previews: PreviewProvider {
+private struct ProductDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(coreDataService: CoreDataService())
     }

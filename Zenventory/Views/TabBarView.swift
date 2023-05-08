@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-enum TabSelected {
+internal enum TabSelected {
     case home, profile
 }
 
-struct TabBarView: View {
+internal struct TabBarView: View {
 
-    var coreDataService: CoreDataService
+    internal var coreDataService: CoreDataService
 
     @State private var selectedTab: TabSelected = .home
     
@@ -39,7 +39,7 @@ struct TabBarView: View {
     }
 }
 
-struct TabView_Previews: PreviewProvider {
+private struct TabView_Previews: PreviewProvider {
 
     static var previews: some View {
         TabBarView(coreDataService: CoreDataService())

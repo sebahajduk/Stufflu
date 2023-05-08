@@ -8,14 +8,15 @@
 import SwiftUI
 import PhotosUI
 
-
-struct AddProductView: View {
+internal struct AddProductView: View {
 
     @Environment(\.dismiss) private var dismiss
 
     @StateObject private var vm: AddProductVModel
 
-    init(coreDataService: CoreDataService) {
+    internal init(
+        coreDataService: CoreDataService
+    ) {
         _vm = StateObject(wrappedValue: AddProductVModel(dataService: coreDataService))
     }
 
@@ -24,49 +25,55 @@ struct AddProductView: View {
             ZStack {
                 ZColor.background
                 VStack(spacing: 20) {
-                    PhotosPicker(selection: $vm.selectedProductPhoto, matching: .images, photoLibrary: .shared()) {
+                    PhotosPicker(
+                        selection: $vm.selectedProductPhoto,
+                        matching: .images,
+                        photoLibrary: .shared()
+                    ) {
                         if vm.productImage == nil {
                             Image(systemName: "camera.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 70, height: 70)
-                                .foregroundColor(ZColor.action)
-                                .background(.clear)
-                                .padding(.bottom, 50)
+                                .circleImage(size: 100, action: true)
                         } else {
                             Image(uiImage: vm.productImage!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 70, height: 70)
-                                .padding(.bottom, 50)
+                                .circleImage(size: 100, action: true)
                         }
                     }
 
                     VStack(spacing: 20) {
-                        TextFieldWithStatus(isValid: $vm.nameIsValid,
-                                            textFieldValue: $vm.productName,
-                                            textFieldLabel: "Name*",
-                                            keyboardType: .default)
+                        TextFieldWithStatus(
+                            isValid: $vm.nameIsValid,
+                            textFieldValue: $vm.productName,
+                            textFieldLabel: "Name*",
+                            keyboardType: .default
+                        )
 
-                        TextFieldWithStatus(isValid: $vm.guaranteeIsValid,
-                                            textFieldValue: $vm.productGuarantee,
-                                            textFieldLabel: "Guarantee (months)",
-                                            keyboardType: .numberPad)
+                        TextFieldWithStatus(
+                            isValid: $vm.guaranteeIsValid,
+                            textFieldValue: $vm.productGuarantee,
+                            textFieldLabel: "Guarantee (months)",
+                            keyboardType: .numberPad
+                        )
 
-                        TextFieldWithStatus(isValid: $vm.careNameIsValid,
-                                            textFieldValue: $vm.productCareName,
-                                            textFieldLabel: "Care name (cleaning, insurance etc.)",
-                                            keyboardType: .default)
+                        TextFieldWithStatus(
+                            isValid: $vm.careNameIsValid,
+                            textFieldValue: $vm.productCareName,
+                            textFieldLabel: "Care name (cleaning, insurance etc.)",
+                            keyboardType: .default
+                        )
 
-                        TextFieldWithStatus(isValid: $vm.careIntervalIsValid,
-                                            textFieldValue: $vm.productCareInterval,
-                                            textFieldLabel: "Care interval (months)",
-                                            keyboardType: .numberPad)
+                        TextFieldWithStatus(
+                            isValid: $vm.careIntervalIsValid,
+                            textFieldValue: $vm.productCareInterval,
+                            textFieldLabel: "Care interval (months)",
+                            keyboardType: .numberPad
+                        )
 
-                        TextFieldWithStatus(isValid: $vm.priceIsValid,
-                                            textFieldValue: $vm.productPrice,
-                                            textFieldLabel: "Price",
-                                            keyboardType: .decimalPad)
+                        TextFieldWithStatus(
+                            isValid: $vm.priceIsValid,
+                            textFieldValue: $vm.productPrice,
+                            textFieldLabel: "Price",
+                            keyboardType: .decimalPad
+                        )
                     }
                     .padding()
                     .background(.ultraThinMaterial)
@@ -80,7 +87,10 @@ struct AddProductView: View {
                         .font(.subheadline)
                         .foregroundColor(ZColor.foreground)
 
-                    Picker("Importance", selection: $vm.selectedImportance) {
+                    Picker(
+                        "Importance",
+                        selection: $vm.selectedImportance
+                    ) {
                         ForEach(Importance.allCases) { importance in
                             Text(importance.rawValue.capitalized)
                         }
@@ -96,31 +106,27 @@ struct AddProductView: View {
 
                         Spacer()
 
-                        PhotosPicker(selection: $vm.selectedProductPhoto, matching: .images, photoLibrary: .shared()) {
+                        PhotosPicker(
+                            selection: $vm.selectedProductPhoto,
+                            matching: .images,
+                            photoLibrary: .shared()
+                        ) {
                             if vm.productImage == nil {
                                 Image(systemName: "doc.viewfinder.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 44, height: 44)
-                                    .background(.clear)
-                                    .foregroundColor(ZColor.action)
+                                    .circleImage(size: 50, action: true)
                             } else {
                                 Image(uiImage: vm.productImage!)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 70, height: 70)
-                                    .padding(.bottom, 50)
+                                    .circleImage(size: 50, action: true)
                             }
                         }
                     }
-
                     .padding()
 
                     Button("Add product") {
                         vm.addButtonTapped()
                         self.dismiss()
                     }
-                        .buttonStyle(StandardButton())
+                    .buttonStyle(StandardButton())
                 }
                 .padding()
             }
@@ -131,7 +137,7 @@ struct AddProductView: View {
     }
 }
 
-struct AddProductView_Previews: PreviewProvider {
+private struct AddProductView_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView(coreDataService: CoreDataService())
     }

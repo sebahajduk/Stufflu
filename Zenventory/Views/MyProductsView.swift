@@ -7,15 +7,17 @@
 
 import SwiftUI
 
-struct MyProductsView: View {
+internal struct MyProductsView: View {
 
-    @StateObject var vm: MyProductViewModel
+    @StateObject internal var vm: MyProductViewModel
 
     @FocusState private var focusField: Bool?
 
     @State private var isFiltering = false
 
-    init(coreDataService: any CoreDataManager) {
+    internal init(
+        coreDataService: any CoreDataManager
+    ) {
         _vm = StateObject(wrappedValue: MyProductViewModel(dataService: coreDataService))
     }
 

@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-class ZFileManager {
+internal struct ZFileManager {
 
-    static let instance = ZFileManager()
-
-    func saveImage(productImage: UIImage, name: String) {
+    internal static func saveImage(productImage: UIImage, name: String) {
         guard
             let productImgData = productImage.jpegData(compressionQuality: 1.0),
             let productPhotoPath = getPathForImage(name: name)
@@ -28,7 +26,7 @@ class ZFileManager {
         }
     }
 
-    func getImage(name: String) -> UIImage? {
+    internal static func getImage(name: String) -> UIImage? {
         guard
             let productPhotoPath = getPathForImage(name: name)?.path else {
             print("Error getting path")
@@ -38,7 +36,7 @@ class ZFileManager {
         return UIImage(contentsOfFile: productPhotoPath)
     }
 
-    func getPathForImage(name: String) -> URL? {
+    internal static func getPathForImage(name: String) -> URL? {
         guard
             let productPhotoPath = FileManager
                 .default
@@ -53,7 +51,7 @@ class ZFileManager {
         return productPhotoPath
     }
 
-    func deleteImage(name: String) {
+    internal static func deleteImage(name: String) {
         guard
             let productPhotoPath = getPathForImage(name: name) else {
             print("Error getting path")
