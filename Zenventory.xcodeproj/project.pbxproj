@@ -119,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				601A0C132A09652800072DBA /* PriceTextField.swift */,
+				60B090CE29E5A646009BD972 /* StandardButton.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -157,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				60A5BF0629CCD3C9008EA2A4 /* Info.plist */,
+				6096E3962A0ACB360089F908 /* Services */,
 				60A248F329CAC75F00809C51 /* Extensions */,
 				60A248F029CAC6CE00809C51 /* Utilities */,
 				602EC15F29DC84BC00E8B470 /* ViewModels */,
@@ -191,12 +193,7 @@
 		606EF9E329C970D00024B7EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				604E77A329F6E56800562F9F /* ZFileManager.swift */,
-				606EF9E429C970EA0024B7EB /* ZColor.swift */,
 				605B5B7429F03E0F00973AD1 /* ProductsContainer.xcdatamodeld */,
-				605B5B7729F0455C00973AD1 /* CoreDataService.swift */,
-				60A0301E2A03630500818118 /* CoreDataManager.swift */,
-				6096E3942A0A91420089F908 /* ZFileManagerError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,10 +234,21 @@
 			path = Extensions_Tests;
 			sourceTree = "<group>";
 		};
+		6096E3962A0ACB360089F908 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				604E77A329F6E56800562F9F /* ZFileManager.swift */,
+				605B5B7729F0455C00973AD1 /* CoreDataService.swift */,
+				60A0301E2A03630500818118 /* CoreDataManager.swift */,
+				6096E3942A0A91420089F908 /* ZFileManagerError.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		60A248F029CAC6CE00809C51 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				60B090CE29E5A646009BD972 /* StandardButton.swift */,
+				606EF9E429C970EA0024B7EB /* ZColor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";

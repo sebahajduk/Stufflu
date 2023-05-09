@@ -13,13 +13,15 @@ protocol CoreDataManager: ObservableObject {
     var savedEntities: [ProductEntity] { get }
     var savedEntitiesPublisher: Published<[ProductEntity]>.Publisher { get }
     
-    func saveData()
+    func saveData() throws
     func removeProduct(at offsets: IndexSet)
-    func fetchProducts()
-    func addProduct(name: String,
-                    guarantee: Int?,
-                    careName: String?,
-                    careInterval: Int?,
-                    price: Double?,
-                    importance: String)
+    func fetchProducts() throws
+    func addProduct(
+        name: String,
+        guarantee: Int?,
+        careName: String?,
+        careInterval: Int?,
+        price: Double?,
+        importance: String
+    )
 }
