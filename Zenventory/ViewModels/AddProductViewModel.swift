@@ -14,7 +14,7 @@ enum Importance: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-final internal class AddProductVModel: ObservableObject {
+final internal class AddProductViewModel: ObservableObject {
 
     internal var dataService: CoreDataService
 

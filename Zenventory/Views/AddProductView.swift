@@ -12,12 +12,12 @@ internal struct AddProductView: View {
 
     @Environment(\.dismiss) private var dismiss
 
-    @StateObject private var vm: AddProductVModel
+    @StateObject private var vm: AddProductViewModel
 
     internal init(
         coreDataService: CoreDataService
     ) {
-        _vm = StateObject(wrappedValue: AddProductVModel(dataService: coreDataService))
+        _vm = StateObject(wrappedValue: AddProductViewModel(dataService: coreDataService))
     }
 
     var body: some View {

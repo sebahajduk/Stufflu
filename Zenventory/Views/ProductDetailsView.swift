@@ -9,12 +9,12 @@ import SwiftUI
 
 internal struct ProductDetailsView: View {
 
-    @StateObject var vm: ProductDetailsVM
+    @StateObject var vm: ProductDetailsViewModel
 
     internal init(
         product: ProductEntity
     ) {
-        _vm = StateObject(wrappedValue: ProductDetailsVM(product: product))
+        _vm = StateObject(wrappedValue: ProductDetailsViewModel(product: product))
     }
 
     var body: some View {
