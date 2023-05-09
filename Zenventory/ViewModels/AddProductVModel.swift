@@ -62,11 +62,11 @@ class AddProductVModel: ObservableObject {
 
 
         if let productImage = productImage {
-            ZFileManager.saveImage(productImage: productImage, name: productName)
+            try? ZFileManager.saveImage(productImage: productImage, name: productName)
         }
 
         if let invoiceImage = invoiceImage {
-            ZFileManager.saveImage(productImage: invoiceImage, name: "\(productName)Invoice")
+            try? ZFileManager.saveImage(productImage: invoiceImage, name: "\(productName)Invoice")
         }
 
     }

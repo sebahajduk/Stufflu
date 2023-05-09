@@ -9,34 +9,38 @@ import SwiftUI
 
 internal struct ZFileManager {
 
-    internal static func saveImage(productImage: UIImage, name: String) {
+    internal static func saveImage(
+        productImage: UIImage,
+        name: String
+    ) throws {
         guard
             let productImgData = productImage.jpegData(compressionQuality: 1.0),
-            let productPhotoPath = getPathForImage(name: name)
+            let productPhotoPath = try getPathForImage(name: name)
         else {
-            print("Error getting Data")
-            return
+            throw ZFileManagerError.gettingData
         }
 
         do {
             try productImgData.write(to: productPhotoPath)
-            print("Successfully saved photos")
         } catch let error {
-            print(error.localizedDescription)
+            throw error
         }
     }
 
-    internal static func getImage(name: String) -> UIImage? {
+    internal static func getImage(
+        name: String
+    ) throws -> UIImage? {
         guard
-            let productPhotoPath = getPathForImage(name: name)?.path else {
-            print("Error getting path")
-            return nil
+            let productPhotoPath =  try getPathForImage(name: name)?.path else {
+            throw ZFileManagerError.gettingPath
         }
 
         return UIImage(contentsOfFile: productPhotoPath)
     }
 
-    internal static func getPathForImage(name: String) -> URL? {
+    internal static func getPathForImage(
+        name: String
+    ) throws -> URL? {
         guard
             let productPhotoPath = FileManager
                 .default
@@ -44,24 +48,24 @@ internal struct ZFileManager {
                 .first?
                 .appendingPathComponent("\(name).jpg")
         else {
-            print("Error getting path.")
-            return nil
+            throw ZFileManagerError.gettingPath
         }
 
         return productPhotoPath
     }
 
-    internal static func deleteImage(name: String) {
+    internal static func deleteImage(
+        name: String
+    ) throws {
         guard
-            let productPhotoPath = getPathForImage(name: name) else {
-            print("Error getting path")
-            return
+            let productPhotoPath = try getPathForImage(name: name) else {
+            throw ZFileManagerError.gettingPath
         }
 
         do {
             try FileManager.default.removeItem(at: productPhotoPath)
         } catch {
-            print("Error deleting image.")
+            throw error
         }
     }
 

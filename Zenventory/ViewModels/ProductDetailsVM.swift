@@ -16,6 +16,6 @@ class ProductDetailsVM: ObservableObject {
         product: ProductEntity
     ) {
         self.product = product
-        self.image = ZFileManager.getImage(name: product.name!)
+        image = try? ZFileManager.getImage(name: product.name ?? "Unknown")
     }
 }

@@ -16,8 +16,6 @@ class ProductCellViewModel: ObservableObject {
     init(product: ProductEntity) {
         self.product = product
         lastUsed = product.lastUsed?.formatted(date: .numeric, time: .omitted) ?? "Unknown"
-        productImage = ZFileManager.getImage(name: product.name ?? "Unknown")
+        productImage = try? ZFileManager.getImage(name: product.name ?? "Unknown")
     }
-
-    
 }
