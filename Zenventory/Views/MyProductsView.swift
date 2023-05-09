@@ -23,7 +23,7 @@ internal struct MyProductsView: View {
 
     var body: some View {
         ZStack {
-            ZColor.background
+            Color.backgroundColor()
                 .ignoresSafeArea()
             VStack {
                 ZStack(alignment: .top) {
@@ -55,7 +55,7 @@ internal struct MyProductsView: View {
                         } label: {
                             Image(systemName: "arrow.up.arrow.down")
                                 .frame(width: 30, height: 30)
-                                .foregroundColor(ZColor.action)
+                                .foregroundColor(.foregroundColor())
                                 .bold()
                         }
 
@@ -64,7 +64,7 @@ internal struct MyProductsView: View {
                         } label: {
                             Image(systemName: "line.3.horizontal.decrease")
                                 .frame(width: 30, height: 30)
-                                .foregroundColor(ZColor.action)
+                                .foregroundColor(.foregroundColor())
                                 .bold()
                         }.sheet(isPresented: $isFiltering) {
                             MyProductsFilterView(vm: vm)
@@ -83,11 +83,11 @@ internal struct MyProductsView: View {
                     }
                     .listRowSeparator(.hidden)
                 }
-                .listRowBackground(ZColor.background)
+                .listRowBackground(Color.backgroundColor())
                 .listStyle(.plain)
                 .padding(.horizontal, 20)
             }
-            .foregroundColor(ZColor.foreground)
+            .foregroundColor(.foregroundColor())
         }
         .navigationTitle("YOUR PRODUCTS")
         .navigationBarTitleDisplayMode(.inline)

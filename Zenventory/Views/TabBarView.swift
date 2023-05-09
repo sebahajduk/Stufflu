@@ -34,7 +34,7 @@ internal struct TabBarView: View {
                 .frame(height: 50)
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
-        .background(ZColor.background)
+        .background(Color.backgroundColor())
         .toolbar(.hidden, for: .navigationBar)
     }
 }

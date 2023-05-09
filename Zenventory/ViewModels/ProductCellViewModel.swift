@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-class ProductCellViewModel: ObservableObject {
+final internal class ProductCellViewModel: ObservableObject {
 
-    @Published var product: ProductEntity
-    @Published var lastUsed: String
-    @Published var productImage: UIImage?
+    @Published internal var product: ProductEntity
+    @Published internal var lastUsed: String
+    @Published internal var productImage: UIImage?
 
-    init(product: ProductEntity) {
+    internal init(
+        product: ProductEntity
+    ) {
         self.product = product
         lastUsed = product.lastUsed?.formatted(date: .numeric, time: .omitted) ?? "Unknown"
         productImage = try? ZFileManager.getImage(name: product.name ?? "Unknown")

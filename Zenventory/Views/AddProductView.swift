@@ -23,7 +23,7 @@ internal struct AddProductView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                ZColor.background
+                Color.backgroundColor()
                 VStack(spacing: 20) {
                     PhotosPicker(
                         selection: $vm.selectedProductPhoto,
@@ -85,7 +85,7 @@ internal struct AddProductView: View {
                         .padding(.bottom, -10)
                         .bold()
                         .font(.subheadline)
-                        .foregroundColor(ZColor.foreground)
+                        .foregroundColor(.foregroundColor())
 
                     Picker(
                         "Importance",
@@ -96,13 +96,13 @@ internal struct AddProductView: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    .foregroundColor(ZColor.foreground)
+                    .foregroundColor(.foregroundColor())
 
                     HStack(alignment: .center) {
                         Text("Receipt & invoice")
                             .bold()
                             .font(.subheadline)
-                            .foregroundColor(ZColor.foreground)
+                            .foregroundColor(.foregroundColor())
 
                         Spacer()
 

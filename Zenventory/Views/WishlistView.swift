@@ -10,7 +10,7 @@ import SwiftUI
 internal struct WishlistView: View {
     var body: some View {
         ZStack {
-            ZColor.background
+            Color.backgroundColor()
                 .ignoresSafeArea()
 
             ScrollView {

@@ -19,7 +19,7 @@ internal struct ProductDetailsView: View {
 
     var body: some View {
         ZStack {
-            ZColor.background
+            Color.backgroundColor()
                 .ignoresSafeArea()
 
             VStack(alignment: .center) {

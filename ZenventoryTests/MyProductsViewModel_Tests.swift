@@ -33,10 +33,10 @@ final class MyProductsViewModel_Tests: XCTestCase {
         vm.sortingType = .lowestPrice
 
         // Then
-        XCTAssertEqual(2, vm.myProducts[0].price)
-        XCTAssertEqual(3, vm.myProducts[1].price)
-        XCTAssertEqual(4, vm.myProducts[2].price)
-        XCTAssertEqual(10, vm.myProducts[3].price)
+        XCTAssertEqual(1, vm.myProducts[0].price)
+        XCTAssertEqual(2, vm.myProducts[1].price)
+        XCTAssertEqual(3, vm.myProducts[2].price)
+        XCTAssertEqual(4, vm.myProducts[3].price)
     }
 
     func test_MyProductsViewModel_observingSorting_shouldSortByHighestPrice() {

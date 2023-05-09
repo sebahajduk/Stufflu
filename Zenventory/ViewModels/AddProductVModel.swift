@@ -14,41 +14,42 @@ enum Importance: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-class AddProductVModel: ObservableObject {
+final internal class AddProductVModel: ObservableObject {
 
-    var dataService: CoreDataService
+    internal var dataService: CoreDataService
 
-    init(dataService: CoreDataService) {
+    internal init(
+        dataService: CoreDataService
+    ) {
         self.dataService = dataService
         runObservers()
     }
 
     private var cancellables = Set<AnyCancellable>()
 
-    @Published var selectedProductPhoto: PhotosPickerItem?
-    @Published var selectedInvoicePhoto: PhotosPickerItem?
-
-    @Published var selectedImportance: Importance = .medium
+    @Published internal var selectedProductPhoto: PhotosPickerItem?
+    @Published internal var selectedInvoicePhoto: PhotosPickerItem?
+    @Published internal var selectedImportance: Importance = .medium
 
     // MARK: --- Product details ---
-    @Published var productName: String = ""
-    @Published var productImage: UIImage?
-    @Published var invoiceImage: UIImage?
-    @Published var productGuarantee: String = ""
-    @Published var productImportance: Int = 0
-    @Published var productCareName: String = ""
-    @Published var productCareInterval: String = ""
-    @Published var productPrice: String = ""
-    @Published var importanceSlider: Double = 5
+    @Published internal var productName: String = ""
+    @Published internal var productImage: UIImage?
+    @Published internal var invoiceImage: UIImage?
+    @Published internal var productGuarantee: String = ""
+    @Published internal var productImportance: Int = 0
+    @Published internal var productCareName: String = ""
+    @Published internal var productCareInterval: String = ""
+    @Published internal var productPrice: String = ""
+    @Published internal var importanceSlider: Double = 5
 
     // MARK: --- Textfields validation ---
-    @Published var nameIsValid = false
-    @Published var guaranteeIsValid = true
-    @Published var careNameIsValid = true
-    @Published var careIntervalIsValid = true
-    @Published var priceIsValid = true
+    @Published internal var nameIsValid = false
+    @Published internal var guaranteeIsValid = true
+    @Published internal var careNameIsValid = true
+    @Published internal var careIntervalIsValid = true
+    @Published internal var priceIsValid = true
 
-    func addButtonTapped() {
+    internal func addButtonTapped() {
         guard textfieldsAreValid() else { return }
 
         dataService.addProduct(

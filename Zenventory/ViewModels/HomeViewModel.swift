@@ -10,13 +10,15 @@ import Combine
 import UIKit
 
 class HomeViewModel: ObservableObject {
-    var dataService: any CoreDataManager
+    @Published internal var products: [ProductEntity] = []
 
-    @Published var products: [ProductEntity] = []
+    internal var dataService: any CoreDataManager
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(dataService: any CoreDataManager) {
+    internal init(
+        dataService: any CoreDataManager
+    ) {
         self.dataService = dataService
         showSavedProducts()
         observeEntity()
@@ -35,7 +37,9 @@ class HomeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func deleteItem(at offsets: IndexSet) {
+    internal func deleteItem(
+        at offsets: IndexSet
+    ) {
         products.remove(atOffsets: offsets)
         dataService.removeProduct(at: offsets)
     }

@@ -17,7 +17,7 @@ internal extension Image {
             .frame(width: size, height: size)
             .clipShape(Circle())
             .padding()
-            .foregroundColor(action ? ZColor.action : ZColor.foreground)
+            .foregroundColor(action ? .actionColor() : .foregroundColor())
     }
 }
 

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreData
 
-internal class CoreDataService: ObservableObject, CoreDataManager {
+final internal class CoreDataService: ObservableObject, CoreDataManager {
     @Published internal var savedEntities: [ProductEntity] = []
 
     internal let container: NSPersistentContainer

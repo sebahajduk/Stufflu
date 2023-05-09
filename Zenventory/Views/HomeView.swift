@@ -40,7 +40,7 @@ internal struct HomeView: View {
 
             Text("30 days history")
                 .font(.headline)
-                .foregroundColor(ZColor.foreground)
+                .foregroundColor(.foregroundColor())
 
             HStack(spacing: 50) {
                 VStack {
@@ -58,7 +58,7 @@ internal struct HomeView: View {
                         .bold()
                 }
             }
-            .foregroundColor(ZColor.foreground)
+            .foregroundColor(.foregroundColor())
 
             Divider()
                 .padding(.horizontal)
@@ -67,7 +67,7 @@ internal struct HomeView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .font(.headline)
                 .bold()
-                .foregroundColor(ZColor.foreground)
+                .foregroundColor(.foregroundColor())
 
             List {
                 ForEach(vm.products, id: \.self) { entity in
@@ -81,10 +81,10 @@ internal struct HomeView: View {
                 .onDelete(perform: vm.deleteItem)
             }
             .listStyle(.plain)
-            .background(ZColor.background)
+            .background(Color.backgroundColor())
         }
         .padding(.horizontal)
-        .background(ZColor.background)
+        .background(Color.backgroundColor())
         .toolbar(.hidden, for: .navigationBar)
     }
 }

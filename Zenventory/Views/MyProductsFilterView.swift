@@ -35,7 +35,7 @@ internal struct MyProductsFilterView: View {
                 .bold()
                 .padding(.horizontal, 100)
                 .padding(.top)
-                .tint(ZColor.action)
+                .tint(.actionColor())
 
                 Picker(
                     "Importance",
@@ -59,14 +59,14 @@ internal struct MyProductsFilterView: View {
                             self.dismiss()
                         }
                     }
-                    .foregroundColor(ZColor.action)
+                    .foregroundColor(.actionColor())
                 }
 
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Clear") {
                         vm.clearFilters()
                     }
-                    .foregroundColor(ZColor.action)
+                    .foregroundColor(.actionColor())
                 }
             }
         }

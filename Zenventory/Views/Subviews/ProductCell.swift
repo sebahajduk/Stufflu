@@ -29,7 +29,7 @@ internal struct ProductCell: View {
                 Text(vm.product.name ?? "")
                     .bold()
                     .font(.subheadline)
-                    .foregroundColor(ZColor.foreground)
+                    .foregroundColor(.foregroundColor())
 
                 Text("Last used: \(vm.lastUsed)")
                     .font(.caption2)
@@ -39,15 +39,15 @@ internal struct ProductCell: View {
                     .font(.system(size: 10))
                     .padding(.top, 5)
                     .padding(.trailing, 50)
-                    .foregroundColor(ZColor.foreground)
+                    .foregroundColor(.foregroundColor())
             }
 
             Spacer()
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: 90)
-        .background(ZColor.background)
-        .listRowBackground(ZColor.background)
+        .background(Color.backgroundColor())
+        .listRowBackground(Color.backgroundColor())
         .cornerRadius(30)
         .overlay {
             RoundedRectangle(cornerRadius: 30)

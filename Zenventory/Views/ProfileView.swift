@@ -9,7 +9,7 @@ import SwiftUI
 
 internal struct ProfileView: View {
     var body: some View {
-        ZColor.background
+        Color.backgroundColor()
             .ignoresSafeArea()
     }
 }

@@ -37,7 +37,7 @@ internal struct ZTabView: View {
                     Text("Home")
                         .font(.caption2)
                 }
-                .foregroundColor(selectedTab == .home ? ZColor.action : ZColor.foreground.opacity(0.5))
+                .foregroundColor(selectedTab == .home ? .actionColor() : .foregroundColor().opacity(0.5))
             }
 
             Spacer()
@@ -47,13 +47,13 @@ internal struct ZTabView: View {
             } label: {
                 ZStack {
                     Circle()
-                        .foregroundColor(ZColor.action)
+                        .foregroundColor(.actionColor())
                         .frame(width: 60, height: 60)
-                        .shadow(color: ZColor.action, radius: 10)
+                        .shadow(color: .actionColor(), radius: 10)
                     Image(systemName: "plus")
                         .resizable()
                         .bold()
-                        .foregroundColor(ZColor.background)
+                        .foregroundColor(.backgroundColor())
                         .frame(width: 20, height: 20)
                 }
                 .offset(y: -32)
@@ -75,12 +75,12 @@ internal struct ZTabView: View {
                     Text("Profile")
                         .font(.caption2)
                 }
-                .foregroundColor(selectedTab == .profile ? ZColor.action : ZColor.foreground.opacity(0.5))
+                .foregroundColor(selectedTab == .profile ? .actionColor() : .foregroundColor().opacity(0.5))
             }
 
             Spacer()
         }
-        .background(ZColor.background)
+        .background(Color.backgroundColor())
         .buttonStyle(TabButtonStyle())
         .ignoresSafeArea()
     }
