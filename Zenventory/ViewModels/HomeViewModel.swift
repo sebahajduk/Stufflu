@@ -9,12 +9,13 @@ import Foundation
 import Combine
 import UIKit
 
-class HomeViewModel: ObservableObject {
-    @Published internal var products: [ProductEntity] = []
+final internal class HomeViewModel: ObservableObject {
+
+    @Published internal var products: [ProductEntity] = .init()
 
     internal var dataService: any CoreDataManager
 
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellables: Set<AnyCancellable> = .init()
 
     internal init(
         dataService: any CoreDataManager

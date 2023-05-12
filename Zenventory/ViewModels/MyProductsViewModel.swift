@@ -5,39 +5,32 @@
 //  Created by Sebastian Hajduk on 26/04/2023.
 //
 
-import Foundation
 import SwiftUI
 import Combine
 
-enum SortingType: String, CaseIterable, Identifiable {
-    var id: Self { self }
-    case lowestPrice = "Price lowest",
-         highestPrice = "Price highest",
-         nameAZ = "Name A-Z",
-         nameZA = "Name Z-A",
-         lastUsed = "Last used",
-         addedDate = "Added date"
-}
 
-class MyProductViewModel: ObservableObject {
 
-    var dataService: any CoreDataManager
+final internal class MyProductsViewModel: ObservableObject {
+
+    internal var dataService: any CoreDataManager
     private var cancellables = Set<AnyCancellable>()
 
-    @Published var myProducts: [ProductEntity] = []
-    @Published var searchText: String = ""
+    @Published internal var myProducts: [ProductEntity] = .init()
+    @Published internal var searchText: String = .init()
 
     //MARK: Sorting
-    @Published var sortingType: SortingType = .addedDate
+    @Published internal var sortingType: SortingType = .addedDate
 
     //MARK: --- Filtering params ---
-    @Published var isFilterActive: Bool = false
-    @Published var minPrice = ""
-    @Published var maxPrice = ""
-    @Published var useImportance = false
-    @Published var importance: Importance = .medium
+    @Published internal var isFilterActive: Bool = false
+    @Published internal var minPrice: String = .init()
+    @Published internal var maxPrice: String = .init()
+    @Published internal var useImportance = false
+    @Published internal var importance: Importance = .medium
 
-    internal init(dataService: any CoreDataManager) {
+    internal init(
+        dataService: any CoreDataManager
+    ) {
         self.dataService = dataService
         loadMyItems()
         observeSearching()
@@ -59,8 +52,8 @@ class MyProductViewModel: ObservableObject {
 
                 withAnimation(.linear) {
                     if searchText.count > 0 {
-                        let filteredProducts = self.myProducts.filter {
-                            guard let productName = $0.name else { return true }
+                        let filteredProducts: [ProductEntity] = self.myProducts.filter {
+                            guard let productName: String = $0.name else { return true }
                             return productName.lowercased().contains(searchText.lowercased())
                         }
                         self.myProducts = filteredProducts
@@ -87,7 +80,7 @@ class MyProductViewModel: ObservableObject {
     private func sortProducts(
         by type: SortingType
     ) -> [ProductEntity] {
-        var sortedArray: [ProductEntity] = []
+        var sortedArray: [ProductEntity] = .init()
 
         switch type {
         case .lowestPrice:
@@ -115,8 +108,10 @@ class MyProductViewModel: ObservableObject {
         importance = .medium
     }
 
-    internal func filter(_ completion: () -> ()) {
-        let filtered = self.dataService.savedEntities
+    internal func filter(
+        _ completion: () -> ()
+    ) {
+        let filtered: [ProductEntity] = self.dataService.savedEntities
             .filter { (entity) -> Bool in
                 guard minPrice.count > 0 else { return true }
                 return entity.price >= Double(minPrice) ?? 0
@@ -128,7 +123,7 @@ class MyProductViewModel: ObservableObject {
             .filter { (entity) -> Bool in
                 guard
                     useImportance,
-                    let entityImportance = entity.importance
+                    let entityImportance: String = entity.importance
                 else { return true }
 
                 return entityImportance.lowercased() == importance.rawValue.lowercased()

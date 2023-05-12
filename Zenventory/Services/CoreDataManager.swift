@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 
 protocol CoreDataManager: ObservableObject {
+
     var container: NSPersistentContainer { get }
     var savedEntities: [ProductEntity] { get }
     var savedEntitiesPublisher: Published<[ProductEntity]>.Publisher { get }

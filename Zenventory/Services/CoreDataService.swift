@@ -10,13 +10,14 @@ import Combine
 import CoreData
 
 final internal class CoreDataService: ObservableObject, CoreDataManager {
-    @Published internal var savedEntities: [ProductEntity] = []
+
+    @Published internal var savedEntities: [ProductEntity] = .init()
+
+    private var cancellables: Set<AnyCancellable> = .init()
 
     internal let container: NSPersistentContainer
     internal var savedEntitiesPublisher: Published<[ProductEntity]>.Publisher { $savedEntities }
     internal var savedEntitiesPublished: Published<[ProductEntity]> { _savedEntities }
-
-    private var cancellables = Set<AnyCancellable>()
 
     internal init() {
         container = NSPersistentContainer(name: "ProductsContainer")
@@ -25,7 +26,7 @@ final internal class CoreDataService: ObservableObject, CoreDataManager {
     }
 
     internal func fetchProducts() throws {
-        let request = NSFetchRequest<ProductEntity>(entityName: "ProductEntity")
+        let request: NSFetchRequest<ProductEntity> = .init(entityName: "ProductEntity")
 
         do {
             savedEntities = try container.viewContext.fetch(request)
@@ -42,7 +43,7 @@ final internal class CoreDataService: ObservableObject, CoreDataManager {
         price: Double?,
         importance: String
     ) {
-        let newProduct = ProductEntity(context: container.viewContext)
+        let newProduct: ProductEntity = .init(context: container.viewContext)
 
         newProduct.id = UUID()
         newProduct.name = name
@@ -70,8 +71,10 @@ final internal class CoreDataService: ObservableObject, CoreDataManager {
     ) {
         guard let index = offsets.first else { return }
 
-        let entity = savedEntities[index]
+        let entity: ProductEntity = savedEntities[index]
+
         container.viewContext.delete(entity)
+
         try? saveData()
         try? fetchProducts()
     }

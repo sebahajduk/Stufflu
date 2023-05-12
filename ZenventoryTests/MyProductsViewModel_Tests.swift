@@ -27,7 +27,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
-        let vm = MyProductViewModel(dataService: data)
+        let vm = MyProductsViewModel(dataService: data)
 
         // When
         vm.sortingType = .lowestPrice
@@ -46,7 +46,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
-        let vm = MyProductViewModel(dataService: data)
+        let vm = MyProductsViewModel(dataService: data)
 
         // When
         vm.sortingType = .highestPrice
@@ -65,7 +65,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
-        let vm = MyProductViewModel(dataService: data)
+        let vm = MyProductsViewModel(dataService: data)
 
         // When
         vm.sortingType = .nameAZ
@@ -84,7 +84,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
-        let vm = MyProductViewModel(dataService: data)
+        let vm = MyProductsViewModel(dataService: data)
 
         // When
         vm.sortingType = .nameZA
@@ -103,7 +103,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
-        let vm = MyProductViewModel(dataService: data)
+        let vm = MyProductsViewModel(dataService: data)
         vm.sortingType = .nameZA
 
         // When
@@ -125,7 +125,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
-        let vm = MyProductViewModel(dataService: data)
+        let vm = MyProductsViewModel(dataService: data)
         vm.minPrice = "2"
         vm.maxPrice = "3"
         // When
@@ -144,7 +144,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "low")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
-        let vm = MyProductViewModel(dataService: data)
+        let vm = MyProductsViewModel(dataService: data)
         vm.useImportance = true
         vm.importance = .high
 

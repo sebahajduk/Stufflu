@@ -1,5 +1,5 @@
 //
-//  ZColor.swift
+//  Color+Ext.swift
 //  Zenventory
 //
 //  Created by Sebastian Hajduk on 21/03/2023.
@@ -8,6 +8,7 @@
 import SwiftUI
 
 extension Color {
+
     internal static func backgroundColor() -> Color {
         .init("background")
     }

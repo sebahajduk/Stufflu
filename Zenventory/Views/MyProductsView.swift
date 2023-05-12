@@ -9,7 +9,7 @@ import SwiftUI
 
 internal struct MyProductsView: View {
 
-    @StateObject internal var vm: MyProductViewModel
+    @StateObject internal var myProductsViewModel: MyProductsViewModel
 
     @FocusState private var focusField: Bool?
 
@@ -18,7 +18,11 @@ internal struct MyProductsView: View {
     internal init(
         coreDataService: any CoreDataManager
     ) {
-        _vm = StateObject(wrappedValue: MyProductViewModel(dataService: coreDataService))
+        _myProductsViewModel = StateObject(
+            wrappedValue: MyProductsViewModel(
+                dataService: coreDataService
+            )
+        )
     }
 
     var body: some View {
@@ -32,7 +36,7 @@ internal struct MyProductsView: View {
                         Text("$12 332.00")
                             .bold()
 
-                        TextField("Search...", text: $vm.searchText)
+                        TextField("Search...", text: $myProductsViewModel.searchText)
                             .padding(7)
                             .padding(.horizontal, 25)
                             .background(Color(.systemGray6))
@@ -49,7 +53,7 @@ internal struct MyProductsView: View {
                         Menu {
                             ForEach(SortingType.allCases) { type in
                                 Button(type.rawValue) {
-                                    vm.sortingType = type
+                                    myProductsViewModel.sortingType = type
                                 }
                             }
                         } label: {
@@ -67,7 +71,7 @@ internal struct MyProductsView: View {
                                 .foregroundColor(.foregroundColor())
                                 .bold()
                         }.sheet(isPresented: $isFiltering) {
-                            MyProductsFilterView(vm: vm)
+                            MyProductsFilterView(myProductsViewModel: myProductsViewModel)
                                 .presentationDetents([.filter])
                         }
                     }
@@ -76,8 +80,12 @@ internal struct MyProductsView: View {
                 .padding(.horizontal, 20)
                 
                 List {
-                    ForEach(vm.myProducts) { product in
-                        NavigationLink(destination: ProductDetailsView(product: product).ignoresSafeArea()) {
+                    ForEach(myProductsViewModel.myProducts) { product in
+                        NavigationLink(
+                            destination: ProductDetailsView(
+                                product: product
+                            )
+                        ) {
                             ProductCell(productEntity: product)
                         }
                     }

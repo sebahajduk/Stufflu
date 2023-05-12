@@ -8,7 +8,9 @@
 import SwiftUI
 
 internal struct PriceTextField: ViewModifier {
-    internal func body(content: Content) -> some View {
+    internal func body(
+        content: Content
+    ) -> some View {
         content
             .frame(height: 30)
             .frame(maxWidth: 60)

@@ -9,18 +9,26 @@ import SwiftUI
 
 internal struct HomeView: View {
 
-    @StateObject private var vm: HomeViewModel
+    @StateObject private var homeViewModel: HomeViewModel
 
     internal init(
         coreDataService: any CoreDataManager
     ) {
-        _vm = StateObject(wrappedValue: HomeViewModel(dataService: coreDataService))
+        _homeViewModel = StateObject(
+            wrappedValue: HomeViewModel(
+                dataService: coreDataService
+            )
+        )
     }
 
     var body: some View {
         VStack(spacing: 20) {
             HStack {
-                NavigationLink(destination: MyProductsView(coreDataService: vm.dataService)) {
+                NavigationLink(
+                    destination: MyProductsView(
+                        coreDataService: homeViewModel.dataService
+                    )
+                ) {
                     TileView(title: "MY PRODUCTS", image: "products")
                 }
                 NavigationLink(destination: WishlistView()) {
@@ -70,15 +78,17 @@ internal struct HomeView: View {
                 .foregroundColor(.foregroundColor())
 
             List {
-                ForEach(vm.products, id: \.self) { entity in
+                ForEach(homeViewModel.products, id: \.self) { entity in
                     NavigationLink(
-                        destination: ProductDetailsView(product: entity)
+                        destination: ProductDetailsView(
+                            product: entity
+                        )
                     ) {
                         ProductCell(productEntity: entity)
                     }
                     .listRowSeparator(.hidden)
                 }
-                .onDelete(perform: vm.deleteItem)
+                .onDelete(perform: homeViewModel.deleteItem)
             }
             .listStyle(.plain)
             .background(Color.backgroundColor())

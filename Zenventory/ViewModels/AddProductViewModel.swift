@@ -9,11 +9,6 @@ import SwiftUI
 import Combine
 import PhotosUI
 
-enum Importance: String, CaseIterable, Identifiable {
-    case low, medium, high
-    var id: Self { self }
-}
-
 final internal class AddProductViewModel: ObservableObject {
 
     internal var dataService: CoreDataService
@@ -25,29 +20,29 @@ final internal class AddProductViewModel: ObservableObject {
         runObservers()
     }
 
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellables: Set<AnyCancellable> = .init()
 
     @Published internal var selectedProductPhoto: PhotosPickerItem?
     @Published internal var selectedInvoicePhoto: PhotosPickerItem?
     @Published internal var selectedImportance: Importance = .medium
 
     // MARK: --- Product details ---
-    @Published internal var productName: String = ""
+    @Published internal var productName: String = .init()
     @Published internal var productImage: UIImage?
     @Published internal var invoiceImage: UIImage?
-    @Published internal var productGuarantee: String = ""
-    @Published internal var productImportance: Int = 0
-    @Published internal var productCareName: String = ""
-    @Published internal var productCareInterval: String = ""
-    @Published internal var productPrice: String = ""
+    @Published internal var productGuarantee: String = .init()
+    @Published internal var productImportance: Int = .init()
+    @Published internal var productCareName: String = .init()
+    @Published internal var productCareInterval: String = .init()
+    @Published internal var productPrice: String = .init()
     @Published internal var importanceSlider: Double = 5
 
     // MARK: --- Textfields validation ---
-    @Published internal var nameIsValid = false
-    @Published internal var guaranteeIsValid = true
-    @Published internal var careNameIsValid = true
-    @Published internal var careIntervalIsValid = true
-    @Published internal var priceIsValid = true
+    @Published internal var nameIsValid: Bool = false
+    @Published internal var guaranteeIsValid: Bool = true
+    @Published internal var careNameIsValid: Bool = true
+    @Published internal var careIntervalIsValid: Bool = true
+    @Published internal var priceIsValid: Bool = true
 
     internal func addButtonTapped() {
         guard textfieldsAreValid() else { return }
@@ -62,11 +57,11 @@ final internal class AddProductViewModel: ObservableObject {
         )
 
 
-        if let productImage = productImage {
+        if let productImage: UIImage = productImage {
             try? ZFileManager.saveImage(productImage: productImage, name: productName)
         }
 
-        if let invoiceImage = invoiceImage {
+        if let invoiceImage: UIImage = invoiceImage {
             try? ZFileManager.saveImage(productImage: invoiceImage, name: "\(productName)Invoice")
         }
 
@@ -94,8 +89,9 @@ final internal class AddProductViewModel: ObservableObject {
                 return try await index.loadTransferable(type: Data.self) ?? Data()
             }
             .receive(on: RunLoop.main)
-            .sink { value in
-                if let image = UIImage(data: value) {
+            .sink { [weak self] value in
+                guard let self else { return }
+                if let image: UIImage = .init(data: value) {
                     self.productImage = image
                 }
             }

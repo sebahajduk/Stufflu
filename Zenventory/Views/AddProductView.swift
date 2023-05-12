@@ -12,12 +12,16 @@ internal struct AddProductView: View {
 
     @Environment(\.dismiss) private var dismiss
 
-    @StateObject private var vm: AddProductViewModel
+    @StateObject private var addProductViewModel: AddProductViewModel
 
     internal init(
         coreDataService: CoreDataService
     ) {
-        _vm = StateObject(wrappedValue: AddProductViewModel(dataService: coreDataService))
+        _addProductViewModel = StateObject(
+            wrappedValue: AddProductViewModel(
+                dataService: coreDataService
+            )
+        )
     }
 
     var body: some View {
@@ -26,51 +30,51 @@ internal struct AddProductView: View {
                 Color.backgroundColor()
                 VStack(spacing: 20) {
                     PhotosPicker(
-                        selection: $vm.selectedProductPhoto,
+                        selection: $addProductViewModel.selectedProductPhoto,
                         matching: .images,
                         photoLibrary: .shared()
                     ) {
-                        if vm.productImage == nil {
+                        if addProductViewModel.productImage == nil {
                             Image(systemName: "camera.circle.fill")
                                 .circleImage(size: 100, action: true)
                         } else {
-                            Image(uiImage: vm.productImage!)
+                            Image(uiImage: addProductViewModel.productImage!)
                                 .circleImage(size: 100, action: true)
                         }
                     }
 
                     VStack(spacing: 20) {
                         TextFieldWithStatus(
-                            isValid: $vm.nameIsValid,
-                            textFieldValue: $vm.productName,
+                            isValid: $addProductViewModel.nameIsValid,
+                            textFieldValue: $addProductViewModel.productName,
                             textFieldLabel: "Name*",
                             keyboardType: .default
                         )
 
                         TextFieldWithStatus(
-                            isValid: $vm.guaranteeIsValid,
-                            textFieldValue: $vm.productGuarantee,
+                            isValid: $addProductViewModel.guaranteeIsValid,
+                            textFieldValue: $addProductViewModel.productGuarantee,
                             textFieldLabel: "Guarantee (months)",
                             keyboardType: .numberPad
                         )
 
                         TextFieldWithStatus(
-                            isValid: $vm.careNameIsValid,
-                            textFieldValue: $vm.productCareName,
+                            isValid: $addProductViewModel.careNameIsValid,
+                            textFieldValue: $addProductViewModel.productCareName,
                             textFieldLabel: "Care name (cleaning, insurance etc.)",
                             keyboardType: .default
                         )
 
                         TextFieldWithStatus(
-                            isValid: $vm.careIntervalIsValid,
-                            textFieldValue: $vm.productCareInterval,
+                            isValid: $addProductViewModel.careIntervalIsValid,
+                            textFieldValue: $addProductViewModel.productCareInterval,
                             textFieldLabel: "Care interval (months)",
                             keyboardType: .numberPad
                         )
 
                         TextFieldWithStatus(
-                            isValid: $vm.priceIsValid,
-                            textFieldValue: $vm.productPrice,
+                            isValid: $addProductViewModel.priceIsValid,
+                            textFieldValue: $addProductViewModel.productPrice,
                             textFieldLabel: "Price",
                             keyboardType: .decimalPad
                         )
@@ -89,7 +93,7 @@ internal struct AddProductView: View {
 
                     Picker(
                         "Importance",
-                        selection: $vm.selectedImportance
+                        selection: $addProductViewModel.selectedImportance
                     ) {
                         ForEach(Importance.allCases) { importance in
                             Text(importance.rawValue.capitalized)
@@ -107,15 +111,15 @@ internal struct AddProductView: View {
                         Spacer()
 
                         PhotosPicker(
-                            selection: $vm.selectedProductPhoto,
+                            selection: $addProductViewModel.selectedProductPhoto,
                             matching: .images,
                             photoLibrary: .shared()
                         ) {
-                            if vm.productImage == nil {
+                            if addProductViewModel.productImage == nil {
                                 Image(systemName: "doc.viewfinder.fill")
                                     .circleImage(size: 50, action: true)
                             } else {
-                                Image(uiImage: vm.productImage!)
+                                Image(uiImage: addProductViewModel.productImage!)
                                     .circleImage(size: 50, action: true)
                             }
                         }
@@ -123,7 +127,7 @@ internal struct AddProductView: View {
                     .padding()
 
                     Button("Add product") {
-                        vm.addButtonTapped()
+                        addProductViewModel.addButtonTapped()
                         self.dismiss()
                     }
                     .buttonStyle(StandardButton())

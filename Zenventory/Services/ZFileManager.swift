@@ -14,8 +14,8 @@ internal struct ZFileManager {
         name: String
     ) throws {
         guard
-            let productImgData = productImage.jpegData(compressionQuality: 1.0),
-            let productPhotoPath = try getPathForImage(name: name)
+            let productImgData: Data = productImage.jpegData(compressionQuality: 1.0),
+            let productPhotoPath: URL = try getPathForImage(name: name)
         else {
             throw ZFileManagerError.gettingData
         }
@@ -31,7 +31,7 @@ internal struct ZFileManager {
         name: String
     ) throws -> UIImage? {
         guard
-            let productPhotoPath =  try getPathForImage(name: name)?.path else {
+            let productPhotoPath: String = try getPathForImage(name: name)?.path else {
             throw ZFileManagerError.gettingPath
         }
 
@@ -42,7 +42,7 @@ internal struct ZFileManager {
         name: String
     ) throws -> URL? {
         guard
-            let productPhotoPath = FileManager
+            let productPhotoPath: URL = FileManager
                 .default
                 .urls(for: .cachesDirectory, in: .userDomainMask)
                 .first?
@@ -58,7 +58,7 @@ internal struct ZFileManager {
         name: String
     ) throws {
         guard
-            let productPhotoPath = try getPathForImage(name: name) else {
+            let productPhotoPath: URL = try getPathForImage(name: name) else {
             throw ZFileManagerError.gettingPath
         }
 

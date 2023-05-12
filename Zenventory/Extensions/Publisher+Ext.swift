@@ -9,14 +9,15 @@ import Combine
 import SwiftUI
 
 extension Publisher {
-    public func tryAwaitMap<T>(
+
+    internal func tryAwaitMap<T>(
         _ transform: @escaping (Self.Output) async throws -> T
     ) -> Publishers.FlatMap<Future<T, Never>, Self> {
         flatMap { value in
             Future { promise in
                 Task {
                     do {
-                        let result = try await transform(value)
+                        let result: T = try await transform(value)
                         promise(.success(result))
                     }
                 }

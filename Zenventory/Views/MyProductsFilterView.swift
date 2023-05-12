@@ -9,7 +9,7 @@ import SwiftUI
 
 internal struct MyProductsFilterView: View {
 
-    @ObservedObject internal var vm: MyProductViewModel
+    @ObservedObject internal var myProductsViewModel: MyProductsViewModel
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -18,19 +18,19 @@ internal struct MyProductsFilterView: View {
                 Text("Price")
 
                 HStack {
-                    TextField("Min", text: $vm.minPrice)
+                    TextField("Min", text: $myProductsViewModel.minPrice)
                         .modifier(PriceTextField())
 
                     Divider()
                         .frame(height: 20)
 
-                    TextField("Max", text: $vm.maxPrice)
+                    TextField("Max", text: $myProductsViewModel.maxPrice)
                         .modifier(PriceTextField())
                 }
 
                 Toggle(
                     "Use importance",
-                    isOn: $vm.useImportance
+                    isOn: $myProductsViewModel.useImportance
                 )
                 .bold()
                 .padding(.horizontal, 100)
@@ -39,23 +39,23 @@ internal struct MyProductsFilterView: View {
 
                 Picker(
                     "Importance",
-                    selection: $vm.importance
+                    selection: $myProductsViewModel.importance
                 ) {
                     ForEach(Importance.allCases) { importance in
                         Button(importance.rawValue.capitalized) {
-                            vm.importance = importance
+                            myProductsViewModel.importance = importance
 
                         }
                     }
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
-                .disabled(!vm.useImportance)
+                .disabled(!myProductsViewModel.useImportance)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Filter") {
-                        vm.filter() {
+                        myProductsViewModel.filter() {
                             self.dismiss()
                         }
                     }
@@ -64,7 +64,7 @@ internal struct MyProductsFilterView: View {
 
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Clear") {
-                        vm.clearFilters()
+                        myProductsViewModel.clearFilters()
                     }
                     .foregroundColor(.actionColor())
                 }

@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct StandardButton: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
+    func makeBody(
+        configuration: Configuration
+    ) -> some View {
             configuration.label
                 .padding()
                 .bold()
-                .background(Color.backgroundColor())
+                .background(Color.actionColor())
                 .foregroundColor(.backgroundColor())
                 .clipShape(Capsule())
                 .opacity(configuration.isPressed ? 0.9 : 1)

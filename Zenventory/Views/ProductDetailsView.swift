@@ -9,12 +9,12 @@ import SwiftUI
 
 internal struct ProductDetailsView: View {
 
-    @StateObject var vm: ProductDetailsViewModel
+    @StateObject private var productDetailsViewModel: ProductDetailsViewModel
 
     internal init(
         product: ProductEntity
     ) {
-        _vm = StateObject(wrappedValue: ProductDetailsViewModel(product: product))
+        _productDetailsViewModel = StateObject(wrappedValue: ProductDetailsViewModel(product: product))
     }
 
     var body: some View {
@@ -23,8 +23,8 @@ internal struct ProductDetailsView: View {
                 .ignoresSafeArea()
 
             VStack(alignment: .center) {
-                if vm.image != nil {
-                    Image(uiImage: vm.image!)
+                if productDetailsViewModel.image != nil {
+                    Image(uiImage: productDetailsViewModel.image!)
                         .circleImage(size: 100, action: true)
                 } else {
                     Image(systemName: "camera.macro.circle.fill")
@@ -32,7 +32,7 @@ internal struct ProductDetailsView: View {
                 }
             }
         }
-        .navigationTitle(vm.product.name!)
+        .navigationTitle(productDetailsViewModel.product.name!)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

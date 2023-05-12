@@ -22,7 +22,9 @@ internal struct TabBarView: View {
             switch selectedTab {
             case .home:
                 NavigationView {
-                    HomeView(coreDataService: coreDataService)
+                    HomeView(
+                        coreDataService: coreDataService
+                    )
                 }
             case .profile:
                 NavigationView {
@@ -30,7 +32,10 @@ internal struct TabBarView: View {
                 }
             }
 
-            ZTabView(selectedTab: $selectedTab, dataService: coreDataService)
+            ZTabView(
+                selectedTab: $selectedTab,
+                dataService: coreDataService
+            )
                 .frame(height: 50)
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)

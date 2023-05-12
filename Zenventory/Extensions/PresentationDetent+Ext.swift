@@ -8,15 +8,14 @@
 import SwiftUI
 
 extension PresentationDetent {
-    static let filter = Self.custom(FilterDetent.self)
+    static let filter: PresentationDetent = Self.custom(FilterDetent.self)
 }
 
 private struct FilterDetent: CustomPresentationDetent {
+
     static func height(
         in context: Context
     ) -> CGFloat? {
         max(300, context.maxDetentValue * 0.3)
     }
-
-
 }

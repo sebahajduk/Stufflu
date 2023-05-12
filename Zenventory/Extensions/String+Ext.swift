@@ -8,8 +8,9 @@
 import Foundation
 
 extension String {
+
     struct NumFormatter {
-        static let instance = NumberFormatter()
+        static let instance: NumberFormatter = .init()
     }
 
     var isDouble: Bool {
@@ -17,7 +18,7 @@ extension String {
     }
 
     var isInteger: Bool {
-        let digitsCharacters = CharacterSet(charactersIn: "0123456789")
+        let digitsCharacters: CharacterSet = .init(charactersIn: "0123456789")
         return CharacterSet(charactersIn: self).isSubset(of: digitsCharacters)
     }
 }
