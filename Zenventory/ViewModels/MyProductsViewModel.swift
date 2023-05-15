@@ -8,8 +8,6 @@
 import SwiftUI
 import Combine
 
-
-
 final internal class MyProductsViewModel: ObservableObject {
 
     internal var dataService: any CoreDataManager

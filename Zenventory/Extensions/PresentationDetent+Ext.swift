@@ -13,7 +13,7 @@ extension PresentationDetent {
 
 private struct FilterDetent: CustomPresentationDetent {
 
-    static func height(
+    static internal func height(
         in context: Context
     ) -> CGFloat? {
         max(300, context.maxDetentValue * 0.3)

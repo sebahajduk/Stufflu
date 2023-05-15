@@ -35,7 +35,6 @@ final internal class AddProductViewModel: ObservableObject {
     @Published internal var productCareName: String = .init()
     @Published internal var productCareInterval: String = .init()
     @Published internal var productPrice: String = .init()
-    @Published internal var importanceSlider: Double = 5
 
     // MARK: --- Textfields validation ---
     @Published internal var nameIsValid: Bool = false

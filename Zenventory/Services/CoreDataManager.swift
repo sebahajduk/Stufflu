@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-protocol CoreDataManager: ObservableObject {
+internal protocol CoreDataManager: ObservableObject {
 
     var container: NSPersistentContainer { get }
     var savedEntities: [ProductEntity] { get }

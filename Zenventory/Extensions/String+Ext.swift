@@ -9,15 +9,15 @@ import Foundation
 
 extension String {
 
-    struct NumFormatter {
+    private struct NumFormatter {
         static let instance: NumberFormatter = .init()
     }
 
-    var isDouble: Bool {
+    internal var isDouble: Bool {
         return NumFormatter.instance.number(from: self)?.doubleValue != nil
     }
 
-    var isInteger: Bool {
+    internal var isInteger: Bool {
         let digitsCharacters: CharacterSet = .init(charactersIn: "0123456789")
         return CharacterSet(charactersIn: self).isSubset(of: digitsCharacters)
     }

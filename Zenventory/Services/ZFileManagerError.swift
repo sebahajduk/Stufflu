@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ZFileManagerError: Error {
+internal enum ZFileManagerError: Error {
     case gettingData
     case gettingPath
 }

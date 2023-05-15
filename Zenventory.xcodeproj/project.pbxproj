@@ -241,9 +241,9 @@
 		6096E3962A0ACB360089F908 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				604E77A329F6E56800562F9F /* ZFileManager.swift */,
 				605B5B7729F0455C00973AD1 /* CoreDataService.swift */,
 				60A0301E2A03630500818118 /* CoreDataManager.swift */,
+				604E77A329F6E56800562F9F /* ZFileManager.swift */,
 				6096E3942A0A91420089F908 /* ZFileManagerError.swift */,
 			);
 			path = Services;

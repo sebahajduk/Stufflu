@@ -6,14 +6,11 @@
 //
 
 import Foundation
-import Combine
 import CoreData
 
 final internal class CoreDataService: ObservableObject, CoreDataManager {
 
     @Published internal var savedEntities: [ProductEntity] = .init()
-
-    private var cancellables: Set<AnyCancellable> = .init()
 
     internal let container: NSPersistentContainer
     internal var savedEntitiesPublisher: Published<[ProductEntity]>.Publisher { $savedEntities }
@@ -62,6 +59,7 @@ final internal class CoreDataService: ObservableObject, CoreDataManager {
         if price != nil {
             newProduct.price = price!
         }
+
         try? saveData()
         try? fetchProducts()
     }
