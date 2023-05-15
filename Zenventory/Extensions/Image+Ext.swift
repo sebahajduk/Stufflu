@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-internal extension Image {
+extension Image {
     internal func circleImage(
         size: CGFloat,
         action: Bool

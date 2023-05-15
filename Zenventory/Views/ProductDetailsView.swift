@@ -24,7 +24,7 @@ internal struct ProductDetailsView: View {
 
             VStack(alignment: .center) {
                 if let image = productDetailsViewModel.image {
-                    Image(uiImage: productDetailsViewModel.image!)
+                    Image(uiImage: image)
                         .circleImage(size: 100, action: true)
                 } else {
                     Image(systemName: "camera.macro.circle.fill")
