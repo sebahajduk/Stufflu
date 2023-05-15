@@ -23,7 +23,7 @@ internal struct ProductDetailsView: View {
                 .ignoresSafeArea()
 
             VStack(alignment: .center) {
-                if productDetailsViewModel.image != nil {
+                if let image = productDetailsViewModel.image {
                     Image(uiImage: productDetailsViewModel.image!)
                         .circleImage(size: 100, action: true)
                 } else {
@@ -32,7 +32,7 @@ internal struct ProductDetailsView: View {
                 }
             }
         }
-        .navigationTitle(productDetailsViewModel.product.name!)
+        .navigationTitle(productDetailsViewModel.product.name ?? "Unknown")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -34,11 +34,11 @@ internal struct AddProductView: View {
                         matching: .images,
                         photoLibrary: .shared()
                     ) {
-                        if addProductViewModel.productImage == nil {
-                            Image(systemName: "camera.circle.fill")
+                        if let image = addProductViewModel.productImage {
+                            Image(uiImage: image)
                                 .circleImage(size: 100, action: true)
                         } else {
-                            Image(uiImage: addProductViewModel.productImage!)
+                            Image(systemName: "camera.circle.fill")
                                 .circleImage(size: 100, action: true)
                         }
                     }
@@ -115,11 +115,11 @@ internal struct AddProductView: View {
                             matching: .images,
                             photoLibrary: .shared()
                         ) {
-                            if addProductViewModel.productImage == nil {
-                                Image(systemName: "doc.viewfinder.fill")
+                            if let image = addProductViewModel.productImage {
+                                Image(uiImage: image)
                                     .circleImage(size: 50, action: true)
                             } else {
-                                Image(uiImage: addProductViewModel.productImage!)
+                                Image(systemName: "doc.viewfinder.fill")
                                     .circleImage(size: 50, action: true)
                             }
                         }

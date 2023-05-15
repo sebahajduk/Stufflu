@@ -48,16 +48,16 @@ final internal class CoreDataService: ObservableObject, CoreDataManager {
         newProduct.importance = importance
         newProduct.lastUsed = Date()
 
-        if guarantee != nil {
-            newProduct.guarantee = Int16(guarantee!)
+        if let guarantee {
+            newProduct.guarantee = Int16(guarantee)
         }
 
-        if careInterval != nil {
-            newProduct.careInterval = Int64(careInterval!)
+        if let careInterval {
+            newProduct.careInterval = Int64(careInterval)
         }
 
-        if price != nil {
-            newProduct.price = price!
+        if let price {
+            newProduct.price = price
         }
 
         try? saveData()
