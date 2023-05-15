@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import PhotosUI
 
-final internal class AddProductViewModel: ObservableObject {
+internal final class AddProductViewModel: ObservableObject {
 
     internal var dataService: CoreDataService
 

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final internal class ProductCellViewModel: ObservableObject {
+internal final class ProductCellViewModel: ObservableObject {
 
     @Published internal var product: ProductEntity
     @Published internal var lastUsed: String

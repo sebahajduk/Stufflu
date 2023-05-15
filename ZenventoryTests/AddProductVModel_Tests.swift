@@ -26,11 +26,11 @@ final class AddProductVModel_Tests: XCTestCase {
         let name = "AAA"
 
         // When
-        let vm = AddProductViewModel(dataService: CoreDataService())
-        vm.productName = name
+        let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+        addProductViewModel.productName = name
 
         // Then
-        XCTAssertTrue(vm.nameIsValid)
+        XCTAssertTrue(addProductViewModel.nameIsValid)
     }
 
     func test_AddProductVModel_nameIsValid_shouldBeTrue_stress() {
@@ -40,10 +40,10 @@ final class AddProductVModel_Tests: XCTestCase {
             /// Given: String with at least 3 letters
             let name = String((0..<Int.random(in: 3..<10)).map { _ in letters.randomElement()! })
 
-            let vm = AddProductViewModel(dataService: CoreDataService())
-            vm.productName = name
+            let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+            addProductViewModel.productName = name
 
-            XCTAssertTrue(vm.nameIsValid)
+            XCTAssertTrue(addProductViewModel.nameIsValid)
         }
     }
 
@@ -52,11 +52,11 @@ final class AddProductVModel_Tests: XCTestCase {
         let name = "AA"
 
         // When
-        let vm = AddProductViewModel(dataService: CoreDataService())
-        vm.productName = name
+        let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+        addProductViewModel.productName = name
 
         // Then
-        XCTAssertFalse(vm.nameIsValid)
+        XCTAssertFalse(addProductViewModel.nameIsValid)
     }
 
     func test_AddProductVModel_nameIsValid_shouldBeFalse_stress() {
@@ -66,29 +66,29 @@ final class AddProductVModel_Tests: XCTestCase {
             /// Given: String with less than 3 letters
             let name = String((0..<Int.random(in: 0..<3)).map { _ in letters.randomElement()! })
 
-            let vm = AddProductViewModel(dataService: CoreDataService())
-            vm.productName = name
+            let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+            addProductViewModel.productName = name
 
-            XCTAssertFalse(vm.nameIsValid)
+            XCTAssertFalse(addProductViewModel.nameIsValid)
         }
     }
 
     func test_AddProductVModel_guaranteeIsValid_shouldBeTrue() {
         let number = "123"
 
-        let vm = AddProductViewModel(dataService: CoreDataService())
-        vm.productGuarantee = number
+        let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+        addProductViewModel.productGuarantee = number
 
-        XCTAssertTrue(vm.guaranteeIsValid)
+        XCTAssertTrue(addProductViewModel.guaranteeIsValid)
     }
 
     func test_AddProductVModel_guaranteeIsValid_shouldBeFalse() {
         let number = "123.0"
 
-        let vm = AddProductViewModel(dataService: CoreDataService())
-        vm.productGuarantee = number
+        let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+        addProductViewModel.productGuarantee = number
 
-        XCTAssertFalse(vm.guaranteeIsValid)
+        XCTAssertFalse(addProductViewModel.guaranteeIsValid)
     }
 
     func test_AddProductVModel_careNameIsValid_shouldBeTrue_stress() {
@@ -98,10 +98,10 @@ final class AddProductVModel_Tests: XCTestCase {
             /// Given: String with at least 3 letters
             let name = String((0..<Int.random(in: 3..<10)).map { _ in letters.randomElement()! })
 
-            let vm = AddProductViewModel(dataService: CoreDataService())
-            vm.productCareName = name
+            let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+            addProductViewModel.productCareName = name
 
-            XCTAssertTrue(vm.careNameIsValid)
+            XCTAssertTrue(addProductViewModel.careNameIsValid)
         }
     }
 
@@ -112,40 +112,40 @@ final class AddProductVModel_Tests: XCTestCase {
             /// Given: String with less than 3 letters
             let name = String((0..<Int.random(in: 1..<3)).map { _ in letters.randomElement()! })
 
-            let vm = AddProductViewModel(dataService: CoreDataService())
-            vm.productCareName = name
+            let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+            addProductViewModel.productCareName = name
 
-            XCTAssertFalse(vm.careNameIsValid)
+            XCTAssertFalse(addProductViewModel.careNameIsValid)
         }
     }
 
     func test_AddProductVModel_careIntervalIsValid_shouldBeTrue() {
         let number = "123"
 
-        let vm = AddProductViewModel(dataService: CoreDataService())
-        vm.productCareInterval = number
+        let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+        addProductViewModel.productCareInterval = number
 
-        XCTAssertTrue(vm.careIntervalIsValid)
+        XCTAssertTrue(addProductViewModel.careIntervalIsValid)
     }
 
     func test_AddProductVModel_careIntervalIsValid_shouldBeFalse() {
         let number = "123.0"
 
-        let vm = AddProductViewModel(dataService: CoreDataService())
-        vm.productCareInterval = number
+        let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
+        addProductViewModel.productCareInterval = number
 
-        XCTAssertFalse(vm.careIntervalIsValid)
+        XCTAssertFalse(addProductViewModel.careIntervalIsValid)
     }
 
     func test_AddProductVModel_priceIsValid_shouldBeTrue() {
         let numbers = ["123", "12.3", "1.0", ".1"]
 
         for n in 0..<numbers.count {
-            let vm = AddProductViewModel(dataService: CoreDataService())
+            let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
 
-            vm.productPrice = numbers[n]
+            addProductViewModel.productPrice = numbers[n]
 
-            XCTAssertTrue(vm.priceIsValid)
+            XCTAssertTrue(addProductViewModel.priceIsValid)
         }
     }
 
@@ -153,11 +153,10 @@ final class AddProductVModel_Tests: XCTestCase {
         let inputs = ["1.2.3", "1n", "a100", "1,23"]
 
         for n in 0..<inputs.count {
-            let vm = AddProductViewModel(dataService: CoreDataService())
+            let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
 
-            vm.productPrice = inputs[n]
-            print(inputs[n])
-            XCTAssertFalse(vm.priceIsValid)
+            addProductViewModel.productPrice = inputs[n]
+            XCTAssertFalse(addProductViewModel.priceIsValid)
         }
     }
 }

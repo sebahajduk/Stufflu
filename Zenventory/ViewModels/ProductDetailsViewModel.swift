@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final internal class ProductDetailsViewModel: ObservableObject {
+internal final class ProductDetailsViewModel: ObservableObject {
 
     @Published internal var product: ProductEntity
     @Published internal var image: UIImage?

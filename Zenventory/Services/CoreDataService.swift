@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final internal class CoreDataService: ObservableObject, CoreDataManager {
+internal final class CoreDataService: ObservableObject, CoreDataManager {
 
     @Published internal var savedEntities: [ProductEntity] = .init()
 

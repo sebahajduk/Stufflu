@@ -9,15 +9,19 @@ import SwiftUI
 
 internal struct ProductCell: View {
 
-    @StateObject private var vm: ProductCellViewModel
+    @StateObject private var productCellViewModel: ProductCellViewModel
 
     internal init(productEntity: ProductEntity) {
-        _vm = StateObject(wrappedValue: ProductCellViewModel(product: productEntity))
+        _productCellViewModel = StateObject(
+            wrappedValue: ProductCellViewModel(
+                product: productEntity
+            )
+        )
     }
 
     var body: some View {
         HStack {
-            if let image = vm.productImage {
+            if let image = productCellViewModel.productImage {
                 Image(uiImage: image)
                     .circleImage(size: 60, action: false)
             } else {
@@ -26,16 +30,16 @@ internal struct ProductCell: View {
             }
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(vm.product.name ?? "")
+                Text(productCellViewModel.product.name ?? "")
                     .bold()
                     .font(.subheadline)
                     .foregroundColor(.foregroundColor())
 
-                Text("Last used: \(vm.lastUsed)")
+                Text("Last used: \(productCellViewModel.lastUsed)")
                     .font(.caption2)
                     .foregroundColor(.gray)
 
-                Text(vm.product.productDescr ?? "lorem ipsum lorem ipsum lorem ipsum")
+                Text(productCellViewModel.product.productDescr ?? "lorem ipsum lorem ipsum lorem ipsum")
                     .font(.system(size: 10))
                     .padding(.top, 5)
                     .padding(.trailing, 50)

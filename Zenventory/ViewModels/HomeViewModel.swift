@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import UIKit
 
-final internal class HomeViewModel: ObservableObject {
+internal final class HomeViewModel: ObservableObject {
 
     @Published internal var products: [ProductEntity] = .init()
 

@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-final internal class MyProductsViewModel: ObservableObject {
+internal final class MyProductsViewModel: ObservableObject {
 
     internal var dataService: any CoreDataManager
     private var cancellables = Set<AnyCancellable>()
