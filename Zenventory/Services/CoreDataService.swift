@@ -7,8 +7,10 @@
 
 import Foundation
 import CoreData
+import Combine
 
 internal final class CoreDataService: ObservableObject, CoreDataManager {
+    private var cancellable: Set<AnyCancellable> = .init()
 
     @Published internal var savedEntities: [ProductEntity] = .init()
 
@@ -59,6 +61,19 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
         if let price {
             newProduct.price = price
         }
+
+        try? saveData()
+        try? fetchProducts()
+    }
+
+    internal func edit(
+        product: ProductEntity
+    ) {
+        guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
+
+        savedEntities.remove(at: index)
+
+        savedEntities.insert(product, at: index)
 
         try? saveData()
         try? fetchProducts()

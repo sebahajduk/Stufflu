@@ -6,20 +6,105 @@
 //
 
 import SwiftUI
+import Combine
 
 internal final class ProductDetailsViewModel: ObservableObject {
+
+    private var cancellables: Set<AnyCancellable> = .init()
+    private var dataService: any CoreDataManager
 
     @Published internal var product: ProductEntity
     @Published internal var image: UIImage?
 
     @Published internal var isEditing: Bool = false
 
+    /// TextFields binders
+    @Published internal var productLastUsed: String = .init()
+    @Published internal var productName: String = .init()
+    @Published internal var productCareName: String = .init()
+    @Published internal var productCareInterval: String = .init()
+    @Published internal var productLastCared: String = .init()
+    @Published internal var productGuarantee: String = .init()
+    @Published internal var productPrice: String = .init()
+    @Published internal var productDescription: String = .init()
+
+    /// TextFields inputs check
+    @Published internal var productCareNameIsValid: Bool = true
+    @Published internal var productNameIsValid: Bool = true
+    @Published internal var productLastUsedIsValid: Bool = true
+    @Published internal var productCareIntervalIsValid: Bool = true
+    @Published internal var productLastCaredIsValid: Bool = true
+    @Published internal var productGuaranteeIsValid: Bool = true
+    @Published internal var productPriceIsValid: Bool = true
+
     internal init(
-        product: ProductEntity
+        product: ProductEntity,
+        dataService: any CoreDataManager
     ) {
         self.product = product
+        self.dataService = dataService
+        
+        self.productName = product.name ?? "Unknown"
         image = try? ZFileManager.getImage(name: product.name ?? "Unknown")
+
+        self.productDescription = product.productDescr ?? "-"
+
+        runObservers()
     }
+
+    // MARK: Textfield data observers
+    private func dataIsValid() -> Bool {
+        productCareNameIsValid &&
+        productNameIsValid &&
+        productCareIntervalIsValid &&
+        productGuaranteeIsValid &&
+        productPriceIsValid
+    }
+
+    private func runObservers() {
+        observeCareNameTextField()
+        observeNameTextField()
+        observeCareIntervalTextField()
+        observeGuaranteeTextField()
+        observePriceTextField()
+    }
+
+    private func observeCareNameTextField() {
+        $productCareName
+            .map { $0.count == 0 || $0.count > 3 }
+            .assign(to: \.productCareNameIsValid, on: self)
+            .store(in: &cancellables)
+    }
+
+    private func observeNameTextField() {
+        $productName
+            .map { $0.count > 3 }
+            .assign(to: \.productNameIsValid, on: self)
+            .store(in: &cancellables)
+    }
+
+    private func observeCareIntervalTextField() {
+        $productCareInterval
+            .map { $0.isInteger }
+            .assign(to: \.productCareIntervalIsValid, on: self)
+            .store(in: &cancellables)
+    }
+
+    private func observeGuaranteeTextField() {
+        $productGuarantee
+            .map { $0.isInteger }
+            .assign(to: \.productGuaranteeIsValid, on: self)
+            .store(in: &cancellables)
+    }
+
+    private func observePriceTextField() {
+        $productPrice
+            .map { $0.isDouble || $0.count == 0 }
+            .assign(to: \.productPriceIsValid, on: self)
+            .store(in: &cancellables)
+    }
+
+    // MARK: Action handlers
 
     internal func editButtonTapped() {
         withAnimation {
@@ -28,6 +113,25 @@ internal final class ProductDetailsViewModel: ObservableObject {
     }
 
     internal func saveButtonTapped() {
+        if dataIsValid() {
+            product.name = productName
+
+            if productCareName.count > 3 {
+                product.careName = productName
+            }
+            if productCareInterval.count >= 1 {
+                product.careInterval = Int64(productCareInterval) ?? 0
+            }
+            if productGuarantee.count >= 1 {
+                product.guarantee = Int16(productGuarantee) ?? 0
+            }
+            if productPrice.count >= 1 {
+                product.price = Double(productPrice) ?? 0.0
+            }
+
+            try? dataService.saveData()
+            try? dataService.fetchProducts()
+        }
         withAnimation {
             isEditing = false
         }

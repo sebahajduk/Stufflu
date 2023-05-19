@@ -11,12 +11,12 @@ internal struct TextFieldWithStatus: View {
 
     @Binding internal var isValid: Bool
     @Binding internal var textFieldValue: String
-    @State internal var textFieldLabel: String = ""
+    @State internal var textFieldLabel: String?
     @State internal var keyboardType: UIKeyboardType
 
     var body: some View {
         HStack {
-            TextField(textFieldLabel, text: $textFieldValue)
+            TextField(textFieldLabel ?? "", text: $textFieldValue)
                 .keyboardType(keyboardType)
 
             if isValid {
@@ -29,6 +29,7 @@ internal struct TextFieldWithStatus: View {
                     .foregroundColor(.red)
             }
         }
+        .padding(.horizontal, 10)
     }
 
 }

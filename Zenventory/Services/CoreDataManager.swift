@@ -25,4 +25,5 @@ internal protocol CoreDataManager: ObservableObject {
         price: Double?,
         importance: String
     )
+    func edit(product: ProductEntity)
 }

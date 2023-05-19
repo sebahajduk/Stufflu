@@ -77,21 +77,25 @@ internal struct HomeView: View {
                 .bold()
                 .foregroundColor(.foregroundColor())
 
-            List {
-                ForEach(homeViewModel.products, id: \.self) { entity in
-                    NavigationLink(
-                        destination: ProductDetailsView(
-                            product: entity
-                        )
-                    ) {
-                        ProductCell(productEntity: entity)
+                List {
+                    ForEach(homeViewModel.products, id: \.self) { entity in
+                        NavigationLink(
+                            destination: ProductDetailsView(
+                                product: entity,
+                                dataService: homeViewModel.dataService
+                            )
+                        ) {
+                            ProductCell(productEntity: entity)
+                        }
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
+                    .onDelete(perform: homeViewModel.deleteItem)
                 }
-                .onDelete(perform: homeViewModel.deleteItem)
-            }
-            .listStyle(.plain)
-            .background(Color.backgroundColor())
+                .listStyle(.plain)
+                .background(Color.backgroundColor())
+                .onChange(of: homeViewModel.products) { newValue in
+                    print("Changed")
+                }
         }
         .padding(.horizontal)
         .background(Color.backgroundColor())

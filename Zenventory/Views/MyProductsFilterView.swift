@@ -44,7 +44,6 @@ internal struct MyProductsFilterView: View {
                     ForEach(Importance.allCases) { importance in
                         Button(importance.rawValue.capitalized) {
                             myProductsViewModel.importance = importance
-
                         }
                     }
                 }

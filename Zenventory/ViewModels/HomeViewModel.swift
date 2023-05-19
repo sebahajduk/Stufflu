@@ -33,6 +33,7 @@ internal final class HomeViewModel: ObservableObject {
         dataService.savedEntitiesPublisher
             .sink { [weak self] newValue in
                 guard let self else { return }
+                self.products = []
                 self.products = newValue
             }
             .store(in: &cancellables)

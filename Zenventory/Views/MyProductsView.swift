@@ -83,7 +83,8 @@ internal struct MyProductsView: View {
                     ForEach(myProductsViewModel.myProducts) { product in
                         NavigationLink(
                             destination: ProductDetailsView(
-                                product: product
+                                product: product,
+                                dataService: myProductsViewModel.dataService
                             )
                         ) {
                             ProductCell(productEntity: product)
