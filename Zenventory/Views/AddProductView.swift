@@ -115,7 +115,7 @@ internal struct AddProductView: View {
                             matching: .images,
                             photoLibrary: .shared()
                         ) {
-                            if let image = addProductViewModel.productImage {
+                            if let image = addProductViewModel.invoiceImage {
                                 Image(uiImage: image)
                                     .circleImage(size: 50, action: true)
                             } else {

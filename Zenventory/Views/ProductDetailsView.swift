@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 #warning("Przypominajka o przygotowaniu sezonowych produktów do nadchodzącego sezonu")
 
@@ -34,8 +35,19 @@ internal struct ProductDetailsView: View {
                     Image(uiImage: image)
                         .circleImage(size: 100, action: true)
                 } else {
-                    Image(systemName: "camera.macro.circle.fill")
-                        .circleImage(size: 100, action: productDetailsViewModel.isEditing)
+                    PhotosPicker(
+                        selection: $productDetailsViewModel.photosPickerItem,
+                        matching: .images,
+                        photoLibrary: .shared()
+                    ) {
+                        if let image = productDetailsViewModel.newPhoto {
+                            Image(uiImage: image)
+                                .circleImage(size: 100, action: true)
+                        } else {
+                            Image(systemName: "camera.macro.circle.fill")
+                                .circleImage(size: 100, action: productDetailsViewModel.isEditing)
+                        }
+                    }
                 }
 
                 viewDetails()
@@ -122,7 +134,13 @@ internal struct ProductDetailsView: View {
                     .foregroundColor(.foregroundColor())
                     .font(.title)
                     .bold()
-                    .padding()
+                    .padding(.horizontal)
+            }
+
+            NavigationLink {
+                FullscreenPhotoView(image: productDetailsViewModel.image)
+            } label: {
+                Text("Receipt / invoice")
             }
 
             Section {

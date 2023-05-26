@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import PhotosUI
 
 internal final class ProductDetailsViewModel: ObservableObject {
 
@@ -37,6 +38,10 @@ internal final class ProductDetailsViewModel: ObservableObject {
     @Published internal var productGuaranteeIsValid: Bool = true
     @Published internal var productPriceIsValid: Bool = true
 
+    /// Photo picker binding
+    @Published internal var photosPickerItem: PhotosPickerItem?
+    @Published internal var newPhoto: UIImage?
+
     internal init(
         product: ProductEntity,
         dataService: any CoreDataManager
@@ -45,7 +50,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
         self.dataService = dataService
         
         self.productName = product.name ?? "Unknown"
-        image = try? ZFileManager.getImage(name: product.name ?? "Unknown")
+        image = try? ZFileManager.getImage(name: "\(product.id ?? UUID())")
 
         self.productDescription = product.productDescr ?? "-"
 
@@ -67,6 +72,8 @@ internal final class ProductDetailsViewModel: ObservableObject {
         observeCareIntervalTextField()
         observeGuaranteeTextField()
         observePriceTextField()
+        observeImageChanges()
+
     }
 
     private func observeCareNameTextField() {
@@ -135,6 +142,26 @@ internal final class ProductDetailsViewModel: ObservableObject {
         withAnimation {
             isEditing = false
         }
+    }
+
+    private func observeImageChanges() {
+        $photosPickerItem
+            .compactMap { $0 }
+            .tryAwaitMap { index in
+                /// Needs to be converted into Data because type Image.self does not show photos other than .png
+                /// for example .heic or .jpeg
+                return try await index.loadTransferable(type: Data.self) ?? Data()
+            }
+            .receive(on: RunLoop.main)
+            .sink { [weak self] value in
+                guard let self else { return }
+                if let image: UIImage = .init(data: value) {
+                    self.newPhoto = image
+                    self.product.objectWillChange.send()
+                    try? ZFileManager.saveImage(productImage: image, name: "\(self.product.id ?? UUID())")
+                }
+            }
+            .store(in: &cancellables)
     }
 
     internal func cancelButtonTapped() {
