@@ -19,7 +19,8 @@ fileprivate struct TabButtonStyle: ButtonStyle {
 internal struct ZTabView: View {
     @Binding internal var selectedTab: TabSelected
 
-    @State internal var dataService: CoreDataService
+    @StateObject internal var dataService: CoreDataService
+    
     @State private var isPresented: Bool = false
 
     var body: some View {

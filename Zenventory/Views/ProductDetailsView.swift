@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+#warning("Przypominajka o przygotowaniu sezonowych produktów do nadchodzącego sezonu")
+
 internal struct ProductDetailsView: View {
 
     @StateObject private var productDetailsViewModel: ProductDetailsViewModel

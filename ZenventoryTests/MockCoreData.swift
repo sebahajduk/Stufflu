@@ -11,6 +11,7 @@ import Combine
 @testable import Zenventory
 
 class MockCoreData: NSObject, CoreDataManager {
+
     var container: NSPersistentContainer = {
         let description = NSPersistentStoreDescription()
         description.url = URL(filePath: "/dev/null")
@@ -32,16 +33,27 @@ class MockCoreData: NSObject, CoreDataManager {
     var savedEntitiesPublisher: Published<[Zenventory.ProductEntity]>.Publisher { $savedEntities }
 
     func removeProduct(at offsets: IndexSet) {
+        if let index = offsets.first {
+            let entity: ProductEntity = savedEntities[index]
 
+            container.viewContext.delete(entity)
+
+            try? saveData()
+            try? fetchProducts()
+        }
     }
 
-    func fetchProducts() {
+    func edit(product: Zenventory.ProductEntity) {
+        
+    }
+
+    func fetchProducts() throws {
         let request = NSFetchRequest<ProductEntity>(entityName: "ProductEntity")
 
         do {
             savedEntities = try container.viewContext.fetch(request)
         } catch {
-            print(error.localizedDescription)
+            throw error
         }
     }
 
@@ -69,15 +81,15 @@ class MockCoreData: NSObject, CoreDataManager {
         if let price {
             newProduct.price = price
         }
-        saveData()
+
+        try? saveData()
     }
 
-    func saveData() {
+    func saveData() throws {
         do {
             try container.viewContext.save()
-            fetchProducts()
         } catch {
-            print("Error\(error.localizedDescription)")
+            throw error
         }
     }
 

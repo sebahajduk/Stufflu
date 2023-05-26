@@ -25,16 +25,17 @@ internal final class HomeViewModel: ObservableObject {
         observeEntity()
     }
 
-    private func showSavedProducts() {
+    func showSavedProducts() {
         products = dataService.savedEntities
     }
 
     private func observeEntity() {
         dataService.savedEntitiesPublisher
             .sink { [weak self] newValue in
-                guard let self else { return }
-                self.products = []
-                self.products = newValue
+                if let self {
+                    self.objectWillChange.send()
+                    self.showSavedProducts()
+                }
             }
             .store(in: &cancellables)
     }

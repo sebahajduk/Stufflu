@@ -111,7 +111,7 @@ internal struct AddProductView: View {
                         Spacer()
 
                         PhotosPicker(
-                            selection: $addProductViewModel.selectedProductPhoto,
+                            selection: $addProductViewModel.selectedInvoicePhoto,
                             matching: .images,
                             photoLibrary: .shared()
                         ) {

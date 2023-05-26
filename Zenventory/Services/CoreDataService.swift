@@ -16,7 +16,6 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
 
     internal let container: NSPersistentContainer
     internal var savedEntitiesPublisher: Published<[ProductEntity]>.Publisher { $savedEntities }
-    internal var savedEntitiesPublished: Published<[ProductEntity]> { _savedEntities }
 
     internal init() {
         container = NSPersistentContainer(name: "ProductsContainer")
@@ -26,7 +25,7 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
 
     internal func fetchProducts() throws {
         let request: NSFetchRequest<ProductEntity> = .init(entityName: "ProductEntity")
-
+        self.objectWillChange.send()
         do {
             savedEntities = try container.viewContext.fetch(request)
         } catch {
@@ -70,10 +69,7 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
         product: ProductEntity
     ) {
         guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
-
-        savedEntities.remove(at: index)
-
-        savedEntities.insert(product, at: index)
+        savedEntities[index] = product
 
         try? saveData()
         try? fetchProducts()

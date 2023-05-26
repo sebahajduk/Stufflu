@@ -128,10 +128,10 @@ internal final class ProductDetailsViewModel: ObservableObject {
             if productPrice.count >= 1 {
                 product.price = Double(productPrice) ?? 0.0
             }
-
-            try? dataService.saveData()
-            try? dataService.fetchProducts()
+            
+            dataService.edit(product: product)
         }
+
         withAnimation {
             isEditing = false
         }

@@ -33,11 +33,26 @@ internal final class MyProductsViewModel: ObservableObject {
         loadMyItems()
         observeSearching()
         observeSorting()
+
+        observeCoreData()
     }
 
     private func loadMyItems() {
         myProducts = dataService.savedEntities
     }
+
+    // MARK: Listening for changes in CoreData
+
+    private func observeCoreData() {
+        dataService.savedEntitiesPublisher
+            .sink { [weak self] newValue in
+                guard let self else { return }
+                self.myProducts = newValue
+            }
+            .store(in: &cancellables)
+    }
+
+    // MARK: User actions handlers
 
     private func observeSearching() {
         $searchText

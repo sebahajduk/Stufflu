@@ -87,7 +87,7 @@ internal struct MyProductsView: View {
                                 dataService: myProductsViewModel.dataService
                             )
                         ) {
-                            ProductCell(productEntity: product)
+                            ProductCellView(productEntity: product)
                         }
                     }
                     .listRowSeparator(.hidden)

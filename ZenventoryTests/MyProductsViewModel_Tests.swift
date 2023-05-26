@@ -27,6 +27,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
+        try? data.fetchProducts()
         let myProductsViewModel = MyProductsViewModel(dataService: data)
 
         // When
@@ -46,6 +47,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
+        try? data.fetchProducts()
         let myProductsViewModel = MyProductsViewModel(dataService: data)
 
         // When
@@ -65,6 +67,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
+        try? data.fetchProducts()
         let myProductsViewModel = MyProductsViewModel(dataService: data)
 
         // When
@@ -84,6 +87,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
+        try? data.fetchProducts()
         let myProductsViewModel = MyProductsViewModel(dataService: data)
 
         // When
@@ -103,6 +107,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
+        try? data.fetchProducts()
         let myProductsViewModel = MyProductsViewModel(dataService: data)
         myProductsViewModel.sortingType = .nameZA
 
@@ -125,9 +130,11 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "medium")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
+        try? data.fetchProducts()
         let myProductsViewModel = MyProductsViewModel(dataService: data)
         myProductsViewModel.minPrice = "2"
         myProductsViewModel.maxPrice = "3"
+
         // When
         myProductsViewModel.filter() { }
 
@@ -144,6 +151,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         data.addProduct(name: "B", guarantee: 3, careName: "", careInterval: 3, price: 3, importance: "medium")
         data.addProduct(name: "A", guarantee: 2, careName: "", careInterval: 2, price: 1, importance: "low")
         data.addProduct(name: "C", guarantee: 2, careName: "", careInterval: 2, price: 4, importance: "medium")
+        try? data.fetchProducts()
         let myProductsViewModel = MyProductsViewModel(dataService: data)
         myProductsViewModel.useImportance = true
         myProductsViewModel.importance = .high

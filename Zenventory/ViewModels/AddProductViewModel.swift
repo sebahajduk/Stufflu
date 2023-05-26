@@ -55,15 +55,20 @@ internal final class AddProductViewModel: ObservableObject {
             importance: selectedImportance.rawValue
         )
 
+        let productID: UUID = dataService.savedEntities.last?.id ?? UUID()
 
         if let productImage: UIImage = productImage {
-            try? ZFileManager.saveImage(productImage: productImage, name: productName)
+            try? ZFileManager.saveImage(
+                productImage: productImage,
+                name: "\(productID)"
+            )
         }
 
         if let invoiceImage: UIImage = invoiceImage {
-            try? ZFileManager.saveImage(productImage: invoiceImage, name: "\(productName)Invoice")
+            try? ZFileManager.saveImage(
+                productImage: invoiceImage,
+                name: "\(productID)Invoice")
         }
-
     }
 
     private func textfieldsAreValid() -> Bool {

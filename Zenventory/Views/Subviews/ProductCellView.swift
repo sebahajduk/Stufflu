@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-internal struct ProductCell: View {
+internal struct ProductCellView: View {
 
-    @StateObject private var productCellViewModel: ProductCellViewModel
+    @ObservedObject private var productCellViewModel: ProductCellViewModel
 
     internal init(productEntity: ProductEntity) {
-        _productCellViewModel = StateObject(
+        _productCellViewModel = ObservedObject(
             wrappedValue: ProductCellViewModel(
                 product: productEntity
             )
@@ -58,10 +58,4 @@ internal struct ProductCell: View {
                 .stroke(.gray.opacity(0.2), lineWidth: 1)
         }
     }
-}
-
-private struct ProductCell_Previews: PreviewProvider {
-    static var previews: some View {
-        TabBarView(coreDataService: CoreDataService())
-     }
 }

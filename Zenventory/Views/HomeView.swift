@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 internal struct HomeView: View {
 
@@ -85,7 +86,7 @@ internal struct HomeView: View {
                                 dataService: homeViewModel.dataService
                             )
                         ) {
-                            ProductCell(productEntity: entity)
+                            ProductCellView(productEntity: entity)
                         }
                         .listRowSeparator(.hidden)
                     }
@@ -93,9 +94,6 @@ internal struct HomeView: View {
                 }
                 .listStyle(.plain)
                 .background(Color.backgroundColor())
-                .onChange(of: homeViewModel.products) { newValue in
-                    print("Changed")
-                }
         }
         .padding(.horizontal)
         .background(Color.backgroundColor())

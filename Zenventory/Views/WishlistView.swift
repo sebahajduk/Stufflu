@@ -8,17 +8,31 @@
 import SwiftUI
 
 internal struct WishlistView: View {
+
+    private let layout = [
+        GridItem(.adaptive(minimum: 120), spacing: 10, alignment: .center)
+    ]
+    
     var body: some View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
 
-            ScrollView {
+            List {
                 ForEach(0..<10) { _ in
-//                    ProductCell()
+                    NavigationLink {
+
+                    } label: {
+                        WishlistProductCellView()
+                    }
                 }
+                .onDelete { _ in
+
+                }
+                .listRowSeparator(.hidden)
             }
-            .padding(.horizontal, 20)
+            .listStyle(.plain)
+            .padding(.horizontal)
         }
         .navigationTitle("WISHLIST")
         .navigationBarTitleDisplayMode(.inline)
