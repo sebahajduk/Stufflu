@@ -90,35 +90,50 @@ internal final class ProductDetailsViewModel: ObservableObject {
     private func observeCareNameTextField() {
         $productCareName
             .map { $0.count == 0 || $0.count > 3 }
-            .assign(to: \.productCareNameIsValid, on: self)
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productCareNameIsValid = value
+            }
             .store(in: &cancellables)
     }
 
     private func observeNameTextField() {
         $productName
             .map { $0.count > 3 }
-            .assign(to: \.productNameIsValid, on: self)
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productNameIsValid = value
+            }
             .store(in: &cancellables)
     }
 
     private func observeCareIntervalTextField() {
         $productCareInterval
             .map { $0.isInteger }
-            .assign(to: \.productCareIntervalIsValid, on: self)
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productCareIntervalIsValid = value
+            }
             .store(in: &cancellables)
     }
 
     private func observeGuaranteeTextField() {
         $productGuarantee
             .map { $0.isInteger }
-            .assign(to: \.productGuaranteeIsValid, on: self)
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productGuaranteeIsValid = value
+            }
             .store(in: &cancellables)
     }
 
     private func observePriceTextField() {
         $productPrice
             .map { $0.isDouble || $0.count == 0 }
-            .assign(to: \.productPriceIsValid, on: self)
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productPriceIsValid = value
+            }
             .store(in: &cancellables)
     }
 
@@ -136,7 +151,6 @@ internal final class ProductDetailsViewModel: ObservableObject {
                 guard let self else { return }
                 if self.product != newValue {
                     self.product = newValue
-                    print("changed")
                 }
             }
             .store(in: &cancellables)

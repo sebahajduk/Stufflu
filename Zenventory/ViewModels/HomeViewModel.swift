@@ -33,9 +33,8 @@ internal final class HomeViewModel: ObservableObject {
     private func observeEntity() {
         dataService.savedEntitiesPublisher
             .sink { [weak self] newValue in
-                if let self {
-                    products = newValue
-                }
+                guard let self else { return }
+                self.products = newValue
             }
             .store(in: &cancellables)
     }

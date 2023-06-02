@@ -29,7 +29,8 @@ internal final class ProductCellViewModel: ObservableObject {
 
     private func observeProductChanges() {
         $product
-            .sink { newValue in
+            .sink { [weak self] newValue in
+                guard let self else { return }
                 self.productImage = try? ZFileManager.getImage(name: newValue.productPhotoPath ?? "Unknown")
             }
             .store(in: &cancellables)
