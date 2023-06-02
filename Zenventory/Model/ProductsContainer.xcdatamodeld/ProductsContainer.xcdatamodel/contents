@@ -12,6 +12,8 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="productDescr" optional="YES" attributeType="String"/>
+        <attribute name="productInvoicePath" optional="YES" attributeType="String"/>
+        <attribute name="productPhotoPath" optional="YES" attributeType="String"/>
     </entity>
     <entity name="WishlistEntity" representedClassName="WishlistEntity" syncable="YES" codeGenerationType="class">
         <attribute name="daysCounter" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

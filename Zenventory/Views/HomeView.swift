@@ -23,6 +23,7 @@ internal struct HomeView: View {
     }
 
     var body: some View {
+        NavigationStack {
         VStack(spacing: 20) {
             HStack {
                 NavigationLink(
@@ -79,25 +80,30 @@ internal struct HomeView: View {
                 .foregroundColor(.foregroundColor())
 
                 List {
-                    ForEach(homeViewModel.products, id: \.self) { entity in
-                        NavigationLink(
-                            destination: ProductDetailsView(
-                                product: entity,
-                                dataService: homeViewModel.dataService
-                            )
-                        ) {
+                    ForEach(homeViewModel.products, id: \.id) { entity in
+                        NavigationLink(value: entity) {
                             ProductCellView(productEntity: entity)
                         }
                         .listRowSeparator(.hidden)
+
                     }
                     .onDelete(perform: homeViewModel.deleteItem)
                 }
+                .navigationDestination(for: ProductEntity.self, destination: { product in
+                    ProductDetailsView(
+                        product: product,
+                        dataService: homeViewModel.dataService
+                    )
+                })
                 .listStyle(.plain)
                 .background(Color.backgroundColor())
-        }
+            }
         .padding(.horizontal)
         .background(Color.backgroundColor())
-        .toolbar(.hidden, for: .navigationBar)
+        }
+        .toolbarRole(.navigationStack)
+        .navigationBarTitleDisplayMode(.inline)
+
     }
 }
 

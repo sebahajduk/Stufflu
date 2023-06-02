@@ -26,4 +26,8 @@ internal protocol CoreDataManager: ObservableObject {
         importance: String
     )
     func edit(product: ProductEntity)
+
+    func addPhoto(product: ProductEntity)
+    func deletePhoto(product: ProductEntity)
+    func addInvoicePhoto(product: ProductEntity)
 }

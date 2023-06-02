@@ -10,6 +10,7 @@ import CoreData
 import Combine
 
 internal final class CoreDataService: ObservableObject, CoreDataManager {
+
     private var cancellable: Set<AnyCancellable> = .init()
 
     @Published internal var savedEntities: [ProductEntity] = .init()
@@ -61,8 +62,7 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
             newProduct.price = price
         }
 
-        try? saveData()
-        try? fetchProducts()
+        refreshData()
     }
 
     internal func edit(
@@ -71,8 +71,7 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
         guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
         savedEntities[index] = product
 
-        try? saveData()
-        try? fetchProducts()
+        refreshData()
     }
 
     internal func removeProduct(
@@ -84,8 +83,7 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
 
         container.viewContext.delete(entity)
 
-        try? saveData()
-        try? fetchProducts()
+        refreshData()
     }
 
     internal func saveData() throws {
@@ -94,5 +92,52 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
         } catch {
             throw error
         }
+    }
+
+    // MARK: Photo managemant
+
+    internal func addPhoto(
+        product: ProductEntity
+    ) {
+        guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
+
+        let entity: ProductEntity = savedEntities[index]
+
+        entity.productPhotoPath = nil
+        entity.productPhotoPath = "\(entity.id ?? UUID())"
+
+        refreshData()
+    }
+
+    internal func addInvoicePhoto (
+        product: ProductEntity
+    ) {
+        guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
+
+        let entity: ProductEntity = savedEntities[index]
+
+
+        entity.productInvoicePath = "\(entity.id ?? UUID())Invoice"
+
+        refreshData()
+    }
+
+    internal func deletePhoto(
+        product: ProductEntity
+    ) {
+        guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
+
+        let entity: ProductEntity = savedEntities[index]
+
+        if let _ = entity.productPhotoPath {
+            entity.productPhotoPath = nil
+        }
+
+        refreshData()
+    }
+
+    private func refreshData() {
+        try? saveData()
+        try? fetchProducts()
     }
 }

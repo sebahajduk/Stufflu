@@ -12,10 +12,11 @@ import PhotosUI
 internal final class ProductDetailsViewModel: ObservableObject {
 
     private var cancellables: Set<AnyCancellable> = .init()
-    private var dataService: any CoreDataManager
+    unowned internal var dataService: any CoreDataManager
 
     @Published internal var product: ProductEntity
     @Published internal var image: UIImage?
+    @Published internal var invoiceImage: UIImage?
 
     @Published internal var isEditing: Bool = false
 
@@ -40,8 +41,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
 
     /// Photo picker binding
     @Published internal var photosPickerItem: PhotosPickerItem?
-    @Published internal var newPhoto: UIImage?
-
+    
     internal init(
         product: ProductEntity,
         dataService: any CoreDataManager
@@ -50,12 +50,15 @@ internal final class ProductDetailsViewModel: ObservableObject {
         self.dataService = dataService
         
         self.productName = product.name ?? "Unknown"
-        image = try? ZFileManager.getImage(name: "\(product.id ?? UUID())")
+        image = try? ZFileManager.getImage(name: product.productPhotoPath ?? "Unknown")
+        invoiceImage = try? ZFileManager.getImage(name: product.productInvoicePath ?? "Unknown")
 
         self.productDescription = product.productDescr ?? "-"
 
         runObservers()
     }
+
+    deinit { }
 
     // MARK: Textfield data observers
     private func dataIsValid() -> Bool {
@@ -73,6 +76,14 @@ internal final class ProductDetailsViewModel: ObservableObject {
         observeGuaranteeTextField()
         observePriceTextField()
         observeImageChanges()
+        observeProduct()
+    }
+
+    internal func deletePhoto() {
+        try? ZFileManager.deleteImage(name: product.productPhotoPath ?? "Unknown")
+        dataService.deletePhoto(product: product)
+
+        self.image = nil
 
     }
 
@@ -119,6 +130,19 @@ internal final class ProductDetailsViewModel: ObservableObject {
         }
     }
 
+    private func observeProduct() {
+        $product
+            .sink { [weak self] newValue in
+                guard let self else { return }
+                if self.product != newValue {
+                    self.product = newValue
+                    print("changed")
+                }
+            }
+            .store(in: &cancellables)
+            
+    }
+
     internal func saveButtonTapped() {
         if dataIsValid() {
             product.name = productName
@@ -156,9 +180,10 @@ internal final class ProductDetailsViewModel: ObservableObject {
             .sink { [weak self] value in
                 guard let self else { return }
                 if let image: UIImage = .init(data: value) {
-                    self.newPhoto = image
-                    self.product.objectWillChange.send()
+                    self.image = image
                     try? ZFileManager.saveImage(productImage: image, name: "\(self.product.id ?? UUID())")
+                    
+                    dataService.addPhoto(product: self.product)
                 }
             }
             .store(in: &cancellables)

@@ -10,8 +10,6 @@ import Combine
 
 internal struct ZFileManager {
 
-    static var urls: Set<URL> = .init()
-
     internal static func saveImage(
         productImage: UIImage,
         name: String
@@ -25,8 +23,6 @@ internal struct ZFileManager {
 
         do {
             try productImgData.write(to: productPhotoPath)
-
-            urls.insert(productPhotoPath)
         } catch let error {
             throw error
         }

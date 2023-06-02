@@ -14,6 +14,7 @@ extension Image {
     ) -> some View {
         self
             .resizable()
+            .aspectRatio(contentMode: .fill)
             .frame(width: size, height: size)
             .clipShape(Circle())
             .padding()

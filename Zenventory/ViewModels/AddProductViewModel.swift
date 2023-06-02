@@ -11,7 +11,7 @@ import PhotosUI
 
 internal final class AddProductViewModel: ObservableObject {
 
-    internal var dataService: CoreDataService
+    unowned internal var dataService: CoreDataService
 
     internal init(
         dataService: CoreDataService
@@ -55,19 +55,24 @@ internal final class AddProductViewModel: ObservableObject {
             importance: selectedImportance.rawValue
         )
 
-        let productID: UUID = dataService.savedEntities.last?.id ?? UUID()
+        guard let product = dataService.savedEntities.last else { return }
+
+        let productID: UUID = product.id ?? UUID()
 
         if let productImage: UIImage = productImage {
             try? ZFileManager.saveImage(
                 productImage: productImage,
                 name: "\(productID)"
             )
+            dataService.addPhoto(product: product)
         }
 
         if let invoiceImage: UIImage = invoiceImage {
             try? ZFileManager.saveImage(
                 productImage: invoiceImage,
-                name: "\(productID)Invoice")
+                name: "\(productID)Invoice"
+            )
+            dataService.addInvoicePhoto(product: product)
         }
     }
 
@@ -77,11 +82,13 @@ internal final class AddProductViewModel: ObservableObject {
 
     private func runObservers() {
         observeSelectedItem()
+        observeSelectedItemInvoice()
         observeNameTF()
         observeGuarantee()
         observeCareName()
         observeCareInterval()
         observePrice()
+
     }
 
     private func observeSelectedItem() {
@@ -97,6 +104,24 @@ internal final class AddProductViewModel: ObservableObject {
                 guard let self else { return }
                 if let image: UIImage = .init(data: value) {
                     self.productImage = image
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    private func observeSelectedItemInvoice() {
+        $selectedInvoicePhoto
+            .compactMap { $0 }
+            .tryAwaitMap { index in
+                /// Needs to be converted into Data because type Image.self does not show photos other than .png
+                /// for example .heic or .jpeg
+                return try await index.loadTransferable(type: Data.self) ?? Data()
+            }
+            .receive(on: RunLoop.main)
+            .sink { [weak self] value in
+                guard let self else { return }
+                if let image: UIImage = .init(data: value) {
+                    self.invoiceImage = image
                 }
             }
             .store(in: &cancellables)

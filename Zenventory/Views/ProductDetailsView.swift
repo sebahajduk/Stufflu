@@ -32,15 +32,49 @@ internal struct ProductDetailsView: View {
                 .ignoresSafeArea()
             VStack {
                 if let image = productDetailsViewModel.image {
-                    Image(uiImage: image)
-                        .circleImage(size: 100, action: true)
+                    if productDetailsViewModel.isEditing {
+                        PhotosPicker(
+                            selection: $productDetailsViewModel.photosPickerItem,
+                            matching: .images,
+                            photoLibrary: .shared()
+                        ) {
+                            ZStack {
+                                Image(uiImage: image)
+                                    .circleImage(size: 100, action: true)
+                                    .overlay(alignment: .topTrailing) {
+                                        Button {
+                                            productDetailsViewModel.deletePhoto()
+                                        } label: {
+                                            Image(systemName: "x.circle.fill")
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(.red)
+                                        }
+                                        .padding(15)
+                                    }
+                            }
+                        }
+                    } else {
+                        NavigationLink {
+                            FullscreenPhotoView(
+                                image: productDetailsViewModel.image,
+                                product: productDetailsViewModel.product,
+                                dataService: productDetailsViewModel.dataService,
+                                photoCategory: .product
+                            )
+                        } label: {
+                            Image(uiImage: image)
+                                .circleImage(size: 100, action: true)
+                        }
+                    }
+
+
                 } else {
                     PhotosPicker(
                         selection: $productDetailsViewModel.photosPickerItem,
                         matching: .images,
                         photoLibrary: .shared()
                     ) {
-                        if let image = productDetailsViewModel.newPhoto {
+                        if let image = productDetailsViewModel.image {
                             Image(uiImage: image)
                                 .circleImage(size: 100, action: true)
                         } else {
@@ -138,7 +172,12 @@ internal struct ProductDetailsView: View {
             }
 
             NavigationLink {
-                FullscreenPhotoView(image: productDetailsViewModel.image)
+                FullscreenPhotoView(
+                    image: productDetailsViewModel.invoiceImage,
+                    product: productDetailsViewModel.product,
+                    dataService: productDetailsViewModel.dataService,
+                    photoCategory: .invoice
+                )
             } label: {
                 Text("Receipt / invoice")
             }
@@ -213,6 +252,7 @@ internal struct ProductDetailsView: View {
             }
         }
         .padding(.horizontal)
+        .navigationTitle("")
     }
 }
 

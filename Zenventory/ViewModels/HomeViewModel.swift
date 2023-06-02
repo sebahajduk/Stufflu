@@ -12,8 +12,9 @@ import UIKit
 internal final class HomeViewModel: ObservableObject {
 
     @Published internal var products: [ProductEntity] = .init()
+    @Published internal var selectedProduct: ProductEntity? = nil
 
-    internal var dataService: any CoreDataManager
+    unowned internal var dataService: any CoreDataManager
 
     private var cancellables: Set<AnyCancellable> = .init()
 

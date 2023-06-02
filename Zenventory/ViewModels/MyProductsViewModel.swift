@@ -10,7 +10,7 @@ import Combine
 
 internal final class MyProductsViewModel: ObservableObject {
 
-    internal var dataService: any CoreDataManager
+    unowned internal var dataService: any CoreDataManager
     private var cancellables = Set<AnyCancellable>()
 
     @Published internal var myProducts: [ProductEntity] = .init()
@@ -36,6 +36,8 @@ internal final class MyProductsViewModel: ObservableObject {
 
         observeCoreData()
     }
+
+    deinit { }
 
     private func loadMyItems() {
         myProducts = dataService.savedEntities

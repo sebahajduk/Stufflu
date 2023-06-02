@@ -16,22 +16,21 @@ internal final class ProductCellViewModel: ObservableObject {
     @Published internal var lastUsed: String
     @Published internal var productImage: UIImage?
 
-    @Published internal var urls: Set<URL> = ZFileManager.urls
-
     internal init(
         product: ProductEntity
     ) {
         self.product = product
         lastUsed = product.lastUsed?.formatted(date: .numeric, time: .omitted) ?? "Unknown"
-        productImage = try? ZFileManager.getImage(name: "\(product.id ?? UUID())")
+        productImage = try? ZFileManager.getImage(name: product.productPhotoPath ?? "Unknown")
 
         observeProductChanges()
+        
     }
 
     private func observeProductChanges() {
-        ZFileManager.urls.publisher
-            .sink { _ in
-                print("I have new photo!")
+        $product
+            .sink { newValue in
+                self.productImage = try? ZFileManager.getImage(name: newValue.productPhotoPath ?? "Unknown")
             }
             .store(in: &cancellables)
     }
