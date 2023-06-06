@@ -7,7 +7,6 @@
 
 import SwiftUI
 import PhotosUI
-import Combine
 
 internal enum PhotoCategory {
     case invoice, product

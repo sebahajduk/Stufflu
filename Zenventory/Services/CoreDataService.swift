@@ -26,7 +26,7 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
 
     internal func fetchProducts() throws {
         let request: NSFetchRequest<ProductEntity> = .init(entityName: "ProductEntity")
-        self.objectWillChange.send()
+
         do {
             savedEntities = try container.viewContext.fetch(request)
         } catch {
@@ -115,7 +115,6 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
         guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
 
         let entity: ProductEntity = savedEntities[index]
-
 
         entity.productInvoicePath = "\(entity.id ?? UUID())Invoice"
 

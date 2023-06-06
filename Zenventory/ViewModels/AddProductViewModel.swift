@@ -88,7 +88,6 @@ internal final class AddProductViewModel: ObservableObject {
         observeCareName()
         observeCareInterval()
         observePrice()
-
     }
 
     private func observeSelectedItem() {

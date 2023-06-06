@@ -72,10 +72,18 @@ final internal class FullscreenPhotoViewModel: ObservableObject {
     private func savePhoto(_ image: UIImage) {
         switch photoCategory {
         case .invoice:
-            try? ZFileManager.saveImage(productImage: image, name: "\(product.id ?? UUID())Invoice")
+            try? ZFileManager.saveImage(
+                productImage: image,
+                name: "\(product.id ?? UUID())Invoice"
+            )
+
             dataService.addInvoicePhoto(product: product)
         case .product:
-            try? ZFileManager.saveImage(productImage: image, name: "\(product.id ?? UUID())")
+            try? ZFileManager.saveImage(
+                productImage: image,
+                name: "\(product.id ?? UUID())"
+            )
+            
             dataService.addPhoto(product: product)
         case .none:
             #warning("Error handling")

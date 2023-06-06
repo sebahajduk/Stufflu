@@ -21,17 +21,21 @@ internal final class ProductCellViewModel: ObservableObject {
     ) {
         self.product = product
         lastUsed = product.lastUsed?.formatted(date: .numeric, time: .omitted) ?? "Unknown"
-        productImage = try? ZFileManager.getImage(name: product.productPhotoPath ?? "Unknown")
+
+        productImage = try? ZFileManager.getImage(
+            name: product.productPhotoPath ?? "Unknown"
+        )
 
         observeProductChanges()
-        
     }
 
     private func observeProductChanges() {
         $product
             .sink { [weak self] newValue in
                 guard let self else { return }
-                self.productImage = try? ZFileManager.getImage(name: newValue.productPhotoPath ?? "Unknown")
+                self.productImage = try? ZFileManager.getImage(
+                    name: newValue.productPhotoPath ?? "Unknown"
+                )
             }
             .store(in: &cancellables)
     }

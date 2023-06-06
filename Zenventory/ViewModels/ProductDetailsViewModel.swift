@@ -50,15 +50,17 @@ internal final class ProductDetailsViewModel: ObservableObject {
         self.dataService = dataService
         
         self.productName = product.name ?? "Unknown"
-        image = try? ZFileManager.getImage(name: product.productPhotoPath ?? "Unknown")
-        invoiceImage = try? ZFileManager.getImage(name: product.productInvoicePath ?? "Unknown")
+        image = try? ZFileManager.getImage(
+            name: product.productPhotoPath ?? "Unknown"
+        )
+        invoiceImage = try? ZFileManager.getImage(
+            name: product.productInvoicePath ?? "Unknown"
+        )
 
         self.productDescription = product.productDescr ?? "-"
 
         runObservers()
     }
-
-    deinit { }
 
     // MARK: Textfield data observers
     private func dataIsValid() -> Bool {
@@ -80,7 +82,10 @@ internal final class ProductDetailsViewModel: ObservableObject {
     }
 
     internal func deletePhoto() {
-        try? ZFileManager.deleteImage(name: product.productPhotoPath ?? "Unknown")
+        try? ZFileManager.deleteImage(
+            name: product.productPhotoPath ?? "Unknown"
+        )
+
         dataService.deletePhoto(product: product)
 
         self.image = nil
@@ -195,7 +200,11 @@ internal final class ProductDetailsViewModel: ObservableObject {
                 guard let self else { return }
                 if let image: UIImage = .init(data: value) {
                     self.image = image
-                    try? ZFileManager.saveImage(productImage: image, name: "\(self.product.id ?? UUID())")
+
+                    try? ZFileManager.saveImage(
+                        productImage: image,
+                        name: "\(self.product.id ?? UUID())"
+                    )
                     
                     dataService.addPhoto(product: self.product)
                 }

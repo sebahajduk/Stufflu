@@ -26,7 +26,7 @@ internal final class HomeViewModel: ObservableObject {
         observeEntity()
     }
 
-    func showSavedProducts() {
+    private func showSavedProducts() {
         products = dataService.savedEntities
     }
 

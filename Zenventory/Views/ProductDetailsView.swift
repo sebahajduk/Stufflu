@@ -66,8 +66,6 @@ internal struct ProductDetailsView: View {
                                 .circleImage(size: 100, action: true)
                         }
                     }
-
-
                 } else {
                     PhotosPicker(
                         selection: $productDetailsViewModel.photosPickerItem,

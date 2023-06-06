@@ -37,8 +37,6 @@ internal final class MyProductsViewModel: ObservableObject {
         observeCoreData()
     }
 
-    deinit { }
-
     private func loadMyItems() {
         myProducts = dataService.savedEntities
     }
