@@ -39,7 +39,7 @@ internal struct ProductCellView: View {
                     .font(.caption2)
                     .foregroundColor(.gray)
 
-                Text(productCellViewModel.product.productDescr ?? "lorem ipsum lorem ipsum lorem ipsum")
+                Text(productCellViewModel.product.productDescr ?? "")
                     .font(.system(size: 10))
                     .padding(.top, 5)
                     .padding(.trailing, 50)

@@ -129,35 +129,50 @@ internal final class AddProductViewModel: ObservableObject {
     private func observeNameTF() {
         $productName
             .map { $0.count >= 3 }
-            .assign(to: \.nameIsValid, on: self)
+            .sink { [weak self] bool in
+                guard let self else { return }
+                self.nameIsValid = bool
+            }
             .store(in: &cancellables)
     }
 
     private func observeGuarantee() {
         $productGuarantee
             .map { $0.isInteger || $0.count == 0 }
-            .assign(to: \.guaranteeIsValid, on: self)
+            .sink { [weak self] bool in
+                guard let self else { return }
+                self.guaranteeIsValid = bool
+            }
             .store(in: &cancellables)
     }
 
     private func observeCareName() {
         $productCareName
             .map { $0.count >= 3 || $0.count == 0 }
-            .assign(to: \.careNameIsValid, on: self)
+            .sink { [weak self] bool in
+                guard let self else { return }
+                self.careNameIsValid = bool
+            }
             .store(in: &cancellables)
     }
 
     private func observeCareInterval() {
         $productCareInterval
             .map { $0.isInteger || $0.count == 0 }
-            .assign(to: \.careIntervalIsValid, on: self)
+            .sink { [weak self] bool in
+                guard let self else { return }
+                self.careIntervalIsValid = bool
+            }
             .store(in: &cancellables)
     }
 
     private func observePrice() {
         $productPrice
             .map { $0.isDouble || $0.count == 0 }
-            .assign(to: \.priceIsValid, on: self)
+            .sink { [weak self] bool in
+                guard let self else { return }
+                self.priceIsValid = bool
+            }
             .store(in: &cancellables)
     }
 }

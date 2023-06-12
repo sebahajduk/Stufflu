@@ -7,11 +7,8 @@
 
 import Foundation
 import CoreData
-import Combine
 
 internal final class CoreDataService: ObservableObject, CoreDataManager {
-
-    private var cancellable: Set<AnyCancellable> = .init()
 
     @Published internal var savedEntities: [ProductEntity] = .init()
 

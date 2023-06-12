@@ -57,7 +57,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
             name: product.productInvoicePath ?? "Unknown"
         )
 
-        self.productDescription = product.productDescr ?? "-"
+        self.productDescription = product.productDescr ?? ""
 
         runObservers()
     }
@@ -165,6 +165,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
     internal func saveButtonTapped() {
         if dataIsValid() {
             product.name = productName
+            product.productDescr = productDescription
 
             if productCareName.count > 3 {
                 product.careName = productName
@@ -178,6 +179,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
             if productPrice.count >= 1 {
                 product.price = Double(productPrice) ?? 0.0
             }
+
             
             dataService.edit(product: product)
         }
@@ -265,7 +267,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
     }
 
     internal func getDescription() -> String {
-        product.productDescr ?? "-"
+        product.productDescr ?? ""
     }
 
 }

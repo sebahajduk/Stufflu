@@ -63,7 +63,7 @@ internal struct HomeView: View {
 
                 VStack {
                     Text("Bought")
-                    Text("$14,12")
+                    Text("\(homeViewModel.boughtSummary, specifier: "%.2f")")
                         .bold()
                 }
             }

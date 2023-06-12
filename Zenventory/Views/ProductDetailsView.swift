@@ -232,9 +232,9 @@ internal struct ProductDetailsView: View {
             .padding(.vertical)
 
             Text("Description")
-                .frame(maxWidth: .infinity)
-                .font(.caption2)
-                .foregroundColor(.foregroundColor().opacity(0.5))
+                    .frame(maxWidth: .infinity)
+                    .font(.caption2)
+                    .foregroundColor(.foregroundColor().opacity(0.5))
 
             if productDetailsViewModel.isEditing {
                 TextEditor(text: $productDetailsViewModel.productDescription)
@@ -246,7 +246,11 @@ internal struct ProductDetailsView: View {
                     .font(.headline)
 
             } else {
-                Text(productDetailsViewModel.getDescription())
+                ScrollView {
+                    Text(productDetailsViewModel.getDescription())
+                        .padding(.bottom, 20)
+                }
+
             }
         }
         .padding(.horizontal)

@@ -28,6 +28,7 @@ internal struct AddProductView: View {
         NavigationStack {
             ZStack {
                 Color.backgroundColor()
+                    .removeFocusOnTap()
                 VStack(spacing: 20) {
                     PhotosPicker(
                         selection: $addProductViewModel.selectedProductPhoto,

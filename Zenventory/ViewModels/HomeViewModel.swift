@@ -13,6 +13,8 @@ internal final class HomeViewModel: ObservableObject {
 
     @Published internal var products: [ProductEntity] = .init()
     @Published internal var selectedProduct: ProductEntity? = nil
+    @Published internal var boughtSummary: Double = .init()
+    @Published internal var soldSummary: Double = .init()
 
     unowned internal var dataService: any CoreDataManager
 
@@ -35,6 +37,12 @@ internal final class HomeViewModel: ObservableObject {
             .sink { [weak self] newValue in
                 guard let self else { return }
                 self.products = newValue
+                self.boughtSummary = 0
+                self.soldSummary = 0
+
+                for product in newValue {
+                    boughtSummary += product.price
+                }
             }
             .store(in: &cancellables)
     }
