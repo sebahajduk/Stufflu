@@ -55,6 +55,7 @@
 		60BAE0FC2A3477B80098F6B9 /* RemoveFocusOnTapModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BAE0FB2A3477B80098F6B9 /* RemoveFocusOnTapModifier.swift */; };
 		60BAE0FE2A3478290098F6B9 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BAE0FD2A3478290098F6B9 /* View+Ext.swift */; };
 		60DE1BB32A2660190053BF35 /* FullscreenPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE1BB22A2660190053BF35 /* FullscreenPhotoViewModel.swift */; };
+		60E43C952A376876006347FA /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E43C942A376876006347FA /* ProductManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		60BAE0FB2A3477B80098F6B9 /* RemoveFocusOnTapModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveFocusOnTapModifier.swift; sourceTree = "<group>"; };
 		60BAE0FD2A3478290098F6B9 /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		60DE1BB22A2660190053BF35 /* FullscreenPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenPhotoViewModel.swift; sourceTree = "<group>"; };
+		60E43C942A376876006347FA /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 				60A0301E2A03630500818118 /* CoreDataManager.swift */,
 				604E77A329F6E56800562F9F /* ZFileManager.swift */,
 				6096E3942A0A91420089F908 /* ZFileManagerError.swift */,
+				60E43C942A376876006347FA /* ProductManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				607346F029EDCC9700110F01 /* String+Ext.swift in Sources */,
 				6074B1282A20F03500D932E5 /* FullscreenPhotoView.swift in Sources */,
 				6084779F2A18FE4500F7CD34 /* WishlistProductCellViewModel.swift in Sources */,
+				60E43C952A376876006347FA /* ProductManager.swift in Sources */,
 				6084779D2A18FD8700F7CD34 /* WishlistProductCellView.swift in Sources */,
 				602EC15C29DC752F00E8B470 /* WishlistView.swift in Sources */,
 				606EF9E529C970EA0024B7EB /* Color+Ext.swift in Sources */,

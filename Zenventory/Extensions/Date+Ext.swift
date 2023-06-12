@@ -12,4 +12,8 @@ extension Date {
         let formatter: DateFormatter = .init()
         return formatter.string(from: self)
     }
+
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
 }

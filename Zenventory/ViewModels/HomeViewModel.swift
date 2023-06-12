@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import UIKit
+import SwiftUI
 
 internal final class HomeViewModel: ObservableObject {
 
@@ -15,6 +15,7 @@ internal final class HomeViewModel: ObservableObject {
     @Published internal var selectedProduct: ProductEntity? = nil
     @Published internal var boughtSummary: Double = .init()
     @Published internal var soldSummary: Double = .init()
+    @Published internal var listIsEmpty: Bool = true
 
     unowned internal var dataService: any CoreDataManager
 
@@ -24,21 +25,22 @@ internal final class HomeViewModel: ObservableObject {
         dataService: any CoreDataManager
     ) {
         self.dataService = dataService
-        showSavedProducts()
         observeEntity()
-    }
-
-    private func showSavedProducts() {
-        products = dataService.savedEntities
     }
 
     private func observeEntity() {
         dataService.savedEntitiesPublisher
             .sink { [weak self] newValue in
                 guard let self else { return }
-                self.products = newValue
+                self.products = newValue.filter { ($0.lastUsed ?? Date()).distance(to: Date()) > 86400 }
                 self.boughtSummary = 0
                 self.soldSummary = 0
+
+                if products.count == 0 {
+                    listIsEmpty = true
+                } else {
+                    listIsEmpty = false
+                }
 
                 for product in newValue {
                     boughtSummary += product.price
@@ -52,5 +54,14 @@ internal final class HomeViewModel: ObservableObject {
     ) {
         products.remove(atOffsets: offsets)
         dataService.removeProduct(at: offsets)
+    }
+
+    internal func use(
+        product: ProductEntity
+    ) {
+        withAnimation {
+            ProductManager.use(product: product)
+            dataService.refreshData()
+        }
     }
 }

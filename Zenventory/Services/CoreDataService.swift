@@ -45,7 +45,7 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
         newProduct.name = name
         newProduct.careName = careName
         newProduct.importance = importance
-        newProduct.lastUsed = Date()
+        newProduct.lastUsed = Calendar.current.date(byAdding: .day, value: -3, to: Date())
 
         if let guarantee {
             newProduct.guarantee = Int16(guarantee)
@@ -132,7 +132,7 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
         refreshData()
     }
 
-    private func refreshData() {
+    internal func refreshData() {
         try? saveData()
         try? fetchProducts()
     }

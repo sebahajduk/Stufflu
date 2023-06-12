@@ -30,4 +30,5 @@ internal protocol CoreDataManager: ObservableObject {
     func addPhoto(product: ProductEntity)
     func deletePhoto(product: ProductEntity)
     func addInvoicePhoto(product: ProductEntity)
+    func refreshData()
 }

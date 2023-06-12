@@ -23,86 +23,100 @@ internal struct HomeView: View {
 
     var body: some View {
         NavigationStack {
-        VStack(spacing: 20) {
-            HStack {
-                NavigationLink(
-                    destination: MyProductsView(
-                        coreDataService: homeViewModel.dataService
-                    )
-                ) {
-                    TileView(title: "MY PRODUCTS", image: "products")
-                }
-                NavigationLink(destination: WishlistView()) {
-                    TileView(title: "WISHLIST", image: "wishlist")
-                }
-            }
-            .contentShape(RoundedRectangle(cornerRadius: 30))
-
-            HStack {
-                TileView(title: "BOUGHT", image: "products")
-                TileView(title: "SOLD", image: "sold")
-            }
-            .contentShape(RoundedRectangle(cornerRadius: 30))
-
-            Divider()
-                .padding(.horizontal)
-
-            Text("30 days history")
-                .font(.headline)
-                .foregroundColor(.foregroundColor())
-
-            HStack(spacing: 50) {
-                VStack {
-                    Text("Sold")
-                    Text("$102,22")
-                        .bold()
-                }
-
-                Divider()
-                    .frame(maxHeight: 30)
-
-                VStack {
-                    Text("Bought")
-                    Text("\(homeViewModel.boughtSummary, specifier: "%.2f")")
-                        .bold()
-                }
-            }
-            .foregroundColor(.foregroundColor())
-
-            Divider()
-                .padding(.horizontal)
-
-            Text("Unused for at least 30 days")
-                .frame(maxWidth: .infinity, alignment: .center)
-                .font(.headline)
-                .bold()
-                .foregroundColor(.foregroundColor())
-
-                List {
-                    ForEach(homeViewModel.products, id: \.id) { entity in
-                        NavigationLink(value: entity) {
-                            ProductCellView(productEntity: entity)
-                        }
-                        .listRowSeparator(.hidden)
-
+            VStack(spacing: 20) {
+                HStack {
+                    NavigationLink(
+                        destination: MyProductsView(
+                            coreDataService: homeViewModel.dataService
+                        )
+                    ) {
+                        TileView(title: "MY PRODUCTS", image: "products")
                     }
-                    .onDelete(perform: homeViewModel.deleteItem)
+                    NavigationLink(destination: WishlistView()) {
+                        TileView(title: "WISHLIST", image: "wishlist")
+                    }
                 }
-                .navigationDestination(for: ProductEntity.self, destination: { product in
-                    ProductDetailsView(
-                        product: product,
-                        dataService: homeViewModel.dataService
-                    )
-                })
-                .listStyle(.plain)
-                .background(Color.backgroundColor())
+                .contentShape(RoundedRectangle(cornerRadius: 30))
+                
+                HStack {
+                    TileView(title: "BOUGHT", image: "products")
+                    TileView(title: "SOLD", image: "sold")
+                }
+                .contentShape(RoundedRectangle(cornerRadius: 30))
+                
+                Divider()
+                    .padding(.horizontal)
+                
+                Text("30 days history")
+                    .font(.headline)
+                    .foregroundColor(.foregroundColor())
+                
+                HStack(spacing: 50) {
+                    VStack {
+                        Text("Sold")
+                        Text("$102,22")
+                            .bold()
+                    }
+                    
+                    Divider()
+                        .frame(maxHeight: 30)
+                    
+                    VStack {
+                        Text("Bought")
+                        Text("\(homeViewModel.boughtSummary, specifier: "%.2f")")
+                            .bold()
+                    }
+                }
+                .foregroundColor(.foregroundColor())
+                
+                Divider()
+                    .padding(.horizontal)
+                
+                Text("Unused for at least 30 days")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .font(.headline)
+                    .bold()
+                    .foregroundColor(.foregroundColor())
+                
+                if homeViewModel.listIsEmpty {
+                    Spacer()
+                    Text("There is no unused products! 🥳")
+                        .font(.headline)
+                        .foregroundStyle(Color.actionColor())
+                    Spacer()
+                } else {
+                    List {
+                        ForEach(homeViewModel.products, id: \.id) { entity in
+                            NavigationLink(value: entity) {
+                                ProductCellView(productEntity: entity)
+                            }
+                            .listRowSeparator(.hidden)
+                            .swipeActions(allowsFullSwipe: true) {
+                                Button(role: .destructive) {
+                                    homeViewModel.use(product: entity)
+                                } label: {
+                                    Label("Used", systemImage: "checkmark")
+                                }
+                                .tint(.green)
+                            }
+                        }
+                    }
+                    .navigationDestination(for: ProductEntity.self, destination: { product in
+                        ProductDetailsView(
+                            product: product,
+                            dataService: homeViewModel.dataService
+                        )
+                    })
+                    .listStyle(.plain)
+                    .background(Color.backgroundColor())
+                }
+                
             }
-        .padding(.horizontal)
-        .background(Color.backgroundColor())
+            .padding(.horizontal)
+            .background(Color.backgroundColor())
         }
         .toolbarRole(.navigationStack)
         .navigationBarTitleDisplayMode(.inline)
-
     }
 }
 
