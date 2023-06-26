@@ -54,7 +54,7 @@ internal struct HomeView: View {
                 HStack(spacing: 50) {
                     VStack {
                         Text("Sold")
-                        Text("$102,22")
+                        Text(homeViewModel.soldSummary.asPrice())
                             .bold()
                     }
                     
@@ -63,7 +63,7 @@ internal struct HomeView: View {
                     
                     VStack {
                         Text("Bought")
-                        Text("\(homeViewModel.boughtSummary, specifier: "%.2f")")
+                        Text(homeViewModel.boughtSummary.asPrice())
                             .bold()
                     }
                 }
@@ -90,6 +90,7 @@ internal struct HomeView: View {
                             NavigationLink(value: entity) {
                                 ProductCellView(productEntity: entity)
                             }
+                            .listRowBackground(Color.backgroundColor())
                             .listRowSeparator(.hidden)
                             .swipeActions(allowsFullSwipe: true) {
                                 Button(role: .destructive) {

@@ -13,4 +13,14 @@ internal struct ProductManager {
         product.lastUsed = Date()
     }
 
+    static func cared(_ product: ProductEntity) {
+        product.lastCared = Date()
+    }
+
+    static func sell(product: ProductEntity, for price: Double) {
+        product.isSold = true
+        product.soldDate = Date()
+        product.soldPrice = price
+    }
+
 }

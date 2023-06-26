@@ -14,6 +14,7 @@ internal struct MyProductsView: View {
     @FocusState private var focusField: Bool?
 
     @State private var isFiltering = false
+    @State private var isSold = false
 
     internal init(
         coreDataService: any CoreDataManager
@@ -81,18 +82,42 @@ internal struct MyProductsView: View {
                 
                 List {
                     ForEach(myProductsViewModel.myProducts) { product in
-                        NavigationLink(
-                            destination: ProductDetailsView(
-                                product: product,
-                                dataService: myProductsViewModel.dataService
-                            )
-                        ) {
+                        NavigationLink(value: product) {
                             ProductCellView(productEntity: product)
                         }
+                        .listRowBackground(Color.backgroundColor())
+                        .listRowSeparator(.hidden)
+                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                            Button() {
+                                myProductsViewModel.caredActionSwiped(product)
+                            } label: {
+                                Label("Cared", systemImage: "checkmark")
+                            }
+                            .tint(.green)
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button() {
+                                self.isSold.toggle()
+                            } label: {
+                                Label("Sold", systemImage: "checkmark")
+                            }
+                            .tint(.cyan)
+                        }
+                        .alert("SoldPrice", isPresented: $isSold) {
+                            TextField("Enter price", text: $myProductsViewModel.priceEnteredInAlert)
+                            Button("Cancel", role: .cancel) {
+
+                            }
+
+                            Button("Save") {
+
+                            }
+                        }
+
                     }
                     .listRowSeparator(.hidden)
+                    .listRowBackground(Color.backgroundColor())
                 }
-                .listRowBackground(Color.backgroundColor())
                 .listStyle(.plain)
                 .padding(.horizontal, 20)
             }

@@ -42,6 +42,7 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
         let newProduct: ProductEntity = .init(context: container.viewContext)
 
         newProduct.id = UUID()
+        newProduct.addedDate = Date()
         newProduct.name = name
         newProduct.careName = careName
         newProduct.importance = importance

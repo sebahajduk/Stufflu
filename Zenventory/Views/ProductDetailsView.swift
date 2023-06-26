@@ -181,10 +181,10 @@ internal struct ProductDetailsView: View {
             }
 
             Section {
-                HStack {
+                HStack(alignment: .top) {
                     productParameter(
                         name: "Last used",
-                        value: productDetailsViewModel.getLastUsed(),
+                        value: productDetailsViewModel.productLastUsed,
                         textFieldBinding: $productDetailsViewModel.productLastUsed,
                         textFieldValid: $productDetailsViewModel.productLastUsedIsValid
                     )
@@ -197,7 +197,7 @@ internal struct ProductDetailsView: View {
                     )
                 }
 
-                HStack {
+                HStack(alignment: .top) {
                     productParameter(
                         name: "Care interval",
                         value: productDetailsViewModel.getCareInterval(),
@@ -213,7 +213,7 @@ internal struct ProductDetailsView: View {
                     )
                 }
 
-                HStack {
+                HStack(alignment: .top) {
                     productParameter(
                         name: "Guarantee",
                         value: productDetailsViewModel.getGuarantee(),

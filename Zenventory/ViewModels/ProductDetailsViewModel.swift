@@ -59,6 +59,10 @@ internal final class ProductDetailsViewModel: ObservableObject {
 
         self.productDescription = product.productDescr ?? ""
 
+        if let lastUsed = product.lastUsed {
+            self.productLastUsed = "\(lastUsed.formatted(date: .numeric, time: .omitted))"
+        }
+
         runObservers()
     }
 
@@ -263,7 +267,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
     }
 
     internal func getPrice() -> String {
-        product.price != 0 ? String(product.price) : "-"
+        product.price.asPrice()
     }
 
     internal func getDescription() -> String {

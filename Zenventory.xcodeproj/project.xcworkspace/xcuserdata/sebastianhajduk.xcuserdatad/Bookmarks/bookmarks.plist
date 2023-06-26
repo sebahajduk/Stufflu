@@ -10,11 +10,11 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingLineNumber</key>
-					<string>126</string>
+					<string>127</string>
 					<key>StartingLineNumber</key>
-					<string>126</string>
+					<string>127</string>
 					<key>Timestamp</key>
-					<string>708278821.813996</string>
+					<string>708967592.25895</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -39,6 +39,49 @@
 				<key>trailing</key>
 				<string></string>
 			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingLineNumber</key>
+					<string>48</string>
+					<key>StartingLineNumber</key>
+					<string>48</string>
+					<key>Timestamp</key>
+					<string>708968677.637906</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Zenventory/Services/CoreDataService.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>        newProduct.lastUsed = Calendar.current.date(byAdding: .day, value: -3, to: Date())
+</string>
+				<key>leading</key>
+				<string>        newProduct.careName = careName
+        newProduct.importance = importance
+</string>
+				<key>trailing</key>
+				<string>
+        if let guarantee {
+            newProduct.guarantee = Int16(guarantee)
+</string>
+			</dict>
+			<key>title</key>
+			<string>Change this to Date() when finished development</string>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>

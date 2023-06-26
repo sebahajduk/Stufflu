@@ -26,6 +26,8 @@ internal final class MyProductsViewModel: ObservableObject {
     @Published internal var useImportance = false
     @Published internal var importance: Importance = .medium
 
+    @Published internal var priceEnteredInAlert: String = .init()
+
     internal init(
         dataService: any CoreDataManager
     ) {
@@ -50,6 +52,10 @@ internal final class MyProductsViewModel: ObservableObject {
                 self.myProducts = newValue
             }
             .store(in: &cancellables)
+    }
+
+    internal func caredActionSwiped(_ product: ProductEntity) {
+        ProductManager.cared(product)
     }
 
     // MARK: User actions handlers
@@ -146,5 +152,13 @@ internal final class MyProductsViewModel: ObservableObject {
             myProducts = filtered
         }
         completion()
+    }
+
+    internal func sell(
+        product: ProductEntity
+    ) {
+        guard let price = Double(priceEnteredInAlert) else { return }
+        ProductManager.sell(product: product, for: price)
+        dataService.refreshData()
     }
 }
