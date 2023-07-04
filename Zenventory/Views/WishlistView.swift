@@ -9,10 +9,6 @@ import SwiftUI
 
 internal struct WishlistView: View {
 
-    private let layout = [
-        GridItem(.adaptive(minimum: 120), spacing: 10, alignment: .center)
-    ]
-    
     var body: some View {
         ZStack {
             Color.backgroundColor()

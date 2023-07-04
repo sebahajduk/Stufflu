@@ -22,5 +22,4 @@ internal struct ProductManager {
         product.soldDate = Date()
         product.soldPrice = price
     }
-
 }

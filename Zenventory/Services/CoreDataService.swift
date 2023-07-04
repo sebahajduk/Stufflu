@@ -11,6 +11,7 @@ import CoreData
 internal final class CoreDataService: ObservableObject, CoreDataManager {
 
     @Published internal var savedEntities: [ProductEntity] = .init()
+    
 
     internal let container: NSPersistentContainer
     internal var savedEntitiesPublisher: Published<[ProductEntity]>.Publisher { $savedEntities }

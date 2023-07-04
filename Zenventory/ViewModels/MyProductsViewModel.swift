@@ -15,6 +15,11 @@ internal final class MyProductsViewModel: ObservableObject {
 
     @Published internal var myProducts: [ProductEntity] = .init()
     @Published internal var searchText: String = .init()
+    @Published internal var showSellingAlert = false {
+        didSet {
+            print(showSellingAlert)
+        }
+    }
 
     //MARK: Sorting
     @Published internal var sortingType: SortingType = .addedDate
@@ -28,19 +33,16 @@ internal final class MyProductsViewModel: ObservableObject {
 
     @Published internal var priceEnteredInAlert: String = .init()
 
+
+
     internal init(
         dataService: any CoreDataManager
     ) {
         self.dataService = dataService
-        loadMyItems()
         observeSearching()
         observeSorting()
 
         observeCoreData()
-    }
-
-    private func loadMyItems() {
-        myProducts = dataService.savedEntities
     }
 
     // MARK: Listening for changes in CoreData
@@ -49,7 +51,9 @@ internal final class MyProductsViewModel: ObservableObject {
         dataService.savedEntitiesPublisher
             .sink { [weak self] newValue in
                 guard let self else { return }
-                self.myProducts = newValue
+                withAnimation {
+                    self.myProducts = newValue.filter { $0.isSold == false }
+                }
             }
             .store(in: &cancellables)
     }
@@ -78,7 +82,7 @@ internal final class MyProductsViewModel: ObservableObject {
                         self.myProducts = filteredProducts
 
                     } else {
-                        self.myProducts = self.dataService.savedEntities
+                        self.myProducts = self.dataService.savedEntities.filter { $0.isSold == false }
                     }
                 }
             }
@@ -113,7 +117,7 @@ internal final class MyProductsViewModel: ObservableObject {
         case .lastUsed:
             sortedArray = self.myProducts.sorted { $0.lastUsed ?? Date() < $1.lastUsed ?? Date() }
         case .addedDate:
-            sortedArray = dataService.savedEntities
+            sortedArray = dataService.savedEntities.filter { $0.isSold == false }
         }
 
         return sortedArray
@@ -130,7 +134,7 @@ internal final class MyProductsViewModel: ObservableObject {
     internal func filter(
         _ completion: () -> ()
     ) {
-        let filtered: [ProductEntity] = self.dataService.savedEntities
+        let filtered: [ProductEntity] = self.dataService.savedEntities.filter { $0.isSold == false }
             .filter { (entity) -> Bool in
                 guard minPrice.count > 0 else { return true }
                 return entity.price >= Double(minPrice) ?? 0
@@ -160,5 +164,10 @@ internal final class MyProductsViewModel: ObservableObject {
         guard let price = Double(priceEnteredInAlert) else { return }
         ProductManager.sell(product: product, for: price)
         dataService.refreshData()
+        resetAlertValues()
+    }
+
+    private func resetAlertValues() {
+        priceEnteredInAlert = ""
     }
 }

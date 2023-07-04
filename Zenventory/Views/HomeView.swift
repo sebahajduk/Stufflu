@@ -22,7 +22,7 @@ internal struct HomeView: View {
     }
 
     var body: some View {
-        NavigationStack {
+
             VStack(spacing: 20) {
                 HStack {
                     NavigationLink(
@@ -32,6 +32,7 @@ internal struct HomeView: View {
                     ) {
                         TileView(title: "MY PRODUCTS", image: "products")
                     }
+                    
                     NavigationLink(destination: WishlistView()) {
                         TileView(title: "WISHLIST", image: "wishlist")
                     }
@@ -115,10 +116,11 @@ internal struct HomeView: View {
             }
             .padding(.horizontal)
             .background(Color.backgroundColor())
+            .toolbarRole(.navigationStack)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .toolbarRole(.navigationStack)
-        .navigationBarTitleDisplayMode(.inline)
-    }
+
+
 }
 
 private struct HomeView_Previews: PreviewProvider {

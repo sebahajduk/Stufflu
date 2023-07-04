@@ -11,10 +11,11 @@ internal struct MyProductsView: View {
 
     @StateObject internal var myProductsViewModel: MyProductsViewModel
 
-    @FocusState private var focusField: Bool?
-
     @State private var isFiltering = false
-    @State private var isSold = false
+
+    /// temporaryProduct is assigned by swipeActions
+    /// it's needed for confirmation alert to change correct product
+    @State private var temporaryProduct: ProductEntity?
 
     internal init(
         coreDataService: any CoreDataManager
@@ -27,6 +28,7 @@ internal struct MyProductsView: View {
     }
 
     var body: some View {
+
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
@@ -36,7 +38,7 @@ internal struct MyProductsView: View {
                         Text("Total value")
                         Text("$12 332.00")
                             .bold()
-
+                        
                         TextField("Search...", text: $myProductsViewModel.searchText)
                             .padding(7)
                             .padding(.horizontal, 25)
@@ -49,7 +51,7 @@ internal struct MyProductsView: View {
                             }
                             .submitLabel(.done)
                     }
-
+                    
                     HStack {
                         Menu {
                             ForEach(SortingType.allCases) { type in
@@ -63,7 +65,7 @@ internal struct MyProductsView: View {
                                 .foregroundColor(.foregroundColor())
                                 .bold()
                         }
-
+                        
                         Button {
                             isFiltering = true
                         } label: {
@@ -79,15 +81,19 @@ internal struct MyProductsView: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .padding(.horizontal, 20)
-                
+
                 List {
-                    ForEach(myProductsViewModel.myProducts) { product in
-                        NavigationLink(value: product) {
+                    ForEach(myProductsViewModel.myProducts, id: \.id) { product in
+                        NavigationLink(destination: {
+                            ProductDetailsView(
+                                product: product,
+                                dataService: myProductsViewModel.dataService
+                            )
+                        }, label: {
                             ProductCellView(productEntity: product)
-                        }
-                        .listRowBackground(Color.backgroundColor())
-                        .listRowSeparator(.hidden)
-                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                        })
+
+                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
                             Button() {
                                 myProductsViewModel.caredActionSwiped(product)
                             } label: {
@@ -95,28 +101,29 @@ internal struct MyProductsView: View {
                             }
                             .tint(.green)
                         }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button() {
-                                self.isSold.toggle()
+                                myProductsViewModel.showSellingAlert.toggle()
+                                self.temporaryProduct = product
                             } label: {
                                 Label("Sold", systemImage: "checkmark")
                             }
                             .tint(.cyan)
                         }
-                        .alert("SoldPrice", isPresented: $isSold) {
+                        .alert("SoldPrice", isPresented: $myProductsViewModel.showSellingAlert) {
                             TextField("Enter price", text: $myProductsViewModel.priceEnteredInAlert)
-                            Button("Cancel", role: .cancel) {
-
-                            }
-
-                            Button("Save") {
-
+                            Button("Cancel", role: .cancel) { }
+                            
+                            Button("Save", role: .destructive) {
+                                guard let temporaryProduct = temporaryProduct else { return }
+                                myProductsViewModel.showSellingAlert = false
+                                myProductsViewModel.sell(product: temporaryProduct)
                             }
                         }
-
+                        .listRowBackground(Color.backgroundColor())
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color.backgroundColor())
+
                 }
                 .listStyle(.plain)
                 .padding(.horizontal, 20)
@@ -126,7 +133,10 @@ internal struct MyProductsView: View {
         .navigationTitle("YOUR PRODUCTS")
         .navigationBarTitleDisplayMode(.inline)
     }
+
 }
+
+
 
 struct MyProductsView_Previews: PreviewProvider {
 
