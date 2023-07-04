@@ -9,29 +9,79 @@ import SwiftUI
 
 internal struct WishlistView: View {
 
+    @State private var isFiltering: Bool = false
+    @State private var searchText: String = .init()
+
     var body: some View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
 
-            List {
-                ForEach(0..<10) { _ in
-                    NavigationLink {
+            VStack {
 
+                HStack {
+
+                    TextField("Search...", text: $searchText)
+                        .padding(7)
+                        .padding(.horizontal, 25)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .padding(.horizontal, 10)
+                        .overlay(alignment: .leading) {
+                            Image(systemName: "magnifyingglass")
+                                .padding()
+                        }
+                        .submitLabel(.done)
+
+                    Menu {
+                        ForEach(SortingType.allCases) { type in
+                            Button(type.rawValue) {
+//                                myProductsViewModel.sortingType = type
+                            }
+                        }
                     } label: {
-                        WishlistProductCellView()
+                        Image(systemName: "arrow.up.arrow.down")
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.foregroundColor())
+                            .bold()
+                    }
+
+                    Button {
+                        isFiltering = true
+                    } label: {
+                        Image(systemName: "line.3.horizontal.decrease")
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.foregroundColor())
+                            .bold()
+                    }.sheet(isPresented: $isFiltering) {
+
                     }
                 }
-                .onDelete { _ in
+                .padding(.horizontal)
+                .frame(maxWidth: .infinity, alignment: .trailing)
 
+                List {
+                    ForEach(0..<10) { _ in
+                        NavigationLink {
+
+                        } label: {
+                            WishlistProductCellView()
+
+                        }
+                    }
+                    .onDelete { _ in
+
+                    }
+                    .listRowBackground(Color.backgroundColor())
+                    .listRowSeparatorTint(Color.actionColor().opacity(0.5))
                 }
-                .listRowSeparator(.hidden)
+                .listStyle(.plain)
+                .padding(.horizontal)
             }
-            .listStyle(.plain)
-            .padding(.horizontal)
         }
         .navigationTitle("WISHLIST")
         .navigationBarTitleDisplayMode(.inline)
+
     }
 }
 

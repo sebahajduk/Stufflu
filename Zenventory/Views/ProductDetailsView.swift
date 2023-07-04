@@ -239,6 +239,7 @@ internal struct ProductDetailsView: View {
             if productDetailsViewModel.isEditing {
                 TextEditor(text: $productDetailsViewModel.productDescription)
                     .padding(10)
+                    .scrollContentBackground(.hidden)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.actionColor(), lineWidth: 1)

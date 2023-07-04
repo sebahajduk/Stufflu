@@ -23,26 +23,20 @@ internal struct WishlistProductCellView: View {
         ZStack {
             Color.backgroundColor()
 
-            VStack(alignment: .center, spacing: 5) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text("Product name")
                     .font(.headline)
                     .foregroundColor(.actionColor())
-                    .multilineTextAlignment(.leading)
 
                 HStack {
-                    Text("Days left: 10")
+                    Text("Days to think over: 10")
                         .font(.subheadline)
                     Spacer()
                     Text("$100")
                         .font(.subheadline)
                 }
             }
-            .padding()
-            .background (
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.actionColor().opacity(0.7), lineWidth: 1)
-                    .shadow(color: Color.actionColor(), radius: 5)
-            )
+            .padding(10)
         }
     }
 }
