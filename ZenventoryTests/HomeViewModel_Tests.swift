@@ -29,7 +29,7 @@ final class HomeViewModel_Tests: XCTestCase {
 
         let homeViewModel: HomeViewModel = .init(dataService: mock)
 
-        XCTAssertEqual(mock.savedEntities.count, 3)
+        XCTAssertEqual(mock.savedProductEntities.count, 3)
         XCTAssertEqual(homeViewModel.products.count, 3)
 
         homeViewModel.deleteItem(at: IndexSet(integer: 0))
@@ -37,7 +37,7 @@ final class HomeViewModel_Tests: XCTestCase {
         try? mock.fetchProducts()
 
         XCTAssertEqual(homeViewModel.products.count, 2)
-        XCTAssertEqual(mock.savedEntities.count, 2)
+        XCTAssertEqual(mock.savedProductEntities.count, 2)
 
     }
 

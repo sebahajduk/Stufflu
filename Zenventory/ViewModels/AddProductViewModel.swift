@@ -55,7 +55,7 @@ internal final class AddProductViewModel: ObservableObject {
             importance: selectedImportance.rawValue
         )
 
-        guard let product = dataService.savedEntities.last else { return }
+        guard let product = dataService.savedProductEntities.last else { return }
 
         let productID: UUID = product.id ?? UUID()
 

@@ -29,12 +29,12 @@ class MockCoreData: NSObject, CoreDataManager {
         return container
     }()
 
-    @Published var savedEntities: [ProductEntity] = []
-    var savedEntitiesPublisher: Published<[Zenventory.ProductEntity]>.Publisher { $savedEntities }
+    @Published var savedProductEntities: [ProductEntity] = []
+    var savedProductEntitiesPublisher: Published<[Zenventory.ProductEntity]>.Publisher { $savedProductEntities }
 
     func removeProduct(at offsets: IndexSet) {
         if let index = offsets.first {
-            let entity: ProductEntity = savedEntities[index]
+            let entity: ProductEntity = savedProductEntities[index]
 
             container.viewContext.delete(entity)
 
@@ -51,7 +51,7 @@ class MockCoreData: NSObject, CoreDataManager {
         let request = NSFetchRequest<ProductEntity>(entityName: "ProductEntity")
 
         do {
-            savedEntities = try container.viewContext.fetch(request)
+            savedProductEntities = try container.viewContext.fetch(request)
         } catch {
             throw error
         }

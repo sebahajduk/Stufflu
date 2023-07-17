@@ -9,15 +9,15 @@ import SwiftUI
 
 internal struct WishlistProductCellView: View {
 
-    //    @ObservedObject internal var wishlistProductCellViewModel: WishlistProductCellViewModel
-
-    //    init(
-    //        product: ProductEntity
-    //    ) {
-    //        _wishlistProductCellViewModel = ObservedObject(
-    //            wrappedValue: WishlistProductCellViewModel(product: product)
-    //        )
-    //    }
+//        @ObservedObject internal var wishlistProductCellViewModel: WishlistProductCellViewModel
+//
+//        init(
+//            product: ProductEntity
+//        ) {
+//            _wishlistProductCellViewModel = ObservedObject(
+//                wrappedValue: WishlistProductCellViewModel(product: product)
+//            )
+//        }
 
     var body: some View {
         ZStack {

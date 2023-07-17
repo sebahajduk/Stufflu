@@ -24,7 +24,7 @@ final class ProductCellViewModel_Tests: XCTestCase {
 
         try? mock.fetchProducts()
 
-        let product: ProductEntity = mock.savedEntities[0]
+        let product: ProductEntity = mock.savedProductEntities[0]
         let productCellViewModel: ProductCellViewModel = .init(product: product)
 
         XCTAssertEqual(product.name, productCellViewModel.product.name)
@@ -38,7 +38,7 @@ final class ProductCellViewModel_Tests: XCTestCase {
 
         try? mock.fetchProducts()
 
-        let product: ProductEntity = mock.savedEntities[0]
+        let product: ProductEntity = mock.savedProductEntities[0]
         product.lastUsed = nil
 
         let productCellViewModel: ProductCellViewModel = .init(product: product)
@@ -52,7 +52,7 @@ final class ProductCellViewModel_Tests: XCTestCase {
 
         try? mock.fetchProducts()
 
-        let product: ProductEntity = mock.savedEntities[0]
+        let product: ProductEntity = mock.savedProductEntities[0]
         product.name = nil
 
         let productCellViewModel: ProductCellViewModel = .init(product: product)

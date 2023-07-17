@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6016FB3F2A659F320082ABBA /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6016FB3E2A659F320082ABBA /* WishlistViewModel.swift */; };
 		601A0C122A095ECA00072DBA /* Image+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601A0C112A095ECA00072DBA /* Image+Ext.swift */; };
 		601A0C142A09652800072DBA /* PriceTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601A0C132A09652800072DBA /* PriceTextField.swift */; };
 		60283AC52A1FBCA30075812A /* Date+Ext_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60283AC42A1FBCA30075812A /* Date+Ext_Tests.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6016FB3E2A659F320082ABBA /* WishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
 		601A0C112A095ECA00072DBA /* Image+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Ext.swift"; sourceTree = "<group>"; };
 		601A0C132A09652800072DBA /* PriceTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTextField.swift; sourceTree = "<group>"; };
 		60283AC42A1FBCA30075812A /* Date+Ext_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext_Tests.swift"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				60A030222A04110600818118 /* ProductDetailsViewModel.swift */,
 				6084779E2A18FE4500F7CD34 /* WishlistProductCellViewModel.swift */,
 				60DE1BB22A2660190053BF35 /* FullscreenPhotoViewModel.swift */,
+				6016FB3E2A659F320082ABBA /* WishlistViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				60A030212A0410F300818118 /* ProductDetailsView.swift in Sources */,
 				606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */,
 				605B5B7629F03E0F00973AD1 /* ProductsContainer.xcdatamodeld in Sources */,
+				6016FB3F2A659F320082ABBA /* WishlistViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

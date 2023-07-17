@@ -48,7 +48,7 @@ internal final class MyProductsViewModel: ObservableObject {
     // MARK: Listening for changes in CoreData
 
     private func observeCoreData() {
-        dataService.savedEntitiesPublisher
+        dataService.savedProductEntitiesPublisher
             .sink { [weak self] newValue in
                 guard let self else { return }
                 withAnimation {
@@ -82,7 +82,7 @@ internal final class MyProductsViewModel: ObservableObject {
                         self.myProducts = filteredProducts
 
                     } else {
-                        self.myProducts = self.dataService.savedEntities.filter { $0.isSold == false }
+                        self.myProducts = self.dataService.savedProductEntities.filter { $0.isSold == false }
                     }
                 }
             }
@@ -117,7 +117,7 @@ internal final class MyProductsViewModel: ObservableObject {
         case .lastUsed:
             sortedArray = self.myProducts.sorted { $0.lastUsed ?? Date() < $1.lastUsed ?? Date() }
         case .addedDate:
-            sortedArray = dataService.savedEntities.filter { $0.isSold == false }
+            sortedArray = dataService.savedProductEntities.filter { $0.isSold == false }
         }
 
         return sortedArray
@@ -134,7 +134,7 @@ internal final class MyProductsViewModel: ObservableObject {
     internal func filter(
         _ completion: () -> ()
     ) {
-        let filtered: [ProductEntity] = self.dataService.savedEntities.filter { $0.isSold == false }
+        let filtered: [ProductEntity] = self.dataService.savedProductEntities.filter { $0.isSold == false }
             .filter { (entity) -> Bool in
                 guard minPrice.count > 0 else { return true }
                 return entity.price >= Double(minPrice) ?? 0

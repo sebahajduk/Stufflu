@@ -9,12 +9,15 @@ import Foundation
 import CoreData
 
 internal final class CoreDataService: ObservableObject, CoreDataManager {
+    @Published internal var savedWishlistEntities: [WishlistEntity] = .init()
 
-    @Published internal var savedEntities: [ProductEntity] = .init()
+    var savedWishlistEntitiesPublisher: Published<[WishlistEntity]>.Publisher { $savedWishlistEntities }
     
 
-    internal let container: NSPersistentContainer
-    internal var savedEntitiesPublisher: Published<[ProductEntity]>.Publisher { $savedEntities }
+    @Published internal var savedProductEntities: [ProductEntity] = .init()
+    
+    internal var container: NSPersistentContainer
+    internal var savedProductEntitiesPublisher: Published<[ProductEntity]>.Publisher { $savedProductEntities }
 
     internal init() {
         container = NSPersistentContainer(name: "ProductsContainer")
@@ -23,119 +26,13 @@ internal final class CoreDataService: ObservableObject, CoreDataManager {
     }
 
     internal func fetchProducts() throws {
-        let request: NSFetchRequest<ProductEntity> = .init(entityName: "ProductEntity")
-
+        let productRequest: NSFetchRequest<ProductEntity> = .init(entityName: "ProductEntity")
+        let wishlistRequest: NSFetchRequest<WishlistEntity> = .init(entityName: "WishlistEntity")
         do {
-            savedEntities = try container.viewContext.fetch(request)
+            savedProductEntities = try container.viewContext.fetch(productRequest)
+            savedWishlistEntities = try container.viewContext.fetch(wishlistRequest)
         } catch {
             throw error
         }
-    }
-
-    internal func addProduct(
-        name: String,
-        guarantee: Int?,
-        careName: String?,
-        careInterval: Int?,
-        price: Double?,
-        importance: String
-    ) {
-        let newProduct: ProductEntity = .init(context: container.viewContext)
-
-        newProduct.id = UUID()
-        newProduct.addedDate = Date()
-        newProduct.name = name
-        newProduct.careName = careName
-        newProduct.importance = importance
-        newProduct.lastUsed = Calendar.current.date(byAdding: .day, value: -3, to: Date())
-
-        if let guarantee {
-            newProduct.guarantee = Int16(guarantee)
-        }
-
-        if let careInterval {
-            newProduct.careInterval = Int64(careInterval)
-        }
-
-        if let price {
-            newProduct.price = price
-        }
-
-        refreshData()
-    }
-
-    internal func edit(
-        product: ProductEntity
-    ) {
-        guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
-        savedEntities[index] = product
-
-        refreshData()
-    }
-
-    internal func removeProduct(
-        at offsets: IndexSet
-    ) {
-        guard let index = offsets.first else { return }
-
-        let entity: ProductEntity = savedEntities[index]
-
-        container.viewContext.delete(entity)
-
-        refreshData()
-    }
-
-    internal func saveData() throws {
-        do {
-            try container.viewContext.save()
-        } catch {
-            throw error
-        }
-    }
-
-    // MARK: Photo managemant
-
-    internal func addPhoto(
-        product: ProductEntity
-    ) {
-        guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
-
-        let entity: ProductEntity = savedEntities[index]
-
-        entity.productPhotoPath = nil
-        entity.productPhotoPath = "\(entity.id ?? UUID())"
-
-        refreshData()
-    }
-
-    internal func addInvoicePhoto (
-        product: ProductEntity
-    ) {
-        guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
-
-        let entity: ProductEntity = savedEntities[index]
-
-        entity.productInvoicePath = "\(entity.id ?? UUID())Invoice"
-
-        refreshData()
-    }
-
-    internal func deletePhoto(
-        product: ProductEntity
-    ) {
-        guard let index = savedEntities.firstIndex(where: { $0.id == product.id }) else { return }
-
-        let entity: ProductEntity = savedEntities[index]
-
-        if let _ = entity.productPhotoPath {
-            entity.productPhotoPath = nil
-        }
-
-        refreshData()
-    }
-
-    internal func refreshData() {
-        try? saveData()
-        try? fetchProducts()
     }
 }

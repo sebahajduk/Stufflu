@@ -16,11 +16,11 @@ internal struct WishlistView: View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
-
+            
             VStack {
-
+                
                 HStack {
-
+                    
                     TextField("Search...", text: $searchText)
                         .padding(7)
                         .padding(.horizontal, 25)
@@ -32,11 +32,12 @@ internal struct WishlistView: View {
                                 .padding()
                         }
                         .submitLabel(.done)
-
+                    
                     Menu {
                         ForEach(SortingType.allCases) { type in
                             Button(type.rawValue) {
-//                                myProductsViewModel.sortingType = type
+                                #warning("Do something")
+                                //                                myProductsViewModel.sortingType = type
                             }
                         }
                     } label: {
@@ -45,7 +46,7 @@ internal struct WishlistView: View {
                             .foregroundColor(.foregroundColor())
                             .bold()
                     }
-
+                    
                     Button {
                         isFiltering = true
                     } label: {
@@ -54,29 +55,36 @@ internal struct WishlistView: View {
                             .foregroundColor(.foregroundColor())
                             .bold()
                     }.sheet(isPresented: $isFiltering) {
-
+                        
                     }
                 }
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity, alignment: .trailing)
-
+                
                 List {
                     ForEach(0..<10) { _ in
                         NavigationLink {
-
+                            
                         } label: {
                             WishlistProductCellView()
-
                         }
                     }
                     .onDelete { _ in
-
+                        
                     }
                     .listRowBackground(Color.backgroundColor())
                     .listRowSeparatorTint(Color.actionColor().opacity(0.5))
                 }
                 .listStyle(.plain)
                 .padding(.horizontal)
+            }
+        }
+        .toolbar {
+            Button {
+                #warning("Do something")
+            } label: {
+                Text("Add")
+                    .bold()
             }
         }
         .navigationTitle("WISHLIST")

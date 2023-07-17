@@ -29,7 +29,7 @@ internal final class HomeViewModel: ObservableObject {
     }
 
     private func observeEntity() {
-        dataService.savedEntitiesPublisher
+        dataService.savedProductEntitiesPublisher
             .sink { [weak self] newValue in
                 guard let self else { return }
                 self.products = newValue.filter { ($0.lastUsed ?? Date()).distance(to: Date()) > 86400 }
