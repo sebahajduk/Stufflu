@@ -8,8 +8,6 @@
 import SwiftUI
 import PhotosUI
 
-#warning("Przypominajka o przygotowaniu sezonowych produktów do nadchodzącego sezonu")
-
 internal struct ProductDetailsView: View {
 
     @StateObject private var productDetailsViewModel: ProductDetailsViewModel
@@ -30,6 +28,7 @@ internal struct ProductDetailsView: View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
+            ScrollView {
             VStack {
                 if let image = productDetailsViewModel.image {
                     if productDetailsViewModel.isEditing {
@@ -81,30 +80,48 @@ internal struct ProductDetailsView: View {
                         }
                     }
                 }
-
+                
                 viewDetails()
-
-                Spacer()
+                
+//                Spacer()
             }
         }
-        .toolbar(content: {
-            if productDetailsViewModel.isEditing {
-                HStack {
-                    Button("Save") { productDetailsViewModel.saveButtonTapped() }
-                        .foregroundColor(.actionColor())
-
-                    Button("Cancel") { productDetailsViewModel.cancelButtonTapped() }
+            }
+            .toolbar(content: {
+                if productDetailsViewModel.isEditing {
+                    HStack {
+                        Button("Save") { productDetailsViewModel.saveButtonTapped() }
+                            .foregroundColor(.actionColor())
+                        
+                        Button("Cancel") { productDetailsViewModel.cancelButtonTapped() }
+                            .foregroundColor(.actionColor())
+                    }
+                } else {
+                    Button("Edit") { productDetailsViewModel.editButtonTapped() }
                         .foregroundColor(.actionColor())
                 }
-            } else {
-                Button("Edit") { productDetailsViewModel.editButtonTapped() }
-                    .foregroundColor(.actionColor())
-            }
-        })
-        .navigationBarTitleDisplayMode(.inline)
+            })
+            .navigationBarTitleDisplayMode(.inline)
+
     }
 
-    private func productParameter(
+    private func productParameterNotEditable(
+        name: String,
+        value: String
+    ) -> some View {
+        VStack {
+            Text(name)
+                .font(.caption2)
+                .foregroundColor(.foregroundColor().opacity(0.5))
+
+            Text(value)
+                .font(.headline)
+                .foregroundColor(.foregroundColor())
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func productParameterEditable(
         name: String,
         value: String,
         textFieldBinding: Binding<String>,
@@ -182,46 +199,42 @@ internal struct ProductDetailsView: View {
 
             Section {
                 HStack(alignment: .top) {
-                    productParameter(
+                    productParameterNotEditable(
                         name: "Last used",
-                        value: productDetailsViewModel.productLastUsed,
-                        textFieldBinding: $productDetailsViewModel.productLastUsed,
-                        textFieldValid: $productDetailsViewModel.productLastUsedIsValid
+                        value: productDetailsViewModel.productLastUsed
                     )
 
-                    productParameter(
+                    productParameterNotEditable(
+                        name: "Last cared",
+                        value: productDetailsViewModel.productLastCared
+                    )
+                }
+
+                HStack(alignment: .top) {
+                    productParameterEditable(
                         name: "Care name",
                         value: productDetailsViewModel.getCareName(),
                         textFieldBinding: $productDetailsViewModel.productCareName,
                         textFieldValid: $productDetailsViewModel.productCareNameIsValid
                     )
-                }
 
-                HStack(alignment: .top) {
-                    productParameter(
+                    productParameterEditable(
                         name: "Care interval",
                         value: productDetailsViewModel.getCareInterval(),
                         textFieldBinding: $productDetailsViewModel.productCareInterval,
                         textFieldValid: $productDetailsViewModel.productCareIntervalIsValid
                     )
-
-                    productParameter(
-                        name: "Last cared",
-                        value: productDetailsViewModel.getLastCared(),
-                        textFieldBinding: $productDetailsViewModel.productLastCared,
-                        textFieldValid: $productDetailsViewModel.productLastCaredIsValid
-                    )
                 }
 
                 HStack(alignment: .top) {
-                    productParameter(
+                    productParameterEditable(
                         name: "Guarantee",
                         value: productDetailsViewModel.getGuarantee(),
                         textFieldBinding: $productDetailsViewModel.productGuarantee,
                         textFieldValid: $productDetailsViewModel.productGuaranteeIsValid
                     )
 
-                    productParameter(
+                    productParameterEditable(
                         name: "Price",
                         value: productDetailsViewModel.getPrice(),
                         textFieldBinding: $productDetailsViewModel.productPrice,
@@ -238,6 +251,7 @@ internal struct ProductDetailsView: View {
 
             if productDetailsViewModel.isEditing {
                 TextEditor(text: $productDetailsViewModel.productDescription)
+                    .frame(minHeight: 100)
                     .padding(10)
                     .scrollContentBackground(.hidden)
                     .background(

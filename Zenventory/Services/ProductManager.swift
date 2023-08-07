@@ -17,9 +17,15 @@ internal struct ProductManager {
         product.lastCared = Date()
     }
 
-    static func sell(product: ProductEntity, for price: Double) {
+    static func sell(
+        product: ProductEntity,
+        for price: Double
+    ) {
         product.isSold = true
         product.soldDate = Date()
         product.soldPrice = price
+
+        try? ZFileManager.deleteImage(name: product.productPhotoPath ?? "")
+        try? ZFileManager.deleteImage(name: product.productInvoicePath ?? "")
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Neumorphic
 
 internal struct TileView: View {
 
@@ -13,18 +14,22 @@ internal struct TileView: View {
     internal var image: String
 
     var body: some View {
-        Text(title)
-            .foregroundColor(.actionColor())
-            .font(.footnote.bold())
-            .frame(maxWidth: .infinity, maxHeight: 70)
-            .padding()
-            .background(Color.backgroundColor())
-            .cornerRadius(30)
-            .overlay {
-                RoundedRectangle(cornerRadius: 30)
-                    .stroke(Color.actionColor().opacity(0.2), lineWidth: 1)
-            }
-            .shadow(color: .foregroundColor().opacity(0.1), radius: 10)
+        VStack {
+            Image(systemName: image)
+                .foregroundColor(.actionColor())
+                .font(.headline)
+                .frame(maxWidth: .infinity, maxHeight: 30)
+                .padding()
+                .background(Color.backgroundColor())
+                .overlay {
+                    Circle()
+                        .stroke(Color.actionColor().opacity(0.2), lineWidth: 1)
+                }
+            Text(title)
+                .font(.caption2.bold())
+                .foregroundStyle(Color.actionColor())
+        }
+
     }
 }
 

@@ -32,7 +32,9 @@ internal final class HomeViewModel: ObservableObject {
         dataService.savedProductEntitiesPublisher
             .sink { [weak self] newValue in
                 guard let self else { return }
-                self.products = newValue.filter { ($0.lastUsed ?? Date()).distance(to: Date()) > 86400 }
+                // 2_592_000 = 30 days
+                self.products = newValue.filter { ($0.lastUsed ?? Date()).distance(to: Date()) > 2_592_000 && $0.isSold == false}
+                let soldProducts = newValue.filter { $0.isSold == true && ($0.soldDate ?? Date()).distance(to: Date()) < 2_592_000 }
                 self.boughtSummary = 0
                 self.soldSummary = 0
 
@@ -42,8 +44,12 @@ internal final class HomeViewModel: ObservableObject {
                     listIsEmpty = false
                 }
 
-                for product in newValue {
+                for product in products {
                     boughtSummary += product.price
+                }
+
+                for product in soldProducts {
+                    soldSummary += product.soldPrice
                 }
             }
             .store(in: &cancellables)

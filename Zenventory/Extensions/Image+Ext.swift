@@ -18,7 +18,7 @@ extension Image {
             .frame(width: size, height: size)
             .clipShape(Circle())
             .padding()
-            .foregroundColor(action ? .actionColor() : .foregroundColor())
+            .foregroundColor(action ? .actionColor() : .foregroundColor().opacity(0.3))
     }
 }
 

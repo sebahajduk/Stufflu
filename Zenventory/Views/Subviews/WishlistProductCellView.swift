@@ -9,41 +9,44 @@ import SwiftUI
 
 internal struct WishlistProductCellView: View {
 
-//        @ObservedObject internal var wishlistProductCellViewModel: WishlistProductCellViewModel
-//
-//        init(
-//            product: ProductEntity
-//        ) {
-//            _wishlistProductCellViewModel = ObservedObject(
-//                wrappedValue: WishlistProductCellViewModel(product: product)
-//            )
-//        }
+    @StateObject private var wishlistProductCellViewModel: WishlistProductCellViewModel
+
+    init(for product: WishlistEntity) {
+        _wishlistProductCellViewModel = StateObject(
+            wrappedValue: WishlistProductCellViewModel(
+                for: product
+            )
+        )
+    }
 
     var body: some View {
         ZStack {
             Color.backgroundColor()
 
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Product name")
-                    .font(.headline)
-                    .foregroundColor(.actionColor())
+            HStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(wishlistProductCellViewModel.product.name ?? "")
+                        .font(.headline)
+                        .foregroundColor(.actionColor())
+                    
+                    HStack {
+                        Text("Days left: " + wishlistProductCellViewModel.daysLeft)
+                            .font(.subheadline)
+                        Spacer()
+                        Text(wishlistProductCellViewModel.product.price.asPrice())
+                            .font(.subheadline)
+                    }
+                }
 
-                HStack {
-                    Text("Days to think over: 10")
-                        .font(.subheadline)
-                    Spacer()
-                    Text("$100")
-                        .font(.subheadline)
+                if wishlistProductCellViewModel.product.link!.isValidURL {
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(Color.actionColor())
+                } else {
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(Color.backgroundColor())
                 }
             }
             .padding(10)
         }
-    }
-}
-
-private struct WishlistProductCellView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        WishlistProductCellView()
     }
 }

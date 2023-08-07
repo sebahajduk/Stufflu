@@ -15,11 +15,7 @@ internal final class MyProductsViewModel: ObservableObject {
 
     @Published internal var myProducts: [ProductEntity] = .init()
     @Published internal var searchText: String = .init()
-    @Published internal var showSellingAlert = false {
-        didSet {
-            print(showSellingAlert)
-        }
-    }
+    @Published internal var showSellingAlert = false 
 
     //MARK: Sorting
     @Published internal var sortingType: SortingType = .addedDate
@@ -33,15 +29,12 @@ internal final class MyProductsViewModel: ObservableObject {
 
     @Published internal var priceEnteredInAlert: String = .init()
 
-
-
     internal init(
         dataService: any CoreDataManager
     ) {
         self.dataService = dataService
         observeSearching()
         observeSorting()
-
         observeCoreData()
     }
 
@@ -75,12 +68,12 @@ internal final class MyProductsViewModel: ObservableObject {
 
                 withAnimation(.linear) {
                     if searchText.count > 0 {
+                        self.myProducts = self.dataService.savedProductEntities.filter { $0.isSold == false }
                         let filteredProducts: [ProductEntity] = self.myProducts.filter {
                             guard let productName: String = $0.name else { return true }
                             return productName.lowercased().contains(searchText.lowercased())
                         }
                         self.myProducts = filteredProducts
-
                     } else {
                         self.myProducts = self.dataService.savedProductEntities.filter { $0.isSold == false }
                     }
@@ -161,10 +154,15 @@ internal final class MyProductsViewModel: ObservableObject {
     internal func sell(
         product: ProductEntity
     ) {
-        guard let price = Double(priceEnteredInAlert) else { return }
-        ProductManager.sell(product: product, for: price)
-        dataService.refreshData()
-        resetAlertValues()
+        if let price = Double(priceEnteredInAlert) {
+            ProductManager.sell(product: product, for: price)
+            dataService.refreshData()
+            resetAlertValues()
+        } else {
+            ProductManager.sell(product: product, for: 0)
+            dataService.refreshData()
+            resetAlertValues()
+        }
     }
 
     private func resetAlertValues() {

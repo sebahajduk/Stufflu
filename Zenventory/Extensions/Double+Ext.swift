@@ -8,7 +8,6 @@
 import Foundation
 
 extension Double {
-
     func asPrice() -> String {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
@@ -16,5 +15,4 @@ extension Double {
 
         return formatter.string(from: self as NSNumber) ?? ""
     }
-
 }

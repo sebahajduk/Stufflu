@@ -9,8 +9,18 @@ import SwiftUI
 
 internal struct WishlistView: View {
 
-    @State private var isFiltering: Bool = false
-    @State private var searchText: String = .init()
+    @StateObject internal var wishlistViewModel: WishlistViewModel
+
+    @State private var addSheetPresented: Bool = false
+    @Environment(\.openURL) var openURL
+
+    internal init(dataService: any CoreDataManager) {
+        _wishlistViewModel = StateObject(
+            wrappedValue: WishlistViewModel(
+                dataService: dataService
+            )
+        )
+    }
 
     var body: some View {
         ZStack {
@@ -18,10 +28,8 @@ internal struct WishlistView: View {
                 .ignoresSafeArea()
             
             VStack {
-                
                 HStack {
-                    
-                    TextField("Search...", text: $searchText)
+                    TextField("Search...", text: $wishlistViewModel.searchText)
                         .padding(7)
                         .padding(.horizontal, 25)
                         .background(Color(.systemGray6))
@@ -32,45 +40,18 @@ internal struct WishlistView: View {
                                 .padding()
                         }
                         .submitLabel(.done)
-                    
-                    Menu {
-                        ForEach(SortingType.allCases) { type in
-                            Button(type.rawValue) {
-                                #warning("Do something")
-                                //                                myProductsViewModel.sortingType = type
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "arrow.up.arrow.down")
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.foregroundColor())
-                            .bold()
-                    }
-                    
-                    Button {
-                        isFiltering = true
-                    } label: {
-                        Image(systemName: "line.3.horizontal.decrease")
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.foregroundColor())
-                            .bold()
-                    }.sheet(isPresented: $isFiltering) {
-                        
-                    }
                 }
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 
                 List {
-                    ForEach(0..<10) { _ in
-                        NavigationLink {
-                            
-                        } label: {
-                            WishlistProductCellView()
+                    ForEach(wishlistViewModel.wishlistProducts, id: \.id ) { entity in
+                        Link(destination: (URL(string: entity.link ?? "")!)) {
+                            WishlistProductCellView(for: entity)
                         }
                     }
-                    .onDelete { _ in
-                        
+                    .onDelete {
+                        wishlistViewModel.deleteWishlistProduct(at: $0)
                     }
                     .listRowBackground(Color.backgroundColor())
                     .listRowSeparatorTint(Color.actionColor().opacity(0.5))
@@ -78,10 +59,14 @@ internal struct WishlistView: View {
                 .listStyle(.plain)
                 .padding(.horizontal)
             }
+            .sheet(isPresented: $addSheetPresented) {
+                AddWishlistProductView(dataService: wishlistViewModel.dataService)
+                    .presentationDetents([.filter])
+            }
         }
         .toolbar {
             Button {
-                #warning("Do something")
+                addSheetPresented.toggle()
             } label: {
                 Text("Add")
                     .bold()
@@ -89,12 +74,5 @@ internal struct WishlistView: View {
         }
         .navigationTitle("WISHLIST")
         .navigationBarTitleDisplayMode(.inline)
-
-    }
-}
-
-private struct WishlistView_Previews: PreviewProvider {
-    static var previews: some View {
-        WishlistView()
     }
 }

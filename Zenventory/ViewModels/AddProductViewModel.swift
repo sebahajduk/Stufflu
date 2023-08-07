@@ -131,7 +131,9 @@ internal final class AddProductViewModel: ObservableObject {
             .map { $0.count >= 3 }
             .sink { [weak self] bool in
                 guard let self else { return }
-                self.nameIsValid = bool
+                withAnimation {
+                    self.nameIsValid = bool
+                }
             }
             .store(in: &cancellables)
     }
@@ -141,7 +143,9 @@ internal final class AddProductViewModel: ObservableObject {
             .map { $0.isInteger || $0.count == 0 }
             .sink { [weak self] bool in
                 guard let self else { return }
-                self.guaranteeIsValid = bool
+                withAnimation {
+                    self.guaranteeIsValid = bool
+                }
             }
             .store(in: &cancellables)
     }
@@ -151,7 +155,9 @@ internal final class AddProductViewModel: ObservableObject {
             .map { $0.count >= 3 || $0.count == 0 }
             .sink { [weak self] bool in
                 guard let self else { return }
-                self.careNameIsValid = bool
+                withAnimation {
+                    self.careNameIsValid = bool
+                }
             }
             .store(in: &cancellables)
     }
@@ -161,7 +167,9 @@ internal final class AddProductViewModel: ObservableObject {
             .map { $0.isInteger || $0.count == 0 }
             .sink { [weak self] bool in
                 guard let self else { return }
-                self.careIntervalIsValid = bool
+                withAnimation {
+                    self.careIntervalIsValid = bool
+                }
             }
             .store(in: &cancellables)
     }
@@ -171,13 +179,10 @@ internal final class AddProductViewModel: ObservableObject {
             .map { $0.isDouble || $0.count == 0 }
             .sink { [weak self] bool in
                 guard let self else { return }
-                self.priceIsValid = bool
+                withAnimation {
+                    self.priceIsValid = bool
+                }
             }
             .store(in: &cancellables)
     }
 }
-
-
-
-
-

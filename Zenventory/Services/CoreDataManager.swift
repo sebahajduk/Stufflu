@@ -44,6 +44,17 @@ extension CoreDataManager {
         try? saveData()
         try? fetchProducts()
     }
+
+    func fetchProducts() throws {
+        let productRequest: NSFetchRequest<ProductEntity> = .init(entityName: "ProductEntity")
+        let wishlistRequest: NSFetchRequest<WishlistEntity> = .init(entityName: "WishlistEntity")
+        do {
+            savedProductEntities = try container.viewContext.fetch(productRequest)
+            savedWishlistEntities = try container.viewContext.fetch(wishlistRequest)
+        } catch {
+            throw error
+        }
+    }
 }
 
 // MARK: ProductEntity management
@@ -126,5 +137,42 @@ extension CoreDataManager {
         link: String?,
         name: String,
         price: Double?
-    ) { }
+    ) {
+        let newWishlistProduct: WishlistEntity = .init(context: container.viewContext)
+
+        newWishlistProduct.id = UUID()
+        newWishlistProduct.daysCounter = days
+        newWishlistProduct.name = name
+
+        if let link {
+            newWishlistProduct.link = link
+        } else {
+            newWishlistProduct.link = ""
+        }
+
+        if let price {
+            newWishlistProduct.price = price
+        } else {
+            newWishlistProduct.price = 0
+        }
+
+        refreshData()
+    }
+
+    func removeWishlistProduct(at offsets: IndexSet) {
+        guard let index = offsets.first else { return }
+
+        let entity: WishlistEntity = savedWishlistEntities[index]
+
+        container.viewContext.delete(entity)
+
+        refreshData()
+    }
+
+    func editWishlistProduct(product: WishlistEntity) {
+        guard let index = savedWishlistEntities.firstIndex(where: { $0.id == product.id }) else { return }
+        savedWishlistEntities[index] = product
+
+        refreshData()
+    }
 }

@@ -18,15 +18,16 @@ internal struct TextFieldWithStatus: View {
         HStack {
             TextField(textFieldLabel ?? "", text: $textFieldValue)
                 .keyboardType(keyboardType)
-
-            if isValid {
-                Image(systemName: "checkmark.circle.fill")
-                    .symbolRenderingMode(.hierarchical)
-                    .foregroundColor(.green)
-            } else {
-                Image(systemName: "x.circle.fill")
-                    .symbolRenderingMode(.hierarchical)
-                    .foregroundColor(.red)
+            if !textFieldValue.isEmpty {
+                if isValid {
+                    Image(systemName: "checkmark.circle.fill")
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(.green)
+                } else {
+                    Image(systemName: "x.circle.fill")
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(.red)
+                }
             }
         }
         .padding(.horizontal, 10)

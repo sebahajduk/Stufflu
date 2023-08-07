@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Neumorphic
 
 internal struct HomeView: View {
 
@@ -22,28 +23,33 @@ internal struct HomeView: View {
     }
 
     var body: some View {
-
-            VStack(spacing: 20) {
+        VStack(spacing: 20) {
                 HStack {
                     NavigationLink(
                         destination: MyProductsView(
                             coreDataService: homeViewModel.dataService
                         )
                     ) {
-                        TileView(title: "MY PRODUCTS", image: "products")
+                        TileView(title: "PRODUCTS", image: "backpack.fill")
                     }
                     
-                    NavigationLink(destination: WishlistView()) {
-                        TileView(title: "WISHLIST", image: "wishlist")
+                    NavigationLink(
+                        destination: WishlistView(
+                            dataService: homeViewModel.dataService
+                    )
+                    ) {
+                        TileView(title: "WISHLIST", image: "heart.fill")
+                    }
+
+                    NavigationLink(
+                        destination:
+                            HistoryView(
+                                dataService: homeViewModel.dataService
+                            )
+                    ) {
+                        TileView(title: "HISTORY", image: "book.fill")
                     }
                 }
-                .contentShape(RoundedRectangle(cornerRadius: 30))
-                
-                HStack {
-                    TileView(title: "BOUGHT", image: "products")
-                    TileView(title: "SOLD", image: "sold")
-                }
-                .contentShape(RoundedRectangle(cornerRadius: 30))
                 
                 Divider()
                     .padding(.horizontal)
@@ -112,15 +118,13 @@ internal struct HomeView: View {
                     .listStyle(.plain)
                     .background(Color.backgroundColor())
                 }
-                
             }
+            .padding(.top)
             .padding(.horizontal)
             .background(Color.backgroundColor())
             .toolbarRole(.navigationStack)
             .navigationBarTitleDisplayMode(.inline)
         }
-
-
 }
 
 private struct HomeView_Previews: PreviewProvider {

@@ -63,6 +63,10 @@ internal final class ProductDetailsViewModel: ObservableObject {
             self.productLastUsed = "\(lastUsed.formatted(date: .numeric, time: .omitted))"
         }
 
+        if let lastCared = product.lastCared {
+            self.productLastCared = "\(lastCared.formatted(date: .numeric, time: .omitted))"
+        }
+
         runObservers()
     }
 
@@ -91,14 +95,12 @@ internal final class ProductDetailsViewModel: ObservableObject {
         )
 
         dataService.deletePhoto(product: product)
-
         self.image = nil
-
     }
 
     private func observeCareNameTextField() {
         $productCareName
-            .map { $0.count == 0 || $0.count > 3 }
+            .map { $0.count == 0 || $0.count >= 3 }
             .sink { [weak self] value in
                 guard let self else { return }
                 self.productCareNameIsValid = value
@@ -172,7 +174,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
             product.productDescr = productDescription
 
             if productCareName.count > 3 {
-                product.careName = productName
+                product.careName = productCareName
             }
             if productCareInterval.count >= 1 {
                 product.careInterval = Int64(productCareInterval) ?? 0
@@ -184,7 +186,6 @@ internal final class ProductDetailsViewModel: ObservableObject {
                 product.price = Double(productPrice) ?? 0.0
             }
 
-            
             dataService.edit(product: product)
         }
 

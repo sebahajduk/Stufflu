@@ -9,8 +9,7 @@ import Foundation
 
 extension Date {
     internal func asString() -> String {
-        let formatter: DateFormatter = .init()
-        return formatter.string(from: self)
+        return self.formatted(date: .numeric, time: .omitted)
     }
 
     static func - (lhs: Date, rhs: Date) -> TimeInterval {
