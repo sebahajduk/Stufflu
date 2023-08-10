@@ -8,10 +8,10 @@
 import XCTest
 @testable import Zenventory
 
-// MARK: --- Naming structure ---
+// MARK: Naming structure
 // test_UnitOfWork_StateUnderTest_ExpectedBehavior
 
-final class AddProductVModel_Tests: XCTestCase {
+final class AddProductVModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -140,10 +140,10 @@ final class AddProductVModel_Tests: XCTestCase {
     func test_AddProductVModel_priceIsValid_shouldBeTrue() {
         let numbers = ["123", "12.3", "1.0", ".1"]
 
-        for n in 0..<numbers.count {
+        for number in 0..<numbers.count {
             let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
 
-            addProductViewModel.productPrice = numbers[n]
+            addProductViewModel.productPrice = numbers[number]
 
             XCTAssertTrue(addProductViewModel.priceIsValid)
         }
@@ -152,10 +152,10 @@ final class AddProductVModel_Tests: XCTestCase {
     func test_AddProductVModel_priceIsValid_shouldBeFalse() {
         let inputs = ["1.2.3", "1n", "a100", "1,23"]
 
-        for n in 0..<inputs.count {
+        for number in 0..<inputs.count {
             let addProductViewModel = AddProductViewModel(dataService: CoreDataService())
 
-            addProductViewModel.productPrice = inputs[n]
+            addProductViewModel.productPrice = inputs[number]
             XCTAssertFalse(addProductViewModel.priceIsValid)
         }
     }

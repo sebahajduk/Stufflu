@@ -12,7 +12,7 @@ import SwiftUI
 internal final class HomeViewModel: ObservableObject {
 
     @Published internal var products: [ProductEntity] = .init()
-    @Published internal var selectedProduct: ProductEntity? = nil
+    @Published internal var selectedProduct: ProductEntity?
     @Published internal var boughtSummary: Double = .init()
     @Published internal var soldSummary: Double = .init()
     @Published internal var listIsEmpty: Bool = true
@@ -33,8 +33,16 @@ internal final class HomeViewModel: ObservableObject {
             .sink { [weak self] newValue in
                 guard let self else { return }
                 // 2_592_000 = 30 days
-                self.products = newValue.filter { ($0.lastUsed ?? Date()).distance(to: Date()) > 2_592_000 && $0.isSold == false}
-                let soldProducts = newValue.filter { $0.isSold == true && ($0.soldDate ?? Date()).distance(to: Date()) < 2_592_000 }
+                self.products = newValue.filter {
+                    ($0.lastUsed ?? Date()).distance(to: Date()) > 2_592_000 &&
+                    $0.isSold == false
+                }
+
+                let soldProducts = newValue.filter {
+                    ($0.soldDate ?? Date()).distance(to: Date()) < 2_592_000 &&
+                    $0.isSold == true
+                }
+
                 self.boughtSummary = 0
                 self.soldSummary = 0
 

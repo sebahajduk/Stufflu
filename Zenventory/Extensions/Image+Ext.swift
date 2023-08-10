@@ -21,4 +21,3 @@ extension Image {
             .foregroundColor(action ? .actionColor() : .foregroundColor().opacity(0.3))
     }
 }
-

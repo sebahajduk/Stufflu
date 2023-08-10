@@ -28,7 +28,7 @@ internal struct WishlistProductCellView: View {
                     Text(wishlistProductCellViewModel.product.name ?? "")
                         .font(.headline)
                         .foregroundColor(.actionColor())
-                    
+
                     HStack {
                         Text("Days left: " + wishlistProductCellViewModel.daysLeft)
                             .font(.subheadline)

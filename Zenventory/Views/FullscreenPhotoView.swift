@@ -36,7 +36,7 @@ struct FullscreenPhotoView: View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
-            
+
             if let image = fullscreenPhotoViewModel.image {
                 if fullscreenPhotoViewModel.isEditing {
                     PhotosPicker(

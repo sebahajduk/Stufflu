@@ -19,21 +19,18 @@ struct AddWishlistProductView: View {
             ))
     }
 
-    ///
+    #warning("Move to viewmodel")
+
     /// WishlistProduct parameters:
     /// - daysCounter (Date - user writes Integer, then program should add days number and save final date as Date
     ///     it will be easier to check days left when user open apps few times in a month + push notifications)
     /// - link (optional String)
     /// - name (3+ letters String)
     /// - price (optional Double)
-    ///
-
-    // MARK: Move to ViewModel
     @State private var daysCounterTextField: String = .init()
     @State private var linkTextField: String = .init()
     @State private var nameTextField: String = .init()
     @State private var priceTextField: String = .init()
-
 
     var body: some View {
         NavigationStack {
@@ -54,7 +51,12 @@ struct AddWishlistProductView: View {
             }
             .toolbar {
                 Button("Add") {
-                    addWishlistProductViewModel.addWishlistProduct(days: daysCounterTextField, link: linkTextField, name: nameTextField, price: priceTextField)
+                    addWishlistProductViewModel.addWishlistProduct(
+                        days: daysCounterTextField,
+                        link: linkTextField,
+                        name: nameTextField,
+                        price: priceTextField
+                    )
                     self.dismiss()
                 }
                 .foregroundStyle(Color.actionColor())

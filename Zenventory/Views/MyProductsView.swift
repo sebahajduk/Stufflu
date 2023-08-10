@@ -38,7 +38,7 @@ internal struct MyProductsView: View {
                         Text("Total value")
                         Text("$12 332.00")
                             .bold()
-                        
+
                         TextField("Search...", text: $myProductsViewModel.searchText)
                             .padding(7)
                             .padding(.horizontal, 25)
@@ -51,7 +51,7 @@ internal struct MyProductsView: View {
                             }
                             .submitLabel(.done)
                     }
-                    
+
                     HStack {
                         Menu {
                             ForEach(SortingType.allCases) { type in
@@ -65,7 +65,7 @@ internal struct MyProductsView: View {
                                 .foregroundColor(.foregroundColor())
                                 .bold()
                         }
-                        
+
                         Button {
                             isFiltering = true
                         } label: {
@@ -94,7 +94,7 @@ internal struct MyProductsView: View {
                         })
 
                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                            Button() {
+                            Button {
                                 myProductsViewModel.caredActionSwiped(product)
                             } label: {
                                 Label("Cared", systemImage: "checkmark")
@@ -102,7 +102,7 @@ internal struct MyProductsView: View {
                             .tint(.green)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button() {
+                            Button {
                                 myProductsViewModel.showSellingAlert.toggle()
                                 self.temporaryProduct = product
                             } label: {
@@ -113,7 +113,7 @@ internal struct MyProductsView: View {
                         .alert("SoldPrice", isPresented: $myProductsViewModel.showSellingAlert) {
                             TextField("Enter price", text: $myProductsViewModel.priceEnteredInAlert)
                             Button("Cancel", role: .cancel) { }
-                            
+
                             Button("Save", role: .destructive) {
                                 guard let temporaryProduct = temporaryProduct else { return }
                                 myProductsViewModel.showSellingAlert = false
@@ -135,8 +135,6 @@ internal struct MyProductsView: View {
     }
 
 }
-
-
 
 struct MyProductsView_Previews: PreviewProvider {
 

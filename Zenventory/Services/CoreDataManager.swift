@@ -20,7 +20,7 @@ internal protocol CoreDataManager: ObservableObject {
     func fetchProducts() throws
 }
 
-//MARK: Operations
+// MARK: Operations
 extension CoreDataManager {
     func saveData() throws {
         do {
@@ -59,6 +59,7 @@ extension CoreDataManager {
 
 // MARK: ProductEntity management
 extension CoreDataManager {
+    // swiftlint: disable function_parameter_count
     func addProduct(
         name: String,
         guarantee: Int?,
@@ -90,7 +91,8 @@ extension CoreDataManager {
 
         refreshData()
     }
-    
+    // swiftlint: enable function_parameter_count
+
     func edit(product: ProductEntity) {
         guard let index = savedProductEntities.firstIndex(where: { $0.id == product.id }) else { return }
         savedProductEntities[index] = product
@@ -108,12 +110,13 @@ extension CoreDataManager {
 
         refreshData()
     }
+
     func deletePhoto(product: ProductEntity) {
         guard let index = savedProductEntities.firstIndex(where: { $0.id == product.id }) else { return }
 
         let entity: ProductEntity = savedProductEntities[index]
 
-        if let _ = entity.productPhotoPath {
+        if entity.productPhotoPath != nil {
             entity.productPhotoPath = nil
         }
 

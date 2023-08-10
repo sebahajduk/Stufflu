@@ -8,7 +8,7 @@
 import XCTest
 @testable import Zenventory
 
-final class String_Ext_Tests: XCTestCase {
+final class StringExtTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

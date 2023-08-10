@@ -41,14 +41,14 @@ internal final class ProductDetailsViewModel: ObservableObject {
 
     /// Photo picker binding
     @Published internal var photosPickerItem: PhotosPickerItem?
-    
+
     internal init(
         product: ProductEntity,
         dataService: any CoreDataManager
     ) {
         self.product = product
         self.dataService = dataService
-        
+
         self.productName = product.name ?? "Unknown"
         image = try? ZFileManager.getImage(
             name: product.productPhotoPath ?? "Unknown"
@@ -165,7 +165,6 @@ internal final class ProductDetailsViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
-            
     }
 
     internal func saveButtonTapped() {
@@ -212,7 +211,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
                         productImage: image,
                         name: "\(self.product.id ?? UUID())"
                     )
-                    
+
                     dataService.addPhoto(product: self.product)
                 }
             }
@@ -274,5 +273,4 @@ internal final class ProductDetailsViewModel: ObservableObject {
     internal func getDescription() -> String {
         product.productDescr ?? ""
     }
-
 }

@@ -8,7 +8,7 @@
 import XCTest
 @testable import Zenventory
 
-final class MyProductsViewModel_Tests: XCTestCase {
+final class MyProductsViewModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -18,8 +18,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    //MARK: ---SORTING TESTS---
-
+    // MARK: SORTING TESTS
     func test_MyProductsViewModel_observingSorting_shouldSortByLowestPrice() {
         // Given
         let data = MockCoreData()
@@ -121,8 +120,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         XCTAssertEqual("C", myProductsViewModel.myProducts[3].name)
     }
 
-    //MARK: ---FILTERING TESTS---
-
+    // MARK: FILTERING TESTS
     func test_MyProductsViewModel_filter_shouldFilterByPrice() {
         // Given
         let data = MockCoreData()
@@ -136,7 +134,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         myProductsViewModel.maxPrice = "3"
 
         // When
-        myProductsViewModel.filter() { }
+        myProductsViewModel.filter { }
 
         // Then
         XCTAssertEqual(2, myProductsViewModel.myProducts.count)
@@ -157,7 +155,7 @@ final class MyProductsViewModel_Tests: XCTestCase {
         myProductsViewModel.importance = .high
 
         // When
-        myProductsViewModel.filter() { }
+        myProductsViewModel.filter { }
 
         // Then
         XCTAssertEqual(1, myProductsViewModel.myProducts.count)

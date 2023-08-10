@@ -80,10 +80,8 @@ internal struct ProductDetailsView: View {
                         }
                     }
                 }
-                
+
                 viewDetails()
-                
-//                Spacer()
             }
         }
             }
@@ -92,7 +90,7 @@ internal struct ProductDetailsView: View {
                     HStack {
                         Button("Save") { productDetailsViewModel.saveButtonTapped() }
                             .foregroundColor(.actionColor())
-                        
+
                         Button("Cancel") { productDetailsViewModel.cancelButtonTapped() }
                             .foregroundColor(.actionColor())
                     }
@@ -158,6 +156,7 @@ internal struct ProductDetailsView: View {
         .frame(maxWidth: .infinity)
     }
 
+    // swiftlint: disable function_body_length
     private func viewDetails() -> some View {
         VStack(alignment: .center) {
 
@@ -271,6 +270,7 @@ internal struct ProductDetailsView: View {
         .padding(.horizontal)
         .navigationTitle("")
     }
+    // swiftlint: enable function_body_length
 }
 
 private struct ProductDetailsView_Previews: PreviewProvider {

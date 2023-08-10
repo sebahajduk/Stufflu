@@ -30,7 +30,10 @@ struct HistoryView: View {
             Color.backgroundColor()
                 .ignoresSafeArea()
             VStack {
-                Picker("History", selection: $historyViewModel.historyPickerSelection) {
+                Picker(
+                    "History",
+                    selection: $historyViewModel.historyPickerSelection
+                ) {
                     ForEach(HistoryOptions.allCases) { option in
                         Text(option.rawValue.capitalized)
                     }
@@ -51,7 +54,7 @@ struct HistoryView: View {
                                     Text("\(product.soldPrice.asPrice())")
                                         .font(.subheadline)
                                 } else {
-                                    Text("\((-10).asPrice())")
+                                    Text("-\(product.price.asPrice())")
                                         .font(.subheadline)
                                 }
                             }
@@ -64,5 +67,7 @@ struct HistoryView: View {
                 .listRowBackground(Color.backgroundColor())
             }
         }
+        .navigationTitle("History")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

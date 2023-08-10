@@ -10,8 +10,25 @@ import Foundation
 extension String {
 
     var isValidURL: Bool {
-        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-        if let match = detector.firstMatch(in: self, range: NSRange(location: 0, length: self.utf16.count)) {
+        var detector: NSDataDetector
+
+        do {
+            detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+
+            detector.firstMatch(
+                in: self,
+                range: NSRange(
+                    location: 0,
+                    length: self.utf16.count
+                )
+            )
+        } catch {
+            fatalError()
+        }
+
+        let firstMatch = detector.firstMatch(in: self, range: NSRange(location: 0, length: self.utf16.count))
+
+        if let match = firstMatch {
             return match.range.length == self.utf16.count
         } else {
             return false

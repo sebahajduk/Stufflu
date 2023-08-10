@@ -26,7 +26,7 @@ internal final class AddProductViewModel: ObservableObject {
     @Published internal var selectedInvoicePhoto: PhotosPickerItem?
     @Published internal var selectedImportance: Importance = .medium
 
-    // MARK: --- Product details ---
+    // MARK: Product details
     @Published internal var productName: String = .init()
     @Published internal var productImage: UIImage?
     @Published internal var invoiceImage: UIImage?
@@ -36,7 +36,7 @@ internal final class AddProductViewModel: ObservableObject {
     @Published internal var productCareInterval: String = .init()
     @Published internal var productPrice: String = .init()
 
-    // MARK: --- Textfields validation ---
+    // MARK: Textfields validation
     @Published internal var nameIsValid: Bool = false
     @Published internal var guaranteeIsValid: Bool = true
     @Published internal var careNameIsValid: Bool = true

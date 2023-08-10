@@ -26,7 +26,7 @@ internal struct WishlistView: View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
-            
+
             VStack {
                 HStack {
                     TextField("Search...", text: $wishlistViewModel.searchText)
@@ -43,7 +43,7 @@ internal struct WishlistView: View {
                 }
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                
+
                 List {
                     ForEach(wishlistViewModel.wishlistProducts, id: \.id ) { entity in
                         Link(destination: (URL(string: entity.link ?? "")!)) {

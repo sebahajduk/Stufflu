@@ -15,12 +15,12 @@ internal final class MyProductsViewModel: ObservableObject {
 
     @Published internal var myProducts: [ProductEntity] = .init()
     @Published internal var searchText: String = .init()
-    @Published internal var showSellingAlert = false 
+    @Published internal var showSellingAlert = false
 
-    //MARK: Sorting
+    // MARK: Sorting
     @Published internal var sortingType: SortingType = .addedDate
 
-    //MARK: --- Filtering params ---
+    // MARK: Filtering params
     @Published internal var isFilterActive: Bool = false
     @Published internal var minPrice: String = .init()
     @Published internal var maxPrice: String = .init()
@@ -125,7 +125,7 @@ internal final class MyProductsViewModel: ObservableObject {
     }
 
     internal func filter(
-        _ completion: () -> ()
+        _ completion: () -> Void
     ) {
         let filtered: [ProductEntity] = self.dataService.savedProductEntities.filter { $0.isSold == false }
             .filter { (entity) -> Bool in

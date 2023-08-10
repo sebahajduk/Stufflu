@@ -54,7 +54,7 @@ internal struct MyProductsFilterView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Filter") {
-                        myProductsViewModel.filter() {
+                        myProductsViewModel.filter {
                             self.dismiss()
                         }
                     }

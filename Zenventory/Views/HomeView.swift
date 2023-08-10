@@ -32,7 +32,7 @@ internal struct HomeView: View {
                     ) {
                         TileView(title: "PRODUCTS", image: "backpack.fill")
                     }
-                    
+
                     NavigationLink(
                         destination: WishlistView(
                             dataService: homeViewModel.dataService
@@ -50,24 +50,25 @@ internal struct HomeView: View {
                         TileView(title: "HISTORY", image: "book.fill")
                     }
                 }
-                
+                .buttonStyle(TapButtonStyle())
+
                 Divider()
                     .padding(.horizontal)
-                
+
                 Text("30 days history")
                     .font(.headline)
                     .foregroundColor(.foregroundColor())
-                
+
                 HStack(spacing: 50) {
                     VStack {
                         Text("Sold")
                         Text(homeViewModel.soldSummary.asPrice())
                             .bold()
                     }
-                    
+
                     Divider()
                         .frame(maxHeight: 30)
-                    
+
                     VStack {
                         Text("Bought")
                         Text(homeViewModel.boughtSummary.asPrice())
@@ -75,16 +76,16 @@ internal struct HomeView: View {
                     }
                 }
                 .foregroundColor(.foregroundColor())
-                
+
                 Divider()
                     .padding(.horizontal)
-                
+
                 Text("Unused for at least 30 days")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .font(.headline)
                     .bold()
                     .foregroundColor(.foregroundColor())
-                
+
                 if homeViewModel.listIsEmpty {
                     Spacer()
                     Text("There is no unused products! 🥳")

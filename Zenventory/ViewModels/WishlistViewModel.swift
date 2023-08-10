@@ -29,10 +29,8 @@ class WishlistViewModel: ObservableObject {
     }
 }
 
-
-//MARK: Combine
+// MARK: Combine
 extension WishlistViewModel {
-
 
     private func observeWishlistProducts() {
         dataService.savedWishlistEntitiesPublisher

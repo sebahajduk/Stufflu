@@ -17,7 +17,7 @@ final internal class FullscreenPhotoViewModel: ObservableObject {
     private var photoCategory: PhotoCategory?
 
     @Published var image: UIImage?
-    @Published var pickerImage: PhotosPickerItem? = nil
+    @Published var pickerImage: PhotosPickerItem?
     @Published internal var isEditing: Bool = false
 
     init(
@@ -83,7 +83,7 @@ final internal class FullscreenPhotoViewModel: ObservableObject {
                 productImage: image,
                 name: "\(product.id ?? UUID())"
             )
-            
+
             dataService.addPhoto(product: product)
         case .none:
             #warning("Error handling")

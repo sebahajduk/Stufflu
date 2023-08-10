@@ -7,20 +7,10 @@
 
 import SwiftUI
 
-fileprivate struct TabButtonStyle: ButtonStyle {
-    internal func makeBody(configuration: Configuration) -> some View {
-        configuration
-            .label
-            .opacity(configuration.isPressed ? 0.9 : 1)
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
-    }
-}
-
 internal struct ZTabView: View {
     @Binding internal var selectedTab: TabSelected
 
     @StateObject internal var dataService: CoreDataService
-    
     @State private var isPresented: Bool = false
 
     var body: some View {
@@ -82,7 +72,7 @@ internal struct ZTabView: View {
             Spacer()
         }
         .background(Color.backgroundColor())
-        .buttonStyle(TabButtonStyle())
+        .buttonStyle(TapButtonStyle())
         .ignoresSafeArea()
     }
 }

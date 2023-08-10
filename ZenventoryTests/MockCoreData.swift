@@ -32,6 +32,9 @@ class MockCoreData: NSObject, CoreDataManager {
     @Published var savedProductEntities: [ProductEntity] = []
     var savedProductEntitiesPublisher: Published<[Zenventory.ProductEntity]>.Publisher { $savedProductEntities }
 
+    @Published var savedWishlistEntities: [Zenventory.WishlistEntity] = []
+    var savedWishlistEntitiesPublisher: Published<[Zenventory.WishlistEntity]>.Publisher { $savedWishlistEntities }
+
     func removeProduct(at offsets: IndexSet) {
         if let index = offsets.first {
             let entity: ProductEntity = savedProductEntities[index]
@@ -44,7 +47,7 @@ class MockCoreData: NSObject, CoreDataManager {
     }
 
     func edit(product: Zenventory.ProductEntity) {
-        
+
     }
 
     func fetchProducts() throws {
@@ -56,7 +59,7 @@ class MockCoreData: NSObject, CoreDataManager {
             throw error
         }
     }
-
+    // swiftlint: disable function_parameter_count
     func addProduct(name: String,
                     guarantee: Int?,
                     careName: String?,
@@ -72,7 +75,7 @@ class MockCoreData: NSObject, CoreDataManager {
         newProduct.importance = importance
         newProduct.lastUsed = Date()
 
-        if let guarantee{
+        if let guarantee {
             newProduct.guarantee = Int16(guarantee)
         }
         if let careInterval {
@@ -84,6 +87,7 @@ class MockCoreData: NSObject, CoreDataManager {
 
         try? saveData()
     }
+    // swiftlint: enable function_parameter_count
 
     func saveData() throws {
         do {
