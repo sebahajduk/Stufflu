@@ -36,7 +36,7 @@ internal struct MyProductsView: View {
                 ZStack(alignment: .top) {
                     VStack {
                         Text("Total value")
-                        Text("$12 332.00")
+                        Text(myProductsViewModel.productsValue.asPrice())
                             .bold()
 
                         TextField("Search...", text: $myProductsViewModel.searchText)

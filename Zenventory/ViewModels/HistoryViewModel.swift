@@ -54,22 +54,17 @@ class HistoryViewModel: ObservableObject {
         var sortedArray = array
 
         sortedArray.sort { product, nextProduct in
-            if product.isSold || nextProduct.isSold {
-                return product.soldDate?.compare(nextProduct.soldDate ?? Date()) == .orderedDescending
+            guard let previousAddedDate = product.addedDate,
+                  let nextAddedDate = nextProduct.addedDate
+            else { return false }
 
-            } else if product.isSold || !nextProduct.isSold {
-                return product.soldDate?.compare(nextProduct.addedDate ?? Date()) == .orderedDescending
+            let dateOne = (product.soldDate ?? previousAddedDate)
+            let dateTwo = (nextProduct.soldDate ?? nextAddedDate)
 
-            } else if !product.isSold || nextProduct.isSold {
-                return product.addedDate?.compare(nextProduct.soldDate ?? Date()) == .orderedDescending
-
-            } else {
-                return product.addedDate?.compare(nextProduct.addedDate ?? Date()) == .orderedDescending
-            }
+            return dateOne.compare(dateTwo) == .orderedDescending
         }
 
         return sortedArray
-
     }
 
     private func showSoldProducts() {
@@ -103,7 +98,6 @@ class HistoryViewModel: ObservableObject {
 
     private func showAllProducts() {
         let sortedArray = sortProducts(in: dataService.savedProductEntities)
-
         self.shownProducts = sortedArray
     }
 }

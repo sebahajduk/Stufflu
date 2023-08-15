@@ -15,22 +15,22 @@ internal struct ZTabView: View {
 
     var body: some View {
         HStack {
-            Spacer()
-            Button {
-                selectedTab = .home
-            } label: {
-                VStack {
-                    Image(systemName: "house.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-
-                    Text("Home")
-                        .font(.caption2)
-                }
-                .foregroundColor(selectedTab == .home ? .actionColor() : .foregroundColor().opacity(0.5))
-            }
-
+//            Spacer()
+//            Button {
+//                selectedTab = .home
+//            } label: {
+//                VStack {
+//                    Image(systemName: "house.fill")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 25, height: 25)
+//
+//                    Text("Home")
+//                        .font(.caption2)
+//                }
+//                .foregroundColor(selectedTab == .home ? .actionColor() : .foregroundColor().opacity(0.5))
+//            }
+//
             Spacer()
 
             Button {
@@ -54,22 +54,22 @@ internal struct ZTabView: View {
 
             Spacer()
 
-            Button {
-                selectedTab = .profile
-            } label: {
-                VStack {
-                    Image(systemName: "person.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-
-                    Text("Profile")
-                        .font(.caption2)
-                }
-                .foregroundColor(selectedTab == .profile ? .actionColor() : .foregroundColor().opacity(0.5))
-            }
-
-            Spacer()
+//            Button {
+//                selectedTab = .profile
+//            } label: {
+//                VStack {
+//                    Image(systemName: "person.fill")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 25, height: 25)
+//
+//                    Text("Profile")
+//                        .font(.caption2)
+//                }
+//                .foregroundColor(selectedTab == .profile ? .actionColor() : .foregroundColor().opacity(0.5))
+//            }
+//
+//            Spacer()
         }
         .background(Color.backgroundColor())
         .buttonStyle(TapButtonStyle())

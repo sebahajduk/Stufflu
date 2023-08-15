@@ -39,5 +39,4 @@ internal final class ProductCellViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
-
 }

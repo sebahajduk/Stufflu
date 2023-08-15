@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Neumorphic
 
 internal struct HomeView: View {
 
@@ -88,7 +87,7 @@ internal struct HomeView: View {
 
                 if homeViewModel.listIsEmpty {
                     Spacer()
-                    Text("There is no unused products! 🥳")
+                    Text("There are no unused products! 🥳")
                         .font(.headline)
                         .foregroundStyle(Color.actionColor())
                     Spacer()

@@ -12,7 +12,6 @@ internal struct WishlistView: View {
     @StateObject internal var wishlistViewModel: WishlistViewModel
 
     @State private var addSheetPresented: Bool = false
-    @Environment(\.openURL) var openURL
 
     internal init(dataService: any CoreDataManager) {
         _wishlistViewModel = StateObject(
@@ -46,14 +45,23 @@ internal struct WishlistView: View {
 
                 List {
                     ForEach(wishlistViewModel.wishlistProducts, id: \.id ) { entity in
-                        Link(destination: (URL(string: entity.link ?? "")!)) {
+                        if entity.link != nil && entity.link?.isValidURL ?? false {
+                            Link(
+                                destination: (
+                                    URL(
+                                        string: entity.link ?? "https://www.google.com"
+                                    )!
+                                )
+                            ) {
+                                WishlistProductCellView(for: entity)
+                            }
+                        } else {
                             WishlistProductCellView(for: entity)
                         }
                     }
                     .onDelete {
                         wishlistViewModel.deleteWishlistProduct(at: $0)
                     }
-                    .listRowBackground(Color.backgroundColor())
                     .listRowSeparatorTint(Color.actionColor().opacity(0.5))
                 }
                 .listStyle(.plain)

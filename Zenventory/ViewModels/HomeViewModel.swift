@@ -38,27 +38,14 @@ internal final class HomeViewModel: ObservableObject {
                     $0.isSold == false
                 }
 
-                let soldProducts = newValue.filter {
-                    ($0.soldDate ?? Date()).distance(to: Date()) < 2_592_000 &&
-                    $0.isSold == true
-                }
-
-                self.boughtSummary = 0
-                self.soldSummary = 0
-
                 if products.count == 0 {
                     listIsEmpty = true
                 } else {
                     listIsEmpty = false
                 }
 
-                for product in products {
-                    boughtSummary += product.price
-                }
-
-                for product in soldProducts {
-                    soldSummary += product.soldPrice
-                }
+                prepareBoughtSummary(for: newValue)
+                prepareSoldSummary(for: newValue)
             }
             .store(in: &cancellables)
     }
@@ -76,6 +63,35 @@ internal final class HomeViewModel: ObservableObject {
         withAnimation {
             ProductManager.use(product: product)
             dataService.refreshData()
+        }
+    }
+
+    private func prepareBoughtSummary(
+        for entities: [ProductEntity]
+    ) {
+        let boughtProducts = entities.filter {
+            ($0.soldDate ?? Date()).distance(to: Date()) < 2_592_000 &&
+            $0.isSold == false
+        }
+        self.boughtSummary = 0
+
+        for product in boughtProducts {
+            self.boughtSummary += product.price
+        }
+    }
+
+    private func prepareSoldSummary (
+        for entities: [ProductEntity]
+    ) {
+        let soldProducts = entities.filter {
+            ($0.soldDate ?? Date()).distance(to: Date()) < 2_592_000 &&
+            $0.isSold == true
+        }
+
+        self.soldSummary = 0
+
+        for product in soldProducts {
+            soldSummary += product.soldPrice
         }
     }
 }

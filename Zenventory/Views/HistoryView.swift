@@ -45,7 +45,8 @@ struct HistoryView: View {
                     ForEach(historyViewModel.shownProducts, id: \.self) { product in
                         HStack {
                             Text(product.name ?? "")
-                                .font(.subheadline)
+                                .font(.subheadline.bold())
+                                .foregroundStyle(Color.actionColor())
                             Spacer()
                             VStack(spacing: 10) {
                                 Text(historyViewModel.getDate(for: product))
@@ -62,9 +63,9 @@ struct HistoryView: View {
                         .padding(.horizontal)
                         .foregroundStyle(Color.foregroundColor())
                     }
+                    .listRowBackground(Color.backgroundColor())
                 }
                 .listStyle(.plain)
-                .listRowBackground(Color.backgroundColor())
             }
         }
         .navigationTitle("History")

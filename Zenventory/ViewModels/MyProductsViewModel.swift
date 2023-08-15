@@ -29,6 +29,8 @@ internal final class MyProductsViewModel: ObservableObject {
 
     @Published internal var priceEnteredInAlert: String = .init()
 
+    @Published internal var productsValue: Double = .init()
+
     internal init(
         dataService: any CoreDataManager
     ) {
@@ -46,6 +48,10 @@ internal final class MyProductsViewModel: ObservableObject {
                 guard let self else { return }
                 withAnimation {
                     self.myProducts = newValue.filter { $0.isSold == false }
+                }
+
+                for product in myProducts {
+                    productsValue += product.price
                 }
             }
             .store(in: &cancellables)

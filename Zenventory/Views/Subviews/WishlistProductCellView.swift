@@ -38,7 +38,7 @@ internal struct WishlistProductCellView: View {
                     }
                 }
 
-                if wishlistProductCellViewModel.product.link!.isValidURL {
+                if wishlistProductCellViewModel.productHasValidURL {
                     Image(systemName: "chevron.right")
                         .foregroundStyle(Color.actionColor())
                 } else {

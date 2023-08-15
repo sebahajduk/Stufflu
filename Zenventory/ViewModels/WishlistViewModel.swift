@@ -48,7 +48,6 @@ extension WishlistViewModel {
             )
             .sink { [weak self] searchText in
                 guard let self else { return }
-                withAnimation(.linear) {
                     if searchText.count > 0 {
                         self.wishlistProducts = self.dataService.savedWishlistEntities
                         let filteredProducts: [WishlistEntity] = self.wishlistProducts.filter {
@@ -59,7 +58,6 @@ extension WishlistViewModel {
                     } else {
                         self.wishlistProducts = self.dataService.savedWishlistEntities
                     }
-                }
             }
             .store(in: &cancellables)
     }
