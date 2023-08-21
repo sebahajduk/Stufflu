@@ -14,7 +14,10 @@ struct CustomCameraView: View {
 
     var body: some View {
         VStack {
-            CustomCameraRepresentable(image: self.$image, didTapCapture: $didTapCapture)
+            CustomCameraRepresentable(
+                image: self.$image, 
+                didTapCapture: $didTapCapture
+            )
             Spacer()
             Button {
                 self.didTapCapture = true

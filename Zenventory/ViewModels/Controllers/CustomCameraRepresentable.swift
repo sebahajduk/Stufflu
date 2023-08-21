@@ -12,13 +12,18 @@ struct CustomCameraRepresentable: UIViewControllerRepresentable {
     @Binding var image: UIImage?
     @Binding var didTapCapture: Bool
 
-    func makeUIViewController(context: Context) -> CustomCameraController {
+    func makeUIViewController(
+        context: Context
+    ) -> CustomCameraController {
         let controller = CustomCameraController()
         controller.delegate = context.coordinator
         return controller
     }
 
-    func updateUIViewController(_ cameraViewController: CustomCameraController, context: Context) {
+    func updateUIViewController(
+        _ cameraViewController: CustomCameraController
+        , context: Context
+    ) {
         if self.didTapCapture {
             cameraViewController.didTapRecord()
         }
@@ -28,7 +33,11 @@ struct CustomCameraRepresentable: UIViewControllerRepresentable {
         Coordinator(self)
     }
 
-    class Coordinator: NSObject, UINavigationControllerDelegate, AVCapturePhotoCaptureDelegate {
+    class Coordinator: 
+        NSObject, 
+        UINavigationControllerDelegate, 
+        AVCapturePhotoCaptureDelegate 
+    {
         let parent: CustomCameraRepresentable
 
         init(_ parent: CustomCameraRepresentable) {

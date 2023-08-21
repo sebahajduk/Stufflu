@@ -10,7 +10,7 @@ import AVFoundation
 
 class CustomCameraController: UIViewController {
     var image: UIImage?
-    var captureSession = AVCaptureSession()
+    var captureSession: AVCaptureSession = .init()
     var backCamera: AVCaptureDevice?
     var frontCamera: AVCaptureDevice?
     var currentCamera: AVCaptureDevice?
@@ -20,7 +20,7 @@ class CustomCameraController: UIViewController {
     weak var delegate: AVCapturePhotoCaptureDelegate?
 
     func didTapRecord() {
-        let settings = AVCapturePhotoSettings()
+        let settings: AVCapturePhotoSettings = .init()
         photoOutput?.capturePhoto(with: settings, delegate: delegate!)
     }
 
@@ -68,7 +68,7 @@ class CustomCameraController: UIViewController {
         do {
             let captureDeviceInput = try AVCaptureDeviceInput(device: currentCamera!)
             captureSession.addInput(captureDeviceInput)
-            photoOutput = AVCapturePhotoOutput()
+            photoOutput = .init()
             photoOutput?.setPreparedPhotoSettingsArray(
                 [AVCapturePhotoSettings(
                     format: [AVVideoCodecKey: AVVideoCodecType.jpeg])],
