@@ -33,8 +33,8 @@ internal struct ZTabView: View {
 //
             Spacer()
 
-            Button {
-                isPresented = true
+            NavigationLink {
+                AddProductView(coreDataService: dataService)
             } label: {
                 ZStack {
                     Circle()
@@ -48,8 +48,7 @@ internal struct ZTabView: View {
                         .frame(width: 20, height: 20)
                 }
                 .offset(y: -32)
-            }.sheet(isPresented: $isPresented) {
-                AddProductView(coreDataService: dataService)
+
             }
 
             Spacer()

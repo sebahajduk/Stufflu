@@ -238,28 +238,8 @@ internal final class ProductDetailsViewModel: ObservableObject {
         }
     }
 
-    internal func getFavorite() -> Bool {
-        product.favorite
-    }
-
     internal func getGuarantee() -> String {
         product.guarantee != 0 ? String(product.guarantee) : "-"
-    }
-
-    internal func getImportance() -> String {
-        if let importance = product.importance {
-            return importance
-        } else {
-            return "-"
-        }
-    }
-
-    internal func getLastCared() -> String {
-        product.lastCared?.asString() ?? "-"
-    }
-
-    internal func getLastUsed() -> String {
-        product.lastCared?.asString() ?? "-"
     }
 
     internal func getName() -> String {

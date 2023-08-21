@@ -135,10 +135,3 @@ internal struct MyProductsView: View {
     }
 
 }
-
-struct MyProductsView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        TabBarView(coreDataService: CoreDataService())
-    }
-}

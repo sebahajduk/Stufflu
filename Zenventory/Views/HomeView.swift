@@ -126,9 +126,3 @@ internal struct HomeView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
 }
-
-private struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        TabBarView(coreDataService: CoreDataService())
-    }
-}

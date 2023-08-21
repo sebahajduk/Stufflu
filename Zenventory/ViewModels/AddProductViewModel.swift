@@ -22,8 +22,6 @@ internal final class AddProductViewModel: ObservableObject {
 
     private var cancellables: Set<AnyCancellable> = .init()
 
-    @Published internal var selectedProductPhoto: PhotosPickerItem?
-    @Published internal var selectedInvoicePhoto: PhotosPickerItem?
     @Published internal var selectedImportance: Importance = .medium
 
     // MARK: Product details
@@ -31,7 +29,6 @@ internal final class AddProductViewModel: ObservableObject {
     @Published internal var productImage: UIImage?
     @Published internal var invoiceImage: UIImage?
     @Published internal var productGuarantee: String = .init()
-    @Published internal var productImportance: Int = .init()
     @Published internal var productCareName: String = .init()
     @Published internal var productCareInterval: String = .init()
     @Published internal var productPrice: String = .init()
@@ -81,49 +78,11 @@ internal final class AddProductViewModel: ObservableObject {
     }
 
     private func runObservers() {
-        observeSelectedItem()
-        observeSelectedItemInvoice()
         observeNameTF()
         observeGuarantee()
         observeCareName()
         observeCareInterval()
         observePrice()
-    }
-
-    private func observeSelectedItem() {
-        $selectedProductPhoto
-            .compactMap { $0 }
-            .tryAwaitMap { index in
-                /// Needs to be converted into Data because type Image.self does not show photos other than .png
-                /// for example .heic or .jpeg
-                return try await index.loadTransferable(type: Data.self) ?? Data()
-            }
-            .receive(on: RunLoop.main)
-            .sink { [weak self] value in
-                guard let self else { return }
-                if let image: UIImage = .init(data: value) {
-                    self.productImage = image
-                }
-            }
-            .store(in: &cancellables)
-    }
-
-    private func observeSelectedItemInvoice() {
-        $selectedInvoicePhoto
-            .compactMap { $0 }
-            .tryAwaitMap { index in
-                /// Needs to be converted into Data because type Image.self does not show photos other than .png
-                /// for example .heic or .jpeg
-                return try await index.loadTransferable(type: Data.self) ?? Data()
-            }
-            .receive(on: RunLoop.main)
-            .sink { [weak self] value in
-                guard let self else { return }
-                if let image: UIImage = .init(data: value) {
-                    self.invoiceImage = image
-                }
-            }
-            .store(in: &cancellables)
     }
 
     private func observeNameTF() {

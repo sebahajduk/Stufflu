@@ -32,11 +32,9 @@ internal struct ProductDetailsView: View {
             VStack {
                 if let image = productDetailsViewModel.image {
                     if productDetailsViewModel.isEditing {
-                        PhotosPicker(
-                            selection: $productDetailsViewModel.photosPickerItem,
-                            matching: .images,
-                            photoLibrary: .shared()
-                        ) {
+                        NavigationLink {
+                            CameraView(image: $productDetailsViewModel.image)
+                        } label: {
                             ZStack {
                                 Image(uiImage: image)
                                     .circleImage(size: 100, action: true)
@@ -66,11 +64,9 @@ internal struct ProductDetailsView: View {
                         }
                     }
                 } else {
-                    PhotosPicker(
-                        selection: $productDetailsViewModel.photosPickerItem,
-                        matching: .images,
-                        photoLibrary: .shared()
-                    ) {
+                    NavigationLink {
+                        CameraView(image: $productDetailsViewModel.image)
+                    } label: {
                         if let image = productDetailsViewModel.image {
                             Image(uiImage: image)
                                 .circleImage(size: 100, action: true)
@@ -271,10 +267,4 @@ internal struct ProductDetailsView: View {
         .navigationTitle("")
     }
     // swiftlint: enable function_body_length
-}
-
-private struct ProductDetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView(coreDataService: CoreDataService())
-    }
 }

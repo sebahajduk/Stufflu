@@ -13,9 +13,3 @@ internal struct ProfileView: View {
             .ignoresSafeArea()
     }
 }
-
-private struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}

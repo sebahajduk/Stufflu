@@ -39,29 +39,26 @@ struct FullscreenPhotoView: View {
 
             if let image = fullscreenPhotoViewModel.image {
                 if fullscreenPhotoViewModel.isEditing {
-                    PhotosPicker(
-                            selection: $fullscreenPhotoViewModel.pickerImage,
-                            matching: .images,
-                            photoLibrary: .shared()
-                        ) {
-                            ZStack {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .overlay {
-                                        Color.actionColor().opacity(0.5)
-                                    }
-                                    .aspectRatio(contentMode: .fit)
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    .padding()
-                                    .shadow(radius: 10)
+                    NavigationLink {
+                        CameraView(image: $fullscreenPhotoViewModel.image)
+                    } label: {
+                        ZStack {
+                            Image(uiImage: image)
+                                .resizable()
+                                .overlay {
+                                    Color.actionColor().opacity(0.5)
+                                }
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .padding()
+                                .shadow(radius: 10)
 
-                                Text("Tap to change photo")
-                                    .foregroundColor(.white)
-                                    .font(.headline)
-                            }
-
+                            Text("Tap to change photo")
+                                .foregroundColor(.white)
+                                .font(.headline)
                         }
+                    }
                 } else {
                     Image(uiImage: image)
                         .resizable()
@@ -72,24 +69,21 @@ struct FullscreenPhotoView: View {
                         .shadow(radius: 10)
                 }
             } else {
-                PhotosPicker(
-                        selection: $fullscreenPhotoViewModel.pickerImage,
-                        matching: .images,
-                        photoLibrary: .shared()
-                    ) {
-                        ZStack {
-                            Image(systemName: "camera.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .foregroundColor(.gray.opacity(0.05))
-                                .padding()
+                NavigationLink {
+                    CameraView(image: $fullscreenPhotoViewModel.image)
+                } label: {
+                    ZStack {
+                        Image(systemName: "camera.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .foregroundColor(.gray.opacity(0.05))
+                            .padding()
 
-                            Text("Tap to add invoice")
-                                .font(.headline)
-                        }
-
+                        Text("Tap to add invoice")
+                            .font(.headline)
                     }
+                }
             }
 
         }

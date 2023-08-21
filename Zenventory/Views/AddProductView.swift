@@ -30,11 +30,9 @@ internal struct AddProductView: View {
                 Color.backgroundColor()
                     .removeFocusOnTap()
                 VStack(spacing: 20) {
-                    PhotosPicker(
-                        selection: $addProductViewModel.selectedProductPhoto,
-                        matching: .images,
-                        photoLibrary: .shared()
-                    ) {
+                    NavigationLink {
+                        CameraView(image: $addProductViewModel.productImage)
+                    } label: {
                         if let image = addProductViewModel.productImage {
                             Image(uiImage: image)
                                 .circleImage(size: 100, action: true)
@@ -111,11 +109,9 @@ internal struct AddProductView: View {
 
                         Spacer()
 
-                        PhotosPicker(
-                            selection: $addProductViewModel.selectedInvoicePhoto,
-                            matching: .images,
-                            photoLibrary: .shared()
-                        ) {
+                        NavigationLink {
+                            CameraView(image: $addProductViewModel.invoiceImage)
+                        } label: {
                             if let image = addProductViewModel.invoiceImage {
                                 Image(uiImage: image)
                                     .circleImage(size: 50, action: true)
@@ -139,11 +135,5 @@ internal struct AddProductView: View {
             .navigationTitle("Add product")
             .navigationBarTitleDisplayMode(.inline)
         }
-    }
-}
-
-private struct AddProductView_Previews: PreviewProvider {
-    static var previews: some View {
-        TabBarView(coreDataService: CoreDataService())
     }
 }

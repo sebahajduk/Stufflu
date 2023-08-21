@@ -12,7 +12,6 @@ import SwiftUI
 internal final class HomeViewModel: ObservableObject {
 
     @Published internal var products: [ProductEntity] = .init()
-    @Published internal var selectedProduct: ProductEntity?
     @Published internal var boughtSummary: Double = .init()
     @Published internal var soldSummary: Double = .init()
     @Published internal var listIsEmpty: Bool = true
@@ -48,13 +47,6 @@ internal final class HomeViewModel: ObservableObject {
                 prepareSoldSummary(for: newValue)
             }
             .store(in: &cancellables)
-    }
-
-    internal func deleteItem(
-        at offsets: IndexSet
-    ) {
-        products.remove(atOffsets: offsets)
-        dataService.removeProduct(at: offsets)
     }
 
     internal func use(

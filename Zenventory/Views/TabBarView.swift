@@ -45,10 +45,3 @@ internal struct TabBarView: View {
         }
     }
 }
-
-private struct TabView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        TabBarView(coreDataService: CoreDataService())
-    }
-}

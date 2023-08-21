@@ -12,7 +12,8 @@ struct StandardButton: ButtonStyle {
         configuration: Configuration
     ) -> some View {
             configuration.label
-                .padding()
+            .padding(.vertical, 10)
+            .padding(.horizontal, 20)
                 .bold()
                 .background(Color.actionColor())
                 .foregroundColor(.backgroundColor())

@@ -31,9 +31,3 @@ internal struct TileView: View {
 
     }
 }
-
-private struct TileView_Previews: PreviewProvider {
-    static var previews: some View {
-        TabBarView(coreDataService: CoreDataService())
-    }
-}
