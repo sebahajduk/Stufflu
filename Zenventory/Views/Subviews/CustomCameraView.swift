@@ -10,17 +10,19 @@ import AVFoundation
 
 struct CustomCameraView: View {
     @Binding var image: UIImage?
+    @Binding var imageForViewUpdates: UIImage?
     @State var didTapCapture: Bool = false
 
     var body: some View {
         VStack {
             CustomCameraRepresentable(
-                image: self.$image,
-                didTapCapture: $didTapCapture
+                image: $image,
+                didTapCapture: $didTapCapture,
+                imageForViewUpdates: $imageForViewUpdates
             )
             Spacer()
             Button {
-                self.didTapCapture = true
+                didTapCapture = true
             } label: {
                 Image(systemName: "camera")
             }

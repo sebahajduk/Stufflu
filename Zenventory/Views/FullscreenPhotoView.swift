@@ -25,7 +25,7 @@ struct FullscreenPhotoView: View {
             if let image = image {
                 if fullscreenPhotoViewModel.isEditing {
                     NavigationLink {
-                        CameraView(image: $image)
+                        CameraView(image: $image, imageForViewUpdates: image)
                     } label: {
                         ZStack {
                             Image(uiImage: image)
@@ -55,7 +55,7 @@ struct FullscreenPhotoView: View {
                 }
             } else {
                 NavigationLink {
-                    CameraView(image: $image)
+                    CameraView(image: $image, imageForViewUpdates: image)
                 } label: {
                     ZStack {
                         Image(systemName: "camera.circle.fill")

@@ -32,7 +32,7 @@ struct AddProductView: View {
 
                 VStack(spacing: 20.0) {
                     NavigationLink {
-                        CameraView(image: $addProductViewModel.productImage)
+                        CameraView(image: $addProductViewModel.productImage, imageForViewUpdates: addProductViewModel.productImage)
                     } label: {
                         if let image = addProductViewModel.productImage {
                             Image(uiImage: image)
@@ -111,7 +111,7 @@ struct AddProductView: View {
                         Spacer()
 
                         NavigationLink {
-                            CameraView(image: $addProductViewModel.invoiceImage)
+                            CameraView(image: $addProductViewModel.invoiceImage, imageForViewUpdates: addProductViewModel.invoiceImage)
                         } label: {
                             if let image = addProductViewModel.invoiceImage {
                                 Image(uiImage: image)

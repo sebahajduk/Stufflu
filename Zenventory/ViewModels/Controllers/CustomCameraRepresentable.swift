@@ -11,6 +11,7 @@ import AVFoundation
 struct CustomCameraRepresentable {
     @Binding var image: UIImage?
     @Binding var didTapCapture: Bool
+    @Binding var imageForViewUpdates: UIImage?
 }
 
 extension CustomCameraRepresentable: UIViewControllerRepresentable {
@@ -26,7 +27,7 @@ extension CustomCameraRepresentable: UIViewControllerRepresentable {
         _ cameraViewController: CustomCameraController,
         context: Context
     ) {
-        if self.didTapCapture {
+        if didTapCapture {
             cameraViewController.didTapRecord()
         }
     }
@@ -57,6 +58,7 @@ extension CustomCameraRepresentable {
 
             if let imageData = photo.fileDataRepresentation() {
                 parent.image = UIImage(data: imageData)
+                parent.imageForViewUpdates = UIImage(data: imageData)
             }
         }
     }
