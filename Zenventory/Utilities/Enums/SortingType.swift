@@ -7,8 +7,8 @@
 
 import Foundation
 
-internal enum SortingType: String, CaseIterable, Identifiable {
-    internal var id: Self { self }
+enum SortingType: String, CaseIterable, Identifiable {
+    var id: Self { self }
     case lowestPrice = "Price lowest",
          highestPrice = "Price highest",
          nameAZ = "Name A-Z",

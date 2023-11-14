@@ -9,9 +9,9 @@ import Foundation
 
 final class WishlistProductCellViewModel: ObservableObject {
 
-    @Published internal var product: WishlistEntity
-    @Published internal var daysLeft: String = .init()
-    @Published internal var productHasValidURL: Bool = false
+    @Published var product: WishlistEntity
+    @Published var daysLeft = ""
+    @Published var productHasValidURL = false
 
     private var productDaysLeft: DateComponents?
 
@@ -42,5 +42,4 @@ final class WishlistProductCellViewModel: ObservableObject {
         guard let link = self.product.link else { return }
         self.productHasValidURL = link.isValidURL
     }
-
 }

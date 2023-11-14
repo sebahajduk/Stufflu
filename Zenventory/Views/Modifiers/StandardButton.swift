@@ -12,13 +12,13 @@ struct StandardButton: ButtonStyle {
         configuration: Configuration
     ) -> some View {
             configuration.label
-            .padding(.vertical, 10)
-            .padding(.horizontal, 20)
+            .padding(.vertical, 10.0)
+            .padding(.horizontal, 20.0)
                 .bold()
                 .background(Color.actionColor())
                 .foregroundColor(.backgroundColor())
                 .clipShape(Capsule())
-                .opacity(configuration.isPressed ? 0.9 : 1)
-                .scaleEffect(configuration.isPressed ? 0.98 : 1)
+                .opacity(configuration.isPressed ? 0.9 : 1.0)
+                .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
     }
 }

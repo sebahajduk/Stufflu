@@ -8,18 +8,19 @@
 import Foundation
 import CoreData
 
-internal final class CoreDataService: ObservableObject, CoreDataManager {
-    @Published internal var savedProductEntities: [ProductEntity] = .init()
-    @Published internal var savedWishlistEntities: [WishlistEntity] = .init()
+final class CoreDataService: ObservableObject, CoreDataManager {
+    @Published var savedProductEntities = [ProductEntity]()
+    @Published var savedWishlistEntities = [WishlistEntity]()
 
-    internal var container: NSPersistentContainer
+    var container: NSPersistentContainer
 
-    internal var savedWishlistEntitiesPublisher: Published<[WishlistEntity]>.Publisher { $savedWishlistEntities }
-    internal var savedProductEntitiesPublisher: Published<[ProductEntity]>.Publisher { $savedProductEntities }
+    var savedWishlistEntitiesPublisher: Published<[WishlistEntity]>.Publisher { $savedWishlistEntities }
+    var savedProductEntitiesPublisher: Published<[ProductEntity]>.Publisher { $savedProductEntities }
 
-    internal init() {
+    init() {
         container = NSPersistentContainer(name: "ProductsContainer")
         container.loadPersistentStores { (_, _) in }
+
         try? fetchProducts()
     }
 }

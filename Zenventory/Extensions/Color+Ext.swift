@@ -9,15 +9,15 @@ import SwiftUI
 
 extension Color {
 
-    internal static func backgroundColor() -> Color {
-        .init("background")
+    static func backgroundColor() -> Color {
+        Color("background")
     }
 
-    internal static func foregroundColor() -> Color {
-        .init("foreground")
+    static func foregroundColor() -> Color {
+        Color("foreground")
     }
 
-    internal static func actionColor() -> Color {
-        .init("action")
+    static func actionColor() -> Color {
+        Color("action")
     }
 }

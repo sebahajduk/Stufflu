@@ -8,27 +8,29 @@
 import SwiftUI
 import AVFoundation
 
-class CustomCameraController: UIViewController {
+final class CustomCameraController: UIViewController {
     var image: UIImage?
-    var captureSession: AVCaptureSession = .init()
+    var captureSession = AVCaptureSession()
     var backCamera: AVCaptureDevice?
     var frontCamera: AVCaptureDevice?
     var currentCamera: AVCaptureDevice?
     var photoOutput: AVCapturePhotoOutput?
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
 
-    weak var delegate: AVCapturePhotoCaptureDelegate?
-
-    func didTapRecord() {
-        let settings: AVCapturePhotoSettings = .init()
-        photoOutput?.capturePhoto(with: settings, delegate: delegate!)
-    }
+    var delegate: AVCapturePhotoCaptureDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
 
+    func didTapRecord() {
+        let settings = AVCapturePhotoSettings()
+        photoOutput?.capturePhoto(with: settings, delegate: delegate!)
+    }
+}
+
+private extension CustomCameraController {
     func setup() {
         setupCaptureSession()
         setupDevice()

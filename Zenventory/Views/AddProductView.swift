@@ -8,13 +8,13 @@
 import SwiftUI
 import PhotosUI
 
-internal struct AddProductView: View {
+struct AddProductView: View {
 
     @Environment(\.dismiss) private var dismiss
 
     @StateObject private var addProductViewModel: AddProductViewModel
 
-    internal init(
+    init(
         coreDataService: CoreDataService
     ) {
         _addProductViewModel = StateObject(
@@ -28,21 +28,22 @@ internal struct AddProductView: View {
         NavigationStack {
             ZStack {
                 Color.backgroundColor()
-                    .removeFocusOnTap()
-                VStack(spacing: 20) {
+                    .ignoresSafeArea()
+
+                VStack(spacing: 20.0) {
                     NavigationLink {
                         CameraView(image: $addProductViewModel.productImage)
                     } label: {
                         if let image = addProductViewModel.productImage {
                             Image(uiImage: image)
-                                .circleImage(size: 100, action: true)
+                                .roundedImage(size: 100.0, action: true)
                         } else {
                             Image(systemName: "camera.circle.fill")
-                                .circleImage(size: 100, action: true)
+                                .roundedImage(size: 100.0, action: true)
                         }
                     }
 
-                    VStack(spacing: 20) {
+                    VStack(spacing: 20.0) {
                         TextFieldWithStatus(
                             isValid: $addProductViewModel.nameIsValid,
                             textFieldValue: $addProductViewModel.productName,
@@ -80,12 +81,12 @@ internal struct AddProductView: View {
                     }
                     .padding()
                     .background(.ultraThinMaterial)
-                    .cornerRadius(20)
+                    .cornerRadius(20.0)
 
                     Text("Importance")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.leading)
-                        .padding(.bottom, -10)
+                        .padding(.bottom, -10.0)
                         .bold()
                         .font(.subheadline)
                         .foregroundColor(.foregroundColor())
@@ -114,10 +115,10 @@ internal struct AddProductView: View {
                         } label: {
                             if let image = addProductViewModel.invoiceImage {
                                 Image(uiImage: image)
-                                    .circleImage(size: 50, action: true)
+                                    .roundedImage(size: 50.0, action: true)
                             } else {
                                 Image(systemName: "doc.viewfinder.fill")
-                                    .circleImage(size: 50, action: true)
+                                    .roundedImage(size: 50.0, action: true)
                             }
                         }
                     }

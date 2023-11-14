@@ -54,7 +54,6 @@
 		60A030132A00FF5F00818118 /* MyProductsViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A030122A00FF5F00818118 /* MyProductsViewModel_Tests.swift */; };
 		60A030152A00FFB500818118 /* MockCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A030142A00FFB500818118 /* MockCoreData.swift */; };
 		60A030172A0105F000818118 /* MyProductsFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A030162A0105F000818118 /* MyProductsFilterView.swift */; };
-		60A0301D2A012F6900818118 /* PresentationDetent+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0301C2A012F6900818118 /* PresentationDetent+Ext.swift */; };
 		60A0301F2A03630500818118 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A0301E2A03630500818118 /* CoreDataManager.swift */; };
 		60A030212A0410F300818118 /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A030202A0410F300818118 /* ProductDetailsView.swift */; };
 		60A030232A04110600818118 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A030222A04110600818118 /* ProductDetailsViewModel.swift */; };
@@ -129,7 +128,6 @@
 		60A030122A00FF5F00818118 /* MyProductsViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductsViewModel_Tests.swift; sourceTree = "<group>"; };
 		60A030142A00FFB500818118 /* MockCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreData.swift; sourceTree = "<group>"; };
 		60A030162A0105F000818118 /* MyProductsFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductsFilterView.swift; sourceTree = "<group>"; };
-		60A0301C2A012F6900818118 /* PresentationDetent+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PresentationDetent+Ext.swift"; sourceTree = "<group>"; };
 		60A0301E2A03630500818118 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		60A030202A0410F300818118 /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
 		60A030222A04110600818118 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -334,7 +332,6 @@
 				607346E629E9BC3000110F01 /* Publisher+Ext.swift */,
 				607346EF29EDCC9700110F01 /* String+Ext.swift */,
 				606EF9E429C970EA0024B7EB /* Color+Ext.swift */,
-				60A0301C2A012F6900818118 /* PresentationDetent+Ext.swift */,
 				601A0C112A095ECA00072DBA /* Image+Ext.swift */,
 				60711EDF2A12B28000E9B60D /* Date+Ext.swift */,
 				60BAE0FD2A3478290098F6B9 /* View+Ext.swift */,
@@ -518,7 +515,6 @@
 				60A0301F2A03630500818118 /* CoreDataManager.swift in Sources */,
 				60A5BF0129CCC9B3008EA2A4 /* MyProductsView.swift in Sources */,
 				605B5B7C29F1A1E500973AD1 /* ProductCellViewModel.swift in Sources */,
-				60A0301D2A012F6900818118 /* PresentationDetent+Ext.swift in Sources */,
 				607346EE29EDC8A500110F01 /* TextFieldWithStatus.swift in Sources */,
 				6082AC372A72BB7C008ED4F3 /* WishlistProductCellViewModel.swift in Sources */,
 				60A030232A04110600818118 /* ProductDetailsViewModel.swift in Sources */,
@@ -695,6 +691,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -730,6 +727,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-internal struct ProfileView: View {
+struct ProfileView: View {
     var body: some View {
         Color.backgroundColor()
             .ignoresSafeArea()

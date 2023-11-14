@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-internal struct WishlistView: View {
+struct WishlistView: View {
 
-    @StateObject internal var wishlistViewModel: WishlistViewModel
+    @StateObject var wishlistViewModel: WishlistViewModel
 
     @State private var addSheetPresented: Bool = false
 
-    internal init(dataService: any CoreDataManager) {
+    init(dataService: any CoreDataManager) {
         _wishlistViewModel = StateObject(
             wrappedValue: WishlistViewModel(
                 dataService: dataService
@@ -29,11 +29,11 @@ internal struct WishlistView: View {
             VStack {
                 HStack {
                     TextField("Search...", text: $wishlistViewModel.searchText)
-                        .padding(7)
-                        .padding(.horizontal, 25)
+                        .padding(7.0)
+                        .padding(.horizontal, 25.0)
                         .background(Color(.systemGray6))
-                        .cornerRadius(8)
-                        .padding(.horizontal, 10)
+                        .cornerRadius(8.0)
+                        .padding(.horizontal, 10.0)
                         .overlay(alignment: .leading) {
                             Image(systemName: "magnifyingglass")
                                 .padding()
@@ -43,33 +43,40 @@ internal struct WishlistView: View {
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity, alignment: .trailing)
 
-                List {
-                    ForEach(wishlistViewModel.wishlistProducts, id: \.id ) { entity in
-                        if entity.link != nil && entity.link?.isValidURL ?? false {
-                            Link(
-                                destination: (
-                                    URL(
-                                        string: entity.link ?? "https://www.google.com"
-                                    )!
-                                )
-                            ) {
+                if !wishlistViewModel.wishlistProducts.isEmpty {
+                    List {
+                        ForEach(wishlistViewModel.wishlistProducts, id: \.id ) { entity in
+                            if entity.link != nil && entity.link?.isValidURL ?? false {
+                                Link(
+                                    destination: (
+                                        URL(
+                                            string: entity.link ?? "https://www.google.com"
+                                        )!
+                                    )
+                                ) {
+                                    WishlistProductCellView(for: entity)
+                                        .listRowBackground(Color.backgroundColor())
+                                }
+                            } else {
                                 WishlistProductCellView(for: entity)
+                                    .listRowBackground(Color.backgroundColor())
                             }
-                        } else {
-                            WishlistProductCellView(for: entity)
                         }
+                        .onDelete {
+                            wishlistViewModel.deleteWishlistProduct(at: $0)
+                        }
+                        .listRowSeparatorTint(Color.actionColor().opacity(0.5))
                     }
-                    .onDelete {
-                        wishlistViewModel.deleteWishlistProduct(at: $0)
-                    }
-                    .listRowSeparatorTint(Color.actionColor().opacity(0.5))
+                    .scrollContentBackground(.hidden)
+                    .listStyle(.plain)
+                    .padding(.horizontal)
+                } else {
+                    Spacer()
                 }
-                .listStyle(.plain)
-                .padding(.horizontal)
             }
             .sheet(isPresented: $addSheetPresented) {
                 AddWishlistProductView(dataService: wishlistViewModel.dataService)
-                    .presentationDetents([.filter])
+                    .presentationDetents([.height(300.0)])
             }
         }
         .toolbar {

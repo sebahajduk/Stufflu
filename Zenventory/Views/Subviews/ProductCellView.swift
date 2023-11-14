@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-internal struct ProductCellView: View {
+struct ProductCellView: View {
 
     @ObservedObject private var productCellViewModel: ProductCellViewModel
 
-    internal init(productEntity: ProductEntity) {
+    init(productEntity: ProductEntity) {
         _productCellViewModel = ObservedObject(
             wrappedValue: ProductCellViewModel(
                 product: productEntity
@@ -23,10 +23,10 @@ internal struct ProductCellView: View {
         HStack {
             if let image = productCellViewModel.productImage {
                 Image(uiImage: image)
-                    .circleImage(size: 60, action: false)
+                    .roundedImage(size: 60.0, action: false)
             } else {
                 Image(systemName: "camera.macro.circle.fill")
-                    .circleImage(size: 60, action: false)
+                    .roundedImage(size: 60.0, action: false)
             }
 
             VStack(alignment: .leading, spacing: 2) {
@@ -40,22 +40,22 @@ internal struct ProductCellView: View {
                     .foregroundColor(.gray)
 
                 Text(productCellViewModel.product.productDescr ?? "")
-                    .font(.system(size: 10))
-                    .padding(.top, 5)
-                    .padding(.trailing, 50)
+                    .font(.system(size: 10.0))
+                    .padding(.top, 5.0)
+                    .padding(.trailing, 50.0)
                     .foregroundColor(.foregroundColor())
             }
 
             Spacer()
         }
         .padding()
-        .frame(maxWidth: .infinity, maxHeight: 90)
+        .frame(maxWidth: .infinity, maxHeight: 90.0)
         .background(Color.backgroundColor())
         .listRowBackground(Color.backgroundColor())
-        .cornerRadius(30)
+        .cornerRadius(30.0)
         .overlay {
-            RoundedRectangle(cornerRadius: 30)
-                .stroke(.gray.opacity(0.2), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 30.0)
+                .stroke(.gray.opacity(0.2), lineWidth: 1.0)
         }
     }
 }

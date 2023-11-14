@@ -8,10 +8,12 @@
 import SwiftUI
 import AVFoundation
 
-struct CustomCameraRepresentable: UIViewControllerRepresentable {
+struct CustomCameraRepresentable {
     @Binding var image: UIImage?
     @Binding var didTapCapture: Bool
+}
 
+extension CustomCameraRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(
         context: Context
     ) -> CustomCameraController {
@@ -21,8 +23,8 @@ struct CustomCameraRepresentable: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(
-        _ cameraViewController: CustomCameraController
-        , context: Context
+        _ cameraViewController: CustomCameraController,
+        context: Context
     ) {
         if self.didTapCapture {
             cameraViewController.didTapRecord()
@@ -32,12 +34,13 @@ struct CustomCameraRepresentable: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
+}
 
-    class Coordinator: 
-        NSObject, 
-        UINavigationControllerDelegate, 
-        AVCapturePhotoCaptureDelegate 
-    {
+extension CustomCameraRepresentable {
+    class Coordinator:
+        NSObject,
+        UINavigationControllerDelegate,
+        AVCapturePhotoCaptureDelegate {
         let parent: CustomCameraRepresentable
 
         init(_ parent: CustomCameraRepresentable) {

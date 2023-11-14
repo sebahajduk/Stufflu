@@ -9,38 +9,36 @@ import SwiftUI
 import Combine
 import PhotosUI
 
-internal final class AddProductViewModel: ObservableObject {
+final class AddProductViewModel: ObservableObject {
+    private var cancellables = Set<AnyCancellable>()
+    private var dataService: any CoreDataManager
 
-    unowned internal var dataService: CoreDataService
-
-    internal init(
+    init(
         dataService: CoreDataService
     ) {
         self.dataService = dataService
         runObservers()
     }
 
-    private var cancellables: Set<AnyCancellable> = .init()
-
-    @Published internal var selectedImportance: Importance = .medium
+    @Published var selectedImportance: Importance = .medium
 
     // MARK: Product details
-    @Published internal var productName: String = .init()
-    @Published internal var productImage: UIImage?
-    @Published internal var invoiceImage: UIImage?
-    @Published internal var productGuarantee: String = .init()
-    @Published internal var productCareName: String = .init()
-    @Published internal var productCareInterval: String = .init()
-    @Published internal var productPrice: String = .init()
+    @Published var productName: String = .init()
+    @Published var productImage: UIImage?
+    @Published var invoiceImage: UIImage?
+    @Published var productGuarantee: String = .init()
+    @Published var productCareName: String = .init()
+    @Published var productCareInterval: String = .init()
+    @Published var productPrice: String = .init()
 
     // MARK: Textfields validation
-    @Published internal var nameIsValid: Bool = false
-    @Published internal var guaranteeIsValid: Bool = true
-    @Published internal var careNameIsValid: Bool = true
-    @Published internal var careIntervalIsValid: Bool = true
-    @Published internal var priceIsValid: Bool = true
+    @Published var nameIsValid: Bool = false
+    @Published var guaranteeIsValid: Bool = true
+    @Published var careNameIsValid: Bool = true
+    @Published var careIntervalIsValid: Bool = true
+    @Published var priceIsValid: Bool = true
 
-    internal func addButtonTapped() {
+    func addButtonTapped() {
         guard textfieldsAreValid() else { return }
 
         dataService.addProduct(

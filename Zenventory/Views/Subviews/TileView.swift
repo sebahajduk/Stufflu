@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-internal struct TileView: View {
+struct TileView: View {
 
-    internal var title: String
-    internal var image: String
+    var title: String
+    var image: String
 
     var body: some View {
         VStack {
             Image(systemName: image)
                 .foregroundColor(.actionColor())
                 .font(.headline)
-                .frame(maxWidth: .infinity, maxHeight: 30)
+                .frame(maxWidth: .infinity, maxHeight: 30.0)
                 .padding()
                 .background(Color.backgroundColor())
                 .overlay {
                     Circle()
-                        .stroke(Color.actionColor().opacity(0.2), lineWidth: 1)
+                        .stroke(Color.actionColor().opacity(0.2), lineWidth: 1.0)
                 }
             Text(title)
                 .font(.caption2.bold())

@@ -41,31 +41,36 @@ struct HistoryView: View {
                 .pickerStyle(.segmented)
                 .padding()
 
-                List {
-                    ForEach(historyViewModel.shownProducts, id: \.self) { product in
-                        HStack {
-                            Text(product.name ?? "")
-                                .font(.subheadline.bold())
-                                .foregroundStyle(Color.actionColor())
-                            Spacer()
-                            VStack(spacing: 10) {
-                                Text(historyViewModel.getDate(for: product))
-                                    .font(.subheadline)
-                                if product.isSold {
-                                    Text("\(product.soldPrice.asPrice())")
+                if !historyViewModel.shownProducts.isEmpty {
+                    List {
+                        ForEach(historyViewModel.shownProducts, id: \.self) { product in
+                            HStack {
+                                Text(product.name ?? "")
+                                    .font(.subheadline.bold())
+                                    .foregroundStyle(Color.actionColor())
+                                Spacer()
+                                VStack(spacing: 10.0) {
+                                    Text(historyViewModel.getDate(for: product))
                                         .font(.subheadline)
-                                } else {
-                                    Text("-\(product.price.asPrice())")
-                                        .font(.subheadline)
+                                    if product.isSold {
+                                        Text("\(product.soldPrice.asPrice())")
+                                            .font(.subheadline)
+                                    } else {
+                                        Text("-\(product.price.asPrice())")
+                                            .font(.subheadline)
+                                    }
                                 }
                             }
+                            .padding(.horizontal)
+                            .foregroundStyle(Color.foregroundColor())
                         }
-                        .padding(.horizontal)
-                        .foregroundStyle(Color.foregroundColor())
+                        .listRowBackground(Color.backgroundColor())
                     }
-                    .listRowBackground(Color.backgroundColor())
+                    .scrollContentBackground(.hidden)
+                    .listStyle(.plain)
+                } else {
+                    Spacer()
                 }
-                .listStyle(.plain)
             }
         }
         .navigationTitle("History")

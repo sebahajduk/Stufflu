@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 extension Publisher {
-    internal func tryAwaitMap<T>(
+    func tryAwaitMap<T>(
         _ transform: @escaping (Self.Output) async throws -> T
     ) -> Publishers.FlatMap<Future<T, Never>, Self> {
         flatMap { value in

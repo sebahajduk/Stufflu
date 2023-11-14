@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-internal struct MyProductsFilterView: View {
+struct MyProductsFilterView: View {
 
-    @ObservedObject internal var myProductsViewModel: MyProductsViewModel
+    @ObservedObject var myProductsViewModel: MyProductsViewModel
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -22,7 +22,7 @@ internal struct MyProductsFilterView: View {
                         .modifier(PriceTextField())
 
                     Divider()
-                        .frame(height: 20)
+                        .frame(height: 20.0)
 
                     TextField("Max", text: $myProductsViewModel.maxPrice)
                         .modifier(PriceTextField())
@@ -33,7 +33,7 @@ internal struct MyProductsFilterView: View {
                     isOn: $myProductsViewModel.useImportance
                 )
                 .bold()
-                .padding(.horizontal, 100)
+                .padding(.horizontal, 100.0)
                 .padding(.top)
                 .tint(.actionColor())
 

@@ -8,30 +8,30 @@
 import SwiftUI
 import Combine
 
-internal final class MyProductsViewModel: ObservableObject {
+final class MyProductsViewModel: ObservableObject {
 
-    unowned internal var dataService: any CoreDataManager
+    var dataService: any CoreDataManager
     private var cancellables = Set<AnyCancellable>()
 
-    @Published internal var myProducts: [ProductEntity] = .init()
-    @Published internal var searchText: String = .init()
-    @Published internal var showSellingAlert = false
+    @Published var myProducts = [ProductEntity]()
+    @Published var searchText = ""
+    @Published var showSellingAlert = false
 
     // MARK: Sorting
-    @Published internal var sortingType: SortingType = .addedDate
+    @Published var sortingType: SortingType = .addedDate
 
     // MARK: Filtering params
-    @Published internal var isFilterActive: Bool = false
-    @Published internal var minPrice: String = .init()
-    @Published internal var maxPrice: String = .init()
-    @Published internal var useImportance = false
-    @Published internal var importance: Importance = .medium
+    @Published var isFilterActive = false
+    @Published var minPrice = ""
+    @Published var maxPrice = ""
+    @Published var useImportance = false
+    @Published var importance: Importance = .medium
 
-    @Published internal var priceEnteredInAlert: String = .init()
+    @Published var priceEnteredInAlert = ""
 
-    @Published internal var productsValue: Double = .init()
+    @Published var productsValue: Double = .init()
 
-    internal init(
+    init(
         dataService: any CoreDataManager
     ) {
         self.dataService = dataService
@@ -41,7 +41,6 @@ internal final class MyProductsViewModel: ObservableObject {
     }
 
     // MARK: Listening for changes in CoreData
-
     private func observeCoreData() {
         dataService.savedProductEntitiesPublisher
             .sink { [weak self] newValue in
@@ -57,12 +56,11 @@ internal final class MyProductsViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    internal func caredActionSwiped(_ product: ProductEntity) {
+    func caredActionSwiped(_ product: ProductEntity) {
         ProductManager.cared(product)
     }
 
     // MARK: User actions handlers
-
     private func observeSearching() {
         $searchText
             .debounce(
@@ -122,7 +120,7 @@ internal final class MyProductsViewModel: ObservableObject {
         return sortedArray
     }
 
-    internal func clearFilters() {
+    func clearFilters() {
         isFilterActive = false
         minPrice = ""
         maxPrice = ""
@@ -130,7 +128,7 @@ internal final class MyProductsViewModel: ObservableObject {
         importance = .medium
     }
 
-    internal func filter(
+    func filter(
         _ completion: () -> Void
     ) {
         let filtered: [ProductEntity] = self.dataService.savedProductEntities.filter { $0.isSold == false }
@@ -157,7 +155,7 @@ internal final class MyProductsViewModel: ObservableObject {
         completion()
     }
 
-    internal func sell(
+    func sell(
         product: ProductEntity
     ) {
         if let price = Double(priceEnteredInAlert) {

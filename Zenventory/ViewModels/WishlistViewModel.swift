@@ -9,30 +9,27 @@ import SwiftUI
 import Combine
 
 class WishlistViewModel: ObservableObject {
+    private var cancellables = Set<AnyCancellable>()
+    var dataService: any CoreDataManager
 
-    unowned internal var dataService: any CoreDataManager
+    @Published var wishlistProducts = [WishlistEntity]()
+    @Published var searchText = ""
 
-    @Published internal var wishlistProducts: [WishlistEntity] = .init()
-    @Published internal var searchText: String = .init()
-
-    private var cancellables: Set<AnyCancellable> = .init()
-
-    internal init(dataService: any CoreDataManager) {
+    init(dataService: any CoreDataManager) {
         self.dataService = dataService
         observeWishlistProducts()
         observeSearchText()
     }
 
-    internal func deleteWishlistProduct(at offsets: IndexSet) {
+    func deleteWishlistProduct(at offsets: IndexSet) {
         wishlistProducts.remove(atOffsets: offsets)
         dataService.removeWishlistProduct(at: offsets)
     }
 }
 
 // MARK: Combine
-extension WishlistViewModel {
-
-    private func observeWishlistProducts() {
+private extension WishlistViewModel {
+    func observeWishlistProducts() {
         dataService.savedWishlistEntitiesPublisher
             .sink { [weak self] newValue in
                 self?.wishlistProducts = newValue
@@ -40,7 +37,7 @@ extension WishlistViewModel {
             .store(in: &cancellables)
     }
 
-    private func observeSearchText() {
+    func observeSearchText() {
         $searchText
             .debounce(
                 for: .milliseconds(200),

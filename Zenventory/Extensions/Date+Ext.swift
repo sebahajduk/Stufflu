@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-    internal func asString() -> String {
+    func asString() -> String {
         return self.formatted(date: .numeric, time: .omitted)
     }
 

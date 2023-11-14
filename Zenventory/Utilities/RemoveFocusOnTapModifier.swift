@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-internal struct RemoveFocusOnTapModifier: ViewModifier {
-    internal func body(content: Content) -> some View {
+struct RemoveFocusOnTapModifier: ViewModifier {
+    func body(content: Content) -> some View {
         content
             .onTapGesture {
                 UIApplication.shared.sendAction(

@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-internal struct HomeView: View {
+struct HomeView: View {
 
     @StateObject private var homeViewModel: HomeViewModel
 
-    internal init(
+    init(
         coreDataService: any CoreDataManager
     ) {
         _homeViewModel = StateObject(
@@ -22,7 +22,7 @@ internal struct HomeView: View {
     }
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 20.0) {
                 HStack {
                     NavigationLink(
                         destination: MyProductsView(
@@ -58,7 +58,7 @@ internal struct HomeView: View {
                     .font(.headline)
                     .foregroundColor(.foregroundColor())
 
-                HStack(spacing: 50) {
+            HStack(spacing: 50.0) {
                     VStack {
                         Text("Sold")
                         Text(homeViewModel.soldSummary.asPrice())
@@ -66,7 +66,7 @@ internal struct HomeView: View {
                     }
 
                     Divider()
-                        .frame(maxHeight: 30)
+                    .frame(maxHeight: 30.0)
 
                     VStack {
                         Text("Bought")
@@ -116,7 +116,7 @@ internal struct HomeView: View {
                         )
                     })
                     .listStyle(.plain)
-                    .background(Color.backgroundColor())
+                    .scrollContentBackground(.hidden)
                 }
             }
             .padding(.top)

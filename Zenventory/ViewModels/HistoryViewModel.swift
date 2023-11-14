@@ -8,14 +8,14 @@
 import SwiftUI
 import Combine
 
-class HistoryViewModel: ObservableObject {
+final class HistoryViewModel: ObservableObject {
 
-    private var cancellables: Set<AnyCancellable> = .init()
+    private var cancellables = Set<AnyCancellable>()
 
-    unowned internal var dataService: any CoreDataManager
+    private var dataService: any CoreDataManager
 
     @Published var historyPickerSelection: HistoryOptions = .all
-    @Published var shownProducts: [ProductEntity] = .init()
+    @Published var shownProducts = [ProductEntity]()
 
     init(dataService: any CoreDataManager) {
         self.dataService = dataService
@@ -39,7 +39,7 @@ class HistoryViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    internal func getDate(for product: ProductEntity) -> String {
+    func getDate(for product: ProductEntity) -> String {
         if product.isSold {
             return product.soldDate?.asString() ?? ""
         } else {

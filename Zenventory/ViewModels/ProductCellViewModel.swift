@@ -8,15 +8,15 @@
 import SwiftUI
 import Combine
 
-internal final class ProductCellViewModel: ObservableObject {
+final class ProductCellViewModel: ObservableObject {
 
-    private var cancellables: Set<AnyCancellable> = .init()
+    private var cancellables = Set<AnyCancellable>()
 
-    @Published internal var product: ProductEntity
-    @Published internal var lastUsed: String
-    @Published internal var productImage: UIImage?
+    @Published var product: ProductEntity
+    @Published var lastUsed: String
+    @Published var productImage: UIImage?
 
-    internal init(
+    init(
         product: ProductEntity
     ) {
         self.product = product

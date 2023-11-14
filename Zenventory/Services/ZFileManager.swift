@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-internal struct ZFileManager {
+struct ZFileManager {
 
-    internal static func saveImage(
+    static func saveImage(
         productImage: UIImage,
         name: String
     ) throws {
@@ -27,7 +27,7 @@ internal struct ZFileManager {
         }
     }
 
-    internal static func getImage(
+    static func getImage(
         name: String
     ) throws -> UIImage? {
         guard
@@ -38,7 +38,7 @@ internal struct ZFileManager {
         return UIImage(contentsOfFile: productPhotoPath)
     }
 
-    internal static func getPathForImage(
+    static func getPathForImage(
         name: String
     ) throws -> URL? {
         guard
@@ -54,7 +54,7 @@ internal struct ZFileManager {
         return productPhotoPath
     }
 
-    internal static func deleteImage(
+    static func deleteImage(
         name: String
     ) throws {
         guard

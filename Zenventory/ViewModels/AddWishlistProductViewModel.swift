@@ -10,21 +10,20 @@ import Combine
 
 final class AddWishlistProductViewModel: ObservableObject {
 
-    private var cancellables: Set<AnyCancellable> = .init()
+    private var cancellables = Set<AnyCancellable>()
+    private var dataService: any CoreDataManager
 
-    unowned internal var dataService: any CoreDataManager
+    @Published var nameTextField = ""
+    @Published var nameIsValid = false
 
-    @Published internal var nameTextField: String = .init()
-    @Published internal var nameIsValid: Bool = false
+    @Published var daysCounterTextField = ""
+    @Published var daysCounterIsValid = false
 
-    @Published internal var daysCounterTextField: String = .init()
-    @Published internal var daysCounterIsValid: Bool = false
+    @Published var linkTextField = ""
+    @Published var linkIsValid = true
 
-    @Published internal var linkTextField: String = .init()
-    @Published internal var linkIsValid: Bool = true
-
-    @Published internal var priceTextField: String = .init()
-    @Published internal var priceIsValid: Bool = true
+    @Published var priceTextField = ""
+    @Published var priceIsValid = true
 
     init(dataService: any CoreDataManager) {
         self.dataService = dataService
@@ -83,27 +82,20 @@ final class AddWishlistProductViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    internal func addWishlistProduct(
+    func addWishlistProduct(
         days: String,
         link: String?,
         name: String,
         price: String,
         completion: @escaping (Bool) -> Void
     ) {
-        /// days - Date
-        /// link - String
-        /// name: String
-        /// price: Double
-
         var dateComponent = DateComponents()
         dateComponent.day = Int(days)
 
-        guard let finalDate = Calendar.current.date(byAdding: dateComponent, to: Date()) else {
-            completion(false)
-            return
-        }
-
-        guard nameIsValid && daysCounterIsValid && linkIsValid && priceIsValid else {
+        guard
+            let finalDate = Calendar.current.date(byAdding: dateComponent, to: Date()),
+            nameIsValid && daysCounterIsValid && linkIsValid && priceIsValid
+        else {
             completion(false)
             return
         }
