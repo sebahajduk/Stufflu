@@ -15,7 +15,7 @@ struct CustomCameraView: View {
     var body: some View {
         VStack {
             CustomCameraRepresentable(
-                image: self.$image, 
+                image: self.$image,
                 didTapCapture: $didTapCapture
             )
             Spacer()
@@ -25,7 +25,7 @@ struct CustomCameraView: View {
                 Image(systemName: "camera")
             }
             .buttonStyle(StandardButton())
-            .padding(.bottom, 30)
+            .padding(.bottom, 30.0)
             Spacer()
         }
     }

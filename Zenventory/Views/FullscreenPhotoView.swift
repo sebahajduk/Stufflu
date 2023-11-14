@@ -8,39 +8,24 @@
 import SwiftUI
 import PhotosUI
 
-internal enum PhotoCategory {
+enum PhotoCategory {
     case invoice, product
 }
 
 struct FullscreenPhotoView: View {
 
-    @ObservedObject private var fullscreenPhotoViewModel: FullscreenPhotoViewModel
-
-    init(
-        image: UIImage?,
-        product: ProductEntity,
-        dataService: any CoreDataManager,
-        photoCategory: PhotoCategory
-    ) {
-        _fullscreenPhotoViewModel = ObservedObject(
-            wrappedValue: FullscreenPhotoViewModel(
-                image: image,
-                product: product,
-                dataService: dataService,
-                photoCategory: photoCategory
-            )
-        )
-    }
+    @ObservedObject private var fullscreenPhotoViewModel: FullscreenPhotoViewModel = .init()
+    @Binding var image: UIImage?
 
     var body: some View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
 
-            if let image = fullscreenPhotoViewModel.image {
+            if let image = image {
                 if fullscreenPhotoViewModel.isEditing {
                     NavigationLink {
-                        CameraView(image: $fullscreenPhotoViewModel.image)
+                        CameraView(image: $image)
                     } label: {
                         ZStack {
                             Image(uiImage: image)
@@ -49,10 +34,10 @@ struct FullscreenPhotoView: View {
                                     Color.actionColor().opacity(0.5)
                                 }
                                 .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                .clipShape(RoundedRectangle(cornerRadius: 20.0))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .padding()
-                                .shadow(radius: 10)
+                                .shadow(radius: 10.0)
 
                             Text("Tap to change photo")
                                 .foregroundColor(.white)
@@ -63,14 +48,14 @@ struct FullscreenPhotoView: View {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .clipShape(RoundedRectangle(cornerRadius: 20.0))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding()
-                        .shadow(radius: 10)
+                        .shadow(radius: 10.0)
                 }
             } else {
                 NavigationLink {
-                    CameraView(image: $fullscreenPhotoViewModel.image)
+                    CameraView(image: $image)
                 } label: {
                     ZStack {
                         Image(systemName: "camera.circle.fill")

@@ -8,8 +8,7 @@
 import Foundation
 import CoreData
 
-internal protocol CoreDataManager: ObservableObject {
-
+protocol CoreDataManager: ObservableObject {
     var container: NSPersistentContainer { get set }
     var savedProductEntities: [ProductEntity] { get set }
     var savedProductEntitiesPublisher: Published<[ProductEntity]>.Publisher { get }
@@ -20,7 +19,6 @@ internal protocol CoreDataManager: ObservableObject {
     func fetchProducts() throws
 }
 
-// MARK: Operations
 extension CoreDataManager {
     func saveData() throws {
         do {
@@ -68,7 +66,7 @@ extension CoreDataManager {
         price: Double?,
         importance: String
     ) {
-        let newProduct: ProductEntity = .init(context: container.viewContext)
+        let newProduct = ProductEntity(context: container.viewContext)
 
         newProduct.id = UUID()
         newProduct.addedDate = Date()
@@ -94,42 +92,49 @@ extension CoreDataManager {
     // swiftlint: enable function_parameter_count
 
     func edit(product: ProductEntity) {
-        guard let index = savedProductEntities.firstIndex(where: { $0.id == product.id }) else { return }
-        savedProductEntities[index] = product
-
-        refreshData()
+        if let index = getIndex(for: product) {
+            savedProductEntities[index] = product
+            refreshData()
+        }
     }
 
     func addPhoto(product: ProductEntity) {
-        guard let index = savedProductEntities.firstIndex(where: { $0.id == product.id }) else { return }
+        if let index = getIndex(for: product) {
+            let entity: ProductEntity = savedProductEntities[index]
 
-        let entity: ProductEntity = savedProductEntities[index]
+            entity.productPhotoPath = nil
+            entity.productPhotoPath = "\(entity.id ?? UUID())"
 
-        entity.productPhotoPath = nil
-        entity.productPhotoPath = "\(entity.id ?? UUID())"
-
-        refreshData()
+            refreshData()
+        }
     }
 
     func deletePhoto(product: ProductEntity) {
-        guard let index = savedProductEntities.firstIndex(where: { $0.id == product.id }) else { return }
-
-        let entity: ProductEntity = savedProductEntities[index]
-
-        if entity.productPhotoPath != nil {
-            entity.productPhotoPath = nil
+        if let index = getIndex(for: product) {
+            let entity: ProductEntity = savedProductEntities[index]
+            if entity.productPhotoPath != nil {
+                entity.productPhotoPath = nil
+                refreshData()
+            }
         }
-
-        refreshData()
     }
     func addInvoicePhoto(product: ProductEntity) {
-        guard let index = savedProductEntities.firstIndex(where: { $0.id == product.id }) else { return }
+        if let index = getIndex(for: product) {
+            let entity: ProductEntity = savedProductEntities[index]
+            entity.productInvoicePath = "\(entity.id ?? UUID())Invoice"
 
-        let entity: ProductEntity = savedProductEntities[index]
+            refreshData()
+        }
+    }
+}
 
-        entity.productInvoicePath = "\(entity.id ?? UUID())Invoice"
+private extension CoreDataManager {
+    func getIndex(for product: ProductEntity) -> Int? {
+        guard
+            let index = savedProductEntities.firstIndex(where: { $0.id == product.id })
+        else { return nil }
 
-        refreshData()
+        return index
     }
 }
 

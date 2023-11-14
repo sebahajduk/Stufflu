@@ -9,18 +9,17 @@ import Foundation
 import Combine
 import SwiftUI
 
-internal final class HomeViewModel: ObservableObject {
+final class HomeViewModel: ObservableObject {
 
-    @Published internal var products: [ProductEntity] = .init()
-    @Published internal var boughtSummary: Double = .init()
-    @Published internal var soldSummary: Double = .init()
-    @Published internal var listIsEmpty: Bool = true
+    var dataService: any CoreDataManager
+    private var cancellables = Set<AnyCancellable>()
 
-    unowned internal var dataService: any CoreDataManager
+    @Published var products = [ProductEntity]()
+    @Published var boughtSummary: Double = .init()
+    @Published var soldSummary: Double = .init()
+    @Published var listIsEmpty = true
 
-    private var cancellables: Set<AnyCancellable> = .init()
-
-    internal init(
+    init(
         dataService: any CoreDataManager
     ) {
         self.dataService = dataService
@@ -49,7 +48,7 @@ internal final class HomeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    internal func use(
+    func use(
         product: ProductEntity
     ) {
         withAnimation {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    internal func removeFocusOnTap() -> some View {
+    func removeFocusOnTap() -> some View {
         modifier(RemoveFocusOnTapModifier())
     }
 }

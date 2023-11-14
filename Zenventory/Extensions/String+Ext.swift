@@ -39,11 +39,11 @@ extension String {
         static let instance: NumberFormatter = .init()
     }
 
-    internal var isDouble: Bool {
+    var isDouble: Bool {
         return NumFormatter.instance.number(from: self)?.doubleValue != nil
     }
 
-    internal var isInteger: Bool {
+    var isInteger: Bool {
         let digitsCharacters: CharacterSet = .init(charactersIn: "0123456789")
         return CharacterSet(charactersIn: self).isSubset(of: digitsCharacters)
     }

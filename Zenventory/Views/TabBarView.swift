@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-internal enum TabSelected {
+enum TabSelected {
     case home, profile
 }
 
-internal struct TabBarView: View {
+struct TabBarView: View {
 
-    internal var coreDataService: CoreDataService
+    var coreDataService: CoreDataService
 
     @State private var selectedTab: TabSelected = .home
 
@@ -37,7 +37,7 @@ internal struct TabBarView: View {
                     selectedTab: $selectedTab,
                     dataService: coreDataService
                 )
-                .frame(height: 50)
+                .frame(height: 50.0)
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.backgroundColor())

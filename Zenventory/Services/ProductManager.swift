@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal struct ProductManager {
+struct ProductManager {
 
     static func use(product: ProductEntity) {
         product.lastUsed = Date()

@@ -8,11 +8,11 @@
 import SwiftUI
 import PhotosUI
 
-internal struct ProductDetailsView: View {
+struct ProductDetailsView: View {
 
     @StateObject private var productDetailsViewModel: ProductDetailsViewModel
 
-    internal init(
+    init(
         product: ProductEntity,
         dataService: any CoreDataManager
     ) {
@@ -37,13 +37,13 @@ internal struct ProductDetailsView: View {
                         } label: {
                             ZStack {
                                 Image(uiImage: image)
-                                    .circleImage(size: 100, action: true)
+                                    .roundedImage(size: 100.0, action: true)
                                     .overlay(alignment: .topTrailing) {
                                         Button {
                                             productDetailsViewModel.deletePhoto()
                                         } label: {
                                             Image(systemName: "x.circle.fill")
-                                                .frame(width: 30, height: 30)
+                                                .frame(width: 30.0, height: 30.0)
                                                 .foregroundColor(.red)
                                         }
                                         .padding(15)
@@ -53,14 +53,11 @@ internal struct ProductDetailsView: View {
                     } else {
                         NavigationLink {
                             FullscreenPhotoView(
-                                image: productDetailsViewModel.image,
-                                product: productDetailsViewModel.product,
-                                dataService: productDetailsViewModel.dataService,
-                                photoCategory: .product
+                                image: $productDetailsViewModel.image
                             )
                         } label: {
                             Image(uiImage: image)
-                                .circleImage(size: 100, action: true)
+                                .roundedImage(size: 100.0, action: true)
                         }
                     }
                 } else {
@@ -69,10 +66,10 @@ internal struct ProductDetailsView: View {
                     } label: {
                         if let image = productDetailsViewModel.image {
                             Image(uiImage: image)
-                                .circleImage(size: 100, action: true)
+                                .roundedImage(size: 100.0, action: true)
                         } else {
                             Image(systemName: "camera.macro.circle.fill")
-                                .circleImage(size: 100, action: productDetailsViewModel.isEditing)
+                                .roundedImage(size: 100.0, action: productDetailsViewModel.isEditing)
                         }
                     }
                 }
@@ -138,7 +135,7 @@ internal struct ProductDetailsView: View {
                     .frame(maxWidth: .infinity)
                     .background(
                         Capsule()
-                            .stroke(Color.actionColor(), lineWidth: 1)
+                            .stroke(Color.actionColor(), lineWidth: 1.0)
                     )
                     .font(.headline)
                     .multilineTextAlignment(.center)
@@ -163,11 +160,11 @@ internal struct ProductDetailsView: View {
                     textFieldLabel: productDetailsViewModel.getName(),
                     keyboardType: .default
                 )
-                .frame(minHeight: 30)
+                .frame(minHeight: 30.0)
                 .frame(maxWidth: .infinity)
                 .background(
                     Capsule()
-                        .stroke(Color.actionColor(), lineWidth: 1)
+                        .stroke(Color.actionColor(), lineWidth: 1.0)
                 )
                 .font(.headline)
                 .multilineTextAlignment(.center)
@@ -183,10 +180,7 @@ internal struct ProductDetailsView: View {
 
             NavigationLink {
                 FullscreenPhotoView(
-                    image: productDetailsViewModel.invoiceImage,
-                    product: productDetailsViewModel.product,
-                    dataService: productDetailsViewModel.dataService,
-                    photoCategory: .invoice
+                    image: $productDetailsViewModel.invoiceImage
                 )
             } label: {
                 Text("Receipt / invoice")
@@ -246,19 +240,19 @@ internal struct ProductDetailsView: View {
 
             if productDetailsViewModel.isEditing {
                 TextEditor(text: $productDetailsViewModel.productDescription)
-                    .frame(minHeight: 100)
-                    .padding(10)
+                    .frame(minHeight: 100.0)
+                    .padding(10.0)
                     .scrollContentBackground(.hidden)
                     .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.actionColor(), lineWidth: 1)
+                        RoundedRectangle(cornerRadius: 10.0)
+                            .stroke(Color.actionColor(), lineWidth: 1.0)
                     )
                     .font(.headline)
 
             } else {
                 ScrollView {
                     Text(productDetailsViewModel.getDescription())
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 20.0)
                 }
 
             }

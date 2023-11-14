@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal enum Importance: String, CaseIterable, Identifiable {
-    internal var id: Self { self }
+enum Importance: String, CaseIterable, Identifiable {
+    var id: Self { self }
     case low, medium, high
 }

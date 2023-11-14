@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-internal struct PriceTextField: ViewModifier {
-    internal func body(
+struct PriceTextField: ViewModifier {
+    func body(
         content: Content
     ) -> some View {
         content
-            .frame(height: 30)
-            .frame(maxWidth: 60)
-            .padding(.horizontal, 25)
+            .frame(height: 30.0)
+            .frame(maxWidth: 60.0)
+            .padding(.horizontal, 25.0)
             .background(.ultraThickMaterial)
-            .cornerRadius(8)
-            .padding(.horizontal, 10)
+            .cornerRadius(8.0)
+            .padding(.horizontal, 10.0)
     }
 }

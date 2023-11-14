@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-internal struct WishlistProductCellView: View {
+struct WishlistProductCellView: View {
 
     @StateObject private var wishlistProductCellViewModel: WishlistProductCellViewModel
 
@@ -23,8 +23,8 @@ internal struct WishlistProductCellView: View {
         ZStack {
             Color.backgroundColor()
 
-            HStack(spacing: 20) {
-                VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 20.0) {
+                VStack(alignment: .leading, spacing: 10.0) {
                     Text(wishlistProductCellViewModel.product.name ?? "")
                         .font(.headline)
                         .foregroundColor(.actionColor())
@@ -46,7 +46,7 @@ internal struct WishlistProductCellView: View {
                         .foregroundStyle(Color.backgroundColor())
                 }
             }
-            .padding(10)
+            .padding(10.0)
         }
     }
 }

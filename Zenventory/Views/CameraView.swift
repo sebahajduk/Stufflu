@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CameraView: View {
 
-    @Binding internal var image: UIImage?
+    @Binding var image: UIImage?
 
     var body: some View {
         NavigationView {
@@ -19,7 +19,7 @@ struct CameraView: View {
                         .ignoresSafeArea()
                     ProgressView()
                     if let image {
-                        VStack(spacing: 30) {
+                        VStack(spacing: 30.0) {
                             Image(uiImage: image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)

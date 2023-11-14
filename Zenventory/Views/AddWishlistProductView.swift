@@ -56,7 +56,7 @@ struct AddWishlistProductView: View {
                 }
                 .padding()
                 .background(.ultraThinMaterial)
-                .cornerRadius(20)
+                .cornerRadius(20.0)
                 .padding()
             }
             .navigationTitle("Add wishlist product")

@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-internal struct ZTabView: View {
-    @Binding internal var selectedTab: TabSelected
+struct ZTabView: View {
+    @Binding var selectedTab: TabSelected
 
-    @StateObject internal var dataService: CoreDataService
+    @StateObject var dataService: CoreDataService
     @State private var isPresented: Bool = false
 
     var body: some View {

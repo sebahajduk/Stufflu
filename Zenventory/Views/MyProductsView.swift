@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-internal struct MyProductsView: View {
+struct MyProductsView: View {
 
-    @StateObject internal var myProductsViewModel: MyProductsViewModel
+    @StateObject var myProductsViewModel: MyProductsViewModel
 
     @State private var isFiltering = false
 
@@ -17,7 +17,7 @@ internal struct MyProductsView: View {
     /// it's needed for confirmation alert to change correct product
     @State private var temporaryProduct: ProductEntity?
 
-    internal init(
+    init(
         coreDataService: any CoreDataManager
     ) {
         _myProductsViewModel = StateObject(
@@ -40,11 +40,11 @@ internal struct MyProductsView: View {
                             .bold()
 
                         TextField("Search...", text: $myProductsViewModel.searchText)
-                            .padding(7)
-                            .padding(.horizontal, 25)
+                            .padding(7.0)
+                            .padding(.horizontal, 25.0)
                             .background(Color(.systemGray6))
-                            .cornerRadius(8)
-                            .padding(.horizontal, 10)
+                            .cornerRadius(8.0)
+                            .padding(.horizontal, 10.0)
                             .overlay(alignment: .leading) {
                                 Image(systemName: "magnifyingglass")
                                     .padding()
@@ -61,7 +61,7 @@ internal struct MyProductsView: View {
                             }
                         } label: {
                             Image(systemName: "arrow.up.arrow.down")
-                                .frame(width: 30, height: 30)
+                                .frame(width: 30.0, height: 30.0)
                                 .foregroundColor(.foregroundColor())
                                 .bold()
                         }
@@ -70,17 +70,17 @@ internal struct MyProductsView: View {
                             isFiltering = true
                         } label: {
                             Image(systemName: "line.3.horizontal.decrease")
-                                .frame(width: 30, height: 30)
+                                .frame(width: 30.0, height: 30.0)
                                 .foregroundColor(.foregroundColor())
                                 .bold()
                         }.sheet(isPresented: $isFiltering) {
                             MyProductsFilterView(myProductsViewModel: myProductsViewModel)
-                                .presentationDetents([.filter])
+                                .presentationDetents([.height(300.0)])
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 20.0)
 
                 List {
                     ForEach(myProductsViewModel.myProducts, id: \.id) { product in
@@ -125,8 +125,9 @@ internal struct MyProductsView: View {
                     }
 
                 }
+                .scrollContentBackground(.hidden)
                 .listStyle(.plain)
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 20.0)
             }
             .foregroundColor(.foregroundColor())
         }

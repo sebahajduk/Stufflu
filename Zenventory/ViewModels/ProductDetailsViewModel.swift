@@ -9,40 +9,40 @@ import SwiftUI
 import Combine
 import PhotosUI
 
-internal final class ProductDetailsViewModel: ObservableObject {
+final class ProductDetailsViewModel: ObservableObject {
 
-    private var cancellables: Set<AnyCancellable> = .init()
-    unowned internal var dataService: any CoreDataManager
+    private var cancellables = Set<AnyCancellable>()
+    private var dataService: any CoreDataManager
 
-    @Published internal var product: ProductEntity
-    @Published internal var image: UIImage?
-    @Published internal var invoiceImage: UIImage?
+    @Published var product: ProductEntity
+    @Published var image: UIImage?
+    @Published var invoiceImage: UIImage?
 
-    @Published internal var isEditing: Bool = false
+    @Published var isEditing: Bool = false
 
     /// TextFields binders
-    @Published internal var productLastUsed: String = .init()
-    @Published internal var productName: String = .init()
-    @Published internal var productCareName: String = .init()
-    @Published internal var productCareInterval: String = .init()
-    @Published internal var productLastCared: String = .init()
-    @Published internal var productGuarantee: String = .init()
-    @Published internal var productPrice: String = .init()
-    @Published internal var productDescription: String = .init()
+    @Published var productLastUsed = ""
+    @Published var productName = ""
+    @Published var productCareName = ""
+    @Published var productCareInterval = ""
+    @Published var productLastCared = ""
+    @Published var productGuarantee = ""
+    @Published var productPrice = ""
+    @Published var productDescription = ""
 
     /// TextFields inputs check
-    @Published internal var productCareNameIsValid: Bool = true
-    @Published internal var productNameIsValid: Bool = true
-    @Published internal var productLastUsedIsValid: Bool = true
-    @Published internal var productCareIntervalIsValid: Bool = true
-    @Published internal var productLastCaredIsValid: Bool = true
-    @Published internal var productGuaranteeIsValid: Bool = true
-    @Published internal var productPriceIsValid: Bool = true
+    @Published var productCareNameIsValid = true
+    @Published var productNameIsValid = true
+    @Published var productLastUsedIsValid = true
+    @Published var productCareIntervalIsValid = true
+    @Published var productLastCaredIsValid = true
+    @Published var productGuaranteeIsValid = true
+    @Published var productPriceIsValid = true
 
     /// Photo picker binding
-    @Published internal var photosPickerItem: PhotosPickerItem?
+    @Published var photosPickerItem: PhotosPickerItem?
 
-    internal init(
+    init(
         product: ProductEntity,
         dataService: any CoreDataManager
     ) {
@@ -57,7 +57,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
             name: product.productInvoicePath ?? "Unknown"
         )
 
-        self.productDescription = product.productDescr ?? ""
+        productDescription = product.productDescr ?? ""
 
         if let lastUsed = product.lastUsed {
             self.productLastUsed = "\(lastUsed.formatted(date: .numeric, time: .omitted))"
@@ -89,7 +89,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
         observeProduct()
     }
 
-    internal func deletePhoto() {
+    func deletePhoto() {
         try? ZFileManager.deleteImage(
             name: product.productPhotoPath ?? "Unknown"
         )
@@ -150,7 +150,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
 
     // MARK: Action handlers
 
-    internal func editButtonTapped() {
+    func editButtonTapped() {
         withAnimation {
             isEditing = true
         }
@@ -167,7 +167,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    internal func saveButtonTapped() {
+    func saveButtonTapped() {
         if dataIsValid() {
             product.name = productName
             product.productDescr = productDescription
@@ -194,18 +194,11 @@ internal final class ProductDetailsViewModel: ObservableObject {
     }
 
     private func observeImageChanges() {
-        $photosPickerItem
-            .compactMap { $0 }
-            .tryAwaitMap { index in
-                /// Needs to be converted into Data because type Image.self does not show photos other than .png
-                /// for example .heic or .jpeg
-                return try await index.loadTransferable(type: Data.self) ?? Data()
-            }
-            .receive(on: RunLoop.main)
-            .sink { [weak self] value in
+        $image
+            .dropFirst()
+            .sink { [weak self] photo in
                 guard let self else { return }
-                if let image: UIImage = .init(data: value) {
-                    self.image = image
+                if let image: UIImage = photo {
 
                     try? ZFileManager.saveImage(
                         productImage: image,
@@ -218,7 +211,7 @@ internal final class ProductDetailsViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    internal func cancelButtonTapped() {
+    func cancelButtonTapped() {
         withAnimation {
             isEditing = false
         }
@@ -226,11 +219,11 @@ internal final class ProductDetailsViewModel: ObservableObject {
 
     // MARK: Product GETTERS
 
-    internal func getCareInterval() -> String {
+    func getCareInterval() -> String {
         product.careInterval != 0 ? String(product.careInterval) : "-"
     }
 
-    internal func getCareName() -> String {
+    func getCareName() -> String {
         if let careName = product.careName {
             return careName
         } else {
@@ -238,19 +231,19 @@ internal final class ProductDetailsViewModel: ObservableObject {
         }
     }
 
-    internal func getGuarantee() -> String {
+    func getGuarantee() -> String {
         product.guarantee != 0 ? String(product.guarantee) : "-"
     }
 
-    internal func getName() -> String {
+    func getName() -> String {
         product.name ?? "Unknown"
     }
 
-    internal func getPrice() -> String {
+    func getPrice() -> String {
         product.price.asPrice()
     }
 
-    internal func getDescription() -> String {
+    func getDescription() -> String {
         product.productDescr ?? ""
     }
 }

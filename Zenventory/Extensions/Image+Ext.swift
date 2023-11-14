@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Image {
-    func circleImage(
+    func roundedImage(
         size: CGFloat,
         action: Bool
     ) -> some View {
@@ -16,7 +16,7 @@ extension Image {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: size, height: size)
-            .clipShape(Circle())
+            .clipShape(RoundedRectangle(cornerRadius: 25.0))
             .padding()
             .foregroundColor(action ? .actionColor() : .foregroundColor().opacity(0.3))
     }

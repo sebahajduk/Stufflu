@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-internal struct TextFieldWithStatus: View {
+struct TextFieldWithStatus: View {
 
-    @Binding internal var isValid: Bool
-    @Binding internal var textFieldValue: String
-    @State internal var textFieldLabel: String?
-    @State internal var keyboardType: UIKeyboardType
+    @Binding var isValid: Bool
+    @Binding var textFieldValue: String
+    @State var textFieldLabel: String?
+    @State var keyboardType: UIKeyboardType
 
     var body: some View {
         HStack {
@@ -30,7 +30,7 @@ internal struct TextFieldWithStatus: View {
                 }
             }
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 10.0)
     }
 
 }
