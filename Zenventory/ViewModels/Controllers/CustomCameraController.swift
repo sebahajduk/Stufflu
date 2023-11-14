@@ -87,7 +87,6 @@ private extension CustomCameraController {
         self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
         self.cameraPreviewLayer?.frame = self.view.frame
         self.view.layer.insertSublayer(cameraPreviewLayer!, at: 0)
-
     }
 
     func startRunningCaptureSession() {

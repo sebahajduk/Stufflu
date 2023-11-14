@@ -6,45 +6,50 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CameraView: View {
 
+    var cancellables = Set<AnyCancellable>()
+
     @Binding var image: UIImage?
+    @State var imageForViewUpdates: UIImage?
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 ZStack {
                     Color.backgroundColor()
                         .ignoresSafeArea()
                     ProgressView()
-                    if let image {
-                        VStack(spacing: 30.0) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
+                    if let imageForViewUpdates {
+                            VStack(spacing: 30.0) {
+                                Image(uiImage: imageForViewUpdates)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
 
-                            HStack {
-                                Button {
+                                HStack {
+                                    Button {
 
-                                } label: {
-                                    Image(systemName: "checkmark.circle")
-                                        .font(.headline)
+                                    } label: {
+                                        Image(systemName: "checkmark.circle")
+                                            .font(.headline)
+                                    }
+                                    .buttonStyle(StandardButton())
+                                    Spacer()
+                                    Button {
+                                        self.image = nil
+                                        self.imageForViewUpdates = nil
+                                    } label: {
+                                        Image(systemName: "arrow.triangle.2.circlepath.camera")
+                                            .font(.headline)
+                                    }
+                                    .buttonStyle(StandardButton())
                                 }
-                                .buttonStyle(StandardButton())
-                                Spacer()
-                                Button {
-                                    self.image = nil
-                                } label: {
-                                    Image(systemName: "arrow.triangle.2.circlepath.camera")
-                                        .font(.headline)
-                                }
-                                .buttonStyle(StandardButton())
+                                .padding()
                             }
-                            .padding()
-                        }
                     } else {
-                        CustomCameraView(image: self.$image)
+                        CustomCameraView(image: $image, imageForViewUpdates: $imageForViewUpdates)
                             .ignoresSafeArea()
                     }
                 }
