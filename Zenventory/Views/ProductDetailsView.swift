@@ -33,7 +33,10 @@ struct ProductDetailsView: View {
                 if let image = productDetailsViewModel.image {
                     if productDetailsViewModel.isEditing {
                         NavigationLink {
-                            CameraView(image: $productDetailsViewModel.image, imageForViewUpdates: productDetailsViewModel.image)
+                            CameraView(
+                                image: $productDetailsViewModel.image,
+                                imageForViewUpdates: productDetailsViewModel.image
+                            )
                         } label: {
                             ZStack {
                                 Image(uiImage: image)
@@ -62,7 +65,10 @@ struct ProductDetailsView: View {
                     }
                 } else {
                     NavigationLink {
-                        CameraView(image: $productDetailsViewModel.image, imageForViewUpdates: productDetailsViewModel.image)
+                        CameraView(
+                            image: $productDetailsViewModel.image,
+                            imageForViewUpdates: productDetailsViewModel.image
+                        )
                     } label: {
                         if let image = productDetailsViewModel.image {
                             Image(uiImage: image)
