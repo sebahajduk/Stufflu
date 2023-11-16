@@ -110,7 +110,7 @@ final class ProductDetailsViewModel: ObservableObject {
 
     private func observeNameTextField() {
         $productName
-            .map { $0.count > 3 }
+            .map { $0.count >= 3 }
             .sink { [weak self] value in
                 guard let self else { return }
                 self.productNameIsValid = value

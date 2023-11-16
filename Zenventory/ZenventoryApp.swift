@@ -14,7 +14,7 @@ struct ZenventoryApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TabBarView(coreDataService: coreDataService)
+            HomeView(coreDataService: coreDataService)
                 .toolbarBackground(.hidden, for: .navigationBar)
                 .toolbar(.hidden, for: .navigationBar)
         }

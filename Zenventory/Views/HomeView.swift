@@ -22,7 +22,8 @@ struct HomeView: View {
     }
 
     var body: some View {
-        VStack(spacing: 20.0) {
+        NavigationStack {
+            VStack(spacing: 20.0) {
                 HStack {
                     NavigationLink(
                         destination: MyProductsView(
@@ -35,7 +36,7 @@ struct HomeView: View {
                     NavigationLink(
                         destination: WishlistView(
                             dataService: homeViewModel.dataService
-                    )
+                        )
                     ) {
                         TileView(title: "WISHLIST", image: "heart.fill")
                     }
@@ -58,7 +59,7 @@ struct HomeView: View {
                     .font(.headline)
                     .foregroundColor(.foregroundColor())
 
-            HStack(spacing: 50.0) {
+                HStack(spacing: 50.0) {
                     VStack {
                         Text("Sold")
                         Text(homeViewModel.soldSummary.asPrice())
@@ -66,7 +67,7 @@ struct HomeView: View {
                     }
 
                     Divider()
-                    .frame(maxHeight: 30.0)
+                        .frame(maxHeight: 30.0)
 
                     VStack {
                         Text("Bought")
@@ -125,4 +126,5 @@ struct HomeView: View {
             .toolbarRole(.navigationStack)
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
 }
