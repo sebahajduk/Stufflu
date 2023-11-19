@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 struct CameraView: View {
+    @Environment(\.dismiss) var dismiss
 
     var cancellables = Set<AnyCancellable>()
 
@@ -30,7 +31,7 @@ struct CameraView: View {
 
                                 HStack {
                                     Button {
-
+                                        dismiss()
                                     } label: {
                                         Image(systemName: "checkmark.circle")
                                             .font(.headline)
