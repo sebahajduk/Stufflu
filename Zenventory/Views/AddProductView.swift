@@ -29,6 +29,7 @@ struct AddProductView: View {
             ZStack {
                 Color.backgroundColor()
                     .ignoresSafeArea()
+                    .removeFocusOnTap()
 
                 VStack(spacing: 20.0) {
                     NavigationLink {

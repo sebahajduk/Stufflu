@@ -28,7 +28,6 @@ struct MyProductsView: View {
     }
 
     var body: some View {
-
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
@@ -134,5 +133,4 @@ struct MyProductsView: View {
         .navigationTitle("YOUR PRODUCTS")
         .navigationBarTitleDisplayMode(.inline)
     }
-
 }
