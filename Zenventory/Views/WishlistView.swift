@@ -55,8 +55,8 @@ struct WishlistView: View {
                                     )
                                 ) {
                                     WishlistProductCellView(for: entity)
-                                        .listRowBackground(Color.backgroundColor())
                                 }
+                                .listRowBackground(Color.backgroundColor())
                             } else {
                                 WishlistProductCellView(for: entity)
                                     .listRowBackground(Color.backgroundColor())
@@ -67,7 +67,8 @@ struct WishlistView: View {
                         }
                         .listRowSeparatorTint(Color.actionColor().opacity(0.5))
                     }
-                    .scrollContentBackground(.hidden)
+                    .background(Color.backgroundColor())
+                    .scrollContentBackground(.visible)
                     .listStyle(.plain)
                     .padding(.horizontal)
                 } else {
