@@ -8,11 +8,12 @@
 import SwiftUI
 import PhotosUI
 
-struct AddProductView: View {
+struct AddProductView: View, KeyboardReadable {
 
     @Environment(\.dismiss) private var dismiss
 
     @StateObject private var addProductViewModel: AddProductViewModel
+    @State private var isKeyboardVisible = false
 
     init(
         coreDataService: CoreDataService
@@ -137,9 +138,16 @@ struct AddProductView: View {
                     }
                     .buttonStyle(StandardButton())
                 }
+                .onReceive(keyboardPublisher) { newIsKeyboardVisible in
+                    withAnimation {
+                        isKeyboardVisible = newIsKeyboardVisible
+                    }
+                }
                 .padding()
             }
             .ignoresSafeArea()
+            .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
+            .toolbarBackground(isKeyboardVisible ? .visible : .hidden, for: .navigationBar)
             .navigationTitle("Add product")
             .navigationBarTitleDisplayMode(.inline)
         }
