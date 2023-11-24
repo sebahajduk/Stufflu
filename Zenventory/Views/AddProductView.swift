@@ -137,6 +137,7 @@ struct AddProductView: View, KeyboardReadable {
                         self.dismiss()
                     }
                     .buttonStyle(StandardButton())
+                    .disabled(!addProductViewModel.addButtonIsEnabled)
                 }
                 .onReceive(keyboardPublisher) { newIsKeyboardVisible in
                     withAnimation {
