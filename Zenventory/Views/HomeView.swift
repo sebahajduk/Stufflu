@@ -101,7 +101,7 @@ struct HomeView: View {
                                     dataService: homeViewModel.dataService
                                 )
                             }, label: {
-                                ProductCellView(productEntity: entity)
+//                                ProductCellView(productEntity: entity, isUnused: homeViewModel.isUnu)
                             })
                             .listRowBackground(Color.backgroundColor())
                             .listRowSeparator(.hidden)
