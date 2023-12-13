@@ -15,6 +15,7 @@ final class ProductCellViewModel: ObservableObject {
     @Published var product: ProductEntity
     @Published var lastUsed: String
     @Published var productImage: UIImage?
+    @Published var isUnused: Bool
 
     init(
         product: ProductEntity
@@ -26,6 +27,8 @@ final class ProductCellViewModel: ObservableObject {
             name: product.productPhotoPath ?? "Unknown"
         )
 
+        self.isUnused = (product.lastUsed ?? Date()).distance(to: Date()) > 2_592_000
+
         observeProductChanges()
     }
 
@@ -36,6 +39,7 @@ final class ProductCellViewModel: ObservableObject {
                 self.productImage = try? ZFileManager.getImage(
                     name: newValue.productPhotoPath ?? "Unknown"
                 )
+                self.isUnused = (newValue.lastUsed ?? Date()).distance(to: Date()) > 2_592_000
             }
             .store(in: &cancellables)
     }

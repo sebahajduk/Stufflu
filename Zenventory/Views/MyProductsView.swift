@@ -91,28 +91,26 @@ struct MyProductsView: View {
                         }, label: {
                             ProductCellView(productEntity: product)
                         })
-
                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                             Button {
                                 myProductsViewModel.caredActionSwiped(product)
                             } label: {
                                 Label("Cared", systemImage: "checkmark")
                             }
-                            .tint(.green)
+                            .tint(Color.actionColor())
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button {
-                                myProductsViewModel.showSellingAlert.toggle()
-                                self.temporaryProduct = product
+                                myProductsViewModel.use(product: product)
                             } label: {
-                                Label("Sold", systemImage: "checkmark")
+                                Label("Used", systemImage: "checkmark")
                             }
-                            .tint(.cyan)
+                            .tint(Color.actionColor())
                         }
                         .alert("SoldPrice", isPresented: $myProductsViewModel.showSellingAlert) {
                             TextField("Enter price", text: $myProductsViewModel.priceEnteredInAlert)
                             Button("Cancel", role: .cancel) { }
-
+                            
                             Button("Save", role: .destructive) {
                                 guard let temporaryProduct = temporaryProduct else { return }
                                 myProductsViewModel.showSellingAlert = false
@@ -122,7 +120,6 @@ struct MyProductsView: View {
                         .listRowBackground(Color.backgroundColor())
                         .listRowSeparator(.hidden)
                     }
-
                 }
                 .scrollContentBackground(.hidden)
                 .listStyle(.plain)

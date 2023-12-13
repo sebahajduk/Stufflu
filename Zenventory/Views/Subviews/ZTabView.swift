@@ -15,22 +15,39 @@ struct ZTabView: View {
 
     var body: some View {
         HStack {
-//            Spacer()
-//            Button {
-//                selectedTab = .home
-//            } label: {
-//                VStack {
-//                    Image(systemName: "house.fill")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 25, height: 25)
-//
-//                    Text("Home")
-//                        .font(.caption2)
-//                }
-//                .foregroundColor(selectedTab == .home ? .actionColor() : .foregroundColor().opacity(0.5))
-//            }
-//
+            Spacer()
+            Button {
+                selectedTab = .myProducts
+            } label: {
+                VStack {
+                    Image(systemName: "backpack.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+
+                    Text("My stuff")
+                        .font(.caption2)
+                }
+                .foregroundColor(selectedTab == .myProducts ? .actionColor() : .foregroundColor().opacity(0.5))
+            }
+
+            Spacer()
+
+            Button {
+                selectedTab = .wishlist
+            } label: {
+                VStack {
+                    Image(systemName: "star.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+
+                    Text("Wishlist")
+                        .font(.caption2)
+                }
+                .foregroundColor(selectedTab == .wishlist ? .actionColor() : .foregroundColor().opacity(0.5))
+            }
+
             Spacer()
 
             NavigationLink {
@@ -53,22 +70,39 @@ struct ZTabView: View {
 
             Spacer()
 
-//            Button {
-//                selectedTab = .profile
-//            } label: {
-//                VStack {
-//                    Image(systemName: "person.fill")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 25, height: 25)
-//
-//                    Text("Profile")
-//                        .font(.caption2)
-//                }
-//                .foregroundColor(selectedTab == .profile ? .actionColor() : .foregroundColor().opacity(0.5))
-//            }
-//
-//            Spacer()
+            Button {
+                selectedTab = .history
+            } label: {
+                VStack {
+                    Image(systemName: "chart.xyaxis.line")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+
+                    Text("History")
+                        .font(.caption2)
+                }
+                .foregroundColor(selectedTab == .history ? .actionColor() : .foregroundColor().opacity(0.5))
+            }
+
+            Spacer()
+
+            Button {
+                selectedTab = .profile
+            } label: {
+                VStack {
+                    Image(systemName: "person.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+
+                    Text("Profile")
+                        .font(.caption2)
+                }
+                .foregroundColor(selectedTab == .profile ? .actionColor() : .foregroundColor().opacity(0.5))
+            }
+
+            Spacer()
         }
         .background(Color.backgroundColor())
         .buttonStyle(TapButtonStyle())
