@@ -20,12 +20,14 @@ struct MyProductsFilterView: View {
                 HStack {
                     TextField("Min", text: $myProductsViewModel.minPrice)
                         .modifier(PriceTextField())
+                        .keyboardType(.decimalPad)
 
                     Divider()
                         .frame(height: 20.0)
 
                     TextField("Max", text: $myProductsViewModel.maxPrice)
                         .modifier(PriceTextField())
+                        .keyboardType(.decimalPad)
                 }
 
                 Toggle(

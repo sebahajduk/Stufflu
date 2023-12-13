@@ -95,9 +95,14 @@ struct HomeView: View {
                 } else {
                     List {
                         ForEach(homeViewModel.products, id: \.id) { entity in
-                            NavigationLink(value: entity) {
-                                ProductCellView(productEntity: entity)
-                            }
+                            NavigationLink(destination: {
+                                ProductDetailsView(
+                                    product: entity,
+                                    dataService: homeViewModel.dataService
+                                )
+                            }, label: {
+//                                ProductCellView(productEntity: entity, isUnused: homeViewModel.isUnu)
+                            })
                             .listRowBackground(Color.backgroundColor())
                             .listRowSeparator(.hidden)
                             .swipeActions(allowsFullSwipe: true) {
@@ -110,12 +115,6 @@ struct HomeView: View {
                             }
                         }
                     }
-                    .navigationDestination(for: ProductEntity.self, destination: { product in
-                        ProductDetailsView(
-                            product: product,
-                            dataService: homeViewModel.dataService
-                        )
-                    })
                     .listStyle(.plain)
                     .scrollContentBackground(.hidden)
                 }

@@ -21,6 +21,9 @@ struct FullscreenPhotoView: View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
+                .onAppear {
+                    fullscreenPhotoViewModel.isEditing = false
+                }
 
             if let image = image {
                 if fullscreenPhotoViewModel.isEditing {

@@ -17,10 +17,8 @@ final class MyProductsViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var showSellingAlert = false
 
-    // MARK: Sorting
     @Published var sortingType: SortingType = .addedDate
 
-    // MARK: Filtering params
     @Published var isFilterActive = false
     @Published var minPrice = ""
     @Published var maxPrice = ""
@@ -48,7 +46,7 @@ final class MyProductsViewModel: ObservableObject {
                 withAnimation {
                     self.myProducts = newValue.filter { $0.isSold == false }
                 }
-
+                productsValue = 0
                 for product in myProducts {
                     productsValue += product.price
                 }
@@ -171,5 +169,19 @@ final class MyProductsViewModel: ObservableObject {
 
     private func resetAlertValues() {
         priceEnteredInAlert = ""
+    }
+
+    func isProductUnused(_ product: ProductEntity) -> Bool {
+        // 2_592_000 = 30 days
+        (product.lastUsed ?? Date()).distance(to: Date()) > 2_592_000
+    }
+
+    func use(
+        product: ProductEntity
+    ) {
+        withAnimation {
+            ProductManager.use(product: product)
+            dataService.refreshData()
+        }
     }
 }

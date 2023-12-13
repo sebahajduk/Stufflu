@@ -25,6 +25,8 @@ final class AddWishlistProductViewModel: ObservableObject {
     @Published var priceTextField = ""
     @Published var priceIsValid = true
 
+    @Published var isAddButtonEnabled = false
+
     init(dataService: any CoreDataManager) {
         self.dataService = dataService
         textFieldsValidation()
@@ -37,13 +39,17 @@ final class AddWishlistProductViewModel: ObservableObject {
         observePriceTextField()
     }
 
+    private func updateIsAddButtonEnabled() {
+        isAddButtonEnabled = nameIsValid && daysCounterIsValid && linkIsValid && priceIsValid
+    }
+
     private func observeNameTextField() {
         $nameTextField
             .sink { [weak self] name in
                 guard let self else { return }
                 withAnimation {
                     self.nameIsValid = name.count >= 3
-
+                    self.updateIsAddButtonEnabled()
                 }
             }
             .store(in: &cancellables)
@@ -54,7 +60,8 @@ final class AddWishlistProductViewModel: ObservableObject {
             .sink { [weak self] days in
                 guard let self else { return }
                 withAnimation {
-                    self.daysCounterIsValid = days.isInteger
+                    self.daysCounterIsValid = days.isInteger && days.count != 0
+                    self.updateIsAddButtonEnabled()
                 }
             }
             .store(in: &cancellables)
@@ -66,6 +73,7 @@ final class AddWishlistProductViewModel: ObservableObject {
                 guard let self else { return }
                 withAnimation {
                     self.linkIsValid = link.count > 3 || link.isEmpty
+                    self.updateIsAddButtonEnabled()
                 }
             }
             .store(in: &cancellables)
@@ -77,6 +85,7 @@ final class AddWishlistProductViewModel: ObservableObject {
                 guard let self else { return }
                 withAnimation {
                     self.priceIsValid = price.isDouble || price.isEmpty
+                    self.updateIsAddButtonEnabled()
                 }
             }
             .store(in: &cancellables)

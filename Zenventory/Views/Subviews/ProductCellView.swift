@@ -55,7 +55,7 @@ struct ProductCellView: View {
         .cornerRadius(30.0)
         .overlay {
             RoundedRectangle(cornerRadius: 30.0)
-                .stroke(.gray.opacity(0.2), lineWidth: 1.0)
+                .stroke(productCellViewModel.isUnused ? .red : .gray.opacity(0.2), lineWidth: 1.0)
         }
     }
 }

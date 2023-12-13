@@ -13,13 +13,6 @@ final class AddProductViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private var dataService: any CoreDataManager
 
-    init(
-        dataService: CoreDataService
-    ) {
-        self.dataService = dataService
-        runObservers()
-    }
-
     @Published var selectedImportance: Importance = .medium
 
     // MARK: Product details
@@ -37,6 +30,15 @@ final class AddProductViewModel: ObservableObject {
     @Published var careNameIsValid: Bool = true
     @Published var careIntervalIsValid: Bool = true
     @Published var priceIsValid: Bool = true
+
+    @Published var addButtonIsEnabled: Bool = false
+
+    init(
+        dataService: CoreDataService
+    ) {
+        self.dataService = dataService
+        runObservers()
+    }
 
     func addButtonTapped() {
         guard textfieldsAreValid() else { return }
@@ -71,6 +73,10 @@ final class AddProductViewModel: ObservableObject {
         }
     }
 
+    private func updateAddButtonIsEnabled() {
+        addButtonIsEnabled = nameIsValid && guaranteeIsValid && careNameIsValid && careIntervalIsValid && priceIsValid
+    }
+
     private func textfieldsAreValid() -> Bool {
         nameIsValid && guaranteeIsValid && careNameIsValid && careIntervalIsValid && priceIsValid
     }
@@ -90,6 +96,7 @@ final class AddProductViewModel: ObservableObject {
                 guard let self else { return }
                 withAnimation {
                     self.nameIsValid = bool
+                    self.updateAddButtonIsEnabled()
                 }
             }
             .store(in: &cancellables)
@@ -102,6 +109,7 @@ final class AddProductViewModel: ObservableObject {
                 guard let self else { return }
                 withAnimation {
                     self.guaranteeIsValid = bool
+                    self.updateAddButtonIsEnabled()
                 }
             }
             .store(in: &cancellables)
@@ -114,6 +122,7 @@ final class AddProductViewModel: ObservableObject {
                 guard let self else { return }
                 withAnimation {
                     self.careNameIsValid = bool
+                    self.updateAddButtonIsEnabled()
                 }
             }
             .store(in: &cancellables)
@@ -126,6 +135,7 @@ final class AddProductViewModel: ObservableObject {
                 guard let self else { return }
                 withAnimation {
                     self.careIntervalIsValid = bool
+                    self.updateAddButtonIsEnabled()
                 }
             }
             .store(in: &cancellables)
@@ -138,6 +148,7 @@ final class AddProductViewModel: ObservableObject {
                 guard let self else { return }
                 withAnimation {
                     self.priceIsValid = bool
+                    self.updateAddButtonIsEnabled()
                 }
             }
             .store(in: &cancellables)

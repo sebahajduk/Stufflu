@@ -14,6 +14,7 @@
 		601A0C142A09652800072DBA /* PriceTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601A0C132A09652800072DBA /* PriceTextField.swift */; };
 		60283AC52A1FBCA30075812A /* Date+Ext_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60283AC42A1FBCA30075812A /* Date+Ext_Tests.swift */; };
 		60283AC72A1FBE680075812A /* ProductCellViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60283AC62A1FBE680075812A /* ProductCellViewModel_Tests.swift */; };
+		602974C42B0FD83900AC8ACE /* KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602974C32B0FD83900AC8ACE /* KeyboardReadable.swift */; };
 		602EC15C29DC752F00E8B470 /* WishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC15B29DC752F00E8B470 /* WishlistView.swift */; };
 		602EC15E29DC844F00E8B470 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC15D29DC844F00E8B470 /* AddProductView.swift */; };
 		602EC16129DC84DF00E8B470 /* AddProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EC16029DC84DF00E8B470 /* AddProductViewModel.swift */; };
@@ -48,6 +49,7 @@
 		608848312A40A69000ABE843 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608848302A40A69000ABE843 /* Double+Ext.swift */; };
 		6090327E2A7965E400E63B35 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6090327D2A7965E400E63B35 /* HistoryViewModel.swift */; };
 		6090E93129DB46A0007131C5 /* ProductCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6090E93029DB46A0007131C5 /* ProductCellView.swift */; };
+		60948C452B0A5C7D003701D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60948C442B0A5C7D003701D9 /* LaunchScreen.storyboard */; };
 		6096E3952A0A91420089F908 /* ZFileManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096E3942A0A91420089F908 /* ZFileManagerError.swift */; };
 		6096E3992A0BF0BC0089F908 /* Importance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096E3982A0BF0BC0089F908 /* Importance.swift */; };
 		6096E39B2A0BF20D0089F908 /* SortingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096E39A2A0BF20D0089F908 /* SortingType.swift */; };
@@ -86,6 +88,7 @@
 		601A0C132A09652800072DBA /* PriceTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTextField.swift; sourceTree = "<group>"; };
 		60283AC42A1FBCA30075812A /* Date+Ext_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext_Tests.swift"; sourceTree = "<group>"; };
 		60283AC62A1FBE680075812A /* ProductCellViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel_Tests.swift; sourceTree = "<group>"; };
+		602974C32B0FD83900AC8ACE /* KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardReadable.swift; sourceTree = "<group>"; };
 		602EC15B29DC752F00E8B470 /* WishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistView.swift; sourceTree = "<group>"; };
 		602EC15D29DC844F00E8B470 /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
 		602EC16029DC84DF00E8B470 /* AddProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewModel.swift; sourceTree = "<group>"; };
@@ -98,12 +101,12 @@
 		605B5B7729F0455C00973AD1 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		605B5B7929F049EB00973AD1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		605B5B7B29F1A1E500973AD1 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
-		606EF9B629C96E120024B7EB /* Zenventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zenventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		606EF9B629C96E120024B7EB /* Stufflu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stufflu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		606EF9B929C96E120024B7EB /* ZenventoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryApp.swift; sourceTree = "<group>"; };
 		606EF9BB29C96E120024B7EB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		606EF9BD29C96E130024B7EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		606EF9C029C96E130024B7EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		606EF9C629C96E130024B7EB /* ZenventoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenventoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		606EF9C629C96E130024B7EB /* StuffluTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StuffluTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		606EF9E429C970EA0024B7EB /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 		606EF9E729C9724E0024B7EB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		606EF9E929C9725B0024B7EB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 		608848302A40A69000ABE843 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		6090327D2A7965E400E63B35 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		6090E93029DB46A0007131C5 /* ProductCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellView.swift; sourceTree = "<group>"; };
+		60948C442B0A5C7D003701D9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6096E3942A0A91420089F908 /* ZFileManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZFileManagerError.swift; sourceTree = "<group>"; };
 		6096E3982A0BF0BC0089F908 /* Importance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importance.swift; sourceTree = "<group>"; };
 		6096E39A2A0BF20D0089F908 /* SortingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingType.swift; sourceTree = "<group>"; };
@@ -201,8 +205,8 @@
 		606EF9B729C96E120024B7EB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				606EF9B629C96E120024B7EB /* Zenventory.app */,
-				606EF9C629C96E130024B7EB /* ZenventoryTests.xctest */,
+				606EF9B629C96E120024B7EB /* Stufflu.app */,
+				606EF9C629C96E130024B7EB /* StuffluTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,6 +224,7 @@
 				606EF9B929C96E120024B7EB /* ZenventoryApp.swift */,
 				606EF9BD29C96E130024B7EB /* Assets.xcassets */,
 				606EF9BF29C96E130024B7EB /* Preview Content */,
+				60948C442B0A5C7D003701D9 /* LaunchScreen.storyboard */,
 			);
 			path = Zenventory;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 			children = (
 				6096E3972A0BF0AF0089F908 /* Enums */,
 				60BAE0FB2A3477B80098F6B9 /* RemoveFocusOnTapModifier.swift */,
+				602974C32B0FD83900AC8ACE /* KeyboardReadable.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -352,9 +358,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		606EF9B529C96E120024B7EB /* Zenventory */ = {
+		606EF9B529C96E120024B7EB /* Stufflu */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 606EF9DA29C96E130024B7EB /* Build configuration list for PBXNativeTarget "Zenventory" */;
+			buildConfigurationList = 606EF9DA29C96E130024B7EB /* Build configuration list for PBXNativeTarget "Stufflu" */;
 			buildPhases = (
 				606EF9B229C96E120024B7EB /* Sources */,
 				606EF9B329C96E120024B7EB /* Frameworks */,
@@ -365,16 +371,16 @@
 			);
 			dependencies = (
 			);
-			name = Zenventory;
+			name = Stufflu;
 			packageProductDependencies = (
 			);
 			productName = Zenventory;
-			productReference = 606EF9B629C96E120024B7EB /* Zenventory.app */;
+			productReference = 606EF9B629C96E120024B7EB /* Stufflu.app */;
 			productType = "com.apple.product-type.application";
 		};
-		606EF9C529C96E130024B7EB /* ZenventoryTests */ = {
+		606EF9C529C96E130024B7EB /* StuffluTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 606EF9DD29C96E130024B7EB /* Build configuration list for PBXNativeTarget "ZenventoryTests" */;
+			buildConfigurationList = 606EF9DD29C96E130024B7EB /* Build configuration list for PBXNativeTarget "StuffluTests" */;
 			buildPhases = (
 				606EF9C229C96E130024B7EB /* Sources */,
 				606EF9C329C96E130024B7EB /* Frameworks */,
@@ -385,9 +391,9 @@
 			dependencies = (
 				606EF9C829C96E130024B7EB /* PBXTargetDependency */,
 			);
-			name = ZenventoryTests;
+			name = StuffluTests;
 			productName = ZenventoryTests;
-			productReference = 606EF9C629C96E130024B7EB /* ZenventoryTests.xctest */;
+			productReference = 606EF9C629C96E130024B7EB /* StuffluTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -409,7 +415,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 606EF9B129C96E120024B7EB /* Build configuration list for PBXProject "Zenventory" */;
+			buildConfigurationList = 606EF9B129C96E120024B7EB /* Build configuration list for PBXProject "Stufflu" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -424,8 +430,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				606EF9B529C96E120024B7EB /* Zenventory */,
-				606EF9C529C96E130024B7EB /* ZenventoryTests */,
+				606EF9B529C96E120024B7EB /* Stufflu */,
+				606EF9C529C96E130024B7EB /* StuffluTests */,
 			);
 		};
 /* End PBXProject section */
@@ -435,6 +441,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60948C452B0A5C7D003701D9 /* LaunchScreen.storyboard in Resources */,
 				606EF9C129C96E130024B7EB /* Preview Assets.xcassets in Resources */,
 				606EF9BE29C96E130024B7EB /* Assets.xcassets in Resources */,
 			);
@@ -519,6 +526,7 @@
 				6082AC372A72BB7C008ED4F3 /* WishlistProductCellViewModel.swift in Sources */,
 				60A030232A04110600818118 /* ProductDetailsViewModel.swift in Sources */,
 				60EEE33E2A90FF1700E7CA2A /* CustomCameraRepresentable.swift in Sources */,
+				602974C42B0FD83900AC8ACE /* KeyboardReadable.swift in Sources */,
 				60B090CF29E5A646009BD972 /* StandardButton.swift in Sources */,
 				60A030212A0410F300818118 /* ProductDetailsView.swift in Sources */,
 				606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */,
@@ -547,7 +555,7 @@
 /* Begin PBXTargetDependency section */
 		606EF9C829C96E130024B7EB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 606EF9B529C96E120024B7EB /* Zenventory */;
+			target = 606EF9B529C96E120024B7EB /* Stufflu */;
 			targetProxy = 606EF9C729C96E130024B7EB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -675,7 +683,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Zenventory/Preview Content\"";
 				DEVELOPMENT_TEAM = 9AWGRVU6P9;
 				ENABLE_PREVIEWS = YES;
@@ -683,12 +691,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Zenventory/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission to add photo.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Our app uses the camera to capture photos of products and invoices you want to track.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need library permission to allow you choose photo.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need library permission to allow you choose photo.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -696,12 +703,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = sebastianhajduk.Zenventory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -711,7 +721,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Zenventory/Preview Content\"";
 				DEVELOPMENT_TEAM = 9AWGRVU6P9;
 				ENABLE_PREVIEWS = YES;
@@ -719,12 +729,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Zenventory/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need the camera permission to add photo.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Our app uses the camera to capture photos of products and invoices you want to track.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need library permission to allow you choose photo.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need library permission to allow you choose photo.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -732,12 +741,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = sebastianhajduk.Zenventory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -757,7 +769,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Zenventory.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Zenventory";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stufflu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Stufflu";
 			};
 			name = Debug;
 		};
@@ -777,14 +789,14 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Zenventory.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Zenventory";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stufflu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Stufflu";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		606EF9B129C96E120024B7EB /* Build configuration list for PBXProject "Zenventory" */ = {
+		606EF9B129C96E120024B7EB /* Build configuration list for PBXProject "Stufflu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				606EF9D829C96E130024B7EB /* Debug */,
@@ -793,7 +805,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		606EF9DA29C96E130024B7EB /* Build configuration list for PBXNativeTarget "Zenventory" */ = {
+		606EF9DA29C96E130024B7EB /* Build configuration list for PBXNativeTarget "Stufflu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				606EF9DB29C96E130024B7EB /* Debug */,
@@ -802,7 +814,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		606EF9DD29C96E130024B7EB /* Build configuration list for PBXNativeTarget "ZenventoryTests" */ = {
+		606EF9DD29C96E130024B7EB /* Build configuration list for PBXNativeTarget "StuffluTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				606EF9DE29C96E130024B7EB /* Debug */,
