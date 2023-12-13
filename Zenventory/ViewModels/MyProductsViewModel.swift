@@ -37,85 +37,11 @@ final class MyProductsViewModel: ObservableObject {
         observeSorting()
         observeCoreData()
     }
+}
 
-    // MARK: Listening for changes in CoreData
-    private func observeCoreData() {
-        dataService.savedProductEntitiesPublisher
-            .sink { [weak self] newValue in
-                guard let self else { return }
-                withAnimation {
-                    self.myProducts = newValue.filter { $0.isSold == false }
-                }
-                productsValue = 0
-                for product in myProducts {
-                    productsValue += product.price
-                }
-            }
-            .store(in: &cancellables)
-    }
-
+extension MyProductsViewModel {
     func caredActionSwiped(_ product: ProductEntity) {
         ProductManager.cared(product)
-    }
-
-    // MARK: User actions handlers
-    private func observeSearching() {
-        $searchText
-            .debounce(
-                for: .milliseconds(200),
-                scheduler: RunLoop.main
-            )
-            .sink { [weak self] searchText in
-                guard let self else { return }
-
-                withAnimation(.linear) {
-                    if searchText.count > 0 {
-                        self.myProducts = self.dataService.savedProductEntities.filter { $0.isSold == false }
-                        let filteredProducts: [ProductEntity] = self.myProducts.filter {
-                            guard let productName: String = $0.name else { return true }
-                            return productName.lowercased().contains(searchText.lowercased())
-                        }
-                        self.myProducts = filteredProducts
-                    } else {
-                        self.myProducts = self.dataService.savedProductEntities.filter { $0.isSold == false }
-                    }
-                }
-            }
-            .store(in: &cancellables)
-    }
-
-    private func observeSorting() {
-        $sortingType
-            .sink { [weak self] newType in
-                guard let self else { return }
-                withAnimation(.linear) {
-                    self.myProducts = self.sortProducts(by: newType)
-                }
-            }
-            .store(in: &cancellables)
-    }
-
-    private func sortProducts(
-        by type: SortingType
-    ) -> [ProductEntity] {
-        var sortedArray: [ProductEntity] = .init()
-
-        switch type {
-        case .lowestPrice:
-            sortedArray = self.myProducts.sorted { $0.price < $1.price }
-        case .highestPrice:
-            sortedArray = self.myProducts.sorted { $0.price > $1.price }
-        case .nameAZ:
-            sortedArray = self.myProducts.sorted { $0.name ?? "Unknown" < $1.name ?? "Unknown" }
-        case .nameZA:
-            sortedArray = self.myProducts.sorted { $0.name ?? "Unknown" > $1.name ?? "Unknown" }
-        case .lastUsed:
-            sortedArray = self.myProducts.sorted { $0.lastUsed ?? Date() < $1.lastUsed ?? Date() }
-        case .addedDate:
-            sortedArray = dataService.savedProductEntities.filter { $0.isSold == false }
-        }
-
-        return sortedArray
     }
 
     func clearFilters() {
@@ -166,8 +92,84 @@ final class MyProductsViewModel: ObservableObject {
             resetAlertValues()
         }
     }
+}
 
-    private func resetAlertValues() {
+private extension MyProductsViewModel {
+    func observeCoreData() {
+        dataService.savedProductEntitiesPublisher
+            .sink { [weak self] newValue in
+                guard let self else { return }
+                withAnimation {
+                    self.myProducts = newValue.filter { $0.isSold == false }
+                }
+                productsValue = 0
+                for product in myProducts {
+                    productsValue += product.price
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeSearching() {
+        $searchText
+            .debounce(
+                for: .milliseconds(200),
+                scheduler: RunLoop.main
+            )
+            .sink { [weak self] searchText in
+                guard let self else { return }
+
+                withAnimation(.linear) {
+                    if searchText.count > 0 {
+                        self.myProducts = self.dataService.savedProductEntities.filter { $0.isSold == false }
+                        let filteredProducts: [ProductEntity] = self.myProducts.filter {
+                            guard let productName: String = $0.name else { return true }
+                            return productName.lowercased().contains(searchText.lowercased())
+                        }
+                        self.myProducts = filteredProducts
+                    } else {
+                        self.myProducts = self.dataService.savedProductEntities.filter { $0.isSold == false }
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeSorting() {
+        $sortingType
+            .sink { [weak self] newType in
+                guard let self else { return }
+                withAnimation(.linear) {
+                    self.myProducts = self.sortProducts(by: newType)
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    func sortProducts(
+        by type: SortingType
+    ) -> [ProductEntity] {
+        var sortedArray: [ProductEntity] = .init()
+
+        switch type {
+        case .lowestPrice:
+            sortedArray = self.myProducts.sorted { $0.price < $1.price }
+        case .highestPrice:
+            sortedArray = self.myProducts.sorted { $0.price > $1.price }
+        case .nameAZ:
+            sortedArray = self.myProducts.sorted { $0.name ?? "Unknown" < $1.name ?? "Unknown" }
+        case .nameZA:
+            sortedArray = self.myProducts.sorted { $0.name ?? "Unknown" > $1.name ?? "Unknown" }
+        case .lastUsed:
+            sortedArray = self.myProducts.sorted { $0.lastUsed ?? Date() < $1.lastUsed ?? Date() }
+        case .addedDate:
+            sortedArray = dataService.savedProductEntities.filter { $0.isSold == false }
+        }
+
+        return sortedArray
+    }
+
+    func resetAlertValues() {
         priceEnteredInAlert = ""
     }
 

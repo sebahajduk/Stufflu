@@ -21,8 +21,20 @@ final class HistoryViewModel: ObservableObject {
         self.dataService = dataService
         updatingShownProducts()
     }
+}
 
-    private func updatingShownProducts() {
+extension HistoryViewModel {
+    func getDate(for product: ProductEntity) -> String {
+        if product.isSold {
+            return product.soldDate?.asString() ?? ""
+        } else {
+            return product.addedDate?.asString() ?? ""
+        }
+    }
+}
+
+private extension HistoryViewModel {
+    func updatingShownProducts() {
         $historyPickerSelection
             .sink { [weak self] selection in
                 guard let self else { return }
@@ -39,15 +51,7 @@ final class HistoryViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func getDate(for product: ProductEntity) -> String {
-        if product.isSold {
-            return product.soldDate?.asString() ?? ""
-        } else {
-            return product.addedDate?.asString() ?? ""
-        }
-    }
-
-    private func sortProducts(
+    func sortProducts(
         in array: [ProductEntity]
     ) -> [ProductEntity] {
 
@@ -67,7 +71,7 @@ final class HistoryViewModel: ObservableObject {
         return sortedArray
     }
 
-    private func showSoldProducts() {
+    func showSoldProducts() {
         var filteredArray = dataService.savedProductEntities.filter { $0.isSold == true }
         filteredArray.sort {
             guard let previousAddedDate = $0.addedDate,
@@ -81,7 +85,7 @@ final class HistoryViewModel: ObservableObject {
         self.shownProducts = sortedArray
     }
 
-    private func showBoughtProducts() {
+    func showBoughtProducts() {
         var filteredArray = dataService.savedProductEntities.filter { $0.isSold == false }
         filteredArray.sort {
             guard let previousAddedDate = $0.addedDate,
@@ -96,7 +100,7 @@ final class HistoryViewModel: ObservableObject {
         self.shownProducts = sortedArray
     }
 
-    private func showAllProducts() {
+    func showAllProducts() {
         let sortedArray = sortProducts(in: dataService.savedProductEntities)
         self.shownProducts = sortedArray
     }
