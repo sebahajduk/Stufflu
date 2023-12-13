@@ -42,6 +42,8 @@ final class ProductDetailsViewModel: ObservableObject {
     /// Photo picker binding
     @Published var photosPickerItem: PhotosPickerItem?
 
+    @Published var sellPrice: String = ""
+
     init(
         product: ProductEntity,
         dataService: any CoreDataManager
@@ -72,6 +74,16 @@ final class ProductDetailsViewModel: ObservableObject {
 }
 
 extension ProductDetailsViewModel {
+    func sellProduct() {
+        var price: Double = 0.0
+
+        if !sellPrice.isEmpty && sellPrice.isDouble {
+            price = Double(sellPrice) ?? 0.0
+        }
+
+        ProductManager.sell(product: product, for: price)
+        dataService.refreshData()
+    }
     func deletePhoto() {
         try? ZFileManager.deleteImage(
             name: product.productPhotoPath ?? "Unknown"

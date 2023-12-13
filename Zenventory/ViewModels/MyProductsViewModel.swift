@@ -92,6 +92,15 @@ extension MyProductsViewModel {
             resetAlertValues()
         }
     }
+
+    func use(
+        product: ProductEntity
+    ) {
+        withAnimation {
+            ProductManager.use(product: product)
+            dataService.refreshData()
+        }
+    }
 }
 
 private extension MyProductsViewModel {
@@ -171,19 +180,5 @@ private extension MyProductsViewModel {
 
     func resetAlertValues() {
         priceEnteredInAlert = ""
-    }
-
-    func isProductUnused(_ product: ProductEntity) -> Bool {
-        // 2_592_000 = 30 days
-        (product.lastUsed ?? Date()).distance(to: Date()) > 2_592_000
-    }
-
-    func use(
-        product: ProductEntity
-    ) {
-        withAnimation {
-            ProductManager.use(product: product)
-            dataService.refreshData()
-        }
     }
 }
