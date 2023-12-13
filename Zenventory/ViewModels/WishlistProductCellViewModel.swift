@@ -21,8 +21,10 @@ final class WishlistProductCellViewModel: ObservableObject {
         productDaysToDecisionValidation()
         productLinkValidation()
     }
+}
 
-    private func productDaysToDecisionValidation() {
+private extension WishlistProductCellViewModel {
+    func productDaysToDecisionValidation() {
         guard let deadline = product.daysCounter else {
             self.daysLeft = "No data"
             return
@@ -38,7 +40,7 @@ final class WishlistProductCellViewModel: ObservableObject {
         self.daysLeft = "\(daysCounter)"
     }
 
-    private func productLinkValidation() {
+    func productLinkValidation() {
         guard let link = self.product.link else { return }
         self.productHasValidURL = link.isValidURL
     }

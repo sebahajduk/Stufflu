@@ -39,7 +39,9 @@ final class AddProductViewModel: ObservableObject {
         self.dataService = dataService
         runObservers()
     }
+}
 
+extension AddProductViewModel {
     func addButtonTapped() {
         guard textfieldsAreValid() else { return }
 
@@ -72,16 +74,18 @@ final class AddProductViewModel: ObservableObject {
             dataService.addInvoicePhoto(product: product)
         }
     }
+}
 
-    private func updateAddButtonIsEnabled() {
+private extension AddProductViewModel {
+    func updateAddButtonIsEnabled() {
         addButtonIsEnabled = nameIsValid && guaranteeIsValid && careNameIsValid && careIntervalIsValid && priceIsValid
     }
 
-    private func textfieldsAreValid() -> Bool {
+    func textfieldsAreValid() -> Bool {
         nameIsValid && guaranteeIsValid && careNameIsValid && careIntervalIsValid && priceIsValid
     }
 
-    private func runObservers() {
+    func runObservers() {
         observeNameTF()
         observeGuarantee()
         observeCareName()
@@ -89,7 +93,7 @@ final class AddProductViewModel: ObservableObject {
         observePrice()
     }
 
-    private func observeNameTF() {
+    func observeNameTF() {
         $productName
             .map { $0.count >= 3 }
             .sink { [weak self] bool in
@@ -102,7 +106,7 @@ final class AddProductViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func observeGuarantee() {
+    func observeGuarantee() {
         $productGuarantee
             .map { $0.isInteger || $0.count == 0 }
             .sink { [weak self] bool in
@@ -115,7 +119,7 @@ final class AddProductViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func observeCareName() {
+    func observeCareName() {
         $productCareName
             .map { $0.count >= 3 || $0.count == 0 }
             .sink { [weak self] bool in
@@ -128,7 +132,7 @@ final class AddProductViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func observeCareInterval() {
+    func observeCareInterval() {
         $productCareInterval
             .map { $0.isInteger || $0.count == 0 }
             .sink { [weak self] bool in
@@ -141,7 +145,7 @@ final class AddProductViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func observePrice() {
+    func observePrice() {
         $productPrice
             .map { $0.isDouble || $0.count == 0 }
             .sink { [weak self] bool in

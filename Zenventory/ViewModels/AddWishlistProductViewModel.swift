@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 
 final class AddWishlistProductViewModel: ObservableObject {
-
     private var cancellables = Set<AnyCancellable>()
     private var dataService: any CoreDataManager
 
@@ -31,66 +30,9 @@ final class AddWishlistProductViewModel: ObservableObject {
         self.dataService = dataService
         textFieldsValidation()
     }
+}
 
-    private func textFieldsValidation() {
-        observeNameTextField()
-        observeDaysCounterTextField()
-        observeLinkTextField()
-        observePriceTextField()
-    }
-
-    private func updateIsAddButtonEnabled() {
-        isAddButtonEnabled = nameIsValid && daysCounterIsValid && linkIsValid && priceIsValid
-    }
-
-    private func observeNameTextField() {
-        $nameTextField
-            .sink { [weak self] name in
-                guard let self else { return }
-                withAnimation {
-                    self.nameIsValid = name.count >= 3
-                    self.updateIsAddButtonEnabled()
-                }
-            }
-            .store(in: &cancellables)
-    }
-
-    private func observeDaysCounterTextField() {
-        $daysCounterTextField
-            .sink { [weak self] days in
-                guard let self else { return }
-                withAnimation {
-                    self.daysCounterIsValid = days.isInteger && days.count != 0
-                    self.updateIsAddButtonEnabled()
-                }
-            }
-            .store(in: &cancellables)
-    }
-
-    private func observeLinkTextField() {
-        $linkTextField
-            .sink { [weak self] link in
-                guard let self else { return }
-                withAnimation {
-                    self.linkIsValid = link.count > 3 || link.isEmpty
-                    self.updateIsAddButtonEnabled()
-                }
-            }
-            .store(in: &cancellables)
-    }
-
-    private func observePriceTextField() {
-        $priceTextField
-            .sink { [weak self] price in
-                guard let self else { return }
-                withAnimation {
-                    self.priceIsValid = price.isDouble || price.isEmpty
-                    self.updateIsAddButtonEnabled()
-                }
-            }
-            .store(in: &cancellables)
-    }
-
+extension AddWishlistProductViewModel {
     func addWishlistProduct(
         days: String,
         link: String?,
@@ -113,5 +55,66 @@ final class AddWishlistProductViewModel: ObservableObject {
 
         dataService.addWishlistProduct(days: finalDate, link: link, name: name, price: productPrice)
         completion(true)
+    }
+}
+
+private extension AddWishlistProductViewModel {
+    func textFieldsValidation() {
+        observeNameTextField()
+        observeDaysCounterTextField()
+        observeLinkTextField()
+        observePriceTextField()
+    }
+
+    func updateIsAddButtonEnabled() {
+        isAddButtonEnabled = nameIsValid && daysCounterIsValid && linkIsValid && priceIsValid
+    }
+
+    func observeNameTextField() {
+        $nameTextField
+            .sink { [weak self] name in
+                guard let self else { return }
+                withAnimation {
+                    self.nameIsValid = name.count >= 3
+                    self.updateIsAddButtonEnabled()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeDaysCounterTextField() {
+        $daysCounterTextField
+            .sink { [weak self] days in
+                guard let self else { return }
+                withAnimation {
+                    self.daysCounterIsValid = days.isInteger && days.count != 0
+                    self.updateIsAddButtonEnabled()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeLinkTextField() {
+        $linkTextField
+            .sink { [weak self] link in
+                guard let self else { return }
+                withAnimation {
+                    self.linkIsValid = link.count > 3 || link.isEmpty
+                    self.updateIsAddButtonEnabled()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    func observePriceTextField() {
+        $priceTextField
+            .sink { [weak self] price in
+                guard let self else { return }
+                withAnimation {
+                    self.priceIsValid = price.isDouble || price.isEmpty
+                    self.updateIsAddButtonEnabled()
+                }
+            }
+            .store(in: &cancellables)
     }
 }

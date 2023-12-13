@@ -16,7 +16,32 @@ protocol CoreDataManager: ObservableObject {
     var savedWishlistEntities: [WishlistEntity] { get set }
     var savedWishlistEntitiesPublisher: Published<[WishlistEntity]>.Publisher { get }
 
+    func saveData() throws
+    func removeProduct(at offsets: IndexSet)
+    func refreshData()
     func fetchProducts() throws
+
+    func edit(product: ProductEntity)
+    func addPhoto(product: ProductEntity)
+    func deletePhoto(product: ProductEntity)
+    func addInvoicePhoto(product: ProductEntity)
+    func removeWishlistProduct(at offsets: IndexSet)
+    func editWishlistProduct(product: WishlistEntity)
+
+    func addProduct(
+        name: String,
+        guarantee: Int?,
+        careName: String?,
+        careInterval: Int?,
+        price: Double?,
+        importance: String
+    )
+    func addWishlistProduct(
+        days: Date,
+        link: String?,
+        name: String,
+        price: Double?
+    )
 }
 
 extension CoreDataManager {
@@ -128,16 +153,6 @@ extension CoreDataManager {
     }
 }
 
-private extension CoreDataManager {
-    func getIndex(for product: ProductEntity) -> Int? {
-        guard
-            let index = savedProductEntities.firstIndex(where: { $0.id == product.id })
-        else { return nil }
-
-        return index
-    }
-}
-
 // MARK: WishlistEntity management
 extension CoreDataManager {
     func addWishlistProduct(
@@ -182,5 +197,15 @@ extension CoreDataManager {
         savedWishlistEntities[index] = product
 
         refreshData()
+    }
+}
+
+private extension CoreDataManager {
+    func getIndex(for product: ProductEntity) -> Int? {
+        guard
+            let index = savedProductEntities.firstIndex(where: { $0.id == product.id })
+        else { return nil }
+
+        return index
     }
 }
