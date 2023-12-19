@@ -9,8 +9,10 @@ import SwiftUI
 import PhotosUI
 
 struct ProductDetailsView: View {
+    @Environment(\.dismiss) var dismiss
 
     @StateObject private var productDetailsViewModel: ProductDetailsViewModel
+    @State private var showSellAlert = false
 
     init(
         product: ProductEntity,
@@ -28,78 +30,95 @@ struct ProductDetailsView: View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
-            ScrollView {
             VStack {
-                if let image = productDetailsViewModel.image {
-                    if productDetailsViewModel.isEditing {
-                        NavigationLink {
-                            CameraView(
-                                image: $productDetailsViewModel.image,
-                                imageForViewUpdates: productDetailsViewModel.image
-                            )
-                        } label: {
-                            ZStack {
-                                Image(uiImage: image)
-                                    .roundedImage(size: 100.0, action: true)
-                                    .overlay(alignment: .topTrailing) {
-                                        Button {
-                                            productDetailsViewModel.deletePhoto()
-                                        } label: {
-                                            Image(systemName: "x.circle.fill")
-                                                .frame(width: 30.0, height: 30.0)
-                                                .foregroundColor(.red)
-                                        }
-                                        .padding(15)
+                ScrollView {
+                    VStack {
+                        if let image = productDetailsViewModel.image {
+                            if productDetailsViewModel.isEditing {
+                                NavigationLink {
+                                    CameraView(
+                                        image: $productDetailsViewModel.image,
+                                        imageForViewUpdates: productDetailsViewModel.image
+                                    )
+                                } label: {
+                                    ZStack {
+                                        Image(uiImage: image)
+                                            .roundedImage(size: 100.0, action: true)
+                                            .overlay(alignment: .topTrailing) {
+                                                Button {
+                                                    productDetailsViewModel.deletePhoto()
+                                                } label: {
+                                                    Image(systemName: "x.circle.fill")
+                                                        .frame(width: 30.0, height: 30.0)
+                                                        .foregroundColor(.red)
+                                                }
+                                                .padding(15)
+                                            }
                                     }
+                                }
+                            } else {
+                                NavigationLink {
+                                    FullscreenPhotoView(
+                                        image: $productDetailsViewModel.image
+                                    )
+                                } label: {
+                                    Image(uiImage: image)
+                                        .roundedImage(size: 100.0, action: true)
+                                }
+                            }
+                        } else {
+                            NavigationLink {
+                                CameraView(
+                                    image: $productDetailsViewModel.image,
+                                    imageForViewUpdates: productDetailsViewModel.image
+                                )
+                            } label: {
+                                if let image = productDetailsViewModel.image {
+                                    Image(uiImage: image)
+                                        .roundedImage(size: 100.0, action: true)
+                                } else {
+                                    Image(systemName: "camera.macro.circle.fill")
+                                        .roundedImage(size: 100.0, action: productDetailsViewModel.isEditing)
+                                }
                             }
                         }
-                    } else {
-                        NavigationLink {
-                            FullscreenPhotoView(
-                                image: $productDetailsViewModel.image
-                            )
-                        } label: {
-                            Image(uiImage: image)
-                                .roundedImage(size: 100.0, action: true)
-                        }
-                    }
-                } else {
-                    NavigationLink {
-                        CameraView(
-                            image: $productDetailsViewModel.image,
-                            imageForViewUpdates: productDetailsViewModel.image
-                        )
-                    } label: {
-                        if let image = productDetailsViewModel.image {
-                            Image(uiImage: image)
-                                .roundedImage(size: 100.0, action: true)
-                        } else {
-                            Image(systemName: "camera.macro.circle.fill")
-                                .roundedImage(size: 100.0, action: productDetailsViewModel.isEditing)
-                        }
+
+                        viewDetails()
                     }
                 }
+                Spacer()
+                Button("Sell product") {
+                    showSellAlert.toggle()
+                }
+                .font(.caption)
+                .bold()
+                .foregroundStyle(Color.red)
+                .alert("SoldPrice", isPresented: $showSellAlert) {
+                    TextField("Enter price", text: $productDetailsViewModel.sellPrice)
+                    Button("Cancel", role: .cancel) { }
 
-                viewDetails()
+                    Button("Save", role: .destructive) {
+                        productDetailsViewModel.sellProduct()
+                        dismiss()
+                    }
+                }
             }
         }
-            }
-            .toolbar(content: {
-                if productDetailsViewModel.isEditing {
-                    HStack {
-                        Button("Save") { productDetailsViewModel.saveButtonTapped() }
-                            .foregroundColor(.actionColor())
+        .toolbar(content: {
+            if productDetailsViewModel.isEditing {
+                HStack {
+                    Button("Save") { productDetailsViewModel.saveButtonTapped() }
+                        .foregroundColor(.actionColor())
 
-                        Button("Cancel") { productDetailsViewModel.cancelButtonTapped() }
-                            .foregroundColor(.actionColor())
-                    }
-                } else {
-                    Button("Edit") { productDetailsViewModel.editButtonTapped() }
+                    Button("Cancel") { productDetailsViewModel.cancelButtonTapped() }
                         .foregroundColor(.actionColor())
                 }
-            })
-            .navigationBarTitleDisplayMode(.inline)
-
+            } else {
+                Button("Edit") { productDetailsViewModel.editButtonTapped() }
+                    .foregroundColor(.actionColor())
+            }
+        })
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func productParameterNotEditable(
@@ -137,14 +156,14 @@ struct ProductDetailsView: View {
                     textFieldLabel: value,
                     keyboardType: .default
                 )
-                    .frame(minHeight: 30)
-                    .frame(maxWidth: .infinity)
-                    .background(
-                        Capsule()
-                            .stroke(Color.actionColor(), lineWidth: 1.0)
-                    )
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
+                .frame(minHeight: 30)
+                .frame(maxWidth: .infinity)
+                .background(
+                    Capsule()
+                        .stroke(Color.actionColor(), lineWidth: 1.0)
+                )
+                .font(.headline)
+                .multilineTextAlignment(.center)
 
             } else {
                 Text(value)
@@ -240,9 +259,9 @@ struct ProductDetailsView: View {
             .padding(.vertical)
 
             Text("Description")
-                    .frame(maxWidth: .infinity)
-                    .font(.caption2)
-                    .foregroundColor(.foregroundColor().opacity(0.5))
+                .frame(maxWidth: .infinity)
+                .font(.caption2)
+                .foregroundColor(.foregroundColor().opacity(0.5))
 
             if productDetailsViewModel.isEditing {
                 TextEditor(text: $productDetailsViewModel.productDescription)
