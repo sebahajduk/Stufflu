@@ -43,37 +43,15 @@ struct WishlistView: View {
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity, alignment: .trailing)
 
-                if !wishlistViewModel.wishlistProducts.isEmpty {
-                    List {
-                        ForEach(wishlistViewModel.wishlistProducts, id: \.id ) { entity in
-                            if entity.link != nil && entity.link?.isValidURL ?? false {
-                                Link(
-                                    destination: (
-                                        URL(
-                                            string: entity.link ?? "https://www.google.com"
-                                        )!
-                                    )
-                                ) {
-                                    WishlistProductCellView(for: entity)
-                                }
-                                .listRowBackground(Color.backgroundColor())
-                            } else {
-                                WishlistProductCellView(for: entity)
-                                    .listRowBackground(Color.backgroundColor())
-                            }
+                wishlistProductsList
+                    .overlay {
+                        if wishlistViewModel.wishlistProducts.isEmpty {
+                            Text("If you want to think about purchase, add your first wishlist product!")
+                                .font(.headline)
+                                .foregroundStyle(Color.actionColor())
+                                .multilineTextAlignment(.center)
                         }
-                        .onDelete {
-                            wishlistViewModel.deleteWishlistProduct(at: $0)
-                        }
-                        .listRowSeparatorTint(Color.actionColor().opacity(0.5))
                     }
-                    .background(Color.backgroundColor())
-                    .scrollContentBackground(.visible)
-                    .listStyle(.plain)
-                    .padding(.horizontal)
-                } else {
-                    Spacer()
-                }
             }
             .sheet(isPresented: $addSheetPresented) {
                 AddWishlistProductView(dataService: wishlistViewModel.dataService)
@@ -90,5 +68,37 @@ struct WishlistView: View {
         }
         .navigationTitle("WISHLIST")
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private extension WishlistView {
+    var wishlistProductsList: some View {
+        List {
+            ForEach(wishlistViewModel.wishlistProducts, id: \.id ) { entity in
+                if entity.link != nil && entity.link?.isValidURL ?? false {
+                    Link(
+                        destination: (
+                            URL(
+                                string: entity.link ?? "https://www.google.com"
+                            )!
+                        )
+                    ) {
+                        WishlistProductCellView(for: entity)
+                    }
+                    .listRowBackground(Color.backgroundColor())
+                } else {
+                    WishlistProductCellView(for: entity)
+                        .listRowBackground(Color.backgroundColor())
+                }
+            }
+            .onDelete {
+                wishlistViewModel.deleteWishlistProduct(at: $0)
+            }
+            .listRowSeparatorTint(Color.actionColor().opacity(0.5))
+        }
+        .background(Color.backgroundColor())
+        .scrollContentBackground(.visible)
+        .listStyle(.plain)
+        .padding(.horizontal)
     }
 }
