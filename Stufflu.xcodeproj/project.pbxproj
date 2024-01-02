@@ -63,6 +63,7 @@
 		60B090CF29E5A646009BD972 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B090CE29E5A646009BD972 /* StandardButton.swift */; };
 		60BAE0FC2A3477B80098F6B9 /* RemoveFocusOnTapModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BAE0FB2A3477B80098F6B9 /* RemoveFocusOnTapModifier.swift */; };
 		60BAE0FE2A3478290098F6B9 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BAE0FD2A3478290098F6B9 /* View+Ext.swift */; };
+		60D9DD262B35F00D00AC1C5E /* ZenQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9DD252B35F00D00AC1C5E /* ZenQuote.swift */; };
 		60DAF24F2A8B6E9F007C0D08 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DAF24E2A8B6E9F007C0D08 /* CameraView.swift */; };
 		60DE1BB32A2660190053BF35 /* FullscreenPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE1BB22A2660190053BF35 /* FullscreenPhotoViewModel.swift */; };
 		60E43C952A376876006347FA /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E43C942A376876006347FA /* ProductManager.swift */; };
@@ -140,6 +141,7 @@
 		60B090CE29E5A646009BD972 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
 		60BAE0FB2A3477B80098F6B9 /* RemoveFocusOnTapModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveFocusOnTapModifier.swift; sourceTree = "<group>"; };
 		60BAE0FD2A3478290098F6B9 /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
+		60D9DD252B35F00D00AC1C5E /* ZenQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuote.swift; sourceTree = "<group>"; };
 		60DAF24E2A8B6E9F007C0D08 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		60DE1BB22A2660190053BF35 /* FullscreenPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenPhotoViewModel.swift; sourceTree = "<group>"; };
 		60E43C942A376876006347FA /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				605B5B7429F03E0F00973AD1 /* ProductsContainer.xcdatamodeld */,
+				60D9DD252B35F00D00AC1C5E /* ZenQuote.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60D9DD262B35F00D00AC1C5E /* ZenQuote.swift in Sources */,
 				60171D852A6AA1690059BD86 /* AddWishlistProductViewModel.swift in Sources */,
 				602EC15E29DC844F00E8B470 /* AddProductView.swift in Sources */,
 				602EC16129DC84DF00E8B470 /* AddProductViewModel.swift in Sources */,

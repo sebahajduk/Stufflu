@@ -46,7 +46,7 @@ struct WishlistView: View {
                 wishlistProductsList
                     .overlay {
                         if wishlistViewModel.wishlistProducts.isEmpty {
-                            Text("If you want to think about purchase, add your first wishlist product!")
+                            Text("If you want to consider a purchase, add your first wishlist product!")
                                 .font(.headline)
                                 .foregroundStyle(Color.actionColor())
                                 .multilineTextAlignment(.center)
