@@ -17,6 +17,9 @@ struct FullscreenPhotoView: View {
     @ObservedObject private var fullscreenPhotoViewModel: FullscreenPhotoViewModel = .init()
     @Binding var image: UIImage?
 
+    // MARK: - Simulator target params
+    @State private var photoPickerItem: PhotosPickerItem?
+
     var body: some View {
         ZStack {
             Color.backgroundColor()
@@ -24,56 +27,19 @@ struct FullscreenPhotoView: View {
                 .onAppear {
                     fullscreenPhotoViewModel.isEditing = false
                 }
-
-            if let image = image {
-                if fullscreenPhotoViewModel.isEditing {
-                    NavigationLink {
-                        CameraView(image: $image, imageForViewUpdates: image)
-                    } label: {
-                        ZStack {
-                            Image(uiImage: image)
-                                .resizable()
-                                .overlay {
-                                    Color.actionColor().opacity(0.5)
-                                }
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 20.0))
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .padding()
-                                .shadow(radius: 10.0)
-
-                            Text("Tap to change photo")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                        }
-                    }
-                } else {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 20.0))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding()
-                        .shadow(radius: 10.0)
-                }
-            } else {
-                NavigationLink {
-                    CameraView(image: $image, imageForViewUpdates: image)
-                } label: {
-                    ZStack {
-                        Image(systemName: "camera.circle.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .foregroundColor(.gray.opacity(0.05))
-                            .padding()
-
-                        Text("Tap to add invoice")
-                            .font(.headline)
-                    }
-                }
+#if targetEnvironment(simulator)
+            PhotosPicker(selection: $photoPickerItem) {
+                productImage
             }
-
+            .disabled(!fullscreenPhotoViewModel.isEditing)
+#else
+            NavigationLink {
+                CameraView(image: $image, imageForViewUpdates: image)
+            } label: {
+                productImage
+            }
+            .disabled(!fullscreenPhotoViewModel.isEditing)
+#endif
         }
         .toolbar {
             HStack {
@@ -88,5 +54,28 @@ struct FullscreenPhotoView: View {
                 }
             }
         }
+    }
+}
+
+private extension FullscreenPhotoView {
+    var productImage: some View {
+        Image(uiImage: image ?? SFSymbols.cameraFill)
+            .resizable()
+            .overlay {
+                if fullscreenPhotoViewModel.isEditing {
+                    ZStack {
+                        Color.actionColor().opacity(0.5)
+
+                        Text("Tap to change photo")
+                            .foregroundStyle(Color.white)
+                            .font(.headline)
+                    }
+                }
+            }
+            .aspectRatio(contentMode: .fit)
+            .clipShape(RoundedRectangle(cornerRadius: 20.0))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding()
+            .shadow(radius: 10.0)
     }
 }

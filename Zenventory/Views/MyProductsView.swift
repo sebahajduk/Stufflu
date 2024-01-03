@@ -77,15 +77,47 @@ struct MyProductsView: View {
                 }
                 .padding(.horizontal, 20.0)
 
-                myProductsList
-                    .overlay {
-                        if myProductsViewModel.myProducts.isEmpty {
-                            Text("You have no products yet. Add them now!")
-                                .font(.headline)
-                                .foregroundStyle(Color.actionColor())
-                                .multilineTextAlignment(.center)
+                List {
+                    ForEach(myProductsViewModel.myProducts, id: \.id) { product in
+                        NavigationLink(destination: {
+                            ProductDetailsView(
+                                product: product,
+                                dataService: myProductsViewModel.dataService
+                            )
+                        }, label: {
+                            ProductCellView(productEntity: product)
+                        })
+                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                            Button {
+                                myProductsViewModel.caredActionSwiped(product)
+                            } label: {
+                                Label("Cared", systemImage: "checkmark")
+                            }
+                            .tint(Color.actionColor())
                         }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            Button {
+                                myProductsViewModel.use(product: product)
+                            } label: {
+                                Label("Used", systemImage: "checkmark")
+                            }
+                            .tint(Color.actionColor())
+                        }
+                        .listRowBackground(Color.backgroundColor())
+                        .listRowSeparator(.hidden)
                     }
+                }
+                .scrollContentBackground(.hidden)
+                .listStyle(.plain)
+                .padding(.horizontal, 20.0)
+//                    .overlay {
+//                        if myProductsViewModel.myProducts.isEmpty {
+//                            Text("You have no products yet. Add them now!")
+//                                .font(.headline)
+//                                .foregroundStyle(Color.actionColor())
+//                                .multilineTextAlignment(.center)
+//                        }
+//                    }
             }
             .foregroundColor(.foregroundColor())
         }
@@ -95,39 +127,39 @@ struct MyProductsView: View {
 }
 
 private extension MyProductsView {
-    var myProductsList: some View {
-        List {
-            ForEach(myProductsViewModel.myProducts, id: \.id) { product in
-                NavigationLink(destination: {
-                    ProductDetailsView(
-                        product: product,
-                        dataService: myProductsViewModel.dataService
-                    )
-                }, label: {
-                    ProductCellView(productEntity: product)
-                })
-                .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                    Button {
-                        myProductsViewModel.caredActionSwiped(product)
-                    } label: {
-                        Label("Cared", systemImage: "checkmark")
-                    }
-                    .tint(Color.actionColor())
-                }
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button {
-                        myProductsViewModel.use(product: product)
-                    } label: {
-                        Label("Used", systemImage: "checkmark")
-                    }
-                    .tint(Color.actionColor())
-                }
-                .listRowBackground(Color.backgroundColor())
-                .listRowSeparator(.hidden)
-            }
-        }
-        .scrollContentBackground(.hidden)
-        .listStyle(.plain)
-        .padding(.horizontal, 20.0)
-    }
+//    var myProductsList: some View {
+//        List {
+//            ForEach(myProductsViewModel.myProducts, id: \.id) { product in
+//                NavigationLink(destination: {
+//                    ProductDetailsView(
+//                        product: product,
+//                        dataService: myProductsViewModel.dataService
+//                    )
+//                }, label: {
+//                    ProductCellView(productEntity: product)
+//                })
+//                .swipeActions(edge: .leading, allowsFullSwipe: false) {
+//                    Button {
+//                        myProductsViewModel.caredActionSwiped(product)
+//                    } label: {
+//                        Label("Cared", systemImage: "checkmark")
+//                    }
+//                    .tint(Color.actionColor())
+//                }
+//                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+//                    Button {
+//                        myProductsViewModel.use(product: product)
+//                    } label: {
+//                        Label("Used", systemImage: "checkmark")
+//                    }
+//                    .tint(Color.actionColor())
+//                }
+//                .listRowBackground(Color.backgroundColor())
+//                .listRowSeparator(.hidden)
+//            }
+//        }
+//        .scrollContentBackground(.hidden)
+//        .listStyle(.plain)
+//        .padding(.horizontal, 20.0)
+//    }
 }
