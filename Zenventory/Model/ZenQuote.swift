@@ -11,9 +11,7 @@ struct ZenQuoteRequest {
     static func getQuote(completion: @escaping (ZenQuote?) -> Void) {
         guard let url = URL(string: "https://zenquotes.io/api/today") else { return }
 
-        var quote = ZenQuote(a: "", q: "")
-
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url) { (data, _, _) in
             guard let data else { return }
 
             do {

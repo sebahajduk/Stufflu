@@ -50,7 +50,6 @@ final class ProductDetailsViewModel: ObservableObject {
         }
     }
 
-    /// Photo picker binding
     @Published var sellPrice: String = ""
 
     init(
@@ -169,7 +168,7 @@ extension ProductDetailsViewModel {
     }
 }
 
-extension ProductDetailsViewModel {
+private extension ProductDetailsViewModel {
     @MainActor
     func loadTransferable(from imageSelection: PhotosPickerItem) async {
         if let data = try? await imageSelection.loadTransferable(type: Data.self) {

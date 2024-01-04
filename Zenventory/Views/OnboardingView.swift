@@ -76,27 +76,24 @@ struct OnboardingView: View {
                     }
 
                     Spacer()
-
-                    Button { 
-                    withAnimation {
-                        if page == .first {
-                            page = .second
-                        } else if page == .second {
-                            page = .third
-                        } else if page == .third {
-                            firstLaunch = false
+                    Button {
+                        withAnimation {
+                            if page == .first {
+                                page = .second
+                            } else if page == .second {
+                                page = .third
+                            } else if page == .third {
+                                firstLaunch = false
+                            }
                         }
-                    }
                     } label: {
                         Text(page == .third ? "Get started" : "Next")
-                            .frame(width: 100, height: 40.0)
+                            .frame(width: 100.0, height: 40.0)
                             .background(Color.white)
                             .clipShape(.capsule)
                     }
-
                 }
                 .frame(height: 50.0)
-
             }
             .padding()
         }
