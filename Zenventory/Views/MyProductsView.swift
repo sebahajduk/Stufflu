@@ -78,6 +78,9 @@ struct MyProductsView: View {
                 .padding(.horizontal, 20.0)
 
                 myProductsList
+                .scrollContentBackground(.hidden)
+                .listStyle(.plain)
+                .padding(.horizontal, 20.0)
                     .overlay {
                         if myProductsViewModel.myProducts.isEmpty {
                             Text("You have no products yet. Add them now!")

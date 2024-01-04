@@ -6,6 +6,18 @@
 //
 
 import SwiftUI
+import TipKit
+
+@available(iOS 17.0, *)
+struct AddButtonTip: Tip {
+    var title: Text {
+        Text("Add your first product!")
+    }
+
+    var message: Text {
+        Text("Tap here.")
+    }
+}
 
 struct ZTabView: View {
     @Binding var selectedTab: TabSelected
@@ -23,7 +35,7 @@ struct ZTabView: View {
                     Image(systemName: "backpack.fill")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 25, height: 25)
+                        .frame(width: 25.0, height: 25.0)
 
                     Text("My stuff")
                         .font(.caption2)
@@ -40,7 +52,7 @@ struct ZTabView: View {
                     Image(systemName: "star.fill")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 25, height: 25)
+                        .frame(width: 25.0, height: 25.0)
 
                     Text("Wishlist")
                         .font(.caption2)
@@ -50,22 +62,36 @@ struct ZTabView: View {
 
             Spacer()
 
-            NavigationLink {
-                AddProductView(coreDataService: dataService)
-            } label: {
-                ZStack {
-                    Circle()
-                        .foregroundColor(.actionColor())
-                        .frame(width: 60, height: 60)
-                        .shadow(color: .actionColor(), radius: 10)
-                    Image(systemName: "plus")
-                        .resizable()
-                        .bold()
-                        .foregroundColor(.backgroundColor())
-                        .frame(width: 20, height: 20)
+            ZStack {
+                if #available(iOS 17.0, *) {
+                    TipView(AddButtonTip(), arrowEdge: .bottom)
+                        .offset(y: -112.0)
                 }
-                .offset(y: -32)
 
+                NavigationLink {
+                    AddProductView(coreDataService: dataService)
+                } label: {
+                    ZStack {
+                        Circle()
+                            .foregroundColor(.actionColor())
+                            .frame(width: 60.0, height: 60.0)
+                            .shadow(color: .actionColor(), radius: 10.0)
+                        Image(systemName: "plus")
+                            .resizable()
+                            .bold()
+                            .foregroundColor(.backgroundColor())
+                            .frame(width: 20.0, height: 20.0)
+                    }
+                    .offset(y: -32.0)
+                }
+                .task {
+                    if #available(iOS 17.0, *) {
+                        try? Tips.configure([
+                            .displayFrequency(.immediate),
+                            .datastoreLocation(.applicationDefault)
+                        ])
+                    }
+                }
             }
 
             Spacer()
@@ -77,7 +103,7 @@ struct ZTabView: View {
                     Image(systemName: "chart.xyaxis.line")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 25, height: 25)
+                        .frame(width: 25.0, height: 25.0)
 
                     Text("History")
                         .font(.caption2)
@@ -94,7 +120,7 @@ struct ZTabView: View {
                     Image(systemName: "person.fill")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 25, height: 25)
+                        .frame(width: 25.0, height: 25.0)
 
                     Text("Profile")
                         .font(.caption2)

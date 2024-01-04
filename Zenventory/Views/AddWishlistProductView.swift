@@ -78,7 +78,9 @@ struct AddWishlistProductView: View {
                     }
                 }
                 .disabled(!addWishlistProductViewModel.isAddButtonEnabled)
-                .foregroundStyle(addWishlistProductViewModel.isAddButtonEnabled ? Color.actionColor() : Color.gray.opacity(0.5))
+                .foregroundStyle(
+                    addWishlistProductViewModel.isAddButtonEnabled ?
+                        Color.actionColor() : Color.gray.opacity(0.5))
             }
         }
     }

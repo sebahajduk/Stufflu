@@ -10,8 +10,7 @@ import StoreKit
 
 struct ProfileView: View {
 
-    @Environment(\.requestReview) private var requestReview
-
+    private var reviewService = ReviewService()
     @State private var todayQuote = ZenQuote(a: "", q: "") {
         didSet {
             quoteAuthor = todayQuote.a
@@ -42,7 +41,7 @@ struct ProfileView: View {
                 Spacer()
 
                 Button("Rate us!") {
-                    requestReview()
+                    reviewService.requestReview()
                 }
                 .buttonStyle(StandardButton())
 

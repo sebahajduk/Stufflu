@@ -12,7 +12,7 @@ enum TabSelected {
 }
 
 struct TabBarView: View {
-
+    @AppStorage("firstLaunch") var firstLaunch = true
     var coreDataService: CoreDataService
 
     @State private var selectedTab: TabSelected = .myProducts
@@ -47,9 +47,19 @@ struct TabBarView: View {
                 )
                 .frame(height: 50.0)
             }
+            .overlay {
+                if firstLaunch {
+                    OnboardingView()
+                }
+            }
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.backgroundColor())
             .toolbar(.hidden, for: .navigationBar)
+            .onAppear {
+                #if DEBUG
+                firstLaunch = true
+                #endif
+            }
         }
     }
 }
