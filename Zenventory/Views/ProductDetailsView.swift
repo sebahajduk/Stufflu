@@ -14,8 +14,6 @@ struct ProductDetailsView: View {
     @StateObject private var productDetailsViewModel: ProductDetailsViewModel
     @State private var showSellAlert = false
 
-    @State private var photoPickerItem: PhotosPickerItem?
-
     init(
         product: ProductEntity,
         dataService: any CoreDataManager
@@ -299,10 +297,10 @@ private extension ProductDetailsView {
 private extension ProductDetailsView {
     var simulatorPhotosPicker: some View {
         Section {
-            if let image = productDetailsViewModel.image {
+            if productDetailsViewModel.image != nil {
                 cameraNavigationLink
             } else {
-                PhotosPicker(selection: $photoPickerItem) {
+                PhotosPicker(selection: $productDetailsViewModel.photosPickerItem) {
                     Image(systemName: "camera.macro.circle.fill")
                         .roundedImage(size: 100.0, action: true)
                         .overlay {

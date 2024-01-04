@@ -39,9 +39,18 @@ final class ProductDetailsViewModel: ObservableObject {
     @Published var productGuaranteeIsValid = true
     @Published var productPriceIsValid = true
 
-    /// Photo picker binding
-    @Published var photosPickerItem: PhotosPickerItem?
+    @Published var photosPickerItem: PhotosPickerItem? {
+        didSet {
+            print("changed")
+            if let photosPickerItem {
+                Task {
+                    await loadTransferable(from: photosPickerItem)
+                }
+            }
+        }
+    }
 
+    /// Photo picker binding
     @Published var sellPrice: String = ""
 
     init(
@@ -157,6 +166,15 @@ extension ProductDetailsViewModel {
 
     func getDescription() -> String {
         product.productDescr ?? ""
+    }
+}
+
+extension ProductDetailsViewModel {
+    @MainActor
+    func loadTransferable(from imageSelection: PhotosPickerItem) async {
+        if let data = try? await imageSelection.loadTransferable(type: Data.self) {
+            self.image = UIImage(data: data)
+        }
     }
 }
 
