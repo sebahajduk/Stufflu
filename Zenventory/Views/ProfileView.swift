@@ -40,13 +40,25 @@ struct ProfileView: View {
 
                 Spacer()
 
-                Button("Rate us!") {
+                Button {
                     reviewService.requestReview()
+                } label: {
+                    Text("Rate us!")
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(StandardButton())
 
+                Button {
+
+                } label: {
+                    Text("Delete all products")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(WarningButton())
+
                 Spacer()
             }
+            .padding(.horizontal, 30.0)
             .onAppear {
                 Task {
                     ZenQuoteRequest.getQuote { quote in

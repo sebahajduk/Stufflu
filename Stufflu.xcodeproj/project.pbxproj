@@ -27,10 +27,9 @@
 		6051BD302A85361100CFFC30 /* TapButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051BD2F2A85361100CFFC30 /* TapButtonStyle.swift */; };
 		605B5B7629F03E0F00973AD1 /* ProductsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7429F03E0F00973AD1 /* ProductsContainer.xcdatamodeld */; };
 		605B5B7829F0455C00973AD1 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7729F0455C00973AD1 /* CoreDataService.swift */; };
-		605B5B7A29F049EB00973AD1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7929F049EB00973AD1 /* HomeViewModel.swift */; };
 		605B5B7C29F1A1E500973AD1 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B5B7B29F1A1E500973AD1 /* ProductCellViewModel.swift */; };
+		6062692B2B4C583100825568 /* WarningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6062692A2B4C583100825568 /* WarningButton.swift */; };
 		606EF9BA29C96E120024B7EB /* ZenventoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9B929C96E120024B7EB /* ZenventoryApp.swift */; };
-		606EF9BC29C96E120024B7EB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9BB29C96E120024B7EB /* HomeView.swift */; };
 		606EF9BE29C96E130024B7EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 606EF9BD29C96E130024B7EB /* Assets.xcassets */; };
 		606EF9C129C96E130024B7EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 606EF9C029C96E130024B7EB /* Preview Assets.xcassets */; };
 		606EF9E529C970EA0024B7EB /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EF9E429C970EA0024B7EB /* Color+Ext.swift */; };
@@ -105,11 +104,10 @@
 		6051BD2F2A85361100CFFC30 /* TapButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapButtonStyle.swift; sourceTree = "<group>"; };
 		605B5B7529F03E0F00973AD1 /* ProductsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductsContainer.xcdatamodel; sourceTree = "<group>"; };
 		605B5B7729F0455C00973AD1 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
-		605B5B7929F049EB00973AD1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		605B5B7B29F1A1E500973AD1 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
+		6062692A2B4C583100825568 /* WarningButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningButton.swift; sourceTree = "<group>"; };
 		606EF9B629C96E120024B7EB /* Stufflu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stufflu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		606EF9B929C96E120024B7EB /* ZenventoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenventoryApp.swift; sourceTree = "<group>"; };
-		606EF9BB29C96E120024B7EB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		606EF9BD29C96E130024B7EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		606EF9C029C96E130024B7EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		606EF9C629C96E130024B7EB /* StuffluTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StuffluTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +176,7 @@
 			children = (
 				601A0C132A09652800072DBA /* PriceTextField.swift */,
 				60B090CE29E5A646009BD972 /* StandardButton.swift */,
+				6062692A2B4C583100825568 /* WarningButton.swift */,
 				6051BD2F2A85361100CFFC30 /* TapButtonStyle.swift */,
 			);
 			path = Modifiers;
@@ -190,7 +189,6 @@
 				602EC16029DC84DF00E8B470 /* AddProductViewModel.swift */,
 				6090327D2A7965E400E63B35 /* HistoryViewModel.swift */,
 				605B5B7B29F1A1E500973AD1 /* ProductCellViewModel.swift */,
-				605B5B7929F049EB00973AD1 /* HomeViewModel.swift */,
 				604E77A529F97C7D00562F9F /* MyProductsViewModel.swift */,
 				60A030222A04110600818118 /* ProductDetailsViewModel.swift */,
 				60DE1BB22A2660190053BF35 /* FullscreenPhotoViewModel.swift */,
@@ -274,7 +272,6 @@
 				601A0C0E2A095DD100072DBA /* Modifiers */,
 				606EF9ED29C980810024B7EB /* Subviews */,
 				606EF9E729C9724E0024B7EB /* TabBarView.swift */,
-				606EF9BB29C96E120024B7EB /* HomeView.swift */,
 				606EF9E929C9725B0024B7EB /* ProfileView.swift */,
 				60A5BF0029CCC9B3008EA2A4 /* MyProductsView.swift */,
 				602EC15B29DC752F00E8B470 /* WishlistView.swift */,
@@ -434,6 +431,7 @@
 			knownRegions = (
 				en,
 				Base,
+				pl,
 			);
 			mainGroup = 606EF9AD29C96E120024B7EB;
 			packageReferences = (
@@ -502,7 +500,6 @@
 				6096E3992A0BF0BC0089F908 /* Importance.swift in Sources */,
 				60BAE0FC2A3477B80098F6B9 /* RemoveFocusOnTapModifier.swift in Sources */,
 				6082AC3B2A752753008ED4F3 /* HistoryView.swift in Sources */,
-				605B5B7A29F049EB00973AD1 /* HomeViewModel.swift in Sources */,
 				604E77A429F6E56800562F9F /* ZFileManager.swift in Sources */,
 				60711EE02A12B28000E9B60D /* Date+Ext.swift in Sources */,
 				6009C11D2A66CB5D0089908A /* AddWishlistProductView.swift in Sources */,
@@ -513,6 +510,7 @@
 				60E43C952A376876006347FA /* ProductManager.swift in Sources */,
 				60DAF24F2A8B6E9F007C0D08 /* CameraView.swift in Sources */,
 				6084779D2A18FD8700F7CD34 /* WishlistProductCellView.swift in Sources */,
+				6062692B2B4C583100825568 /* WarningButton.swift in Sources */,
 				602EC15C29DC752F00E8B470 /* WishlistView.swift in Sources */,
 				606EF9E529C970EA0024B7EB /* Color+Ext.swift in Sources */,
 				60A030172A0105F000818118 /* MyProductsFilterView.swift in Sources */,
@@ -522,7 +520,6 @@
 				608848312A40A69000ABE843 /* Double+Ext.swift in Sources */,
 				60B48CD62B459115007FF258 /* Constants+SFSymbols.swift in Sources */,
 				604E77A629F97C7D00562F9F /* MyProductsViewModel.swift in Sources */,
-				606EF9BC29C96E120024B7EB /* HomeView.swift in Sources */,
 				607346E729E9BC3000110F01 /* Publisher+Ext.swift in Sources */,
 				606EF9EA29C9725B0024B7EB /* ProfileView.swift in Sources */,
 				606EF9E829C9724E0024B7EB /* TabBarView.swift in Sources */,
