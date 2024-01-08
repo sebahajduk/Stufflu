@@ -55,11 +55,6 @@ struct TabBarView: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.backgroundColor())
             .toolbar(.hidden, for: .navigationBar)
-            .onAppear {
-                #if DEBUG
-                firstLaunch = true
-                #endif
-            }
         }
     }
 }
