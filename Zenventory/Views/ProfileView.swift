@@ -9,6 +9,7 @@ import SwiftUI
 import StoreKit
 
 struct ProfileView: View {
+    @AppStorage("currency") var currency = "USD"
 
     private var reviewService = ReviewService()
     @State private var todayQuote = ZenQuote(a: "", q: "") {
@@ -17,6 +18,7 @@ struct ProfileView: View {
             quote = todayQuote.q
         }
     }
+
     @State private var quoteAuthor = ""
     @State private var quote = ""
 
@@ -26,18 +28,27 @@ struct ProfileView: View {
                 .ignoresSafeArea()
 
             VStack(alignment: .center) {
-                Spacer()
-
-                Group {
+                VStack {
                     Text(quote)
                         .font(.headline)
+                        .padding(.top, 30.0)
 
                     Text(quoteAuthor)
                         .font(.caption)
                 }
                 .foregroundStyle(Color.actionColor())
                 .multilineTextAlignment(.center)
+                .frame(height: 100.0)
 
+                Spacer()
+
+                Picker("Currency", selection: $currency) {
+                    ForEach(NSLocale.isoCurrencyCodes, id: \.self) { currency in
+                        Text(currency)
+                    }
+                }
+                .pickerStyle(.navigationLink)
+                Divider()
                 Spacer()
 
                 Button {
