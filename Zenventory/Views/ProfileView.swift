@@ -9,7 +9,7 @@ import SwiftUI
 import StoreKit
 
 struct ProfileView: View {
-    @AppStorage("currency") var currency = "USD"
+    @AppStorage("currency") var currency = "localCurrency"
 
     private var reviewService = ReviewService()
     @State private var todayQuote = ZenQuote(a: "", q: "") {
