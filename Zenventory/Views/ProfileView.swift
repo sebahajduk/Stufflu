@@ -59,14 +59,6 @@ struct ProfileView: View {
                 }
                 .buttonStyle(StandardButton())
 
-                Button {
-
-                } label: {
-                    Text("Delete all products")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(WarningButton())
-
                 Spacer()
             }
             .padding(.horizontal, 30.0)
