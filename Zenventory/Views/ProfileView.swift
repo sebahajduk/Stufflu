@@ -7,6 +7,7 @@
 
 import SwiftUI
 import StoreKit
+import MessageUI
 
 struct ProfileView: View {
     @AppStorage("currency") var currency = "localCurrency"
@@ -21,6 +22,9 @@ struct ProfileView: View {
 
     @State private var quoteAuthor = ""
     @State private var quote = ""
+
+    @State private var mailResult: Result<MFMailComposeResult, Error>?
+    @State private var isShowingMailView = false
 
     var body: some View {
         ZStack {
@@ -50,6 +54,20 @@ struct ProfileView: View {
                 .pickerStyle(.navigationLink)
                 Divider()
                 Spacer()
+
+                if MFMailComposeViewController.canSendMail() {
+                    Button {
+                        self.isShowingMailView.toggle()
+                    } label: {
+                        Text("Send feature idea")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(StandardButton())
+                    .sheet(isPresented: $isShowingMailView) {
+                        MailView(isShowing: $isShowingMailView, result: $mailResult)
+                            .ignoresSafeArea()
+                    }
+                }
 
                 Button {
                     reviewService.requestReview()
