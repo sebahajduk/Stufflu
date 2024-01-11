@@ -55,18 +55,17 @@ struct ProfileView: View {
                 Divider()
                 Spacer()
 
-                if MFMailComposeViewController.canSendMail() {
-                    Button {
-                        self.isShowingMailView.toggle()
-                    } label: {
-                        Text("Send feature idea")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(StandardButton())
-                    .sheet(isPresented: $isShowingMailView) {
-                        MailView(isShowing: $isShowingMailView, result: $mailResult)
-                            .ignoresSafeArea()
-                    }
+                Button {
+                    self.isShowingMailView.toggle()
+                } label: {
+                    Text("Send feature idea")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(StandardButton())
+                .disabled(!MFMailComposeViewController.canSendMail())
+                .sheet(isPresented: $isShowingMailView) {
+                    MailView(isShowing: $isShowingMailView, result: $mailResult)
+                        .ignoresSafeArea()
                 }
 
                 Button {

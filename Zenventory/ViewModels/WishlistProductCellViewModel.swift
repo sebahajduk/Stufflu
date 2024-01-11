@@ -37,7 +37,7 @@ private extension WishlistProductCellViewModel {
         )
 
         guard let daysCounter = productDaysLeft?.day else { return }
-        self.daysLeft = "\(daysCounter)"
+        self.daysLeft = daysCounter < 0 ? "0" : "\(daysCounter)"
     }
 
     func productLinkValidation() {
