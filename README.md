@@ -1,6 +1,6 @@
-# Zenventory
+# Stufflu
 
-Zenventory is a minimalist inventory management app designed for individuals who want to keep track of their possessions. It allows you to store information about your products, track your expenses, and keep records of sold products.
+Stufflu is a minimalist inventory management app designed for individuals who want to keep track of their possessions. It allows you to store information about your products, track your expenses, and keep records of sold products.
 
 # Features
 
