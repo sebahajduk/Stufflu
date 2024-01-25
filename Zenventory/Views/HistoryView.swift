@@ -73,7 +73,7 @@ struct HistoryView: View {
                 }
             }
         }
-        .navigationTitle("History")
+        .navigationTitle("HISTORY")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

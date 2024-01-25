@@ -8,24 +8,32 @@
 import SwiftUI
 
 enum TabSelected {
-    case home, profile
+    case myProducts, wishlist, history, profile
 }
 
 struct TabBarView: View {
-
+    @AppStorage("firstLaunch") var firstLaunch = true
     var coreDataService: CoreDataService
 
-    @State private var selectedTab: TabSelected = .home
+    @State private var selectedTab: TabSelected = .myProducts
 
     var body: some View {
         NavigationStack {
             VStack {
                 switch selectedTab {
-                case .home:
+                case .myProducts:
                     NavigationView {
-                        HomeView(
+                        MyProductsView(
                             coreDataService: coreDataService
                         )
+                    }
+                case .wishlist:
+                    NavigationView {
+                        WishlistView(dataService: coreDataService)
+                    }
+                case .history:
+                    NavigationView {
+                        HistoryView(dataService: coreDataService)
                     }
                 case .profile:
                     NavigationView {
@@ -38,6 +46,11 @@ struct TabBarView: View {
                     dataService: coreDataService
                 )
                 .frame(height: 50.0)
+            }
+            .overlay {
+                if firstLaunch {
+                    OnboardingView()
+                }
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.backgroundColor())

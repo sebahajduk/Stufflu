@@ -13,10 +13,6 @@ struct MyProductsView: View {
 
     @State private var isFiltering = false
 
-    /// temporaryProduct is assigned by swipeActions
-    /// it's needed for confirmation alert to change correct product
-    @State private var temporaryProduct: ProductEntity?
-
     init(
         coreDataService: any CoreDataManager
     ) {
@@ -81,56 +77,60 @@ struct MyProductsView: View {
                 }
                 .padding(.horizontal, 20.0)
 
-                List {
-                    ForEach(myProductsViewModel.myProducts, id: \.id) { product in
-                        NavigationLink(destination: {
-                            ProductDetailsView(
-                                product: product,
-                                dataService: myProductsViewModel.dataService
-                            )
-                        }, label: {
-                            ProductCellView(productEntity: product)
-                        })
-
-                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                            Button {
-                                myProductsViewModel.caredActionSwiped(product)
-                            } label: {
-                                Label("Cared", systemImage: "checkmark")
-                            }
-                            .tint(.green)
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button {
-                                myProductsViewModel.showSellingAlert.toggle()
-                                self.temporaryProduct = product
-                            } label: {
-                                Label("Sold", systemImage: "checkmark")
-                            }
-                            .tint(.cyan)
-                        }
-                        .alert("SoldPrice", isPresented: $myProductsViewModel.showSellingAlert) {
-                            TextField("Enter price", text: $myProductsViewModel.priceEnteredInAlert)
-                            Button("Cancel", role: .cancel) { }
-
-                            Button("Save", role: .destructive) {
-                                guard let temporaryProduct = temporaryProduct else { return }
-                                myProductsViewModel.showSellingAlert = false
-                                myProductsViewModel.sell(product: temporaryProduct)
-                            }
-                        }
-                        .listRowBackground(Color.backgroundColor())
-                        .listRowSeparator(.hidden)
-                    }
-
-                }
+                myProductsList
                 .scrollContentBackground(.hidden)
                 .listStyle(.plain)
                 .padding(.horizontal, 20.0)
+                    .overlay {
+                        if myProductsViewModel.myProducts.isEmpty {
+                            Text("You have no products yet. Add them now!")
+                                .font(.headline)
+                                .foregroundStyle(Color.actionColor())
+                                .multilineTextAlignment(.center)
+                        }
+                    }
             }
             .foregroundColor(.foregroundColor())
         }
         .navigationTitle("YOUR PRODUCTS")
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private extension MyProductsView {
+    var myProductsList: some View {
+        List {
+            ForEach(myProductsViewModel.myProducts, id: \.id) { product in
+                NavigationLink(destination: {
+                    ProductDetailsView(
+                        product: product,
+                        dataService: myProductsViewModel.dataService
+                    )
+                }, label: {
+                    ProductCellView(productEntity: product)
+                })
+                .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                    Button {
+                        myProductsViewModel.caredActionSwiped(product)
+                    } label: {
+                        Label("Cared", systemImage: "checkmark")
+                    }
+                    .tint(Color.actionColor())
+                }
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Button {
+                        myProductsViewModel.use(product: product)
+                    } label: {
+                        Label("Used", systemImage: "checkmark")
+                    }
+                    .tint(Color.actionColor())
+                }
+                .listRowBackground(Color.backgroundColor())
+                .listRowSeparator(.hidden)
+            }
+        }
+        .scrollContentBackground(.hidden)
+        .listStyle(.plain)
+        .padding(.horizontal, 20.0)
     }
 }

@@ -1,13 +1,13 @@
 //
-//  StandardButton.swift
-//  Zenventory
+//  WarningButton.swift
+//  Stufflu
 //
-//  Created by Sebastian Hajduk on 11/04/2023.
+//  Created by Sebastian Hajduk on 08/01/2024.
 //
 
 import SwiftUI
 
-struct StandardButton: ButtonStyle {
+struct WarningButton: ButtonStyle {
     func makeBody(
         configuration: Configuration
     ) -> some View {
@@ -32,7 +32,7 @@ struct StandardButton: ButtonStyle {
 
         var backgroundColor: Color {
             if isEnabled {
-                return Color.actionColor()
+                return Color.red
             } else {
                 return Color.gray.opacity(0.5)
             }

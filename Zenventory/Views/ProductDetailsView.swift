@@ -9,8 +9,10 @@ import SwiftUI
 import PhotosUI
 
 struct ProductDetailsView: View {
+    @Environment(\.dismiss) var dismiss
 
     @StateObject private var productDetailsViewModel: ProductDetailsViewModel
+    @State private var showSellAlert = false
 
     init(
         product: ProductEntity,
@@ -28,80 +30,216 @@ struct ProductDetailsView: View {
         ZStack {
             Color.backgroundColor()
                 .ignoresSafeArea()
-            ScrollView {
             VStack {
-                if let image = productDetailsViewModel.image {
-                    if productDetailsViewModel.isEditing {
-                        NavigationLink {
-                            CameraView(
-                                image: $productDetailsViewModel.image,
-                                imageForViewUpdates: productDetailsViewModel.image
-                            )
-                        } label: {
-                            ZStack {
-                                Image(uiImage: image)
-                                    .roundedImage(size: 100.0, action: true)
-                                    .overlay(alignment: .topTrailing) {
-                                        Button {
-                                            productDetailsViewModel.deletePhoto()
-                                        } label: {
-                                            Image(systemName: "x.circle.fill")
-                                                .frame(width: 30.0, height: 30.0)
-                                                .foregroundColor(.red)
-                                        }
-                                        .padding(15)
-                                    }
-                            }
-                        }
-                    } else {
-                        NavigationLink {
-                            FullscreenPhotoView(
-                                image: $productDetailsViewModel.image
-                            )
-                        } label: {
-                            Image(uiImage: image)
-                                .roundedImage(size: 100.0, action: true)
-                        }
-                    }
-                } else {
-                    NavigationLink {
-                        CameraView(
-                            image: $productDetailsViewModel.image,
-                            imageForViewUpdates: productDetailsViewModel.image
-                        )
-                    } label: {
-                        if let image = productDetailsViewModel.image {
-                            Image(uiImage: image)
-                                .roundedImage(size: 100.0, action: true)
-                        } else {
-                            Image(systemName: "camera.macro.circle.fill")
-                                .roundedImage(size: 100.0, action: productDetailsViewModel.isEditing)
-                        }
-                    }
+                ScrollView {
+#if targetEnvironment(simulator)
+                    simulatorPhotosPicker
+#else
+                    cameraNavigationLink
+#endif
+                    viewDetails
                 }
 
-                viewDetails()
+                Spacer()
+
+                Button("Sell product") {
+                    showSellAlert.toggle()
+                }
+                .font(.caption)
+                .bold()
+                .foregroundStyle(Color.red)
+                .alert("SoldPrice", isPresented: $showSellAlert) {
+                    TextField("Enter price", text: $productDetailsViewModel.sellPrice)
+
+                    Button("Cancel", role: .cancel) { }
+
+                    Button("Save", role: .destructive) {
+                        productDetailsViewModel.sellProduct()
+                        dismiss()
+                    }
+                }
             }
         }
-            }
-            .toolbar(content: {
-                if productDetailsViewModel.isEditing {
-                    HStack {
-                        Button("Save") { productDetailsViewModel.saveButtonTapped() }
-                            .foregroundColor(.actionColor())
+        .toolbar(content: {
+            if productDetailsViewModel.isEditing {
+                HStack {
+                    Button("Save") { productDetailsViewModel.saveButtonTapped() }
+                        .foregroundColor(.actionColor())
 
-                        Button("Cancel") { productDetailsViewModel.cancelButtonTapped() }
-                            .foregroundColor(.actionColor())
-                    }
-                } else {
-                    Button("Edit") { productDetailsViewModel.editButtonTapped() }
+                    Button("Cancel") { productDetailsViewModel.cancelButtonTapped() }
                         .foregroundColor(.actionColor())
                 }
-            })
-            .navigationBarTitleDisplayMode(.inline)
+            } else {
+                Button("Edit") { productDetailsViewModel.editButtonTapped() }
+                    .foregroundColor(.actionColor())
+            }
+        })
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
 
+private extension ProductDetailsView {
+    var viewDetails: some View {
+        VStack(alignment: .center) {
+            productNameView
+
+            NavigationLink {
+                FullscreenPhotoView(
+                    image: $productDetailsViewModel.invoiceImage
+                )
+            } label: {
+                Text("Receipt / invoice")
+            }
+
+            parametersView
+
+            descriptionView
+        }
+        .padding(.horizontal)
+        .navigationTitle("")
     }
 
+    var cameraNavigationLink: some View {
+        NavigationLink {
+            if productDetailsViewModel.isEditing || productDetailsViewModel.image == nil {
+                CameraView(
+                    image: $productDetailsViewModel.image,
+                    imageForViewUpdates: productDetailsViewModel.image
+                )
+            } else {
+                FullscreenPhotoView(
+                    image: $productDetailsViewModel.image
+                )
+            }
+        } label: {
+            Image(systemName: "camera.macro.circle.fill")
+                .roundedImage(size: 100.0, action: true)
+                .overlay {
+                    if let image = productDetailsViewModel.image {
+                        Image(uiImage: image)
+                            .roundedImage(size: 100.0, action: true)
+                    }
+                }
+                .overlay(alignment: .topTrailing) {
+                    if productDetailsViewModel.isEditing {
+                        Button {
+                            productDetailsViewModel.deletePhoto()
+                        } label: {
+                            Image(systemName: "x.circle.fill")
+                                .frame(width: 30.0, height: 30.0)
+                                .foregroundColor(.red)
+                        }
+                        .padding(15)
+                    }
+                }
+        }
+    }
+
+    var productNameView: some View {
+        Section {
+            if productDetailsViewModel.isEditing {
+                TextFieldWithStatus(
+                    isValid: $productDetailsViewModel.productNameIsValid,
+                    textFieldValue: $productDetailsViewModel.productName,
+                    textFieldLabel: productDetailsViewModel.getName(),
+                    keyboardType: .default
+                )
+                .frame(minHeight: 30.0)
+                .frame(maxWidth: .infinity)
+                .background(
+                    Capsule()
+                        .stroke(Color.actionColor(), lineWidth: 1.0)
+                )
+                .font(.headline)
+                .multilineTextAlignment(.center)
+            } else {
+                Text(productDetailsViewModel.product.name?.uppercased() ?? "Unknown")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.foregroundColor())
+                    .font(.title)
+                    .bold()
+                    .padding(.horizontal)
+            }
+        }
+    }
+    var parametersView: some View {
+        Section {
+            HStack(alignment: .top) {
+                productParameterNotEditable(
+                    name: "Last used",
+                    value: productDetailsViewModel.productLastUsed
+                )
+
+                productParameterNotEditable(
+                    name: "Last cared",
+                    value: productDetailsViewModel.productLastCared
+                )
+            }
+
+            HStack(alignment: .top) {
+                productParameterEditable(
+                    name: "Care name",
+                    value: productDetailsViewModel.getCareName(),
+                    textFieldBinding: $productDetailsViewModel.productCareName,
+                    textFieldValid: $productDetailsViewModel.productCareNameIsValid
+                )
+
+                productParameterEditable(
+                    name: "Care interval",
+                    value: productDetailsViewModel.getCareInterval(),
+                    textFieldBinding: $productDetailsViewModel.productCareInterval,
+                    textFieldValid: $productDetailsViewModel.productCareIntervalIsValid
+                )
+            }
+
+            HStack(alignment: .top) {
+                productParameterEditable(
+                    name: "Guarantee",
+                    value: productDetailsViewModel.getGuarantee(),
+                    textFieldBinding: $productDetailsViewModel.productGuarantee,
+                    textFieldValid: $productDetailsViewModel.productGuaranteeIsValid
+                )
+
+                productParameterEditable(
+                    name: "Price",
+                    value: productDetailsViewModel.getPrice(),
+                    textFieldBinding: $productDetailsViewModel.productPrice,
+                    textFieldValid: $productDetailsViewModel.productPriceIsValid
+                )
+            }
+        }
+        .padding(.vertical)
+    }
+
+    var descriptionView: some View {
+        Section {
+            Text("Description")
+                .frame(maxWidth: .infinity)
+                .font(.caption2)
+                .foregroundColor(.foregroundColor().opacity(0.5))
+
+            if productDetailsViewModel.isEditing {
+                TextEditor(text: $productDetailsViewModel.productDescription)
+                    .frame(minHeight: 100.0)
+                    .padding(10.0)
+                    .scrollContentBackground(.hidden)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10.0)
+                            .stroke(Color.actionColor(), lineWidth: 1.0)
+                    )
+                    .font(.headline)
+
+            } else {
+                ScrollView {
+                    Text(productDetailsViewModel.getDescription())
+                        .padding(.bottom, 20.0)
+                }
+            }
+        }
+    }
+}
+
+private extension ProductDetailsView {
     private func productParameterNotEditable(
         name: String,
         value: String
@@ -125,7 +263,6 @@ struct ProductDetailsView: View {
         textFieldValid: Binding<Bool>
     ) -> some View {
         VStack {
-
             Text(name)
                 .font(.caption2)
                 .foregroundColor(.foregroundColor().opacity(0.5))
@@ -137,36 +274,7 @@ struct ProductDetailsView: View {
                     textFieldLabel: value,
                     keyboardType: .default
                 )
-                    .frame(minHeight: 30)
-                    .frame(maxWidth: .infinity)
-                    .background(
-                        Capsule()
-                            .stroke(Color.actionColor(), lineWidth: 1.0)
-                    )
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
-
-            } else {
-                Text(value)
-                    .font(.headline)
-                    .foregroundColor(.foregroundColor())
-            }
-        }
-        .frame(maxWidth: .infinity)
-    }
-
-    // swiftlint: disable function_body_length
-    private func viewDetails() -> some View {
-        VStack(alignment: .center) {
-
-            if productDetailsViewModel.isEditing {
-                TextFieldWithStatus(
-                    isValid: $productDetailsViewModel.productNameIsValid,
-                    textFieldValue: $productDetailsViewModel.productName,
-                    textFieldLabel: productDetailsViewModel.getName(),
-                    keyboardType: .default
-                )
-                .frame(minHeight: 30.0)
+                .frame(minHeight: 30)
                 .frame(maxWidth: .infinity)
                 .background(
                     Capsule()
@@ -176,95 +284,45 @@ struct ProductDetailsView: View {
                 .multilineTextAlignment(.center)
 
             } else {
-                Text(productDetailsViewModel.product.name?.uppercased() ?? "Unknown")
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.foregroundColor())
-                    .font(.title)
-                    .bold()
-                    .padding(.horizontal)
-            }
-
-            NavigationLink {
-                FullscreenPhotoView(
-                    image: $productDetailsViewModel.invoiceImage
-                )
-            } label: {
-                Text("Receipt / invoice")
-            }
-
-            Section {
-                HStack(alignment: .top) {
-                    productParameterNotEditable(
-                        name: "Last used",
-                        value: productDetailsViewModel.productLastUsed
-                    )
-
-                    productParameterNotEditable(
-                        name: "Last cared",
-                        value: productDetailsViewModel.productLastCared
-                    )
-                }
-
-                HStack(alignment: .top) {
-                    productParameterEditable(
-                        name: "Care name",
-                        value: productDetailsViewModel.getCareName(),
-                        textFieldBinding: $productDetailsViewModel.productCareName,
-                        textFieldValid: $productDetailsViewModel.productCareNameIsValid
-                    )
-
-                    productParameterEditable(
-                        name: "Care interval",
-                        value: productDetailsViewModel.getCareInterval(),
-                        textFieldBinding: $productDetailsViewModel.productCareInterval,
-                        textFieldValid: $productDetailsViewModel.productCareIntervalIsValid
-                    )
-                }
-
-                HStack(alignment: .top) {
-                    productParameterEditable(
-                        name: "Guarantee",
-                        value: productDetailsViewModel.getGuarantee(),
-                        textFieldBinding: $productDetailsViewModel.productGuarantee,
-                        textFieldValid: $productDetailsViewModel.productGuaranteeIsValid
-                    )
-
-                    productParameterEditable(
-                        name: "Price",
-                        value: productDetailsViewModel.getPrice(),
-                        textFieldBinding: $productDetailsViewModel.productPrice,
-                        textFieldValid: $productDetailsViewModel.productPriceIsValid
-                    )
-                }
-            }
-            .padding(.vertical)
-
-            Text("Description")
-                    .frame(maxWidth: .infinity)
-                    .font(.caption2)
-                    .foregroundColor(.foregroundColor().opacity(0.5))
-
-            if productDetailsViewModel.isEditing {
-                TextEditor(text: $productDetailsViewModel.productDescription)
-                    .frame(minHeight: 100.0)
-                    .padding(10.0)
-                    .scrollContentBackground(.hidden)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10.0)
-                            .stroke(Color.actionColor(), lineWidth: 1.0)
-                    )
+                Text(value)
                     .font(.headline)
-
-            } else {
-                ScrollView {
-                    Text(productDetailsViewModel.getDescription())
-                        .padding(.bottom, 20.0)
-                }
-
+                    .foregroundColor(.foregroundColor())
             }
         }
-        .padding(.horizontal)
-        .navigationTitle("")
+        .frame(maxWidth: .infinity)
     }
-    // swiftlint: enable function_body_length
+}
+
+// MARK: - Simulator target
+private extension ProductDetailsView {
+    var simulatorPhotosPicker: some View {
+        Section {
+            if productDetailsViewModel.image != nil {
+                cameraNavigationLink
+            } else {
+                PhotosPicker(selection: $productDetailsViewModel.photosPickerItem) {
+                    Image(systemName: "camera.macro.circle.fill")
+                        .roundedImage(size: 100.0, action: true)
+                        .overlay {
+                            if let image = productDetailsViewModel.image {
+                                Image(uiImage: image)
+                                    .roundedImage(size: 100.0, action: true)
+                            }
+                        }
+                        .overlay(alignment: .topTrailing) {
+                            if productDetailsViewModel.isEditing {
+                                Button {
+                                    productDetailsViewModel.deletePhoto()
+                                } label: {
+                                    Image(systemName: "x.circle.fill")
+                                        .frame(width: 30.0, height: 30.0)
+                                        .foregroundColor(.red)
+                                }
+                                .padding(15)
+                            }
+                        }
+                }
+            }
+        }
+    }
 }

@@ -39,8 +39,18 @@ final class ProductDetailsViewModel: ObservableObject {
     @Published var productGuaranteeIsValid = true
     @Published var productPriceIsValid = true
 
-    /// Photo picker binding
-    @Published var photosPickerItem: PhotosPickerItem?
+    @Published var photosPickerItem: PhotosPickerItem? {
+        didSet {
+            print("changed")
+            if let photosPickerItem {
+                Task {
+                    await loadTransferable(from: photosPickerItem)
+                }
+            }
+        }
+    }
+
+    @Published var sellPrice: String = ""
 
     init(
         product: ProductEntity,
@@ -69,26 +79,19 @@ final class ProductDetailsViewModel: ObservableObject {
 
         runObservers()
     }
+}
 
-    // MARK: Textfield data observers
-    private func dataIsValid() -> Bool {
-        productCareNameIsValid &&
-        productNameIsValid &&
-        productCareIntervalIsValid &&
-        productGuaranteeIsValid &&
-        productPriceIsValid
+extension ProductDetailsViewModel {
+    func sellProduct() {
+        var price: Double = 0.0
+
+        if !sellPrice.isEmpty && sellPrice.isDouble {
+            price = Double(sellPrice) ?? 0.0
+        }
+
+        ProductManager.sell(product: product, for: price)
+        dataService.refreshData()
     }
-
-    private func runObservers() {
-        observeCareNameTextField()
-        observeNameTextField()
-        observeCareIntervalTextField()
-        observeGuaranteeTextField()
-        observePriceTextField()
-        observeImageChanges()
-        observeProduct()
-    }
-
     func deletePhoto() {
         try? ZFileManager.deleteImage(
             name: product.productPhotoPath ?? "Unknown"
@@ -98,73 +101,10 @@ final class ProductDetailsViewModel: ObservableObject {
         self.image = nil
     }
 
-    private func observeCareNameTextField() {
-        $productCareName
-            .map { $0.count == 0 || $0.count >= 3 }
-            .sink { [weak self] value in
-                guard let self else { return }
-                self.productCareNameIsValid = value
-            }
-            .store(in: &cancellables)
-    }
-
-    private func observeNameTextField() {
-        $productName
-            .map { $0.count >= 3 }
-            .sink { [weak self] value in
-                guard let self else { return }
-                self.productNameIsValid = value
-            }
-            .store(in: &cancellables)
-    }
-
-    private func observeCareIntervalTextField() {
-        $productCareInterval
-            .map { $0.isInteger }
-            .sink { [weak self] value in
-                guard let self else { return }
-                self.productCareIntervalIsValid = value
-            }
-            .store(in: &cancellables)
-    }
-
-    private func observeGuaranteeTextField() {
-        $productGuarantee
-            .map { $0.isInteger }
-            .sink { [weak self] value in
-                guard let self else { return }
-                self.productGuaranteeIsValid = value
-            }
-            .store(in: &cancellables)
-    }
-
-    private func observePriceTextField() {
-        $productPrice
-            .map { $0.isDouble || $0.count == 0 }
-            .sink { [weak self] value in
-                guard let self else { return }
-                self.productPriceIsValid = value
-            }
-            .store(in: &cancellables)
-    }
-
-    // MARK: Action handlers
-
     func editButtonTapped() {
         withAnimation {
             isEditing = true
         }
-    }
-
-    private func observeProduct() {
-        $product
-            .sink { [weak self] newValue in
-                guard let self else { return }
-                if self.product != newValue {
-                    self.product = newValue
-                }
-            }
-            .store(in: &cancellables)
     }
 
     func saveButtonTapped() {
@@ -193,31 +133,11 @@ final class ProductDetailsViewModel: ObservableObject {
         }
     }
 
-    private func observeImageChanges() {
-        $image
-            .dropFirst()
-            .sink { [weak self] photo in
-                guard let self else { return }
-                if let image: UIImage = photo {
-
-                    try? ZFileManager.saveImage(
-                        productImage: image,
-                        name: "\(self.product.id ?? UUID())"
-                    )
-
-                    dataService.addPhoto(product: self.product)
-                }
-            }
-            .store(in: &cancellables)
-    }
-
     func cancelButtonTapped() {
         withAnimation {
             isEditing = false
         }
     }
-
-    // MARK: Product GETTERS
 
     func getCareInterval() -> String {
         product.careInterval != 0 ? String(product.careInterval) : "-"
@@ -245,5 +165,113 @@ final class ProductDetailsViewModel: ObservableObject {
 
     func getDescription() -> String {
         product.productDescr ?? ""
+    }
+}
+
+private extension ProductDetailsViewModel {
+    @MainActor
+    func loadTransferable(from imageSelection: PhotosPickerItem) async {
+        if let data = try? await imageSelection.loadTransferable(type: Data.self) {
+            self.image = UIImage(data: data)
+        }
+    }
+}
+
+private extension ProductDetailsViewModel {
+    func dataIsValid() -> Bool {
+        productCareNameIsValid &&
+        productNameIsValid &&
+        productCareIntervalIsValid &&
+        productGuaranteeIsValid &&
+        productPriceIsValid
+    }
+
+    func runObservers() {
+        observeCareNameTextField()
+        observeNameTextField()
+        observeCareIntervalTextField()
+        observeGuaranteeTextField()
+        observePriceTextField()
+        observeImageChanges()
+        observeProduct()
+    }
+
+    func observeCareNameTextField() {
+        $productCareName
+            .map { $0.count == 0 || $0.count >= 3 }
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productCareNameIsValid = value
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeNameTextField() {
+        $productName
+            .map { $0.count >= 3 }
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productNameIsValid = value
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeCareIntervalTextField() {
+        $productCareInterval
+            .map { $0.isInteger }
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productCareIntervalIsValid = value
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeGuaranteeTextField() {
+        $productGuarantee
+            .map { $0.isInteger }
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productGuaranteeIsValid = value
+            }
+            .store(in: &cancellables)
+    }
+
+    func observePriceTextField() {
+        $productPrice
+            .map { $0.isDouble || $0.count == 0 }
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.productPriceIsValid = value
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeProduct() {
+        $product
+            .sink { [weak self] newValue in
+                guard let self else { return }
+                if self.product != newValue {
+                    self.product = newValue
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeImageChanges() {
+        $image
+            .dropFirst()
+            .sink { [weak self] photo in
+                guard let self else { return }
+                if let image: UIImage = photo {
+
+                    try? ZFileManager.saveImage(
+                        productImage: image,
+                        name: "\(self.product.id ?? UUID())"
+                    )
+
+                    dataService.addPhoto(product: self.product)
+                }
+            }
+            .store(in: &cancellables)
     }
 }

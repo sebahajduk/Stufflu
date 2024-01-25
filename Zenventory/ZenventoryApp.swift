@@ -17,6 +17,11 @@ struct ZenventoryApp: App {
             TabBarView(coreDataService: coreDataService)
                 .toolbarBackground(.hidden, for: .navigationBar)
                 .toolbar(.hidden, for: .navigationBar)
+                .onAppear {
+#if DEBUG
+                    UserDefaults.standard.removeObject(forKey: "firstLaunch")
+#endif
+                }
         }
     }
 }
